@@ -1,0 +1,13 @@
+{
+  "version": "5.6",
+  "file": "GWYF_策略决策器.html",
+  "attribution": "旅人使用GPT-6制作",
+  "application": "Steam《朋友，梭哈吧》虚拟游戏币策略辅助工具",
+  "algorithm": "Ed25519 signature over SHA-256 digest of exact UTF-8 HTML file bytes",
+  "sha256": "7c7ae92bf7b8a62b8c6f78971be2f2607014b155159d32e32651e489e84a5c07",
+  "publicKeyBase64": "k0MQfi+FQyZtehebzwIOSU5+cRx87HHU/FXvDERVMM4=",
+  "signatureBase64": "SjX4tg614b5DOmenggFUuWc9EpwVkm/OzLkft9d/dVOhttOSzyq4EZnXpQYte70BXfQG9iTW40bZ+zzFtYthAQ==",
+  "publicKeyFingerprintSha256": "9f77b37679c585d2e9f40979bd141d14a26f97a66f476a214df3fb909a36a7c1",
+  "createdUTC": "2026-10-17T15:48:48+00:00",
+  "note": "Version 5.6 uses a newly issued signing key. Compare SHA-256 with the hash published in the original conversation."
+}
