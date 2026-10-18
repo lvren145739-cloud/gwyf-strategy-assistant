@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0d1220"><title>朋友，梭哈吧 · 策略决策器 v5.6</title><meta name="description" content="Steam《朋友，梭哈吧》专用虚拟游戏币策略辅助工具；仅分析不可兑换现金的虚拟游戏币、概率与道具收益，不涉及真钱赌博或真实博彩平台。"><meta name="author" content="旅人使用GPT-6制作"><meta name="creator" content="旅人使用GPT-6制作"><meta name="application-name" content="朋友，梭哈吧 · 游戏内策略辅助工具">
+<!-- WORK ATTRIBUTION: 旅人使用GPT-6制作 | GWYF | OFFLINE-STRATEGY-TOOL | Preserve author credit. -->
+<style>
+:root{--work-authorship:"旅人使用GPT-6制作";color-scheme:dark;--bg:#0b101b;--panel:#141d2c;--panel2:#1b273a;--edge:#2d3b50;--text:#f1f5fb;--muted:#99adc7;--mint:#4be4bb;--amber:#ffd180;--red:#ff8e97;--blue:#91b8ff;--shadow:0 15px 55px #0004}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at top,#172942 0%,#0b101b 480px);color:var(--text);font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;font-size:15px}button,select,input{font:inherit}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--mint);outline-offset:2px}.wrap{max-width:1050px;margin:0 auto;padding:16px 14px 60px}.top{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:8px 0 16px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--mint)}h1{margin:2px 0 4px;font-size:clamp(23px,5vw,31px);letter-spacing:-.7px}p{line-height:1.65}.sub{font-size:12px;color:var(--muted);margin:4px 0}.tag{border:1px solid #355969;border-radius:9px;color:#99edd2;font-size:11px;padding:7px;background:#152a35;white-space:nowrap}.tabs{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 1px 11px;scrollbar-width:thin}.tab{border:1px solid var(--edge);background:#162137;color:#bfd0e6;flex:0 0 auto;scroll-snap-align:start;border-radius:12px;padding:11px 14px;font-size:13px;font-weight:700;min-height:44px}.tab.active{background:#244337;border-color:#60d0aa;color:#c8ffe8}.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:14px;align-items:start}.panel{border:1px solid var(--edge);background:linear-gradient(150deg,#1a2537,#121b2a);border-radius:17px;padding:18px;box-shadow:var(--shadow);min-width:0}.panel h2{font-size:17px;margin:0 0 14px}.panel h3{font-size:14px;margin:17px 0 8px}.label{display:block;color:var(--muted);font-size:12px;margin:12px 0 7px;font-weight:650}.buttons{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.btn{background:#223149;color:#eef3ff;border:1px solid #3b4b61;border-radius:10px;min-height:45px;font-weight:700;padding:8px 5px}.btn.selected{color:#0b2c23;background:var(--mint);border-color:var(--mint)}.btn.warn{background:#402a31;color:#ffc6cb}.btn.mini{font-size:12px;min-height:38px}.btn.plain{background:#182437;color:#c3d4ec}.btn:disabled{opacity:.35;cursor:not-allowed}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.row>*{min-width:0}.row.split>*{flex:1 1 130px}.field{flex:1 1 125px;min-width:0}.field input,.field select,select,input[type=number]{width:100%;min-height:44px;background:#0f1929;border:1px solid #43566c;border-radius:10px;color:var(--text);padding:9px 10px}.switch{display:flex;align-items:center;gap:8px;font-size:12px;color:#bccce0;padding:6px 0;cursor:pointer}.switch input{accent-color:var(--mint);width:18px;height:18px}.chip{background:#24364d;padding:6px 10px;color:#d8e5f6;border-radius:10px;font-size:12px}.hero{border-radius:16px;background:linear-gradient(140deg,#154838,#1d3643);border:1px solid #396b6a;padding:20px;min-height:160px;display:flex;flex-direction:column;justify-content:center}.hero .over{font-size:11px;color:#a7d8c9;letter-spacing:1.3px;font-weight:800}.hero .big{font-size:clamp(31px,8vw,52px);font-weight:900;letter-spacing:-1px;margin:8px 0;color:#baffdf}.hero .desc{color:#d8f4ec;line-height:1.6;font-size:14px}.hero.stand{background:linear-gradient(135deg,#283956,#172c40);border-color:#4a6d93}.hero.stand .big{color:#c1dbff}.hero.hit{background:linear-gradient(135deg,#213d4e,#173042);border-color:#426d8c}.hero.hit .big{color:#9ce6ff}.hero.double{background:linear-gradient(135deg,#60452a,#332b32);border-color:#806645}.hero.double .big{color:#ffe0a1}.hero.split{background:linear-gradient(135deg,#50356b,#25283c);border-color:#725994}.hero.split .big{color:#d9beff}.hero.alert{background:#472832;border-color:#a65c67}.hero.alert .big{color:#ffd1d6}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:13px 0}.stat{background:#152133;border:1px solid #2b3e53;border-radius:13px;padding:13px}.stat span{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.stat strong{display:block;font-size:20px;line-height:1.3;font-variant-numeric:tabular-nums}.note{color:#b3c5db;font-size:12px;line-height:1.65;margin:12px 0 0}.note b{color:#f8dc99}.divider{height:1px;background:#29394c;margin:15px 0}.pill-tabs{display:flex;background:#0e1827;padding:4px;border-radius:12px;gap:4px}.pill-tabs button{flex:1;border:0;background:transparent;color:#bacbe0;border-radius:9px;min-height:40px;font-size:12px;font-weight:700}.pill-tabs button.active{background:#294e45;color:#b9ffe0}.cards-row{display:flex;flex-wrap:wrap;gap:5px;min-height:44px}.playing{display:inline-flex;align-items:center;justify-content:center;background:#f5f7ff;color:#151d30;border-radius:8px;min-width:36px;height:49px;font-weight:900;box-shadow:0 3px 1px #aebaca;font-size:17px;padding:4px}.playing.red{color:#d03747}.playing.matched{background:#bdffe4;box-shadow:0 3px 1px #5fa787}.poker-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.poker-card{padding:7px 3px;background:#19293e;border:1px solid #36465d;border-radius:12px}.poker-card select{padding:5px 0;border:0;border-radius:6px;background:#293b54;text-align:center;font-size:14px;min-height:35px}.poker-card.good{border-color:#4be4bb;background:#1e4b40}.poker-card .idx{font-size:10px;text-align:center;color:#9bacbf;margin-bottom:5px}.poker-card .hold{font-size:11px;text-align:center;min-height:18px;color:#79dfbb;font-weight:700;margin-top:4px}.full{width:100%}.inline-result{padding:12px;background:#121f30;border:1px solid #33455d;border-radius:12px;margin-top:12px;font-size:13px;line-height:1.65}.foot{font-size:12px;color:#8e9eb2;margin:20px 0}.foot a{color:#96d9ff}.smallgap{margin-top:9px}.valuebar{accent-color:var(--mint);width:100%;height:32px}.hidden{display:none!important}@media(max-width:725px){.layout{grid-template-columns:1fr}.panel{padding:15px}.wrap{padding:14px 11px 45px}.top{margin-top:4px}.tag{display:none}.tab{padding:10px 12px}.hero{min-height:140px}.buttons{gap:6px}.btn{min-height:43px}.stats .stat{padding:10px}.stat strong{font-size:19px}}@media(max-width:365px){.buttons{gap:3px}.btn{font-size:13px}.poker-grid{gap:3px}.poker-card{padding:5px 2px}.poker-card select{font-size:12px}}
+
+.purpose-banner{display:flex;gap:11px;align-items:flex-start;border:1px solid #426e82;border-radius:14px;background:linear-gradient(125deg,#143348,#152938);padding:13px 15px;margin:2px 0 15px;color:#e8f8ff}
+.purpose-icon{font-size:22px;line-height:1.35;flex:none}
+.purpose-banner strong{display:block;font-size:14px;font-weight:850;line-height:1.5;color:#fff}
+.purpose-banner .purpose-caption{font-size:12px;color:#b4e1ed;line-height:1.65;margin-top:4px}
+.work-credit{font-size:11px;color:#91a8bb;white-space:normal}
+@media(max-width:365px){.purpose-banner{padding:12px;gap:8px}.purpose-banner strong{font-size:13px}}
+/* Hidden offline authorship marker: 旅人使用GPT-6制作 */
+/* v2 touch-first additions */
+.has-modal{overflow:hidden}.picker-card{min-height:116px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;touch-action:manipulation;color:var(--text)}.picker-card .idx{font-size:10px}.bigcard{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f1f5ff;color:#162538;border-radius:8px;min-width:49px;width:82%;height:67px;font-size:27px;font-weight:900}.bigcard span{font-size:20px;margin-top:-8px}.bigcard.red{color:#bf243d}.wheel-modal{position:fixed;inset:0;z-index:900;display:flex;align-items:end;justify-content:center}.wheel-shade{position:absolute;inset:0;background:#000a}.wheel-sheet{position:relative;background:#172234;border:1px solid #425c76;border-radius:22px 22px 0 0;padding:16px max(17px,env(safe-area-inset-right)) max(22px,env(safe-area-inset-bottom));width:100%;max-width:550px;box-shadow:0 0 80px #0007}.sheet-top{display:flex;justify-content:space-between;align-items:center;font-size:16px}.wheel-columns{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:15px 0}.wheel-title{text-align:center;color:var(--muted);margin-bottom:7px}.wheel-frame{position:relative;height:250px;overflow:hidden;border-radius:14px;background:linear-gradient(180deg,#111b2d,#1b2d42 46%,#1b2d42 54%,#111b2d)}.wheel-list{height:250px;overflow-y:auto;overscroll-behavior:contain;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-block:100px;position:relative;z-index:2}.wheel-list::-webkit-scrollbar{display:none}.wheel-option{display:block;width:100%;height:50px;flex-shrink:0;scroll-snap-align:center;border:0;background:transparent;color:#c3d4e8;font-size:23px;font-weight:750}.wheel-option:focus-visible{outline-offset:-3px}.wheel-center{position:absolute;z-index:1;top:100px;left:5px;right:5px;height:50px;border-block:1px solid #75b9d0;background:#567e8a1b;pointer-events:none;border-radius:7px}.wheel-preview{text-align:center;margin:-4px 0 12px}.wheel-preview strong{font-size:24px;margin-left:10px}.rank-banner{border:1px solid #335069;background:#122435;border-radius:14px;padding:14px;margin:8px 0 14px}.two-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.two-tabs .btn{min-height:46px}.inventory{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.inv-item{border:1px solid #36475d;background:#172638;border-radius:12px;min-height:64px;padding:9px;text-align:left;display:flex;justify-content:space-between;align-items:center;color:var(--text);gap:8px}.inv-item.on{background:#1a463e;border-color:#55d1a8}.inv-item b{font-size:13px;display:block}.inv-item small{font-size:11px;color:#a4b7ca;display:block;margin-top:4px}.count{min-width:30px;padding:5px 7px;border-radius:8px;background:#0f1a28;border:1px solid #496274;text-align:center;font-weight:800}.ranking{display:flex;flex-direction:column;gap:8px}.ranking-card{border:1px solid #34495f;background:#172637;border-radius:14px;padding:13px}.ranking-card.toprank{border-color:#659d8f;background:linear-gradient(125deg,#224439,#182738)}.ranking-head{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}.rank-num{font-weight:900;color:#ffd98a;font-size:21px}.rank-name{font-weight:800;font-size:16px;flex:1;min-width:130px}.tier{font-size:11px;border:1px solid #63738a;padding:4px 8px;border-radius:7px;color:#c9d8e8;font-weight:800}.tier.S{color:#ffd98a;border-color:#b18a4d}.tier.A{color:#a3f7d8;border-color:#4a9879}.tier.B{color:#a7c7ff}.ranking-card p{font-size:12px;color:#b7cde2;margin:7px 0}.micro{font-size:11px;color:#92aac4}.inline-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.tiny{font-size:11px;padding:3px 7px;border-radius:6px;background:#263d50;color:#c2d7ed}.tool-link{display:inline-block;border:1px solid #446982;padding:7px 9px;border-radius:8px;margin-top:8px;color:#b8ebfb;background:#192b3f;font-size:12px}.switchline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0}.wide-select{background:#101b2a;border:1px solid #46556f;padding:9px;border-radius:10px;color:#e6f1ff;min-height:45px;max-width:100%}details.guide{background:#101d2e;border-radius:12px;border:1px solid #334860;padding:10px;margin:10px 0}details.guide summary{cursor:pointer;font-weight:750}.guide p{font-size:12px}.empty-inv{font-size:12px;color:var(--muted)}@media(max-width:400px){.picker-card .bigcard{min-width:38px;height:59px;font-size:22px}.picker-card .bigcard span{font-size:17px}.poker-grid{gap:4px}.picker-card{padding:6px 2px}.inventory{gap:6px}.inv-item{padding:8px 7px}.inv-item b{font-size:12px}}@media(min-width:730px){.wheel-modal{align-items:center}.wheel-sheet{border-radius:22px}}
+
+/* v3.1 verified floor catalog and separate multiplier Wheel of Fortune */
+.grid-floor{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:14px 0}.floor-tile{min-height:86px;border:1px solid #3b5166;border-radius:12px;background:#172538;color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;cursor:pointer;touch-action:manipulation}.floor-tile.selected{border-color:#55d8b2;background:#245446}.floor-tile b{font-size:12px;color:#adc3d4}.floor-tile strong{font-size:24px;font-variant-numeric:tabular-nums}.floor-tile small{font-size:10px;color:#b7cbda}.floor-list{display:flex;flex-direction:column;gap:8px}.floor-entry{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px;border-radius:12px;background:#1a2b3d;border:1px solid #354d65}.floor-entry b{font-size:13px}.floor-entry .btn{white-space:nowrap}.floor-flag.yes{color:#7ff1be;font-weight:900}.floor-flag.no{color:#64778d}.floor-matrix-scroll{overflow-x:auto}.floor-matrix{min-width:330px}.floor-matrix th:first-child,.floor-matrix td:first-child{max-width:170px;min-width:155px}.floor-matrix td:first-child{font-size:12px;line-height:1.5}@media(max-width:380px){.floor-entry{padding:9px 7px}.floor-entry b{font-size:12px}.grid-floor{gap:5px}}
+/* v3: Dragon/Penguin cash-out ladder and touch roulette felt */
+.ladder-table{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums}.ladder-table th,.ladder-table td{text-align:right;border-bottom:1px solid #304159;padding:11px 6px}.ladder-table th:first-child,.ladder-table td:first-child{text-align:left}.ladder-table th{color:#9db8cc;font-size:11px}.ladder-current{background:#245045;color:#c4ffe4;font-weight:750}.r-toolbar{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px;padding:10px;margin:12px 0 4px;border-radius:12px;background:#0d1826;border:1px solid #344c58}.r-base{flex:1 1 105px;font-size:12px;color:#a8bed0}.r-base input{display:block;width:100%;margin-top:5px;min-height:40px;background:#16283b;color:#fff;border:1px solid #466176;border-radius:9px;padding:7px 9px}.r-chip-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;flex:2 1 190px}.r-chip-select{border:2px solid #748ba5;border-radius:50%;aspect-ratio:1/1;max-height:50px;min-height:42px;background:radial-gradient(circle,#335270 49%,#294055 50%);font-weight:900;color:#ebf2fc;box-shadow:inset 0 0 0 3px #183348}.r-chip-select.selected{color:#172b25;border-color:#deffd6;background:radial-gradient(circle,#84eed4 50%,#35a990 51%);box-shadow:0 0 0 2px #2e936f88,inset 0 0 0 3px #d0ffee}.r-status{font-size:11px;line-height:1.5;color:#adcae2;margin:9px 0 10px}.r-status strong{color:#aafbd9}.roulette-table{background:linear-gradient(130deg,#0d583a,#114832);border:2px solid #b99550;border-radius:14px;padding:12px 7px 14px;overflow:hidden;box-shadow:inset 0 0 18px #052e2080}.roulette-grid{display:grid;grid-template-columns:28px repeat(12,minmax(0,1fr)) 37px;grid-template-rows:repeat(3,45px);gap:2px;min-width:0}.roulette-grid>div{min-width:0;min-height:0}.roulette-grid .r-zero{grid-column:1;grid-row:1 / 4}.r-cell{width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;line-height:1.15;border:1px solid #c7d4c8;background:#174d35;color:white;font-weight:750;min-height:40px;padding:2px 0;font-size:11px;border-radius:2px;touch-action:manipulation}.r-cell.r-red{background:#a52d3a}.r-cell.r-black{background:#162130}.r-cell.r-zero-cell{background:#107451;font-size:16px}.r-cell.r-out{background:#136448;border-color:#91bbaa;font-size:10px;letter-spacing:-.1px}.r-cell.r-outred{background:#a52d3a}.r-cell.r-outblack{background:#162130}.r-cell.r-bet-on{outline:2px solid #f7d881;outline-offset:-2px}.r-cell:active{filter:brightness(1.4)}.r-chip{position:absolute;z-index:4;bottom:-2px;right:-2px;border-radius:100px;display:flex;align-items:center;justify-content:center;min-width:17px;max-width:36px;min-height:17px;padding:0 3px;background:#ffe8a3;color:#162332;border:2px dashed #a86f31;box-shadow:0 2px 3px #1117;font-weight:900;font-size:9px;pointer-events:none;white-space:nowrap}.roulette-dozens{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;margin:4px 39px 0 30px;height:43px}.roulette-outside{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2px;margin-top:5px;height:46px}.r-wagers{display:flex;flex-direction:column;gap:5px;margin-top:10px}.r-wager-row{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2b4352;padding:7px 0;gap:10px;font-variant-numeric:tabular-nums}.r-wager-row small{color:#92acb5}.r-remove{min-width:28px;min-height:28px;border:1px solid #725864;border-radius:8px;margin-left:9px;background:#402934;color:#ffb2a9}.r-outcomes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:12px}.r-outcome{text-align:center;display:flex;flex-direction:column;gap:3px;border:1px solid #47607a;background:#1d2a3d;padding:7px 2px;border-radius:8px}.r-outcome small{font-size:10px;white-space:nowrap;font-variant-numeric:tabular-nums}.r-outcome.win{border-color:#40856a;color:#9af1b9}.r-outcome.lose{color:#ffa6ac}.r-outcome.draw{color:#eee1a8}@media(max-width:425px){.roulette-table{padding:10px 4px}.roulette-grid{grid-template-columns:24px repeat(12,minmax(0,1fr)) 29px;grid-template-rows:repeat(3,42px);gap:1px}.r-cell{font-size:10px;border-width:1px}.r-cell.r-out{font-size:9px}.roulette-dozens{margin-left:25px;margin-right:30px}.r-chip{min-width:15px;min-height:15px;font-size:8px}.r-outcomes{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:350px){.roulette-grid{grid-template-columns:22px repeat(12,minmax(0,1fr)) 27px}.roulette-dozens{margin-left:23px;margin-right:28px}.r-cell{font-size:9px}.r-cell.r-out{font-size:8px}}
+
+/* Baccarat: touch-first table, same stake controls as Roulette */
+.bacc-board{background:linear-gradient(145deg,#0e513e,#10382e);border:2px solid #c0a26a;border-radius:16px;padding:16px 12px 12px;box-shadow:inset 0 0 26px #041f1b8c;min-width:0}
+.bacc-brand{font-size:11px;font-weight:900;letter-spacing:2px;text-align:center;color:#d7f6eb;padding:0 0 14px}
+.bacc-areas{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.bacc-spot{position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px;min-height:116px;padding:12px 5px;background:linear-gradient(145deg,#205e4c,#104a3d);color:#f3fffa;border:2px solid #bed0ae;border-radius:14px;font-weight:900;touch-action:manipulation}
+.bacc-spot b{font-size:20px}.bacc-spot small{font-size:11px;font-weight:550;color:#cbe4d9}.bacc-spot:active{filter:brightness(1.25)}.bacc-spot.selected{border-color:#ffe39b;box-shadow:0 0 0 2px #c49f64a3,inset 0 0 14px #eed36b22}
+.bacc-spot.tie{grid-column:1 / 3;min-height:96px;background:linear-gradient(120deg,#31516b,#294554)}
+.bacc-spot .r-chip{bottom:5px;right:7px;min-width:24px;min-height:24px;font-size:10px}
+.bacc-spot .bacc-prob{font-weight:800;color:#fbe3a6}
+.bacc-hands{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.bacc-hand{background:#152538;border:1px solid #3c526b;border-radius:12px;padding:11px 8px;text-align:center;min-width:0}
+.bacc-hand.won{border-color:#75dea9;background:#1a4537}.bacc-hand h4{margin:0 0 9px;font-size:13px;color:#b8cae2}
+.bacc-card{display:inline-flex;justify-content:center;align-items:center;background:#fff9ec;color:#181b24;border-radius:6px;font-size:15px;font-weight:850;width:38px;height:55px;margin:0 2px 5px;box-shadow:1px 2px 3px #0006}
+.bacc-card.red{color:#c32d45}.bacc-score{font-weight:850;color:#b6f4d2;margin-top:5px}
+@media(max-width:390px){.bacc-board{padding:12px 7px}.bacc-spot{min-height:107px}.bacc-spot b{font-size:17px}.bacc-card{width:33px;height:49px;font-size:14px}.bacc-hand{padding:9px 3px}}
+
+/* v4 portfolio and decision modeling */
+.strategy-preset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.strategy-preset .btn{min-height:52px;font-size:12px;padding:8px 5px}
+.model-strip{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.model-choice{border-radius:10px;border:1px solid #4a6076;background:#142638;padding:10px;color:#d1e5fa;font-size:12px;flex:1;min-width:130px;cursor:pointer}.model-choice.active{background:#20473d;color:#d0ffe8;border-color:#57cda4}.model-choice b{display:block}.summary-ev{border:1px solid #55aa8e;background:#193c34;border-radius:14px;padding:15px;margin-bottom:12px}.summary-ev .kicker{font-size:11px;color:#b1f2da;font-weight:800}.summary-ev .amount{font-size:30px;font-weight:900;color:#baffe7;font-variant-numeric:tabular-nums}.summary-ev .micro{color:#cceddf}.rank-stat{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}.rank-stat span{background:#1e3b3a;border:1px solid #456b63;border-radius:8px;padding:5px 8px;color:#b2f1db;font-size:11px}.rank-stat .uncertain{background:#322c29;color:#f9d4a8;border-color:#665342}.side-by-side{display:grid;grid-template-columns:1fr 1fr;gap:8px}.side-by-side>div{background:#16283a;border:1px solid #3a5065;border-radius:10px;padding:11px}.teal{color:var(--mint)}.warning-v4{border:1px solid #7d6041;background:#302719;border-radius:11px;padding:11px;font-size:12px;line-height:1.65;color:#ffe1b2}.method-note{border-left:3px solid #53bda1;padding:5px 10px;font-size:12px;color:#b5d5d1;margin:10px 0}.negative{color:#ffb7ba!important}.tiny-btn{font-size:11px!important;min-height:36px!important}
+@media(max-width:390px){.strategy-preset{gap:5px}.strategy-preset .btn{font-size:11px}.model-choice{padding:8px}.summary-ev .amount{font-size:26px}}
+
+.rec-action{background:#132d30;border:1px solid #346460;border-radius:10px;padding:11px 12px;margin:10px 0}.rec-action strong{color:#9ff2db}.rec-action .instruction{line-height:1.7;margin:6px 0;color:#ecf5ff}.rec-math{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.rec-math span{border:1px solid #4d6779;background:#1c3442;border-radius:8px;font-size:11px;padding:6px;color:#d1f5e3}.rec-math .risk{border-color:#755c47;color:#ffe0ac}.rec-stamp{font-size:11px;color:#bcd1e2;line-height:1.6}.rec-lead{border-left:3px solid #65d4bb;padding:10px;margin:9px 0}.small-pill{background:#2f3e53;border-radius:7px;padding:4px 7px;font-size:10px}
+
+.sync-items{margin-bottom:10px}.sync-items .inventory{grid-template-columns:repeat(2,minmax(0,1fr))}.sync-items .inv-item{min-width:0}.buff-quick{background:#15382f;color:#adeccc;padding:9px 12px;border-radius:10px;font-size:13px;margin:8px 0 12px;line-height:1.5}.ranking .note{margin-top:4px}.ranking .rec-action{padding:10px}.ranking .rec-action .instruction{line-height:1.48}.ranking .rec-stamp{display:none}
+.inventory .inv-item>span:first-child{min-width:0;overflow-wrap:anywhere}.inventory .inv-item .count{flex:0 0 auto;min-width:26px;padding:4px 5px}.inventory .inv-item{gap:4px}
+</style></head><body><div class="wrap" data-creation-signature="旅人使用GPT-6制作"><header class="top"><div><div class="eyebrow">GWYF · MOBILE COMPANION</div><h1>🎲 朋友，梭哈吧 <span style="color:var(--mint)">策略决策器</span></h1><div class="sub">点一下输入局面，马上获得行动与概率提示 · 完全离线</div></div><div class="tag">2026 · v5.6 · v1.0.30 资料</div></header>
+<section class="purpose-banner" role="note" aria-label="适用范围声明">
+  <span class="purpose-icon" aria-hidden="true">🎮</span><div>
+    <strong>Steam《朋友，梭哈吧》· 游戏内策略辅助工具</strong>
+    <div class="purpose-caption">仅用于分析不可兑换现金的虚拟游戏币、游戏概率和道具收益；不涉及真钱赌博或真实博彩平台。</div>
+  </div>
+</section>
+<template id="attribution-backup" data-author="旅人" data-assisted-by="GPT-6">旅人使用GPT-6制作</template>
+<nav id="tabs" class="tabs" aria-label="选择小游戏"></nav><main class="layout"><section id="controls" class="panel"></section><section id="results" class="panel"></section></main><footer class="foot"><span class="work-credit" aria-label="制作署名">© 旅人使用 GPT-6 制作 · 非官方</span> · <a href="https://gwyfguides.com/items" target="_blank">道具攻略</a> · <a href="https://gwyfguides.com/games/slots" target="_blank">老虎机资料</a></footer></div>
+<script>
+(()=>{'use strict';
+const __creatorSignature=Object.freeze({author:'旅人',assistant:'GPT-6',credit:'旅人使用GPT-6制作',project:'GWYF-Offline-Companion'});
+const tabs=[['recommend','🏆 游戏推荐'],['roulette','🎯 轮盘'],['baccarat','🎴 游戏百家乐'],['poker','♠ 单人扑克'],['bj','🃏 二十一点'],['craps','🎲 街头骰子'],['money','🌈 颜色转盘 F2'],['fortune','🎡 倍率转盘 F1'],['hilo','⚖ 猜大小'],['crash','🚀 Crash'],['floors','🏢 楼层图鉴'],['items','🎒 道具排行'],['dragon','🐉 爬龙塔'],['penguin','🐧 企鹅跳冰块'],['mines','💣 扫雷']];
+const state={tab:'recommend',b:{mode:'quick',type:'hard',hard:16,soft:7,pair:'8',dealer:'10',cards:['10','6'],double:true,first:true,h17:false},pk:{cards:[['A','♠'],['A','♥'],['6','♦'],['9','♣'],['Q','♠']],hold:null,ev:null,running:false},mines:{mine:10,k:3},hilo:{threshold:50,side:'under'},money:{color:'orange'},fortune:{},crash:{target:2,profit:1,refund:0},dragon:{rows:3},penguin:{step:2},roulette:{base:10,multiple:1,wagers:[],last:null},baccarat:{base:10,multiple:1,wagers:[],last:null},craps:{phase:0,point:0,left:3,msg:''},build:{floor:2,goal:'money',risk:'normal',team:'group',owned:{},showAll:false,sort:'rank',settlement:'pooled',rouletteStrategy:'six',baccaratStrategy:'bothquarter'}};
+const $=id=>document.getElementById(id),fmt=(x,n=2)=>Number.isFinite(x)?Number(x).toLocaleString('zh-CN',{maximumFractionDigits:n,minimumFractionDigits:n}):'—',pct=(x,n=2)=>fmt(x*100,n)+'%', num=x=>Math.max(0,Number(x)||0),lim=(x,a,b)=>Math.max(a,Math.min(b,x)),highlight=(v,active)=>v===active?'selected':'',stat=(a,b)=>`<div class="stat"><span>${a}</span><strong>${b}</strong></div>`,hero=(type,title,desc,subtitle='实时建议')=>`<div class="hero ${type}"><div class="over">${subtitle}</div><div class="big">${title}</div><div class="desc">${desc}</div></div>`,result=(title,inner)=>`<h2>${title}</h2>${inner}`;
+function signedMoney(x){return (x>1e-9?'+':x< -1e-9?'−':'')+fmt(Math.abs(x),2);}
+function renderNav(){const nav=$('tabs'),oldLeft=nav.scrollLeft;nav.innerHTML=tabs.map(([id,name])=>`<button class="tab ${state.tab===id?'active':''}" data-tab="${id}" aria-current="${state.tab===id?'page':'false'}">${name}</button>`).join('');nav.scrollLeft=oldLeft;const active=nav.querySelector('.tab.active');if(active){const left=active.offsetLeft-nav.offsetLeft,right=left+active.offsetWidth;if(left<nav.scrollLeft)nav.scrollLeft=Math.max(0,left-12);else if(right>nav.scrollLeft+nav.clientWidth)nav.scrollLeft=right-nav.clientWidth+12;}}
+function render(){const prevOpen=!!document.querySelector('details.sync-items[open]');renderNav();({recommend:drawRecommend,floors:drawFloors,items:drawItems,bj:drawBJ,poker:drawPoker,mines:drawMines,fortune:drawFortune,money:drawMoney,hilo:drawHiLo,crash:drawCrash,dragon:drawDragon,penguin:drawPenguin,roulette:drawRoulette,baccarat:drawBaccarat,craps:drawCraps})[state.tab]();if(!['recommend','items'].includes(state.tab))$('controls').insertAdjacentHTML('afterbegin',`<details class="guide sync-items"><summary>🎒 已有道具 ${guideItems.filter(it=>owned(it.id)).length} 种 · 点此同步修改</summary>${inventoryPicker()}</details>${['roulette','baccarat'].includes(state.tab)?'':`<div class="buff-quick">${shortBuff()}</div>`}`);const p=document.querySelector('details.sync-items');if(p&&prevOpen)p.open=true;}
+function shortBuff(){const b=buffState();return '🎲 最终利润加成 ×'+fmt(b.a*(1+b.cameraRate),2)+' · '+(b.b===0?'亏损归零':'损失保留 '+pct(b.b));}
+function btnGroup(values,selected,fn,cols){return `<div class="buttons" style="grid-template-columns:repeat(${cols||5},minmax(0,1fr))">${values.map(v=>`<button class="btn ${highlight(String(v[0]),String(selected))}" data-cmd="${fn}" data-val="${v[0]}">${v[1]}</button>`).join('')}</div>`;}
+const dvals=['2','3','4','5','6','7','8','9','10','A'];const valItems=dvals.map(v=>[v,v]);
+function bjRaw(cards){let total=0,aces=0;for(const c of cards){if(c==='A'){total++;aces++}else total+=['J','Q','K'].includes(c)?10:Number(c)}if(aces&&total+10<=21)return {total:total+10,soft:true};return {total,soft:false};}
+function bjSituation(){const b=state.b;if(b.mode==='cards'){const r=bjRaw(b.cards);return {...r,pair:b.cards.length===2&&b.cards[0]===b.cards[1]?b.cards[0]:null,two:b.cards.length===2,labels:b.cards.join(' + ')}}if(b.type==='hard')return {total:b.hard,soft:false,pair:null,two:b.first,labels:`硬 ${b.hard}`};if(b.type==='soft')return {total:11+Number(b.soft),soft:true,pair:null,two:b.first,labels:`A + ${b.soft}`};const p=b.pair;return {total:p==='A'?12:Number(p)*2,soft:p==='A',pair:p,two:true,labels:`${p} + ${p}`};}
+function bjBase(s,dealer,h17){const d=dealer==='A'?11:Number(dealer),t=s.total;if(t>21)return ['B','已超过 21 点（爆牌）。'];if(t===21)return ['S','已经是 21 点，停牌即可。'];if(s.soft){if(t>=20)return ['S','软 20 或更高不再冒险。'];if(t===19){if(h17&&d===6)return ['DS','H17 规则下，软 19 对庄家 6 可考虑加倍。'];return ['S','软 19 停牌。']}if(t===18){if((h17&&d>=2&&d<=6)||(!h17&&d>=3&&d<=6))return ['DS','软 18 遇到庄家弱明牌，适合加倍；不能加倍则停牌。'];if(d===2||d===7||d===8)return ['S','软 18 对此明牌以停牌更合适。'];return ['H','庄家明牌较强，软 18 可继续要牌。']}if(t===17){if(d>=3&&d<=6||(h17&&d===2))return ['DH','软 17 对弱明牌加倍，无法加倍就要牌。'];return ['H','软 17 可继续安全改善点数。']}if(t===15||t===16){if(d>=4&&d<=6)return ['DH','软 15/16 对 4–6 加倍，无法加倍就要牌。'];return ['H','目前点数不够，继续要牌。']}if(t===13||t===14){if(d>=5&&d<=6)return ['DH','软 13/14 对 5–6 加倍，无法加倍就要牌。'];return ['H','软手低点数，继续要牌。']}return ['H','继续要牌。'];}
+if(t>=17)return ['S','硬 17 以上停牌。'];if(t>=13)return [d<=6?'S':'H',d<=6?'庄家 2–6 较弱，停牌等待庄家补牌。':'庄家 7–A 较强，硬 13–16 要牌改善。'];if(t===12)return [d>=4&&d<=6?'S':'H','硬 12 只对庄家 4、5、6 停牌。'];if(t===11)return [d!==11||h17?'DH':'H','硬 11 通常加倍（S17 对 A 要牌）。'];if(t===10)return [d>=2&&d<=9?'DH':'H','硬 10 对庄家 2–9 加倍。'];if(t===9)return [d>=3&&d<=6?'DH':'H','硬 9 对庄家 3–6 加倍。'];return ['H','总点数偏低，继续要牌。'];}
+function bjDecision(){const b=state.b,s=bjSituation();let [code,why]=bjBase(s,b.dealer,b.h17);
+if(code==='DH'||code==='DS'){if(b.double&&s.two){return {code:'D',why,alternative:code==='DH'?'要牌':'停牌',s}}return {code:code==='DH'?'H':'S',why:why+' 当前不能加倍，已切换备用动作。',alternative:'',s};}
+return {code,why,alternative:'',s};}
+const bjMap={H:['hit','要牌 HIT'],S:['stand','停牌 STAND'],D:['double','加倍 DOUBLE'],B:['alert','已爆牌 BUST']};
+function drawBJ(){const b=state.b,x=bjDecision(),s=x.s;const rnames={hard:'硬手',soft:'A 软手',pair:'对子'};
+let input=`<h2>🃏 二十一点 · 要牌 / 停牌 / 加倍</h2><div class="pill-tabs"><button data-cmd="bmode" data-val="quick" class="${b.mode==='quick'?'active':''}">点数快捷查表</button><button data-cmd="bmode" data-val="cards" class="${b.mode==='cards'?'active':''}">逐张输入手牌</button></div>`;
+if(b.mode==='quick'){input+=`<span class="label">我的手牌类型</span>${btnGroup(Object.keys(rnames).map(v=>[v,rnames[v]]),b.type,'btype',3)}<span class="label">${b.type==='hard'?'当前硬点数':b.type==='soft'?'A + 另一张（或其余牌合计）':'两张同点数（按普通手牌判断）'}</span>`;
+if(b.type==='hard')input+=btnGroup(Array.from({length:18},(_,i)=>[String(i+4),String(i+4)]),String(b.hard),'bhard',6);
+if(b.type==='soft')input+=btnGroup(Array.from({length:9},(_,i)=>[String(i+2),'A+'+(i+2)]),String(b.soft),'bsoft',3);
+if(b.type==='pair')input+=btnGroup(['A','2','3','4','5','6','7','8','9','10'].map(v=>[v,v==='10'?'10/J/Q/K':v+'+'+v]),b.pair,'bpair',5);
+if(b.type!=='pair')input+=`<label class="switch"><input type="checkbox" data-check="bfirst" ${b.first?'checked':''}/>仍是初始两张牌（可以加倍）</label>`;
+}else{input+=`<span class="label">输入自己的牌 · 按顺序点选（最多 12 张）</span><div class="cards-row">${b.cards.map(c=>`<span class="playing ${['♥','♦'].includes(c)?'red':''}">${c}</span>`).join('')}</div><div class="smallgap">${btnGroup(['A','2','3','4','5','6','7','8','9','10','J','Q','K'].map(v=>[v,v]),'','add',7)}</div><div class="row smallgap"><button class="btn plain" data-cmd="undo">↩ 撤销一张</button><button class="btn plain" data-cmd="resetbj">重置手牌</button></div>`;}
+input+=`<span class="label">庄家明牌（看得到的那张）</span>${btnGroup(valItems,b.dealer,'dealer',5)}<div class="divider"></div><h3>桌面规则 / 当前可用操作</h3><div class="row split"><label class="switch"><input type="checkbox" data-check="bdouble" ${b.double?'checked':''}/> 允许加倍</label><label class="switch"><input type="checkbox" data-check="bh17" ${b.h17?'checked':''}/> 庄家软17继续要牌（H17）</label></div><p class="note">只给要牌／停牌／加倍建议，<b>不使用分牌</b>。默认采用庄家软17停牌（S17），可在上方改成 H17 的基础策略；本游戏是单副跨回合持续消耗的 52 张牌、Natural 3×，实际最优动作可能因剩余牌而变。</p>`;
+$('controls').innerHTML=input;
+let [cls,name]=bjMap[x.code];const sdetail=`${s.labels} · ${s.soft?'软':'硬'} ${s.total} 点 · 庄家 ${b.dealer}`;
+$('results').innerHTML=result('本手最优基础动作',hero(cls,name,x.why))+`<div class="stats">${stat('当前点数',s.total+(s.soft?' · 软':''))}${stat('庄家明牌',b.dealer)}${stat('加倍条件',b.double&&s.two?'满足':'不可用')}</div><div class="inline-result">${sdetail}${x.alternative?`<div>若不能加倍：<b>${x.alternative}</b></div>`:''}<div style="margin-top:7px">提示：拿到第三张牌后请关闭“初始两张”，或切换到“逐张输入手牌”。</div></div><p class="note">A 可按 11 计且不爆牌时为软手。8+8 按硬 16，A+A 按软 12；5+5 按硬 10，10+10 按硬 20。基础查表不能代表实时剩余牌最优解。</p>`;}
+function bjChange(cmd,v){const b=state.b;if(cmd==='bmode')b.mode=v;else if(cmd==='btype')b.type=v;else if(cmd==='bhard')b.hard=+v;else if(cmd==='bsoft')b.soft=+v;else if(cmd==='bpair')b.pair=v;else if(cmd==='dealer')b.dealer=v;else if(cmd==='add'&&b.cards.length<12)b.cards.push(v);else if(cmd==='undo')b.cards.pop();else if(cmd==='resetbj')b.cards=[];render();}
+function drawHiLo(resultOnly=false){const h=state.hilo;const chance=(h.side==='under'?h.threshold:100-h.threshold)/100;if(!resultOnly)$('controls').innerHTML=`<h2>⚖ HiLo · 高低猜测</h2><span class="label">概率分割点 <b id="hlval" style="color:var(--mint)">${h.threshold}%</b></span><input type="range" class="valuebar" min="1" max="99" value="${h.threshold}" data-range="threshold"><span class="label">下注方向</span>${btnGroup([['under','低于阈值 Under'],['over','高于阈值 Over']],h.side,'side',2)}<p class="note">本游戏是连续概率阈值的 Over/Under，不是猜下一张扑克牌。所选边胜率 = 阈值或其补数。</p>`;$('results').innerHTML=result('概率与行动',hero('stand',`${pct(chance,0)} 胜率`,`理论基础总返还率约 100%。两侧在相同概率时，期望收益相同；胜率越高，倍率越低。`,'当前所选方向'))+`<div class="stats">${stat('理论毛倍率',fmt(1/chance,3)+'×')}${stat('失败概率',pct(1-chance))}${stat('最终期望净收益率',pct(singleSettlement(chance,1/chance).roi))}${stat('所选方向',h.side==='under'?'低于阈值':'高于阈值')}</div><div class="inline-result">${chance>=.6?'较高命中率，但不保证赢；适合尝试低波动。':chance<=.25?'高风险倍率：连续失败十分常见。':'中等风险。'}<br>同样的 20% 胜率：Under 20% 和 Over 80% 的基础倍率均约 5×。</div>`;}
+function minesP(m,k){let p=1;for(let i=0;i<k;i++)p*=(25-m-i)/(25-i);return p;}
+function signedPct(x,n=2){return (x>1e-10?'+':'')+pct(Math.abs(x)<1e-10?0:x,n)}
+function chancePct(x){return x>0&&x<0.00001?'＜0.001%':pct(x,3)}
+function drawMines(){
+ const a=state.mines; a.mine=lim(Math.round(a.mine),1,24);
+ const max=25-a.mine;a.k=lim(Math.round(a.k),0,max);
+ const currentP=minesP(a.mine,a.k),currentGross=1/currentP,hasNext=a.k<max;
+ const nextP=hasNext?(max-a.k)/(25-a.k):0,nextGross=hasNext?1/minesP(a.mine,a.k+1):null;
+ const stopNet=a.k?settleNet(currentGross-1):0;
+ const winNet=hasNext?settleNet(nextGross-1):null,failNet=settleNet(-1);
+ const nextEV=hasNext?nextP*winNet+(1-nextP)*failNet:null;
+ const diff=hasNext?nextEV-stopNet:null;
+ let resultName=!hasNext?'安全格已全部翻完':owned('statue')?'免亏保护 · 可以继续':diff>1e-8?'继续一格期望更高':diff < -1e-8?'现在提现期望更高':'继续或提现 · 期望接近';
+ let steps=[];
+ const endAt=Math.min(max,a.k+5);
+ if(a.k>0)steps.push(`<tr class="ladder-current"><td>第 ${a.k} 格 ◀</td><td>${fmt(currentGross,3)}×</td><td>${chancePct(currentP)}</td><td>已在此格</td></tr>`);
+ for(let t=a.k+1;t<=endAt;t++){
+   const reach=minesP(a.mine,t),conditional=reach/currentP;
+   steps.push(`<tr><td>第 ${t} 格</td><td>${fmt(1/reach,3)}×</td><td>${chancePct(reach)}</td><td>${chancePct(conditional)}</td></tr>`);
+ }
+ const allRemain=a.k<max?minesP(a.mine,max)/currentP:null;
+ const table=steps.length?`<h3>各目标格的连续成功率</h3><table class="ladder-table"><thead><tr><th>到达格数</th><th>提现倍率</th><th>从开局到此格</th><th>从当前到此格</th></tr></thead><tbody>${steps.join('')}</tbody></table>`:'';
+ $('controls').innerHTML=`<h2>💣 Mine Sweeper · 扫雷</h2><div class="row split"><label class="field"><span class="label">放置地雷数（1–24）</span><input type="number" min="1" max="24" data-num="mine" value="${a.mine}"></label><label class="field"><span class="label">已连续翻开安全格</span><input type="number" min="0" max="${max}" data-num="k" value="${a.k}"></label></div><div class="inline-result">25 格中有 ${a.mine} 雷 · 已安全 ${a.k} 格 · 剩余 ${max-a.k} 个安全格</div>`;
+ $('results').innerHTML=result('下一格风险与收益',hero(!hasNext||diff< -1e-8?'stand':'double',resultName,hasNext?`再翻一格，成功率 ${pct(nextP)}；失败概率 ${pct(1-nextP)}。`:'已无新的安全格可以翻。'))+
+ `<div class="stats">${stat('当前提现倍率',a.k?fmt(currentGross,3)+'×':'尚未翻开')}${stat('从开局到当前格',a.k?chancePct(currentP):'起点')}${stat('下一格成功率',hasNext?pct(nextP,3):'—')}${stat('下一格触雷率',hasNext?pct(1-nextP,3):'—')}${stat('下一格成功倍率',hasNext?fmt(nextGross,3)+'×':'—')}${stat('下一格成功后净赚',hasNext?signedPct(winNet):'—')}${stat('下一格失败净亏',hasNext?signedPct(failNet):'—')}${stat('再翻一格净期望',hasNext?signedPct(nextEV):'—')}${stat('相比立即提现的期望变化',hasNext?signedPct(diff):'—')}${stat('从当前到全部安全格',hasNext?chancePct(allRemain):'已完成')}</div>${table}`;
+}
+const fortuneOutcomes=[
+ {m:0,count:1,label:'0×'}, {m:.1,count:5,label:'0.1×'}, {m:.25,count:4,label:'0.25×'},
+ {m:.5,count:3,label:'0.5×'}, {m:2,count:2,label:'2×'}, {m:3,count:2,label:'3×'}, {m:5,count:1,label:'5×'}
+];
+const fortuneRaw=[...fortuneOutcomes.map(x=>({...x})),{m:null,count:2,label:'Spin（重新转）'}];
+function drawFortune(){
+ const model=fortuneModel();
+ const rows=fortuneOutcomes.map(x=>{
+   const net=settleNet(x.m-1);
+   return `<tr><td><b>${x.label}</b></td><td>${x.count} / 18</td><td>${pct(x.count/18)}</td><td style="color:${net>0?'#9cf1c8':net<0?'#ffbabf':'#eff'}">${signedPct(net)}</td></tr>`;
+ }).join('');
+ $('controls').innerHTML=`<h2>🎡 Wheel of Fortune · 倍率转盘</h2><p class="note">F1 的倍率转盘直接随机给出返还倍率，不能选择颜色或控制落点。</p><div class="rank-banner"><b>20 个等面积扇区</b><div class="inline-tags">${fortuneRaw.map(x=>`<span class="tiny">${x.label} · ${x.count} 格</span>`).join('')}</div><p class="note">其中 2 格 Spin 为重新转动，最终结算只计其余 18 格。</p></div>`;
+ $('results').innerHTML=result('倍率转盘 · 期望与概率',hero(model.roi>=0?'stand':'double',signedPct(model.roi),'已按当前道具状态计算每次转动的净收益率。','最终期望净收益率'))+
+ `<div class="stats">${stat('最终盈利概率',pct(model.win))}${stat('最终亏损概率',pct(model.lose))}${stat('基础毛返还率','100.00%')}${stat('最终 5× 的概率',pct(1/18))}${stat('最差结果',signedPct(model.min))}${stat('最好结果',signedPct(model.max))}</div><h3>各倍率的最终收益</h3><table class="ladder-table"><thead><tr><th>返还倍率</th><th>格数</th><th>结算概率</th><th>最终净盈亏率</th></tr></thead><tbody>${rows}</tbody></table><p class="note">净盈亏率按每笔投注额计算；1× 为收回本金，+100% 为净赚一倍投注额。<a href="https://gwyfguides.com/games/wheel-of-fortune" target="_blank" rel="noopener">赔率依据 ↗</a></p>`;
+}
+const moneyData={green:['绿',14,2],blue:['蓝',10,3],red:['红',8,5],orange:['橙',5,10]};
+function drawMoney(){
+ const a=state.money,[label,count,m]=moneyData[a.color],p=count/37,edge=singleSettlement(p,m).roi;
+ const rows=Object.entries(moneyData).map(([key,[name,c,mult]])=>{const probability=c/37,roi=singleSettlement(probability,mult).roi;return `<tr class="${a.color===key?'ladder-current':''}"><td><b>${name}色${a.color===key?' ◀':''}</b></td><td>${pct(probability)}</td><td>${mult}×</td><td>${signedPct(roi)}</td></tr>`;}).join('');
+ $('controls').innerHTML=`<h2>🌈 Money Wheel · 选颜色转盘</h2><span class="label">选择下注颜色</span>${btnGroup(Object.entries(moneyData).map(([k,v])=>[k,v[0]+'色']),a.color,'mwcolor',4)}<p class="note">选定颜色后直接查看中奖概率与最终收益率；不用填写下注金额。</p>`;
+ $('results').innerHTML=result('颜色转盘 · 概率与收益',hero('double',`${label}色 · 最终期望 ${signedPct(edge)}`,`命中率 ${pct(p)}，命中时返还 ${m}×（含本金）。`))+
+ `<div class="stats">${stat('选中颜色命中率',pct(p))}${stat('命中总返还',m+'×')}${stat('基础毛返还率',pct(p*m))}${stat('命中后净赚',signedPct(settleNet(m-1)))}${stat('未命中净亏',signedPct(settleNet(-1)))}${stat('连续 5 次不中',pct((1-p)**5))}</div><h3>四种颜色收益对比</h3><table class="ladder-table"><thead><tr><th>颜色</th><th>命中率</th><th>返还</th><th>最终期望净收益率</th></tr></thead><tbody>${rows}</tbody></table><p class="note">收益率均相对于投注金额计算，已同步计算已选道具。<a href="https://gwyfguides.com/games/money-wheel" target="_blank" rel="noopener">配置依据 ↗</a></p>`;
+}
+function drawCrash(){const c=state.crash;c.target=lim(c.target,1.2,100);const p=1/c.target;const gross=1+(c.target-1)*buffState().a;const ev=singleSettlement(p,c.target).roi;
+$('controls').innerHTML=`<h2>🚀 Crash · 何时提现</h2><span class="label">计划提现倍率</span>${btnGroup([1.2,1.5,2,3,5,10].map(v=>[v,v+'×']),String(c.target),'ctarget',3)}<label class="field"><span class="label">自定义倍率 (1.2–100)</span><input type="number" min="1.2" max="100" step="0.1" data-num="target" value="${c.target}"></label><p class="note">2026 年 7 月版本后的社区代码分析：常规目标的理论存活率大约为 1/倍率。真实点击有延迟，1.01× 左右可能直接爆炸；因此不提供近于 1× 的“必胜”建议。</p>`;
+$('results').innerHTML=result('倍率决策',hero(c.target<=1.5?'stand':'double',`${fmt(c.target,1)}× 计划提现`,c.target<=1.5?'更偏向减少连败与完成连胜任务；仍可能在你点下提现前爆炸。':'更偏向单次高收益，命中率随倍率下降。','当前目标'))+`<div class="stats">${stat('理论达到概率',pct(p))}${stat('理论失败率',pct(1-p))}${stat('成功最终总返还',fmt(gross,3)+'×')}${stat('理论单局期望净值',(ev>=0?'+':'')+pct(ev))}${stat('连续 4 次成功',pct(p**4))}${stat('基础目标 2× 的命中率','50%')}</div><p class="note">理论收益未扣实际反应／网络延迟；加成作用于盈利部分，不直接把总倍率相乘。未加成时各正常倍率基础期望接近零，但实际操作通常更差。</p>`;}
+const dragonMultipliers=Array.from({length:7},(_,i)=>Math.pow(4/3,i));
+const penguinMultipliers=[1,1.2,1.5,2,3,5,10,25,75,250,1000];
+function buffedMultiplier(m,f){return 1+(m-1)*f}
+function ladderPanel(kind,level,multipliers){
+ const isDragon=kind==='dragon',cur=multipliers[level],end=multipliers.length-1,atEnd=level===end;
+ const next=atEnd?null:multipliers[level+1],pNext=atEnd?null:cur/next;
+ const cashOut=level>0?settleNet(cur-1):0;
+ const win=atEnd?null:settleNet(next-1),lose=settleNet(-1);
+ const nextEV=atEnd?null:pNext*win+(1-pNext)*lose;
+ const evChange=atEnd?null:nextEV-cashOut;
+ const currStreak=1/cur;
+ const finishFromNow=cur/multipliers[end];
+ const stageLabel=isDragon?'层':'步';
+ const decision=atEnd?'全部完成 · 提现':owned('statue')?'免亏保护 · 可继续':level===0?'开始第一步':evChange>1e-8?'继续一步期望更高':evChange< -1e-8?'当前提现期望更高':'继续或提现 · 期望接近';
+ const explanation=atEnd?'已到最后一档。':`继续第 ${level+1} ${stageLabel}：成功 ${pct(pNext,2)}，失败 ${pct(1-pNext,2)}。`;
+ const table=multipliers.slice(1).map((v,i)=>{
+   const stage=i+1,fromStart=1/v;
+   const conditional=stage>level?cur/v:null;
+   const active=stage===level;
+   const fromHere=stage<level?'已通过':active?`已在此${stageLabel}`:chancePct(conditional);
+   return `<tr class="${active?'ladder-current':''}"><td>${stage}${active?' ◀':''}</td><td>${fmt(v,stage>=7?0:3)}×</td><td>${chancePct(fromStart)}</td><td>${fromHere}</td></tr>`;
+ }).join('');
+ return result('下一步风险与收益',hero(atEnd||evChange< -1e-8?'stand':'double',decision,explanation))+
+ `<div class="stats">${stat('当前提现倍率',level?fmt(cur,3)+'×':'尚未起步')}${stat(`从开局到当前${stageLabel}`,level?chancePct(currStreak):'起点')}${stat('下一步成功率',atEnd?'—':pct(pNext,3))}${stat('下一步失败率',atEnd?'—':pct(1-pNext,3))}${stat('下一步成功倍率',atEnd?'—':fmt(next,3)+'×')}${stat('下一步成功后净赚',atEnd?'—':signedPct(win))}${stat('下一步失败净亏',atEnd?'—':signedPct(lose))}${stat('继续一步净期望',atEnd?'—':signedPct(nextEV))}${stat('相比现在提现的期望变化',atEnd?'—':signedPct(evChange))}${stat('从当前到终点',atEnd?'已到终点':chancePct(finishFromNow))}</div>
+ <h3>各目标${stageLabel}的连续成功率</h3><table class="ladder-table"><thead><tr><th>到达${stageLabel}数</th><th>提现倍率</th><th>从开局到此${stageLabel}</th><th>从当前到此${stageLabel}</th></tr></thead><tbody>${table}</tbody></table>`;
+}
+function drawDragon(){const a=state.dragon;a.rows=lim(Math.round(a.rows),0,6);const cur=dragonMultipliers[a.rows];
+ $('controls').innerHTML=`<h2>🐉 Dragon Tower · 爬龙塔</h2><span class="label">已经连续安全通过几层</span>${btnGroup(Array.from({length:7},(_,i)=>[i,String(i)]),String(a.rows),'drow',7)}<div class="inline-result">当前：<b>${a.rows===0?'起点':fmt(cur,3)+'× 可提现'}</b> · 剩余 ${6-a.rows} 层</div>`;
+ $('results').innerHTML=ladderPanel('dragon',a.rows,dragonMultipliers);
+}
+function drawPenguin(){const a=state.penguin;a.step=lim(Math.round(a.step),0,10);
+ $('controls').innerHTML=`<h2>🐧 Penguin Cross · 企鹅跳冰块</h2><span class="label">已经连续安全跳过几块</span>${btnGroup(Array.from({length:11},(_,i)=>[i,String(i)]),String(a.step),'pstep',6)}<div class="inline-result">当前：<b>${a.step===0?'起点':fmt(penguinMultipliers[a.step],a.step>=7?0:2)+'× 可提现'}</b> · 剩余 ${10-a.step} 步</div>`;
+ $('results').innerHTML=ladderPanel('penguin',a.step,penguinMultipliers);
+}
+// v4.3: 用户在轮盘实测「同时拥有赌徒自信与保险，红黑各押 100，开非0只收回200」，否定逐注增益对冲。采用整桌合并的工作模型。
+function buffState(){
+ const confidence=owned('confidence'),insurance=owned('insurance'),stakeholder=1+0.5*owned('stakeholder');
+ const statue=!!owned('statue'),drink=!!owned('drink'),mic=!!owned('microphone');
+ const camera=!!owned('camera')&&state.build.team==='group';
+ // 同局净额归并之后再生效；神圣雕像勾选即防止亏损。
+ const a=(1+.5*confidence)*(drink?2:1)*(mic?2:1);
+ const refund=statue||mic?1:1-Math.pow(.75,insurance);
+ return {a,b:1-refund,refund,confidence,insurance,stakeholder,statue,drink,mic,camera,
+   cameraRate:camera?.25*stakeholder:0,mode:'pooled'};
+}
+function moneyNet(raw,gross,stake,bf){return settleNet(raw,bf);}
+function settleNet(raw,bf=buffState()){
+ let self=raw>0?raw*bf.a:raw<0?raw*bf.b:0;
+ // 相机只拍队友；按成功捕捉一局、第一格充能并立即摔碎（利润的25%）估算额外团队收益。
+ if(raw>0&&bf.camera)self+=raw*bf.a*bf.cameraRate;
+ return self;
+}
+function portfolioEV(legs,scenarios,bf=buffState()){
+ const invested=legs.reduce((z,w)=>z+w.stake,0),out=[];let ev=0,probPos=0,probZero=0,probAny=0,min=Infinity,max=-Infinity;
+ for(const scenario of scenarios){let raw=0,winning=false;
+  for(const w of legs){const gross=w.gross(scenario.id);raw+=w.stake*(gross-1);if(gross>0)winning=true;}
+  const net=settleNet(raw,bf);
+  ev+=scenario.prob*net;if(net>1e-8)probPos+=scenario.prob;else if(Math.abs(net)<=1e-8)probZero+=scenario.prob;
+  if(winning)probAny+=scenario.prob;
+  min=Math.min(min,net);max=Math.max(max,net);out.push({id:scenario.id,prob:scenario.prob,raw,net});
+ }
+ return {total:invested,ev,roi:invested>0?ev/invested:0,win:probPos,flat:probZero,lose:Math.max(0,1-probPos-probZero),any:probAny,min:invested?min:0,max:invested?max:0,out};
+}
+function levelModel(){const b=buffState();return `<div class="r-status"><strong>最终利润加成 ×${fmt(b.a*(1+b.cameraRate),2)}</strong> · ${b.b===0?'所有亏损归零':'亏损保留 '+pct(b.b)} ${b.camera?' · 相机按单次成功拍摄计团队收入':''}</div>`;}
+function modelWarn(){return '';}
+// GWYF 已确认的欧洲单 0 轮盘投注类别，不添加未经验证的分注 / 角注 / 街注。
+const rouletteReds=new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
+const rouletteDefs={};
+
+function rouletteDef(key,name,nums,gross,kind){rouletteDefs[key]={key,name,nums,gross,kind};}
+for(let n=0;n<=36;n++)rouletteDef('n'+n,String(n),[n],36,'单号');
+rouletteDef('red','红色',Array.from(rouletteReds),2,'红黑');rouletteDef('black','黑色',Array.from({length:36},(_,i)=>i+1).filter(n=>!rouletteReds.has(n)),2,'红黑');
+rouletteDef('even','偶数',Array.from({length:18},(_,i)=>(i+1)*2),2,'单双');rouletteDef('odd','奇数',Array.from({length:18},(_,i)=>2*i+1),2,'单双');
+rouletteDef('low','1–18',Array.from({length:18},(_,i)=>i+1),2,'大小');rouletteDef('high','19–36',Array.from({length:18},(_,i)=>i+19),2,'大小');
+for(let i=0;i<3;i++){rouletteDef('doz'+i,`${i*12+1}–${i*12+12}`,Array.from({length:12},(_,k)=>i*12+k+1),3,'十二数');rouletteDef('col'+i,`第 ${i+1} 列`,Array.from({length:12},(_,k)=>i+1+k*3),3,'列');}
+function rouletteScenarios(){return Array.from({length:37},(_,i)=>({id:i,prob:1/37}));}
+function rouletteLegs(wagers){return wagers.filter(w=>rouletteDefs[w.key]&&w.amount>0).map(w=>{const d=rouletteDefs[w.key];return {stake:w.amount,gross:(n)=>d.nums.includes(n)?d.gross:0};});}
+function roulettePortfolio(){const a=state.roulette,byKey={};for(const w of a.wagers)byKey[w.key]=(byKey[w.key]||0)+w.amount;
+ const legs=rouletteLegs(a.wagers),chosen=portfolioEV(legs,rouletteScenarios());
+ const outcomes=chosen.out.map(o=>o.raw+chosen.total),nets=chosen.out.map(o=>o.net);
+ return {...chosen,byKey,nets,outcomes,evPayout:chosen.ev+chosen.total,baseEV:outcomes.reduce((s,v)=>s+v,0)/37-chosen.total,pos:chosen.win,flat:chosen.flat,any:chosen.any,evaluations:{pooled:chosen}};}
+function roulettePreset(preset){const keys=preset==='all37'?Array.from({length:37},(_,i)=>'n'+i):preset==='columns'?['col0','col1','col2']:preset==='dozens'?['doz0','doz1','doz2']:['red','black','odd','even','low','high'];if(preset==='six0')keys.push('n0');
+ state.roulette.wagers=keys.map(key=>({key,amount:Math.round(state.roulette.base*state.roulette.multiple*100)/100}));state.roulette.last=null;state.build.rouletteStrategy=preset;storeBuild();render();}
+function roulettePresetLabel(p){return ({six:'六区对冲',six0:'六区 + 0 对冲',all37:'37 单号覆盖（非稳赚）',columns:'三列全覆盖',dozens:'三段全覆盖'})[p]||p;}
+function roulettePresetLegs(p){let keys=p==='all37'?Array.from({length:37},(_,i)=>'n'+i):p==='columns'?['col0','col1','col2']:p==='dozens'?['doz0','doz1','doz2']:['red','black','odd','even','low','high'];if(p==='six0')keys.push('n0');return rouletteLegs(keys.map(key=>({key,amount:1})));}
+function rouletteChip(key,tall=false){const a=state.roulette,n= a.wagers.filter(w=>w.key===key).reduce((sum,w)=>sum+w.amount,0);return n?`<span class="r-chip ${tall?'r-chip-tall':''}" aria-label="已下注 ${fmt(n,0)}">${n>=1000?fmt(n/1000,1)+'k':fmt(n,n<10?2:0)}</span>`:'';}
+function rouletteCell(key,label,extra=''){return `<button type="button" class="r-cell ${extra} ${state.roulette.wagers.some(w=>w.key===key)?'r-bet-on':''}" data-cmd="rplace" data-val="${key}" aria-label="下注 ${rouletteDefs[key].name}">${label}${rouletteChip(key)}</button>`;}
+function drawRoulette(){const a=state.roulette,pf=roulettePortfolio();let numbers=`<div class="roulette-grid">`;
+numbers+=`<div class="r-zero">${rouletteCell('n0','0','r-zero-cell')}</div>`;
+for(let row=0;row<3;row++){for(let col=0;col<12;col++){const n=3-row+col*3;let color=rouletteReds.has(n)?'r-red':'r-black';numbers+=`<div class="r-slot" style="grid-column:${col+2};grid-row:${row+1}">${rouletteCell('n'+n,String(n),color)}</div>`;}}
+for(let row=0;row<3;row++){numbers+=`<div class="r-column" style="grid-column:14;grid-row:${row+1}">${rouletteCell('col'+(2-row),'2:1','r-out')}</div>`;}
+numbers+=`</div><div class="roulette-dozens">${[0,1,2].map(i=>rouletteCell('doz'+i,`${i*12+1}–${i*12+12}　2:1`,'r-out')).join('')}</div><div class="roulette-outside">${[['low','1–18'],['even','偶 EVEN'],['red','🔴 红'],['black','⚫ 黑'],['odd','奇 ODD'],['high','19–36']].map(([key,name])=>rouletteCell(key,name,'r-out '+(key==='red'?'r-outred':key==='black'?'r-outblack':''))).join('')}</div>`;
+const setRows=Object.entries(pf.byKey).map(([key,amount])=>`<div class="r-wager-row"><span>${rouletteDefs[key].name} <small>· ${rouletteDefs[key].gross}×</small></span><span>${fmt(amount,2)} <button class="r-remove" data-cmd="rremove" data-val="${key}" aria-label="撤销 ${rouletteDefs[key].name} 最后一次下注">✕</button></span></div>`).join('');
+$('controls').innerHTML=`<h2>🎯 Roulette · 实际下注区模拟</h2><p class="note">这里的「每份金额」可自由输入，1×/2×/5×/10× 只是帮你快速点选的筹码数量，并非游戏限制。点击桌面相应区域即可累加下注；支持单号 0–36、红黑、单双、大小、十二数和三列。</p><div class="r-toolbar"><label class="r-base">每份金额 <input type="number" min="0.01" max="1000000000" step="0.01" data-num="base" value="${a.base}" aria-label="轮盘每份金额，自由输入"></label><div class="r-chip-buttons">${[1,2,5,10].map(v=>`<button type="button" class="r-chip-select ${a.multiple===v?'selected':''}" data-cmd="rchip" data-val="${v}" aria-pressed="${a.multiple===v}">${v}×</button>`).join('')}</div></div><p class="r-status">本次点选下注 <strong>${fmt(a.base*a.multiple,2)}</strong> · 1×/2×/5×/10× 仅为操作快捷键；可自由改「每份金额」，已放下注额不变</p>${levelModel()}<div class="roulette-table" aria-label="轮盘模拟下注桌面">${numbers}</div><div class="row" style="margin-top:12px"><button class="btn plain" data-cmd="rundo" ${a.wagers.length?'':'disabled'}>↩ 撤销一步</button><button class="btn warn" data-cmd="rclear" ${a.wagers.length?'':'disabled'}>清空桌面</button></div><div class="inline-result"><b>已押下注区：${Object.keys(pf.byKey).length} 个 · ${a.wagers.length} 次点击</b>${setRows?`<div class="r-wagers">${setRows}</div>`:'<p class="note">请先在上方下注区点击至少一次。</p>'}</div><p class="note">轮盘投注赔率按游戏验证过的 37 个结果：单号 36×、十二数 / 列 3×、其他大范围 2×，均为包含本金的总返还。<a href="https://gwyfguides.com/games/roulette" target="_blank" rel="noopener">游戏攻略数据 ↗</a></p>`;
+
+const hitLabel=Object.keys(pf.byKey).length>1?'至少一个下注区命中':'下注命中率';
+let cells=pf.total>0?`<details class="guide"><summary>查看 0–36 各结果 · 最终净收益</summary><div class="r-outcomes">${pf.nets.map((x,i)=>`<div class="r-outcome ${x>0?'win':x<0?'lose':'draw'}"><b>${i}</b><small>${x>=0?'+':''}${fmt(x,1)}</small></div>`).join('')}</div></details>`:'';
+$('results').innerHTML=result('整桌组合 · 已计入道具',hero(pf.total?(pf.min>=-1e-8?'stand':'double'):'hit',pf.total?`${pct(pf.win)} 净盈利概率`:'尚未下注',pf.total?`已按当前道具计算全部 37 个结果的净盈亏。`:'请选择底注并点击下注区或使用预设。'))+
+`<div class="stats">${stat('总下注',fmt(pf.total))}${stat('最终期望净收益',(pf.ev>=0?'+':'')+fmt(pf.ev))}${stat('最终期望净收益率',pf.total?pct(pf.roi):'—')}${stat('净盈利概率',pf.total?pct(pf.win):'—')}${stat('最差结果（净盈亏）',pf.total?signedMoney(pf.min):'—')}${stat('最好结果（净盈亏）',pf.total?signedMoney(pf.max):'—')}${stat(hitLabel,pf.total?pct(pf.any):'—')}${stat('基础模型期望',pf.total?pct(pf.baseEV/pf.total):'—')}</div>
+<div class="method-note"><b>整桌合并计算</b><br>对冲组合即使所有非 0 结果都保本，也不会凭空获得保险返还或利润加成。${pf.total&&pf.min>=0?'当前组合的所有结果均不会亏损（按已选道具计算）。':'下注后显示每种结果的真实净盈亏，而不是单注中奖概率。'}</div>${cells}${modelWarn()}<p class="note">赔率：单号 36×、十二数 / 列 3×、其他 2×，均含本金。无道具时任意下注组合期望为 −2.7027%（仅基于均匀 0–36）。<a href="https://gwyfguides.com/games/roulette" target="_blank" rel="noopener">轮盘配置资料 ↗</a></p>`;
+}
+function rouletteAct(cmd,v){const a=state.roulette;if(cmd==='rpreset'){roulettePreset(v);return;}if(cmd==='rchip')a.multiple=Number(v);else if(cmd==='rplace'&&rouletteDefs[v]){const amount=Math.round(a.base*a.multiple*100)/100;if(amount>0)a.wagers.push({key:v,amount});a.last=null;}else if(cmd==='rundo'){a.wagers.pop();a.last=null;}else if(cmd==='rclear'){a.wagers=[];a.last=null;}else if(cmd==='rremove'){const i=a.wagers.findLastIndex(w=>w.key===v);if(i>=0)a.wagers.splice(i,1);a.last=null;}render();}
+// 游戏百家乐：一副 52 张牌发四张，庄闲各两张比较个位数。与赌场 8 副牌补牌制不同。
+// 52P4=6,497,400：庄胜 2,927,104，闲胜 2,927,104，和局 643,192。独立全排列校验。
+const baccaratTotalDeals=6497400;
+const baccaratDefs={player:{label:'闲 PLAYER',gross:2,count:2927104},banker:{label:'庄 BANKER',gross:2,count:2927104},tie:{label:'和 TIE',gross:10,count:643192}};
+const baccaratKeys=['player','banker','tie'];
+function baccaratScenarios(){return baccaratKeys.map(id=>({id,prob:baccaratDefs[id].count/baccaratTotalDeals}));}
+function baccaratLegs(wagers){return wagers.filter(w=>baccaratDefs[w.key]&&w.amount>0).map(w=>({stake:w.amount,gross:(id)=>id===w.key?baccaratDefs[id].gross:0}));}
+function baccaratPortfolio(){const byKey={player:0,banker:0,tie:0};for(const w of state.baccarat.wagers){if(baccaratDefs[w.key])byKey[w.key]+=w.amount;}
+ const o=portfolioEV(baccaratLegs(state.baccarat.wagers),baccaratScenarios()),outcomes={};for(const x of o.out){outcomes[x.id]={pay:x.raw+o.total,net:x.net,prob:x.prob};}
+ return {...o,byKey,outcomes,evPayout:o.ev+o.total,profitProb:o.win,flatProb:o.flat,anyProb:o.any,evaluations:{pooled:o}};}
+function baccaratPreset(which){const base=state.baccarat.base*state.baccarat.multiple;let parts=which==='both'?[['player',1],['banker',1]]:which==='bothquarter'?[['player',1],['banker',1],['tie',.25]]:which==='bothhalf'?[['player',1],['banker',1],['tie',.5]]:which==='tie'?[['tie',1]]:[['player',1]];
+ state.baccarat.wagers=parts.map(([key,f])=>({key,amount:Math.round(base*f*100)/100})).filter(w=>w.amount>0);state.build.baccaratStrategy=which;storeBuild();render();}
+function baccaratPresetLegs(which){const parts=which==='both'?[['player',1],['banker',1]]:which==='bothquarter'?[['player',1],['banker',1],['tie',.25]]:which==='bothhalf'?[['player',1],['banker',1],['tie',.5]]:which==='tie'?[['tie',1]]:[['player',1]];return baccaratLegs(parts.map(([key,stake])=>({key,amount:stake})));}
+function drawBaccarat(){
+ const a=state.baccarat,pf=baccaratPortfolio();
+ const spots=baccaratKeys.map(k=>{const x=baccaratDefs[k],amt=pf.byKey[k];return `<button class="bacc-spot ${k==='tie'?'tie':''} ${amt?'selected':''}" data-cmd="bplace" data-val="${k}" aria-label="下注${x.label}"><b>${x.label}</b><small>中奖总返还 ${x.gross}× · <span class="bacc-prob">${pct(x.count/baccaratTotalDeals)}</span></small>${amt?`<span class="r-chip">${amt>=1000?fmt(amt/1000,1)+'k':fmt(amt,amt<10?2:0)}</span>`:''}</button>`}).join('');
+ const detail=baccaratKeys.filter(k=>pf.byKey[k]>0).map(k=>`<div class="r-wager-row"><span>${baccaratDefs[k].label} <small>· ${baccaratDefs[k].gross}×</small></span><span>${fmt(pf.byKey[k],2)} <button class="r-remove" data-cmd="bremove" data-val="${k}" aria-label="撤销 ${baccaratDefs[k].label} 最后一次下注">✕</button></span></div>`).join('');
+ $('controls').innerHTML=`<h2>🎴 Baccarat · 游戏实际规则</h2><p class="note">输入「每份金额」，再用 1×/2×/5×/10× 快捷按钮选择本次点选的金额；它们并非游戏规定的下注档位。点击庄、闲、和即可<b>重复叠加</b>。本游戏庄、闲各发两张，不补牌、不抽庄家佣金。</p><div class="r-toolbar"><label class="r-base">每份金额 <input type="number" min="0.01" max="1000000000" step="0.01" data-num="base" value="${a.base}" aria-label="百家乐每份金额，自由输入"></label><div class="r-chip-buttons">${[1,2,5,10].map(v=>`<button type="button" class="r-chip-select ${a.multiple===v?'selected':''}" data-cmd="bchip" data-val="${v}" aria-pressed="${a.multiple===v}">${v}×</button>`).join('')}</div></div><p class="r-status">本次点选下注 <strong>${fmt(a.base*a.multiple,2)}</strong> · 按钮倍率仅用于快速加筹码；可自由改「每份金额」，已有注额不变</p>${levelModel()}<div class="bacc-board"><div class="bacc-brand">BACCARAT · GWYF FOUR-CARD TABLE</div><div class="bacc-areas">${spots}</div></div><div class="row" style="margin-top:12px"><button class="btn plain" data-cmd="bundo" ${a.wagers.length?'':'disabled'}>↩ 撤销一步</button><button class="btn warn" data-cmd="bclear" ${a.wagers.length?'':'disabled'}>清空桌面</button></div><div class="inline-result"><b>下注区：${baccaratKeys.filter(k=>pf.byKey[k]>0).length} 个 · ${a.wagers.length} 次点击</b>${detail?`<div class="r-wagers">${detail}</div>`:'<p class="note">尚未下注，可以先选择筹码并点击下注区域。</p>'}</div><p class="note">计算依据：<a href="https://gwyfguides.com/games/baccarat" target="_blank" rel="noopener">v1.0.30 游戏百家乐攻略 ↗</a>。每轮以完整 52 张牌随机抽出四张计算；若你看到游戏内规则或版本不同，应以当前游戏为准。</p>`;
+ const outcomeRows=baccaratKeys.map(k=>{const d=baccaratDefs[k],o=pf.outcomes[k];return `<tr><td>${d.label}</td><td>${pct(o.prob,4)}</td><td>${fmt(o.pay,2)}</td><td style="color:${o.net>0?'#8ef2b6':o.net<0?'#ffa7b0':'#e6d9a9'}">${o.net>=0?'+':''}${fmt(o.net,2)}</td></tr>`}).join('');
+ const tip='单押和局的基础期望返还率为 98.99%，在三种单押选项中最高；庄、闲命中率更高。';
+ $('results').innerHTML=result('百家乐 · 整桌组合概率与期望',hero(pf.total?'stand':'hit',pf.total?pct(pf.profitProb)+' 净盈利概率':'尚未下注',pf.total?`根据三种发牌结果，计算整桌实际净盈利概率。`:'先选筹码，然后直接点击左侧庄、闲、和。','《朋友，梭哈吧》游戏版'))+`<div class="stats">${stat('本轮总下注',fmt(pf.total,2))}${stat(baccaratKeys.filter(k=>pf.byKey[k]>0).length>1?'至少一个下注区命中':'下注命中率',pf.total?pct(pf.anyProb):'—')}${stat('整桌净盈利概率',pf.total?pct(pf.profitProb):'—')}${stat('恰好保本概率',pf.total?pct(pf.flatProb):'—')}${stat('整桌亏损概率',pf.total?pct(1-pf.profitProb-pf.flatProb):'—')}${stat('理论总返还期望',fmt(pf.evPayout,2))}${stat('期望净盈亏',(pf.ev>=0?'+':'')+fmt(pf.ev,2))}${stat('期望净收益率',pf.total?pct(pf.ev/pf.total):'—')}${stat('最好结果（净盈亏）',pf.total?signedMoney(pf.max):'—')}${stat('最差结果（净盈亏）',pf.total?signedMoney(pf.min):'—')}</div><h3>庄 / 闲 / 和 · 全部结算</h3><table class="ladder-table"><thead><tr><th>开出结果</th><th>概率</th><th>总返还</th><th>净盈亏</th></tr></thead><tbody>${outcomeRows}</tbody></table><div class="rank-banner"><b>下注参考</b><p class="note">${tip}</p></div>${modelWarn()}<p class="note">游戏版基础赔率：庄 2×、闲 2×、和 10×（<b>均为含本金总返还</b>）。不同于赌场标准百家乐的「庄家 5% 佣金 / 第三张补牌」，请勿把现实赌场的概率直接套入游戏。</p>`;
+}
+function baccaratAct(cmd,v){const a=state.baccarat;if(cmd==='bpreset'){baccaratPreset(v);return;}if(cmd==='bchip')a.multiple=Number(v);else if(cmd==='bplace'&&baccaratDefs[v]){const amount=Math.round(a.base*a.multiple*100)/100;if(amount>0)a.wagers.push({key:v,amount});}else if(cmd==='bundo')a.wagers.pop();else if(cmd==='bclear')a.wagers=[];else if(cmd==='bremove'){const i=a.wagers.findLastIndex(w=>w.key===v);if(i>=0)a.wagers.splice(i,1);}render();}
+
+const diceWays={2:1,3:2,4:3,5:4,6:5,7:6,8:5,9:4,10:3,11:2,12:1};
+function drawCraps(){const a=state.craps;let s='';if(a.phase===0)s=hero('stand','首掷：7 / 11 赢',`2、3、12 直接输；4、5、6、8、9、10 设立目标点。输入每次骰子点数来跟踪回合。`,'游戏规则提示');else if(a.phase===1){const pp=diceWays[a.point]/36,loss=6/36,other=1-pp-loss,pw=pp*(1-other**a.left)/(1-other),pl=loss*(1-other**a.left)/(1-other),pu=other**a.left;s=hero('double',`目标：${a.point} 点`,`命中目标赔付 4×；投出 7 则输。剩余 ${a.left} 掷；若均未分出胜负，退回本金。`)+`<div class="stats">${stat('在剩余掷数内命中点',pct(pw))}${stat('在剩余掷数内输给 7',pct(pl))}${stat('最终退还本金',pct(pu))}${stat('此阶段最终期望净收益率',pct(portfolioEV([{stake:1,gross:id=>id==='w'?4:id==='p'?1:0}],[{id:'w',prob:pw},{id:'p',prob:pu},{id:'l',prob:pl}]).roi))}</div>`;}else{s=hero(a.phase===2?'stand':'alert',a.msg,'这一回合已经结算，点击「新一轮」重来。');}
+$('controls').innerHTML=`<h2>🎲 Street Craps · 街头骰子</h2><span class="label">选择这一次两颗骰子点数之和</span>${btnGroup(Array.from({length:11},(_,i)=>[String(i+2),String(i+2)]),'','roll',6)}<div class="row smallgap"><button class="btn plain full" data-cmd="newcraps">↻ 新一轮</button></div><p class="note">规则与普通赌场 Craps 不完全相同。本游戏：首掷 7/11 赢 2×，2/3/12 输；目标点阶段最多 3 掷，未分胜负则退本金。</p>`;
+$('results').innerHTML=result('回合跟踪',s+`<div class="stats">${stat('当前阶段',a.phase===0?'首掷':a.phase===1?'目标点阶段':'已结算')}${stat('剩余次数',a.phase===1?a.left:'—')}${stat('开局最终期望',pct(crapsModel().roi))}</div><p class="note">理想均匀公平骰子的整局理论毛返还约 137.75%；但游戏物理骰子的实际分布未得到验证，这不是保证真实收益率。</p>`);}
+function roll(v){const a=state.craps,vv=Number(v);if(a.phase>=2)return;if(a.phase===0){if(vv===7||vv===11){a.phase=2;a.msg='首掷中奖 2×';}else if(vv===2||vv===3||vv===12){a.phase=3;a.msg='首掷落败';}else{a.phase=1;a.point=vv;a.left=3;}}else{if(vv===a.point){a.phase=2;a.msg='成功掷中目标 4×';}else if(vv===7){a.phase=3;a.msg='掷出 7，输掉本局';}else{a.left--;if(!a.left){a.phase=2;a.msg='三次内未分出胜负，退还本金';}}}render();}
+// 扑克：GWYF 真实计分，无“高牌不赔 / 低对子不赔”的标准视频扑克变体。
+const pRanks=['2','3','4','5','6','7','8','9','10','J','Q','K','A'],suits=['♠','♥','♦','♣'],valueOf=c=>pRanks.indexOf(c[0])+2;const deck=Array.from({length:52},(_,i)=>({id:i,r:2+i%13,s:Math.floor(i/13)}));const pay=[0,1,2,3,4,6,9,25,50];
+function handPay(ids,counts){counts.fill(0);let max=0,min=15,same=true,flag=-1;for(let i=0;i<5;i++){let id=ids[i],r=2+id%13,st=Math.floor(id/13);counts[r]++;if(r>max)max=r;if(r<min)min=r;if(flag===-1)flag=st;else if(flag!==st)same=false;}let pairs=0,triple=false,quads=false,distinct=0;for(let r=2;r<=14;r++){if(counts[r])distinct++;if(counts[r]===2)pairs++;if(counts[r]===3)triple=true;if(counts[r]===4)quads=true;}let straight=distinct===5&&(max-min===4||(counts[14]&&counts[2]&&counts[3]&&counts[4]&&counts[5]));if(straight&&same)return 50;if(quads)return 25;if(triple&&pairs)return 9;if(same)return 6;if(straight)return 4;if(triple)return 3;if(pairs===2)return 2;if(pairs===1)return 1;return 0;}
+function drawPoker(){const pk=state.pk;let inner=`<h2>♠ 单人扑克 · 滚轮选牌</h2><p class="note">点击任一张牌，弹出两个纵向滚轮（点数 / 花色）。上下滑动选择，再按完成。</p><div class="poker-grid poker-picks">`;
+for(let i=0;i<5;i++){const c=pk.cards[i],red=['♥','♦'].includes(c[1]);inner+=`<button type="button" class="poker-card picker-card ${pk.hold!==null&&(pk.hold&(1<<i))?'good':''}" data-cmd="pickcard" data-val="${i}" aria-label="编辑第 ${i+1} 张牌"><div class="idx">第 ${i+1} 张 · 点击选牌</div><span class="bigcard ${red?'red':''}">${c[0]}<span>${c[1]}</span></span><div class="hold">${pk.hold===null?'点击修改':pk.hold&(1<<i)?'✓ 保留':'更换'}</div></button>`;}
+inner+=`</div><button class="btn full smallgap" id="solvePoker" data-cmd="solve" ${pk.running?'disabled':''} style="background:#2a725f">${pk.running?'⏳ 正在遍历组合...':'计算最优保留牌'}</button><p class="note">同花顺 50×、四条 25×、葫芦 9×、同花 6×、顺子 4×、三条 3×、两对 2×、任意一对 1×，高牌 0×。</p>`;$('controls').innerHTML=inner;
+let output=pk.running?hero('double','计算中...','正在遍历换牌组合。'):pk.hold===null?hero('stand','等待五张牌','点选五张牌，确认牌面后计算。绿色边框表示推荐保留，其他换牌。'):hero('split',pk.hold===31?'五张全部保留':pk.hold===0?'五张全部更换':`保留 ${bits(pk.hold)} 张牌`,`绿色为保留牌，其余换掉。最终期望总返还 ${fmt(pk.ev,4)}×。`);
+if(pk.hold!==null&&!pk.running)output+=`<div class="stats">${stat('保留',bits(pk.hold)+' / 5 张')}${stat('换牌',5-bits(pk.hold)+' 张')}${stat('最终期望',fmt(pk.ev,4)+'×')}${stat('模型','52 张牌')}</div>`;
+$('results').innerHTML=result('保留 / 换牌建议',output+`<p class="note"><b>注意：</b>原游戏跨回合消耗牌堆。当前计算假设除手里五张外其余 47 张都可抽，真实剩余牌已知时结果可能不同。请不要在计算期间修改牌面。</p>`);}
+function showPokerWheel(i){const pk=state.pk;if(pk.running)return;const c=pk.cards[i];if($('wheelModal'))$('wheelModal').remove();const modal=document.createElement('div');modal.className='wheel-modal';modal.id='wheelModal';modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-label','滚轮选择扑克');
+const rows=(opts,kind)=>`<div class="wheel-list" data-wheel="${kind}" role="listbox" aria-label="${kind==='rank'?'点数':'花色'}">${opts.map((v,n)=>`<button type="button" class="wheel-option" data-wheel-option="${n}" tabindex="-1">${v}</button>`).join('')}</div>`;
+modal.innerHTML=`<div class="wheel-shade" data-wheel-close="1"></div><div class="wheel-sheet"><div class="sheet-top"><b>第 ${i+1} 张牌</b><button class="btn mini plain" data-wheel-close="1">取消 ✕</button></div><div class="wheel-columns"><div class="wheel-wrap"><div class="wheel-title">点数</div><div class="wheel-frame">${rows(pRanks,'rank')}<div class="wheel-center"></div></div></div><div class="wheel-wrap"><div class="wheel-title">花色</div><div class="wheel-frame">${rows(suits,'suit')}<div class="wheel-center"></div></div></div></div><div class="wheel-preview">预览：<strong id="wheelPreview">${c[0]}${c[1]}</strong></div><button class="btn full" data-wheel-confirm="${i}" style="background:#2a725f">✓ 完成选牌</button></div>`;
+document.body.appendChild(modal);document.body.classList.add('has-modal');const lists=[modal.querySelector('[data-wheel="rank"]'),modal.querySelector('[data-wheel="suit"]')];
+const indexOfWheel=(list)=>Math.max(0,Math.min(list.children.length-1,Math.round(list.scrollTop/50)));
+const sync=()=>{const chosen=[pRanks[indexOfWheel(lists[0])],suits[indexOfWheel(lists[1])]];const pr=$('wheelPreview');if(pr){pr.textContent=chosen.join('');pr.style.color=['♥','♦'].includes(chosen[1])?'#ff858d':'#e8f4ff';}};
+for(const list of lists){list.addEventListener('scroll',sync,{passive:true});list.addEventListener('click',ev=>{let t=ev.target.closest('[data-wheel-option]');if(t){list.scrollTo({top:50*Number(t.dataset.wheelOption),behavior:'smooth'});}});}
+modal.addEventListener('click',ev=>{if(ev.target.closest('[data-wheel-close]'))closeWheel();const btn=ev.target.closest('[data-wheel-confirm]');if(btn){const rank=pRanks[indexOfWheel(lists[0])],suit=suits[indexOfWheel(lists[1])];pk.cards[i]=[rank,suit];pk.hold=null;pk.ev=null;closeWheel();drawPoker();storeSession();}});
+const keyFn=ev=>{if(ev.key==='Escape'){closeWheel();}if(ev.key==='Enter'&&ev.target===modal){modal.querySelector('[data-wheel-confirm]').click();}};
+modal._esc=keyFn;document.addEventListener('keydown',keyFn);
+requestAnimationFrame(()=>{lists[0].scrollTop=50*pRanks.indexOf(c[0]);lists[1].scrollTop=50*suits.indexOf(c[1]);sync();});}
+function closeWheel(){const x=$('wheelModal');if(x){if(x._esc)document.removeEventListener('keydown',x._esc);x.remove();}document.body.classList.remove('has-modal');}
+function bits(m){let n=0;while(m){m&=m-1;n++;}return n;}
+async function solvePoker(){const pk=state.pk;if(pk.running)return;const ids=pk.cards.map(c=>13*suits.indexOf(c[1])+(valueOf(c)-2));if(new Set(ids).size!==5){$('results').innerHTML=result('输入错误',hero('alert','重复的牌','一副标准扑克牌内不会有两张点数和花色完全相同的牌，请修改后再计算。'));return;}pk.running=true;pk.hold=null;drawPoker();await new Promise(r=>setTimeout(r,40));const rem=deck.map(c=>c.id).filter(x=>!ids.includes(x));let best=-Infinity,bmask=0;const work=new Array(5),counts=new Int8Array(15);try{for(let mask=0;mask<32;mask++){let held=0;for(let i=0;i<5;i++)if(mask&(1<<i))work[held++]=ids[i];const need=5-held;let sum=0,n=0;function walk(start,depth){if(depth===need){sum+=buffedGross(handPay(work,counts));n++;return;}for(let j=start;j<=rem.length-(need-depth);j++){work[held+depth]=rem[j];walk(j+1,depth+1);}}
+// 真实枚举全部 32 种保留方法（含一张也不保留）
+walk(0,0);let ev=sum/n;if(ev>best+1e-12){best=ev;bmask=mask;}if(mask%2===0)await new Promise(r=>setTimeout(r,0));}
+pk.hold=bmask;pk.ev=best;}catch(err){alert('计算失败：'+err.message);}finally{pk.running=false;drawPoker();}}
+function buffedGross(g){return 1+settleNet(g-1);}
+// 道具 / 游戏推荐：价格、机制参考公开 v1.0.30 攻略；评分为编辑性启发式，不是假冒数学 RTP。
+const guideItems=[
+ {id:'golden',name:'黄金筹码',en:'Golden Chip',tier:'S',base:96,price:[4,6,8,10],type:'道具',desc:'一次免费满额下注；用电击枪先提高赌桌上限，再使用更划算。',keys:['免费下注','电击枪联动']},
+ {id:'confidence',name:'赌徒自信',en:"Gambler’s Confidence",tier:'S',base:94,price:[7,10,13,16],type:'升级',desc:'正利润倍率：0 次×1，1 次×1.5，2 次×2；正收益玩法越稳定越值。',keys:['全局利润','长期成长']},
+ {id:'insurance',name:'保险',en:'Insurance',tier:'S',base:92,price:[7,10,13,16],type:'升级',desc:'输局按 1−0.75^购买次数返还部分损失；1 次 25%，2 次 43.75%。',keys:['降低亏损','可叠加']},
+ {id:'statue',name:'神圣雕像',en:'Holy Statue',tier:'S',base:90,price:[7,11,15,19],type:'道具',desc:'激活期间可让附近输钱结果免损；必须把握生效时间，满额保护可能影响输局任务。',keys:['短时保护','高波动护航']},
+ {id:'taser',name:'电击枪',en:'Taser',tier:'S',base:89,price:[4,6,8,10],type:'道具',desc:'对下注键盘提高最大押注；不改变胜率，与黄金筹码直接联动。',keys:['提高下注上限','免费筹码组合']},
+ {id:'quota',name:'配额枪',en:'Quota Gun',tier:'A',base:86,price:[5,8,11,14],type:'道具',desc:'用于补齐配额，每次有效攻击按配额约三分之一计算且受剩余配额上限约束；不受利益相关者加成。',keys:['配额救急','无需赌桌']},
+ {id:'stakeholder',name:'利益相关者',en:'Stakeholder',tier:'A',base:84,price:[6,9,12,15],type:'升级',desc:'增加受支持道具的效果，强化黄金筹码、电击枪、相机、雕像等，但不强化配额枪或时光机。',keys:['联动放大','适合道具多时']},
+ {id:'drink',name:'饮料',en:'Drink',tier:'A',base:81,price:[5,8,11,14],type:'道具',desc:'喝下后临时提升正利润，适合即将结算的高价值赢局。',keys:['临时利润','时机重要']},
+ {id:'time',name:'时光机',en:'Time Machine',tier:'A',base:80,price:[6,9,12,15],type:'道具',desc:'回溯约 60 秒及近期游戏结果；有可能同时撤回已获得的挑战进度。',keys:['失误补救','挑战需谨慎']},
+ {id:'angel',name:'天使转轮',en:"Angel’s Reel",tier:'A',base:78,price:[3,5,7,9],type:'道具',desc:'有机会恢复最近一次亏损，不是保证返还；可被支持的效果增幅强化。',keys:['输局恢复','概率效果']},
+ {id:'microphone',name:'麦克风',en:'Microphone',tier:'A',base:76,price:[6,9,12,15],type:'道具',desc:'通过唱歌积累临时盈利／亏损恢复增益；要留意范围、维持时间和实际结算。',keys:['临时增益','队友配合']},
+ {id:'camera',name:'相机',en:'Camera',tier:'A',base:73,price:[6,9,12,15],type:'道具',desc:'记录另一位玩家的赢局以获得额外利润；单人游玩价值低。',keys:['多人联动','捕捉队友赢局']},
+ {id:'bonus',name:'额外抽签',en:'Bonus Draw',tier:'B',base:69,price:[8,10,12,14],type:'升级',desc:'每次盈利时获得额外 1 Ticket 的几率每层 +10 个百分点。',keys:['票券收益','长期成长']},
+ {id:'mystery',name:'神秘箱',en:'Mystery Box',tier:'B',base:64,price:[4,6,8,10],type:'道具',desc:'随机获得道具或升级；不能指定想要的效果，优先级取决于当前欠缺什么。',keys:['随机高方差','不能定向']},
+ {id:'devil',name:'恶魔转轮',en:"Devil’s Reel",tier:'C',base:55,price:[3,5,7,9],type:'道具',desc:'拿近期赢得的利润继续冒险，有机会放大也可能失去，不适合求稳保本。',keys:['极高波动','只赌已赢利润']},
+ {id:'bat',name:'球棒',en:'Bat',tier:'C',base:31,price:null,type:'特殊',desc:'主要是对队友的物理互动；没有经证实的通用赌桌收益提升。',keys:['多人娱乐','非必买']},
+ {id:'maxwell',name:'Maxwell 猫',en:'Maxwell',tier:'D',base:14,price:null,type:'彩蛋',desc:'神秘箱稀有宠物，没有确认的收益增益。',keys:['收藏','不提高收益']},
+ {id:'ratto',name:'Ratto 老鼠',en:'Ratto',tier:'D',base:14,price:null,type:'彩蛋',desc:'神秘箱稀有装饰宠物，没有确认的收益增益。',keys:['收藏','不提高收益']}
+];
+const gameFacts=[
+ {id:'craps',name:'街头骰子 Craps',icon:'🎲',floors:[1,3,4],base:89,risk:3,kind:'模型',max:400,ev:'约 137.75%（公平骰子模型）',url:'https://gwyfguides.com/games/craps',note:'公平物理骰子假设下收益较高；实际投骰速度与物理偏差很重要。',tags:['正收益模型','大注','物理骰']},
+ {id:'money',name:'选颜色转盘 · 橙色',icon:'🎡',floors:[2,4],base:88,risk:3,kind:'固定配置',max:200,ev:'135.14%（橙色 / 游戏配置）',url:'https://gwyfguides.com/games/money-wheel',note:'37 格中 5 格橙色、赢时 10×；结算快，但连续不中常见。',tags:['可验证优势','快速','高波动']},
+ {id:'poker',name:'单人扑克',icon:'♠',floors:[3,4],base:81,risk:3,kind:'新牌堆模型',max:300,ev:'约 128.41%（最优保留新牌堆）',url:'https://gwyfguides.com/games/poker',note:'真正决策是保留／换牌；当前剩余牌会改变最优选择，需用上方扑克助手。',tags:['可操作策略','持久牌堆']},
+ {id:'slots',name:'老虎机',icon:'🎰',floors:[1,2,3,4],base:72,risk:3,kind:'模拟重放',max:50,ev:'约 115.56%（1000 万种子模拟）',url:'https://gwyfguides.com/games/slots',note:'模型显示正收益，但单次上限低、方差高，非软件代码精确 RTP。',tags:['操作容易','小注','高波动']},
+ {id:'fortune',name:'倍率转盘 · 命运之轮',icon:'🎡',floors:[1,3,4],base:58,risk:2,kind:'固定配置',max:250,ev:'约 100%',url:'https://gwyfguides.com/games/wheel-of-fortune',note:'直接下注，随机获得 0× 至 5×，两格 Spin Again 触发重转。无颜色投注；与 F2 金钱转盘不同。',tags:['不用判断','近保本']},
+ {id:'bj',name:'二十一点',icon:'🃏',floors:[1,2,3,4],base:63,risk:2,kind:'随牌堆变',max:300,ev:'策略 / 剩余牌决定',url:'https://gwyfguides.com/games/blackjack',note:'有要牌、停牌、加倍；单副牌持续消耗，自然 21 支付 3×，不提供分牌。',tags:['可操作策略','Natural 3×']},
+ {id:'baccarat',name:'百家乐 · 游戏四张牌版',icon:'🎴',floors:[3,4],base:48,risk:3,kind:'单副牌精确枚举',max:300,ev:'和局毛返还 98.99%',url:'https://gwyfguides.com/games/baccarat',note:'游戏是单副牌、庄闲各两张、不补第三张：庄/闲均2×、和局10×总返还；和局胜率约9.90%，相对高返还但短期波动很大。',tags:['选择投注类型','高波动']},
+ {id:'hilo',name:'HiLo 猜大小',icon:'⚖',floors:[2,3,4],base:51,risk:2,kind:'固定配置',max:100,ev:'约 100%',url:'https://gwyfguides.com/games/hilo',note:'选择胜率百分比和高低方向，倍率大约是 1/胜率。',tags:['概率可控','适合连胜目标']},
+ {id:'keno',name:'基诺 Keno',icon:'🔢',floors:[2,4],base:51,risk:2,kind:'固定配置',max:100,ev:'约 100%',url:'https://gwyfguides.com/games/keno',note:'选中数量影响盈亏分布，不是某几个数字“更幸运”。',tags:['选号个数','任务路线']},
+ {id:'penguin',name:'企鹅过马路',icon:'🐧',floors:[2,3,4],base:52,risk:3,kind:'固定配置',max:100,ev:'1.2×–1000×（10 步）',url:'https://gwyfguides.com/games/penguin-cross',note:'有 10 个真实提现档位，第一跳成功约 83.33%；加成道具可降低挑战所需档位。',tags:['提现决策','适合任务']},
+ {id:'crash',name:'Crash 倍率',icon:'🚀',floors:[2,4],base:47,risk:3,kind:'程序模型',max:250,ev:'约 100%（不计操作延迟）',url:'https://gwyfguides.com/games/crash',note:'选提现倍率不改变基础期望；网络／反应延迟会拉低实际结果。',tags:['操作反应','倍率目标']},
+ {id:'dragon',name:'爬龙塔',icon:'🐉',floors:[3,4],base:46,risk:3,kind:'固定配置',max:null,ev:'1.333×–5.619×（6 层）',url:'https://gwyfguides.com/games/dragon-tower',note:'已核实 6 层各档倍率；每层 3 安全 1 失败，未加成时各档期望接近公平。',tags:['继续／收手','75% 下层存活']},
+ {id:'mines',name:'扫雷',icon:'💣',floors:[3,4],base:45,risk:3,kind:'组合概率',max:null,ev:'理论近公平 / 跟目标有关',url:'https://gwyfguides.com/games/minesweeper',note:'25 格不提供数字线索；道具不能改变地雷位置概率。',tags:['组合概率','高倍率任务']},
+ {id:'roulette',name:'轮盘',icon:'🎯',floors:[1,2,3,4],base:42,risk:2,kind:'固定配置',max:null,ev:'常规投注约 97.30%',url:'https://gwyfguides.com/games/roulette',note:'已支持可点击轮盘下注桌面，多区域下注后精确枚举 37 个开奖结果的盈亏分布。',tags:['固定负期望','简单']},
+ {id:'duck',name:'鸭子赛跑',icon:'🦆',floors:[1,4],base:40,risk:3,kind:'对称假设',max:500,ev:'理论约 100%（每鸭均等假设）',url:'https://gwyfguides.com/games/duck-race',note:'4 只鸭中 1 只赢得 4×；25% 是对称模型，不是实际赛道测量。',tags:['无已证实选号优势','物理/模拟']},
+ {id:'plinko',name:'弹珠台 Plinko',icon:'🔵',floors:[2,4],base:36,risk:3,kind:'物理未解',max:50,ev:'无可靠实时 RTP',url:'https://gwyfguides.com/games/plinko',note:'下落物理分布未被量化，不能把最高倍率或视觉投放点当成最优解。',tags:['物理未解','优先做任务']}
+];
+function storeBuild(){try{localStorage.setItem('GWYF_BUILD_V2',JSON.stringify(state.build));}catch(err){}}
+function restoreBuild(){try{let v=JSON.parse(localStorage.getItem('GWYF_BUILD_V2')||'null');if(v&&[1,2,3,4].includes(Number(v.floor))){state.build.floor=Number(v.floor);if(['money','quota','safe','tickets','challenge'].includes(v.goal))state.build.goal=v.goal;if(['normal','careful','bold'].includes(v.risk))state.build.risk=v.risk;if(['solo','group'].includes(v.team))state.build.team=v.team;state.build.settlement='pooled';if(['six','six0','all37','columns','dozens'].includes(v.rouletteStrategy))state.build.rouletteStrategy=v.rouletteStrategy;if(['both','bothquarter','bothhalf','tie'].includes(v.baccaratStrategy))state.build.baccaratStrategy=v.baccaratStrategy;if(v.owned&&typeof v.owned==='object'){for(let it of guideItems){let n=Number(v.owned[it.id])||0;state.build.owned[it.id]=Math.max(0,Math.min(it.type==='升级'?4:1,Math.floor(n)));}}}}catch(err){}}
+function owned(id){return Number(state.build.owned[id]||0)}
+function isUpgrade(id){return guideItems.find(it=>it.id===id)?.type==='升级'}
+function inventoryPicker(){let n=guideItems.filter(it=>owned(it.id)).length;return `<div class="switchline"><b>选中即计入模型 · 已有 ${n} 种</b><button class="btn mini plain" data-cmd="resetOwned">清空</button></div><div class="inventory">${guideItems.filter(it=>it.type!=='彩蛋'&&it.id!=='bat').map(it=>`<button type="button" class="inv-item ${owned(it.id)?'on':''}" data-cmd="owned" data-val="${it.id}" aria-pressed="${owned(it.id)>0}"><span><b>${it.name}</b><small>${it.en}</small></span><span class="count">${owned(it.id)?isUpgrade(it.id)?'×'+owned(it.id):'✓':'+'}</span></button>`).join('')}</div><p class="micro">雕像勾选即免亏，结算前使用；用完取消。相机默认成功拍摄，黄金筹码等一次性道具只提供用法。</p>`;}
+function configPicker(){const b=state.build;return `<div class="row split"><div class="field"><span class="label">所在楼层</span><div class="buttons" style="grid-template-columns:repeat(4,1fr)">${[1,2,3,4].map(n=>`<button class="btn ${b.floor===n?'selected':''}" data-cmd="floor" data-val="${n}">F${n}</button>`).join('')}</div></div><div class="row split"><label class="field"><span class="label">本次目的</span><select class="wide-select full" data-build="goal">${[['money','长期收益'],['quota','尽快完成配额'],['safe','尽量保住资金'],['tickets','刷取 Tickets'],['challenge','完成指定任务']].map(([v,label])=>`<option value="${v}" ${b.goal===v?'selected':''}>${label}</option>`).join('')}</select></label><label class="field"><span class="label">波动承受能力</span><select class="wide-select full" data-build="risk">${[['careful','谨慎'],['normal','均衡'],['bold','愿意承受大波动']].map(([v,label])=>`<option value="${v}" ${b.risk===v?'selected':''}>${label}</option>`).join('')}</select></label></div><div class="row"><label class="switch"><input type="checkbox" data-build-check="team" ${b.team==='group'?'checked':''}>正在多人联机（相机才可能发挥作用）</label></div>`;}
+function itemContext(it){const b=state.build;let s=it.base;const memo=[];if(b.goal==='safe'){if(['insurance','statue','angel','time'].includes(it.id))s+=8;if(['devil','taser'].includes(it.id))s-=10;}if(b.goal==='quota'){if(it.id==='quota'){s+=18;memo.push('即将缺配额时特别强');}if(['golden','taser','confidence'].includes(it.id))s+=5;}
+if(b.goal==='money'){if(['golden','confidence','taser','drink'].includes(it.id))s+=4;}
+if(b.goal==='tickets'){if(it.id==='bonus'){s+=24;memo.push('盈利时额外 Ticket 的概率');}if(it.id==='quota')s-=8;}
+if(b.goal==='challenge'){if(it.id==='time')s-=6;if(it.id==='bonus')s+=5;}
+if(it.id==='camera'&&b.team==='solo'){s-=35;memo.push('单人无法拍摄其他玩家');}
+if(it.id==='stakeholder'){if(['golden','taser','statue','camera','drink','microphone','angel','devil'].some(id=>owned(id)))s+=13;else{s-=22;memo.push('目前缺乏受益道具');}}
+if(it.id==='golden'&&owned('taser')){s+=8;memo.push('已拥有电击枪，可以先提高上限');}
+if(it.id==='taser'&&owned('golden')){s+=7;memo.push('黄金筹码能吃到更高上限');}
+if(it.id==='camera'&&b.team==='group')s+=3;
+if(it.id==='bonus'&&owned('confidence'))s+=2;
+return {score:Math.round(Math.max(0,Math.min(s,100))),memo};}
+function tagForScore(v){return v>=93?'S':v>=77?'A':v>=60?'B':v>=35?'C':'D';}
+function itemCard(it,n){const c=itemContext(it),price=it.price?it.price[state.build.floor-1]+' T':'未标普通商店价',level=owned(it.id);return `<article class="ranking-card ${n===0?'toprank':''}"><div class="ranking-head"><span class="rank-num">#${n+1}</span><div class="rank-name">${it.name}<div class="micro">${it.en}</div></div><span class="tier ${tagForScore(c.score)}">${tagForScore(c.score)} · ${c.score} 分</span></div><div class="micro" style="margin-top:7px">${it.type} · F${state.build.floor}：${price} ${level?' · 已拥有'+(it.type==='升级'?'×'+level:''):''}</div><p>${it.desc}</p>${c.memo.length?`<p style="color:#9de4ca"><b>当前加分/提醒：</b>${c.memo.join('；')}</p>`:''}<div class="inline-tags">${it.keys.map(x=>`<span class="tiny">${x}</span>`).join('')}</div></article>`;}
+function drawItems(){const items=guideItems.map(it=>({...it,context:itemContext(it)})).sort((a,b)=>b.context.score-a.context.score);$('controls').innerHTML=`<h2>🎒 道具强度排行</h2><p class="note">以下是根据机制、投入票券、覆盖范围及联动价值做的<b>主观场景评分（0–100）</b>，会随你的楼层、目标与库存改变；不是官方强度、爆率或胜率。</p>${configPicker()}<details class="guide" open><summary>管理已有道具（与游戏推荐页同步）</summary>${inventoryPicker()}</details>`;$('results').innerHTML=result('实时道具梯队 · 高分在前',`<div class="ranking">${items.map(itemCard).join('')}</div><p class="note">稀有宠物和特殊物品按已验证的博彩收益作用评分；作为收藏品的价值不在这里计算。直接购买价格依 v1.0.30 正常难度表，实际以你游戏商店为准。</p>`);}
+function buildAdvice(){const o=state.build.owned,b=state.build;let notes=[];if(owned('taser')&&owned('golden'))notes.push('电击枪先抬高赌桌上限，再使用黄金筹码进行更大的免费下注。');else if(owned('golden'))notes.push('已有黄金筹码：在理解胜率的强势赌桌上使用，若能搭配电击枪更好。');else if(owned('taser'))notes.push('已有电击枪：它只提高下注额；先确保赌桌本身有足够好的收益模型。');
+if(owned('stakeholder')&&(owned('golden')||owned('taser')||owned('statue')||owned('drink')))notes.push('利益相关者能放大你现有的部分道具效果，但不会增强配额枪／时光机。');if(owned('insurance')||owned('statue'))notes.push('保护道具支持高波动路线；满额返还可能让输局任务不计数。');if(owned('confidence'))notes.push('赌徒自信提高正利润，不改变抽卡、骰子或轮盘命中率。');if(owned('quota')&&b.goal==='quota')notes.push('配额接近目标时，配额枪可能比再赌一局更可控。');if(owned('camera')&&b.team==='solo')notes.push('当前选了单人，Camera 不应作为收益策略核心。');if(b.goal==='challenge')notes.push('若挑战要求“固定最终倍率”或“连输”，先确认增益和保护不会让结果失效。');return notes.length?notes.join(' '):'没有核心组合时，优先选已验证有优势的赌桌，再考虑投入票券。黄金筹码、保险与赌徒自信适用于不同的收益／风险目标。';}
+// v4.1: explicit stakes and outcome-weighted strategy selection, no longer +6 arbitrary points per item.
+function singleSettlement(p,gross,b=buffState()){
+ return portfolioEV([{stake:1,gross:id=>id==='hit'?gross:0}],[{id:'hit',prob:p},{id:'miss',prob:1-p}],b);
+}
+function detailsOf(o){return {roi:o.roi,win:o.win,min:o.min,max:o.max,ev:o.ev,total:o.total};}
+const rotPresets=[
+ {key:'red',name:'单押红色',instruction:'只在红色下注，其他区域不押；金额按你在游戏里想投入的数额填写。',effort:1,model:'直选（单注）',confidence:'赔率可枚举'},
+ {key:'six',name:'六个外围区等额（非稳赚）',instruction:'红、黑、单、双、小（1–18）、大（19–36）这六处各押相同金额。例如每处押 100，总共投入 600。',effort:6,model:'整桌净额',confidence:'轮盘零净额已实测'},
+ {key:'six0',name:'六外围等额＋绿色 0',instruction:'红、黑、单、双、小、大各押相同金额；绿色 0 再押同样金额。共七处，开出 0 时只有押 0 的注单中奖。',effort:7,model:'整桌净额',confidence:'轮盘零净额已实测'},
+ {key:'columns',name:'三列等额',instruction:'轮盘右边三列各押相同金额，三列都覆盖；开出绿色 0 时三处全输。',effort:3,model:'整桌净额',confidence:'轮盘零净额已实测'},
+ {key:'dozens',name:'三个十二数区等额',instruction:'在 1–12、13–24、25–36 三个区域各押相同金额；开出绿色 0 时三处全输。',effort:3,model:'整桌净额',confidence:'轮盘零净额已实测'},
+ {key:'all37',name:'单号 0–36 全覆盖',instruction:'从 0 到 36，每个单号都押相同金额，共覆盖 37 个号码；操作较慢，须先确认游戏允许全部下注且总额不超上限。',effort:37,model:'整桌净额',confidence:'覆盖允许与下注限制待确认'}
+];
+function rouletteStrategies(){return rotPresets.map(x=>({...x,calc:portfolioEV(x.key==='red'?rouletteLegs([{key:'red',amount:1}]):roulettePresetLegs(x.key),rouletteScenarios())}));}
+function baccStrategies(){return [
+ {key:'tie',name:'单押和局',instruction:'只在「和 TIE」下注，不押庄或闲；金额按游戏中的范围自由填写。',effort:1,confidence:'单区赔率验证'},
+ {key:'both',name:'同时押庄和闲',instruction:'庄和闲分别押相同金额，例如庄 100、闲 100；如果开和，两笔都不中。',effort:2,confidence:'按整桌净额估算；百家乐未实测'},
+ {key:'bothquarter',name:'庄＋闲＋少量和局',instruction:'庄和闲押相同金额，「和」押它们各自金额的四分之一。例如庄 100、闲 100、和 25。',effort:3,confidence:'按整桌净额估算；金额精度待验证'},
+ {key:'bothhalf',name:'庄＋闲＋和局 0.5×',instruction:'庄和闲押相同金额，「和」押它们各自金额的一半。例如庄 100、闲 100、和 50。',effort:3,confidence:'按整桌净额估算；金额精度待验证'}
+ ].map(x=>({...x,calc:portfolioEV(baccaratPresetLegs(x.key),baccaratScenarios())}));}
+function strategyScore(v,type){const b=state.build,roi=v.calc.roi,p=v.calc.win,worst=v.calc.min/v.calc.total;
+ if(type==='safe')return roi*24 + p*38 + Math.max(-1,worst)*22 - v.effort*.13;
+ if(type==='quota')return roi*38 + p*8 - v.effort*.28;
+ if(type==='tickets')return roi*31 + p*20 - v.effort*.24;
+ if(type==='challenge')return roi*18 + p*8 - v.effort*.18;
+ return roi*43 + p*4 - v.effort*.22;
+}
+function selectStrategy(sets){const goal=state.build.goal;const type=goal==='safe'||state.build.risk==='careful'?'safe':goal;
+ return [...sets].sort((a,b)=>strategyScore(b,type)-strategyScore(a,type))[0];}
+function outcomeEdge(p,m){return singleSettlement(p,m);}
+function payoutPlan(pairs){return pairs.map(([count,gross])=>({id:String(gross),prob:count, gross}));}
+function fortuneModel(){const sce=fortuneOutcomes.map((r,i)=>({id:i,prob:r.count/18}));return portfolioEV([{stake:1,gross:id=>fortuneOutcomes[id].m}],sce);}
+function crapsModel(){// probability weights derive fair-dice-model guide; no physical calibration
+ const w=.3937,l=.3592,t=1-w-l;
+ // 2× immediate win: 8/36, remaining win in point phase based on the guide probability
+ const immediate=8/36, later=w-immediate;
+ return portfolioEV([{stake:1,gross:id=>id==='now'?2:id==='point'?4:id==='push'?1:0}],
+ [{id:'now',prob:immediate},{id:'point',prob:later},{id:'push',prob:t},{id:'miss',prob:l}]);
+}
+function ladderStrategy(game){const arr=game==='dragon'?dragonMultipliers:penguinMultipliers;
+ const choose= owned('statue')?arr.length-1:state.build.goal==='safe'||state.build.risk==='careful'?1:state.build.goal==='quota'?Math.min(3,arr.length-1):state.build.risk==='bold'?arr.length-1:Math.min(3,arr.length-1);
+ return {n:choose,calc:outcomeEdge(1/arr[choose],arr[choose]),mult:arr[choose]};
+}
+function gamePlan(g){const id=g.id,b=state.build,bs=buffState(),hasBuff=owned('confidence')||owned('insurance');
+ const plan={name:'',instruction:'',caveat:'',confidence:'攻略/模式说明',calc:null,action:null,model:'单次注单',source:g.url};
+ if(id==='roulette'){
+   let options=rouletteStrategies(),chosen=owned('statue')?{key:'n0',name:'单押一个号码',instruction:'选一个单号下注；雕像在结算前启用，输则免亏，开中获得 36× 总返还。',calc:singleSettlement(1/37,36),confidence:'37 个号码等概率',model:'整桌净额',action:null}:options.find(x=>x.key==='red');
+   
+   Object.assign(plan,{name:chosen.name,instruction:chosen.instruction,calc:chosen.calc,confidence:chosen.confidence,model:'整桌净额模型',action:null,caveat:'轮盘红黑等额对冲已实测：两道具同时持有时，净盈亏为 0 不会产生额外收入。现在统一按整桌净额估算；非零净盈亏的道具触发值、总额上限仍待验证。'});
+ }else if(id==='baccarat'){
+   let options=baccStrategies(),chosen=options.find(x=>x.key==='tie');
+   if(!hasBuff)chosen=options.find(x=>x.key==='tie');
+   Object.assign(plan,{name:chosen.name,instruction:chosen.instruction,calc:chosen.calc,model:'整桌净额模型',confidence:chosen.confidence,action:null,caveat:'游戏为四张牌版；采用整桌净额作保守外推，百家乐本身的多区道具结算尚未实测，不能把对冲视为必赚。'});
+ }else if(id==='money'){
+   const opts=Object.entries(moneyData).map(([key,[label,count,gross]])=>({key,name:label+'色',instruction:'只选择'+label+'色下注，具体金额在游戏允许范围内自行填写；中奖总返还为'+gross+'倍（含本金）。',effort:1,calc:outcomeEdge(count/37,gross)}));
+   const selected=b.goal==='tickets'||b.goal==='challenge'?opts.find(x=>x.key==='green'):owned('statue')?opts.find(x=>x.key==='orange'):b.goal==='safe'?opts.find(x=>x.key==='red'):opts.find(x=>x.key==='orange');
+   Object.assign(plan,{name:selected.name,instruction:selected.instruction,calc:selected.calc,confidence:'v1.0.30 固定37格配置',action:selected.key,caveat:'橙色期望高，但一次不中率 86.49%；不能选择多颜色同时投注，数据可能受当前游戏 EstimatedValue 影响。'});
+ }else if(id==='fortune'){
+   Object.assign(plan,{name:'不选格 · 控制底注',instruction:'直接转动倍率转盘，落点和倍率无法选择；查看倍率转盘页的最终期望收益率。保护道具可降低亏损。',calc:fortuneModel(),confidence:'固定20格，重转后18个有效格',caveat:'游戏中 Spin Again 触发重新转，不额外视为中奖。'});
+ }else if(id==='craps'){
+   Object.assign(plan,{name:'按规则完成整局投骰',instruction:'选择游戏允许的下注金额后掷骰。首投 7 或 11 获得 2 倍总返还；掷出 4、5、6、8、9、10 则设立目标，再投最多三次：命中目标返还 4 倍，投出 7 则输，超时退本金。',calc:crapsModel(),confidence:'公平双骰假设（非实际物理验证）',caveat:'可控骰子/球棒技巧属玩家经验，实际骰面不一定均匀；开奖速度会影响五分钟配额。'});
+ }else if(id==='dragon'||id==='penguin'){
+   const x=ladderStrategy(id),level=id==='dragon'?'层':'步';
+   Object.assign(plan,{name:'通过 '+x.n+level+'后提现',instruction:`先按游戏内范围选择下注金额，安全通过第 ${x.n} ${level}后，在出现 ${fmt(x.mult,3)} 倍返还时提现；更远档位奖金更高，失败风险也更大。`,calc:x.calc,confidence:'固定档位 / 公平路径模型',caveat:'收益期望按从起点一次打到目标档位计算；不表示当前已安全到达的条件价值。'});
+ }else if(id==='hilo'){
+   const pr=owned('statue')?.1:b.goal==='safe'||b.risk==='careful'?.75:.5;
+   Object.assign(plan,{name:`选择 ${pct(pr,0)} 命中区间`,instruction:`将猜大或猜小的命中概率调到约 ${pct(pr,0)}，自行选择下注金额；对应的理想总返还约 ${fmt(1/pr,2)} 倍。不要只为追高赔率不断降低命中概率。`,calc:outcomeEdge(pr,1/pr),confidence:'概率倒数近似模型',caveat:'游戏实际赔率及舍入与特殊规则可能调整理论值。'});
+ }else if(id==='mines'){
+   Object.assign(plan,{name:'少雷首翻 · 到目标提现',instruction:'设置较少地雷（例如 1–3 雷），第一格成功就考虑提现；使用扫雷页按当前雷数／已开格计算下一格风险。',confidence:'超几何模型',caveat:'是否支持设定地雷数及实际提现倍率按游戏UI为准，不能用辅助器预测雷位置。'});
+ }else if(id==='crash'){
+   Object.assign(plan,{name:'预设低倍提现',instruction:'目标先选 1.2×～1.5×，到线尽快手动提现；网络与反应延迟可能导致低于模型的实际收益。',confidence:'理论爆炸分布假设',caveat:'不将 1/x 概率当成已验证的实际 RTP；不宜无条件加码。'});
+ }else if(id==='poker'){
+   Object.assign(plan,{name:'按五张牌最优换牌',instruction:'在扑克助手里用双滚轮输入五张牌，点击“计算最优保留”，只保留标记的牌，再换其余牌。',confidence:'新牌堆精确枚举，跨局牌堆会变',caveat:'需要核对本局是否已消耗牌，不能只记住一套固定换牌法。'});
+ }else if(id==='bj'){
+   Object.assign(plan,{name:'基础策略查表',instruction:'先选自己的硬手 / A软手 / 对子与庄家明牌，严格按“要牌 / 停牌 / 加倍”执行；这款游戏不能分牌。',confidence:'基本策略（剩余牌未知）',caveat:'21点连局共用剩余牌堆，发牌记忆和特殊赔率也可能改变最佳动作。'});
+ }else if(id==='slots'){
+   Object.assign(plan,{name:'直接旋转 · 高波动',instruction:'基础回放毛返还约 115.56%（即净 +15.56%）；单次最高基础下注约 50。想刷钱优先对比目前楼层的确定赔率玩法。',confidence:'1000万次重放',caveat:''});
+ }else if(id==='duck'){
+   Object.assign(plan,{name:'每轮押一只鸭',instruction:'在可投注范围内选定金额，每局挑一只鸭；目前没有证据显示某只鸭固定更容易胜出。神圣雕像选中时本次结算免亏。',calc:outcomeEdge(.25,4),confidence:'四鸭对称假设',caveat:'25% 是公平赛跑假设，不代表实际每一只鸭概率已测出。'});
+ }else if(id==='keno'){
+   Object.assign(plan,{name:'以较少选数控制波动',instruction:'按照游戏界面选少量号码，自行输入下注额；选号数量以你的任务目标和想承担的风险为准，而非迷信特定幸运号码。',confidence:'游戏自定义赔率需核实',caveat:'未得到完整的选数—命中—赔率配置，不能在排行中把它算成确定正期望。'});
+ }else if(id==='plinko'){
+   Object.assign(plan,{name:'少量试球，不预估落点',instruction:'先用较小、可承受的金额观察实际落球区间；球棒影响轨迹仅属于玩家经验，不能保证落在高倍率区。',confidence:'物理未解',caveat:'未知实际落球概率，无法可靠给出正期望或最优投放方向。'});
+ }
+ const extras=[];
+ if(owned('taser')&&owned('golden'))extras.push('电击枪先提高当前机器允许的最大下注，再用黄金筹码兑换免费最大注。');
+ else if(owned('golden'))extras.push('黄金筹码：在确认当前机器最大注与成功场景后使用免费投注。');
+ else if(owned('taser'))extras.push('电击枪只提升下注上限，先验证这张桌值得放大金额。');
+ if(owned('statue'))extras.push('神圣雕像：结算前启用，免除本次亏损；用完取消勾选。');
+ if(owned('microphone'))extras.push('麦克风：已按充能成功、盈利翻倍及亏损保护计入。');
+ if(owned('drink'))extras.push('饮料：已按限时盈利翻倍计入。');
+ if(owned('camera')&&b.team==='group')extras.push('相机：已计入队友成功拍摄本局盈利、1格充能即兑现的团队额外奖励。');
+ if(owned('quota')&&b.goal==='quota')extras.push('配额枪更适合弥补最后的配额缺口，不要把其效果当成赌桌 RTP。');
+ if(owned('bonus')&&b.goal==='tickets')extras.push('Bonus Draw 优先配合能频繁结算正利润的小额胜局。');
+ plan.extras=extras;
+ return plan;
+}
+function gameContext(g){
+ const plan=gamePlan(g),b=state.build,known=!!plan.calc,shield=!!owned('statue');let score=47,protectedProfit=null;
+ if(known){
+  const o=plan.calc,loss=o.total?Math.max(0,-o.min/o.total):1;
+  if(shield){
+   // Statue can be activated right before settlement; do not estimate game duration.
+   // Known packaged max stake gives a per-protected-settlement expected profit estimate.
+   protectedProfit=Number.isFinite(g.max)&&g.max>0?o.roi*g.max:null;
+   score=protectedProfit!==null?44+49*Math.tanh(Math.max(0,protectedProfit)/230):46+35*Math.tanh(Math.max(0,o.roi));
+   if(g.kind==='对称假设'||g.kind==='物理未解')score-=13;
+  }else{
+   score=51+34*Math.tanh(o.roi*1.35)+(b.goal==='safe'||b.risk==='careful'?14*o.win-14*loss:5*o.win-4*loss);
+   if(g.id==='craps')score-=6;
+   if(g.id==='duck')score-=8;
+   if(g.id==='hilo')score-=3;
+   if(b.goal==='quota'&&g.id==='money')score+=3;
+  }
+ }else if(g.id==='slots')score=49;
+ else if(g.id==='poker')score=49;
+ if(!shield&&b.risk==='bold'&&known&&plan.calc.roi>0)score+=2;
+ return {score:Math.round(Math.max(0,Math.min(100,score))),why:[],watch:[],plan,protectedProfit};
+}
+function worstOutcomeLabel(o){if(!o||!o.total)return '—';const v=o.min/o.total;return Math.abs(v)<1e-8?'最差结果：恰好保本':`最差结果：${v>0?'净赚':'净亏'} ${pct(Math.abs(v))}（占总下注）`; }
+function rankCard(g,n,c=gameContext(g)){const p=c.plan,tool=tabs.some(v=>v[0]===g.id),o=p.calc;
+ const metrics=o?`<div class="rec-math"><span>最终期望净收益率 ${o.roi>=0?'+':''}${pct(o.roi)}</span><span>盈利概率 ${pct(o.win)}</span><span class="${o.min<0?'risk':''}">${worstOutcomeLabel(o)}</span></div>`:g.id==='slots'?'<div class="rec-math"><span>基础回放期望 +15.56%</span><span>最终收益分布不足</span></div>':'<div class="rec-math"><span>暂无可靠期望值</span></div>';
+ const protectedLine=owned('statue')&&o?`<div class="rec-math"><span>结算免亏 · 单局期望 ${o.roi>=0?'+':''}${pct(o.roi)}</span>${c.protectedProfit!==null?`<span>按基础下注上限估算净赚 ${fmt(c.protectedProfit,1)}</span>`:''}</div>`:'';
+ const variants=null;
+ const comparison=variants?`<details class="guide"><summary>比较 ${variants.length} 种下注方案（看期望、盈利概率和最差结果）</summary><div class="floor-matrix-scroll"><table class="ladder-table"><thead><tr><th>方案（点选直接应用）</th><th>期望净收益</th><th>盈利率</th><th>最差结果 / 总下注</th></tr></thead><tbody>${variants.map(v=>`<tr><td style="text-align:left"><button class="btn mini plain tiny-btn" data-cmd="applyPlan" data-val="${g.id}:${v.key}">${v.name} ↗</button></td><td>${v.calc.roi>=0?'+':''}${pct(v.calc.roi)}</td><td>${pct(v.calc.win)}</td><td>${pct(v.calc.min/v.calc.total)}</td></tr>`).join('')}</tbody></table></div><p class="note">这里只比较金额比例，不规定实际下注额；期望收益率和最差结果都以「该方案总下注额」为分母。实际金额可自行设置，且需符合机器的单区和总投注限额。模型模式：整桌净额（轮盘零净额已实测，百家乐待验证）。</p></details>`:'';
+ let controls='';if(p.action&&tool){controls=`<button class="btn mini" data-cmd="applyPlan" data-val="${g.id}:${p.action}">直接应用这套下注方案 →</button>`;}
+ return `<article class="ranking-card ${n===0?'toprank':''}"><div class="ranking-head"><span class="rank-num">#${n+1}</span><span class="rank-name">${g.icon} ${g.name}</span><span class="tier ${tagForScore(c.score)}">推荐 ${c.score}/100</span></div>
+ <div class="rec-action"><strong>推荐押法：${p.name}</strong><div class="instruction">${p.instruction}</div>${metrics}${protectedLine}</div>
+ ${p.extras.length?`<div class="method-note"><b>你已有道具的用法：</b>${p.extras.slice(0,4).join(' ')}</div>`:''}
+
+ <div class="row" style="margin-top:10px">${controls}${tool?`<button class="btn mini plain" data-cmd="goto" data-val="${g.id}">打开决策器 →</button>`:''}<a class="tool-link" style="margin:0" href="${g.url}" target="_blank" rel="noopener">参考攻略 ↗</a></div></article>`;
+}
+const floorNames={1:'入门楼层',2:'倍率玩法',3:'进阶赌桌',4:'全部游戏候选池'};
+const floorCounts={1:6,2:9,3:11,4:16};
+const extraExamples={1:'一楼可找到直接转倍率的 Wheel of Fortune，不是四色 Money Wheel。',2:'二楼新开放 Money Wheel 颜色下注；上一层的 Wheel of Fortune 不在常规候选池里。',3:'三楼恢复 Wheel of Fortune，并开放扑克、扫雷、龙塔与百家乐；Money Wheel 不在本层候选池。',4:'四楼的 16 种普通游戏全部有资格出现，但并不保证同一次进场全部刷出。'};
+function drawFloors(){const f=state.build.floor,eligible=gameFacts.filter(g=>g.floors.includes(f));
+ const floorControls=btnGroup([1,2,3,4].map(v=>[v,'F'+v]),String(f),'floor',4);
+ const cards=eligible.map(g=>`<article class="floor-entry"><div><b>${g.icon} ${g.name}</b><div class="micro">${g.floors.map(i=>'F'+i).join(' · ')} · 首见 F${Math.min(...g.floors)}</div></div><div class="row" style="gap:5px">${tabs.some(t=>t[0]===g.id)?`<button class="btn mini" data-cmd="goto" data-val="${g.id}">打开助手</button>`:`<a class="tool-link" style="margin:0" href="${g.url}" target="_blank" rel="noopener">攻略 ↗</a>`}</div></article>`).join('');
+ const matrix=gameFacts.slice().sort((a,b)=>Math.min(...a.floors)-Math.min(...b.floors)||a.name.localeCompare(b.name)).map(g=>`<tr><td>${g.icon} ${g.name}</td>${[1,2,3,4].map(i=>`<td style="text-align:center"><span class="floor-flag ${g.floors.includes(i)?'yes':'no'}">${g.floors.includes(i)?'✓':'—'}</span></td>`).join('')}</tr>`).join('');
+ $('controls').innerHTML=`<h2>🏢 四层游戏图鉴 · 已重新核对</h2><p class="note">Steam 官方：4 层、17 种博彩玩法；v1.0.30 游戏池资料：<b>16 种普通赌场小游戏</b>。另一种是结果的抛硬币，而不是普通楼层赌桌。</p><div class="grid-floor">${[1,2,3,4].map(i=>`<button class="floor-tile ${f===i?'selected':''}" data-cmd="floor" data-val="${i}"><b>F${i}</b><strong>${floorCounts[i]}</strong><small>款候选</small></button>`).join('')}</div><h3>筛选楼层</h3>${floorControls}<div class="rank-banner"><b>F${f} · ${floorNames[f]}</b><p class="note">${extraExamples[f]}</p><p class="note">当前为<b>可出现</b>的游戏集合，不代表每次进场都刷齐。</p></div><p class="note">优先参考 <a href="https://steamcommunity.com/stats/3892270/achievements" target="_blank" rel="noopener">Steam 官方成就</a>，楼层池完整列表采用 <a href="https://gwyfguides.com/floors" target="_blank" rel="noopener">v1.0.30 整理的配置矩阵</a>。资料存在版本变化风险；部分聚合攻略把两种转盘或不同楼层混在一起，此处不采用。</p>`;
+ $('results').innerHTML=result(`F${f} 当前候选：${eligible.length} / 16 种`,`<div class="floor-list">${cards}</div><details class="guide"><summary>展开全部 16 款 × 四楼层对照表</summary><div class="floor-matrix-scroll"><table class="ladder-table floor-matrix"><thead><tr><th>游戏名</th><th>F1</th><th>F2</th><th>F3</th><th>F4</th></tr></thead><tbody>${matrix}</tbody></table></div></details><div class="rank-banner"><b>为什么 Steam 写 17 种？</b><p class="note">配置资料把 <b>16 种普通赌场游戏</b>与<b>结果二选一时的 Coin Flip</b>分开列。后者不会出现在普通四层游戏池里。这是对公开总数的解释，并非 Steam 官方逐项提供的完整 17 项名单。</p></div>`);}
+function drawRecommend(){const b=state.build,available=gameFacts.filter(g=>g.floors.includes(b.floor)).map(g=>({g,c:gameContext(g)})).sort((a,z)=>z.c.score-a.c.score),missing=gameFacts.filter(g=>!g.floors.includes(b.floor)),top=available[0];
+ $('controls').innerHTML=`<h2>🏆 当前楼层 · 游戏推荐</h2>${configPicker()}<details class="guide" open><summary>🎒 已有道具 ${guideItems.filter(it=>owned(it.id)).length} 种 · 修改后全局同步</summary>${inventoryPicker()}</details>`;
+ const featured='';
+ $('results').innerHTML=result('F'+b.floor+' · 可出现 '+available.length+' 款游戏',featured+`<div class="ranking">${available.map((e,index)=>rankCard(e.g,index,e.c)).join('')}</div><details class="guide"><summary>未开放的 ${missing.length} 款</summary><div class="inline-tags">${missing.map(g=>'<span class="tiny">'+g.icon+' '+g.name+'</span>').join('')}</div></details>`);
+}
+function handleBuild(cmd,v){const b=state.build;if(cmd==='floor')b.floor=Number(v);if(cmd==='owned'){const it=guideItems.find(x=>x.id===v);if(it){const val=owned(v);b.owned[v]=it.type==='升级'?(val+1)%5:(val?0:1);}}if(cmd==='resetOwned')b.owned={};if(cmd==='goto'){state.tab=v;render();window.scrollTo({top:0,behavior:'instant'});return;}storeBuild();render();}
+
+function handleCmd(cmd,v){if(cmd==='owned'||cmd==='resetOwned'){state.pk.hold=null;state.pk.ev=null;handleBuild(cmd,v);return;}if(cmd==='applyPlan'){const parts=v.split(':'),[id,key]=parts;if(id==='roulette'&&key){state.tab='roulette';if(key==='red'){state.roulette.wagers=[{key:'red',amount:state.roulette.base*state.roulette.multiple}];render();}else roulettePreset(key);}if(id==='baccarat'&&key){state.tab='baccarat';baccaratPreset(key);}if(id==='money'&&key&&moneyData[key]){state.tab='money';state.money.color=key;render();}return;}if(['recommend','items','floors'].includes(state.tab)){handleBuild(cmd,v);return;}switch(state.tab){case 'bj':bjChange(cmd,v);return;case 'poker':if(cmd==='solve')solvePoker();else if(cmd==='pickcard')showPokerWheel(Number(v));return;case 'mines':return;case 'fortune':return;case 'money':if(cmd==='mwcolor'){state.money.color=v;render();}return;case 'hilo':if(cmd==='side'){state.hilo.side=v;render();}return;case 'crash':if(cmd==='ctarget'){state.crash.target=+v;render();}return;case 'penguin':if(cmd==='pstep')state.penguin.step=Number(v);render();return;case 'dragon':if(cmd==='drow')state.dragon.rows=Number(v);render();return;case 'roulette':rouletteAct(cmd,v);return;case 'baccarat':baccaratAct(cmd,v);return;case 'craps':if(cmd==='roll')roll(v);else if(cmd==='newcraps'){state.craps={phase:0,point:0,left:3,msg:''};render();}return;}}
+const numberKeys={mines:{mine:[1,24,1],k:[0,24,1]},crash:{target:[1.2,100,.1],profit:[1,20,.05],refund:[0,1,.01]},dragon:{rows:[0,6,1]},penguin:{step:[0,10,1]},roulette:{base:[.01,1e9,.01]},baccarat:{base:[.01,1e9,.01]}};
+document.addEventListener('click',e=>{let t=e.target.closest('[data-tab]');if(t){state.tab=t.dataset.tab;render();storeSession();window.scrollTo({top:0,behavior:'instant'});return;}t=e.target.closest('[data-cmd]');if(t)handleCmd(t.dataset.cmd,t.dataset.val);});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.build){state.build[t.dataset.build]=t.value;storeBuild();render();storeSession();return;}if(t.dataset.buildCheck==='team'){state.build.team=t.checked?'group':'solo';storeBuild();render();storeSession();return;}if(t.dataset.check){state.b[{bdouble:'double',bh17:'h17',bfirst:'first'}[t.dataset.check]]=t.checked;render();storeSession();return;}if(t.dataset.num){const key=t.dataset.num,arr=numberKeys[state.tab]?.[key];if(arr){const v=lim(Number(t.value)||0,arr[0],arr[1]);state[state.tab][key]=arr[2]===1?Math.round(v):v;render();storeSession();}return;}if(t.dataset.pkr!==undefined){state.pk.cards[+t.dataset.pkr][0]=t.value;state.pk.hold=null;drawPoker();storeSession();return;}if(t.dataset.pks!==undefined){state.pk.cards[+t.dataset.pks][1]=t.value;state.pk.hold=null;drawPoker();storeSession();return;}});
+document.addEventListener('input',e=>{if(e.target.dataset.range==='threshold'){state.hilo.threshold=Number(e.target.value);const v=$('hlval');if(v)v.textContent=state.hilo.threshold+'%';drawHiLo(true);}});
+function storeSession(){try{const fields=['roulette','baccarat','b','mines','hilo','money','fortune','crash','dragon','penguin','craps'];const obj={tab:state.tab,pkCards:state.pk.cards};for(const key of fields)obj[key]=state[key];localStorage.setItem('GWYF_SESSION_V54',JSON.stringify(obj));}catch(e){}}
+function restoreSession(){try{const old=JSON.parse(localStorage.getItem('GWYF_SESSION_V54')||'null');if(!old||typeof old!=='object')return;for(const key of ['roulette','baccarat','b','mines','hilo','money','fortune','crash','dragon','penguin','craps']){if(old[key]&&typeof old[key]==='object')state[key]={...state[key],...old[key]};}if(Array.isArray(old.pkCards)&&old.pkCards.length===5)state.pk.cards=old.pkCards;if(tabs.some(t=>t[0]===old.tab))state.tab=old.tab;state.money={color:moneyData[state.money.color]?state.money.color:'orange'};state.fortune={};for(const id of ['roulette','baccarat']){const v=state[id];v.base=lim(Number(v.base)||10,.01,1e9);v.multiple=[1,2,5,10].includes(Number(v.multiple))?Number(v.multiple):1;v.wagers=Array.isArray(v.wagers)?v.wagers.filter(w=>w&&typeof w.key==='string'&&Number.isFinite(w.amount)&&w.amount>0&&w.amount<1e12).slice(0,500):[];v.last=null;}}catch(e){}}
+const baseHandleCmd=handleCmd;handleCmd=function(cmd,v){baseHandleCmd(cmd,v);storeSession();};
+restoreBuild();restoreSession();render();})();
+</script></body></html>

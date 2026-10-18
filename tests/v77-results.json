@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "single-card replacement immediately excludes old card; undo restores hand AND history; reload and archive keep both generations",
+    "recommended batch exchange archives every discard before replacements, preserves held cards, skips held slots and archives final hand without loss",
+    "Blackjack dealer hole/draws persist, S17 stops dealer input; archive records both hands exactly once, resets upcard, supports undo and applies to next recommendation",
+    "Blackjack player/dealer controls, recommendation and archive fit together at 320/360/390/430px",
+    "bust hand can archive all known cards, unknown hole is not guessed, impossible rank count blocks archive"
+  ],
+  "errors": []
+}

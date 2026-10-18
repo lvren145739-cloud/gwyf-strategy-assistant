@@ -1,0 +1,94 @@
+{
+  "release": "7.7",
+  "saveSchema": 7,
+  "checkedAt": "2026-10-18T18:08:46.407028+00:00",
+  "sha256": "e8f80d337f39b77e2d01aacca022ca36ebfd491d5b3742ba138d9c50d49b1ec1",
+  "blackjack": {
+    "checks": 861,
+    "independentFixtures": 72,
+    "compositionReversal": {
+      "rank": 4,
+      "n": 3,
+      "from": "H",
+      "to": "S"
+    }
+  },
+  "existingEngineAssertions": 3031,
+  "browserSuites": {
+    "v77-results.json": {
+      "checks": [
+        "single-card replacement immediately excludes old card; undo restores hand AND history; reload and archive keep both generations",
+        "recommended batch exchange archives every discard before replacements, preserves held cards, skips held slots and archives final hand without loss",
+        "Blackjack dealer hole/draws persist, S17 stops dealer input; archive records both hands exactly once, resets upcard, supports undo and applies to next recommendation",
+        "Blackjack player/dealer controls, recommendation and archive fit together at 320/360/390/430px",
+        "bust hand can archive all known cards, unknown hole is not guessed, impossible rank count blocks archive"
+      ],
+      "errors": []
+    },
+    "v77-regression-results.json": {
+      "checks": [
+        "category navigation scrolls off the screen instead of covering game controls",
+        "complete Blackjack selection and current recommendation fit together at 320/360/390/430px",
+        "Blackjack recommendation updates immediately for hand, dealer and hand-stage changes",
+        "core controls and nearby result fit together for 12 other games at 390px",
+        "slider drag, Mines actions, Slots board and asynchronous Poker solve keep the nearby result current",
+        "22 pages fit four widths; no JavaScript errors or external requests"
+      ],
+      "errors": [],
+      "externalRequests": []
+    }
+  },
+  "offlineValidation": "Complete self-contained HTML executed with browser network offline, Blob Worker solver exercised; file:// navigation blocked by environment browser policy.",
+  "modelLimits": [
+    "Public fixed-rule model; current game binary not independently reversed.",
+    "Quick two-card hard totals average feasible compositions; later quick totals do not deduct unknown current composition.",
+    "Current input assumes known hand and history belong to one deck; cannot annotate a hand already spanning a deck rebuild."
+  ],
+  "pokerEntry": {
+    "mode": "inline 52 concrete cards, no dialog",
+    "autoAdvance": true,
+    "autoCollapseAfterFive": true,
+    "undoStepsPerSession": 50,
+    "entryStatePersists": true,
+    "mobileFullBoardWidths": [
+      320,
+      360,
+      390,
+      430
+    ],
+    "allWidths": [
+      320,
+      360,
+      390,
+      430,
+      768,
+      1440
+    ],
+    "engineChange": false,
+    "discardHistory": "immediate on replacing an occupied slot; recommended batch removes and records discards before incoming selection",
+    "undo": "restores both current cards and used pool",
+    "archive": "set union of all earlier discards and final hand"
+  },
+  "blackjackArchive": {
+    "dealerFollowup": true,
+    "includes": [
+      "player cards",
+      "dealer upcard",
+      "revealed dealer hole and further drawn cards"
+    ],
+    "resets": [
+      "player cards",
+      "dealer upcard",
+      "dealer followup"
+    ],
+    "undo": true,
+    "unknownCards": "never guessed",
+    "sameScreenWidths": [
+      320,
+      360,
+      390,
+      430
+    ]
+  },
+  "numericalEngineChangeInThisRelease": false
+}

@@ -1,0 +1,38 @@
+const guideItems=[
+ {id:'golden',name:'黄金筹码',en:'Golden Chip',tier:'S',base:96,price:[4,6,8,10],type:'道具',desc:'一次免费满额下注；用电击枪先提高赌桌上限，再使用更划算。',keys:['免费下注','电击枪联动']},
+ {id:'confidence',name:'赌徒自信',en:"Gambler’s Confidence",tier:'S',base:94,price:[7,10,13,16],type:'升级',desc:'正利润倍率：0 次×1，1 次×1.5，2 次×2；正收益玩法越稳定越值。',keys:['全局利润','长期成长']},
+ {id:'insurance',name:'保险',en:'Insurance',tier:'S',base:92,price:[7,10,13,16],type:'升级',desc:'输局按 1−0.75^购买次数返还部分损失；1 次 25%，2 次 43.75%。',keys:['降低亏损','可叠加']},
+ {id:'statue',name:'神圣雕像',en:'Holy Statue',tier:'S',base:90,price:[7,11,15,19],type:'道具',desc:'激活期间可让附近输钱结果免损；必须把握生效时间，满额保护可能影响输局任务。',keys:['短时保护','高波动护航']},
+ {id:'taser',name:'电击枪',en:'Taser',tier:'S',base:89,price:[4,6,8,10],type:'道具',desc:'对下注键盘提高最大押注；不改变胜率，与黄金筹码直接联动。',keys:['提高下注上限','免费筹码组合']},
+ {id:'quota',name:'配额枪',en:'Quota Gun',tier:'A',base:86,price:[5,8,11,14],type:'道具',desc:'用于补齐配额，每次有效攻击按配额约三分之一计算且受剩余配额上限约束；不受利益相关者加成。',keys:['配额救急','无需赌桌']},
+ {id:'stakeholder',name:'利益相关者',en:'Stakeholder',tier:'A',base:84,price:[6,9,12,15],type:'升级',desc:'增加受支持道具的效果，强化黄金筹码、电击枪、相机、雕像等，但不强化配额枪或时光机。',keys:['联动放大','适合道具多时']},
+ {id:'drink',name:'饮料',en:'Drink',tier:'A',base:81,price:[5,8,11,14],type:'道具',desc:'喝下后临时提升正利润，适合即将结算的高价值赢局。',keys:['临时利润','时机重要']},
+ {id:'time',name:'时光机',en:'Time Machine',tier:'A',base:80,price:[6,9,12,15],type:'道具',desc:'回溯约 60 秒及近期游戏结果；有可能同时撤回已获得的挑战进度。',keys:['失误补救','挑战需谨慎']},
+ {id:'angel',name:'天使转轮',en:"Angel’s Reel",tier:'A',base:78,price:[3,5,7,9],type:'道具',desc:'有机会恢复最近一次亏损，不是保证返还；可被支持的效果增幅强化。',keys:['输局恢复','概率效果']},
+ {id:'microphone',name:'麦克风',en:'Microphone',tier:'A',base:76,price:[6,9,12,15],type:'道具',desc:'通过唱歌积累临时盈利／亏损恢复增益；要留意范围、维持时间和实际结算。',keys:['临时增益','队友配合']},
+ {id:'camera',name:'相机',en:'Camera',tier:'A',base:73,price:[6,9,12,15],type:'道具',desc:'记录另一位玩家的赢局以获得额外利润；单人游玩价值低。',keys:['多人联动','捕捉队友赢局']},
+ {id:'bonus',name:'额外抽签',en:'Bonus Draw',tier:'B',base:69,price:[8,10,12,14],type:'升级',desc:'每次盈利时获得额外 1 Ticket 的几率每层 +10 个百分点。',keys:['票券收益','长期成长']},
+ {id:'mystery',name:'神秘箱',en:'Mystery Box',tier:'B',base:64,price:[4,6,8,10],type:'道具',desc:'随机获得道具或升级；不能指定想要的效果，优先级取决于当前欠缺什么。',keys:['随机高方差','不能定向']},
+ {id:'devil',name:'恶魔转轮',en:"Devil’s Reel",tier:'C',base:55,price:[3,5,7,9],type:'道具',desc:'拿近期赢得的利润继续冒险，有机会放大也可能失去，不适合求稳保本。',keys:['极高波动','只赌已赢利润']},
+ {id:'bat',name:'球棒',en:'Bat',tier:'C',base:31,price:null,type:'特殊',desc:'主要是对队友的物理互动；没有经证实的通用赌桌收益提升。',keys:['多人娱乐','非必买']},
+ {id:'maxwell',name:'Maxwell 猫',en:'Maxwell',tier:'D',base:14,price:null,type:'彩蛋',desc:'神秘箱稀有宠物，没有确认的收益增益。',keys:['收藏','不提高收益']},
+ {id:'ratto',name:'Ratto 老鼠',en:'Ratto',tier:'D',base:14,price:null,type:'彩蛋',desc:'神秘箱稀有装饰宠物，没有确认的收益增益。',keys:['收藏','不提高收益']}
+];
+const gameFacts=[
+ {id:'craps',name:'街头骰子 Craps',icon:'🎲',floors:[1,3,4],base:89,risk:3,kind:'模型',max:400,ev:'约 137.75%（公平骰子模型）',url:'https://gwyfguides.com/games/craps',note:'公平物理骰子假设下收益较高；实际投骰速度与物理偏差很重要。',tags:['正收益模型','大注','物理骰']},
+ {id:'money',name:'选颜色转盘 · 橙色',icon:'🎡',floors:[2,4],base:88,risk:3,kind:'固定配置',max:200,ev:'135.14%（橙色 / 游戏配置）',url:'https://gwyfguides.com/games/money-wheel',note:'37 格中 5 格橙色、赢时 10×；结算快，但连续不中常见。',tags:['可验证优势','快速','高波动']},
+ {id:'poker',name:'单人扑克',icon:'♠',floors:[3,4],base:81,risk:3,kind:'新牌堆模型',max:300,ev:'约 128.41%（最优保留新牌堆）',url:'https://gwyfguides.com/games/poker',note:'真正决策是保留／换牌；当前剩余牌会改变最优选择，需用上方扑克助手。',tags:['可操作策略','持久牌堆']},
+ {id:'slots',name:'老虎机',icon:'🎰',floors:[1,2,3,4],base:72,risk:3,kind:'模拟重放',max:50,ev:'约 115.56%（1000 万种子模拟）',url:'https://gwyfguides.com/games/slots',note:'模型显示正收益，但单次上限低、方差高，非软件代码精确 RTP。',tags:['操作容易','小注','高波动']},
+ {id:'fortune',name:'倍率转盘 · 命运之轮',icon:'🎡',floors:[1,3,4],base:58,risk:2,kind:'固定配置',max:250,ev:'约 100%',url:'https://gwyfguides.com/games/wheel-of-fortune',note:'直接下注，随机获得 0× 至 5×，两格 Spin Again 触发重转。无颜色投注；与 F2 金钱转盘不同。',tags:['不用判断','近保本']},
+ {id:'bj',name:'二十一点',icon:'🃏',floors:[1,2,3,4],base:63,risk:2,kind:'随牌堆变',max:300,ev:'策略 / 剩余牌决定',url:'https://gwyfguides.com/games/blackjack',note:'有要牌、停牌、加倍；单副牌持续消耗，自然 21 支付 3×，不提供分牌。',tags:['可操作策略','Natural 3×']},
+ {id:'baccarat',name:'百家乐 · 游戏四张牌版',icon:'🎴',floors:[3,4],base:48,risk:3,kind:'单副牌精确枚举',max:300,ev:'和局毛返还 98.99%',url:'https://gwyfguides.com/games/baccarat',note:'游戏是单副牌、庄闲各两张、不补第三张：庄/闲均2×、和局10×总返还；和局胜率约9.90%，相对高返还但短期波动很大。',tags:['选择投注类型','高波动']},
+ {id:'hilo',name:'HiLo 猜大小',icon:'⚖',floors:[2,3,4],base:51,risk:2,kind:'固定配置',max:100,ev:'约 100%',url:'https://gwyfguides.com/games/hilo',note:'选择胜率百分比和高低方向，倍率大约是 1/胜率。',tags:['概率可控','适合连胜目标']},
+ {id:'keno',name:'基诺 Keno',icon:'🔢',floors:[2,4],base:51,risk:2,kind:'固定配置',max:100,ev:'约 100%',url:'https://gwyfguides.com/games/keno',note:'选中数量影响盈亏分布，不是某几个数字“更幸运”。',tags:['选号个数','任务路线']},
+ {id:'penguin',name:'企鹅过马路',icon:'🐧',floors:[2,3,4],base:52,risk:3,kind:'固定配置',max:100,ev:'1.2×–1000×（10 步）',url:'https://gwyfguides.com/games/penguin-cross',note:'有 10 个真实提现档位，第一跳成功约 83.33%；加成道具可降低挑战所需档位。',tags:['提现决策','适合任务']},
+ {id:'crash',name:'Crash 倍率',icon:'🚀',floors:[2,4],base:47,risk:3,kind:'程序模型',max:250,ev:'约 100%（不计操作延迟）',url:'https://gwyfguides.com/games/crash',note:'选提现倍率不改变基础期望；网络／反应延迟会拉低实际结果。',tags:['操作反应','倍率目标']},
+ {id:'dragon',name:'爬龙塔',icon:'🐉',floors:[3,4],base:46,risk:3,kind:'固定配置',max:null,ev:'1.333×–5.619×（6 层）',url:'https://gwyfguides.com/games/dragon-tower',note:'已核实 6 层各档倍率；每层 3 安全 1 失败，未加成时各档期望接近公平。',tags:['继续／收手','75% 下层存活']},
+ {id:'mines',name:'扫雷',icon:'💣',floors:[3,4],base:45,risk:3,kind:'组合概率',max:null,ev:'理论近公平 / 跟目标有关',url:'https://gwyfguides.com/games/minesweeper',note:'25 格不提供数字线索；道具不能改变地雷位置概率。',tags:['组合概率','高倍率任务']},
+ {id:'roulette',name:'轮盘',icon:'🎯',floors:[1,2,3,4],base:42,risk:2,kind:'固定配置',max:null,ev:'常规投注约 97.30%',url:'https://gwyfguides.com/games/roulette',note:'已支持可点击轮盘下注桌面，多区域下注后精确枚举 37 个开奖结果的盈亏分布。',tags:['固定负期望','简单']},
+ {id:'duck',name:'鸭子赛跑',icon:'🦆',floors:[1,4],base:40,risk:3,kind:'对称假设',max:500,ev:'理论约 100%（每鸭均等假设）',url:'https://gwyfguides.com/games/duck-race',note:'4 只鸭中 1 只赢得 4×；25% 是对称模型，不是实际赛道测量。',tags:['无已证实选号优势','物理/模拟']},
+ {id:'plinko',name:'弹珠台 Plinko',icon:'🔵',floors:[2,4],base:36,risk:3,kind:'物理未解',max:50,ev:'无可靠实时 RTP',url:'https://gwyfguides.com/games/plinko',note:'下落物理分布未被量化，不能把最高倍率或视觉投放点当成最优解。',tags:['物理未解','优先做任务']}
+];

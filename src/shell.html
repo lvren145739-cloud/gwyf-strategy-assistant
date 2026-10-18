@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1213">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 50 50%27%3E%3Crect width=%2750%27 height=%2750%27 rx=%2712%27 fill=%27%238ce6bd%27/%3E%3Ctext x=%2725%27 y=%2737%27 text-anchor=%27middle%27 font-size=%2739%27 fill=%27%23173e32%27%3E%E2%9A%84%3C/text%3E%3C/svg%3E">
+<meta name="description" content="《朋友，梭哈吧》离线游戏决策器。16款小游戏、精确概率、扑克换牌、道具状态和局内资金规划。">
+<meta name="author" content="旅人使用GPT-6制作">
+<title>朋友，梭哈吧 · 决策器 7.7</title>
+<style>/*__CSS__*/</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="mobile-shade" id="navShade"></div>
+<aside class="sidebar" id="sidebar" aria-label="工具导航">
+  <a class="brand" href="#recommend" aria-label="朋友，梭哈吧 决策器首页"><span class="brand-icon">⚄</span><span>朋友，梭哈吧<small>决策器 / COMPANION</small></span><span class="version">7.7</span></a>
+  <label class="search"><span aria-hidden="true">⌕</span><input id="navSearch" type="search" placeholder="找游戏或工具…" aria-label="搜索游戏和工具"><kbd>/</kbd></label>
+  <div class="nav-filter"><button data-action="navFilter" id="navFilter">全部游戏</button><span id="navCount">16 款</span></div>
+  <nav id="nav"></nav>
+  <div class="sidebar-foot"><span class="status-dot"></span>离线可用 · 数据保存在此浏览器<button data-go="sources">规则依据与版本 ↗</button></div>
+</aside>
+<div class="app">
+  <header class="topbar"><div class="topbar-left"><button class="icon-btn menu-btn" data-action="menu" aria-label="打开导航" aria-expanded="false">☰</button><span class="breadcrumb">游戏工作台<span>/</span><b id="pageName">局势总览</b></span></div><div class="top-actions"><span id="saveState" class="saved"><i></i>自动保存</span><button class="text-btn" data-action="export" title="导出完整存档">↓ 导出存档</button><button class="text-btn" data-action="import">↑ 导入</button></div></header>
+  <div class="contextbar" id="contextbar"></div>
+  <nav id="quickNav" class="quick-nav" aria-label="分类游戏直达"></nav>
+  <main id="main" tabindex="-1"><div id="pageHeading"></div><div id="content"></div></main>
+  <footer class="footer"><span>© 旅人使用 GPT-6 制作 · 非官方游戏辅助</span><span>仅用于游戏内虚拟币 · <button data-go="sources">资料基准 v1.0.30</button></span></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+<noscript><p style="padding:30px">请启用 JavaScript 后使用决策器。所有计算都在本地完成。</p></noscript>
+<script>/*__JS__*/</script>
+</body>
+</html>

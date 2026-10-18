@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+node_modules/
+.venv/
+playwright-report/
+test-results/
+v*-*.png

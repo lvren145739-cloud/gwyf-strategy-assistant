@@ -1,0 +1,14 @@
+import {readFileSync} from 'node:fs';
+import {createHash,createPublicKey,verify} from 'node:crypto';
+import assert from 'node:assert/strict';
+const root=new URL('../',import.meta.url),read=p=>readFileSync(new URL(p,root));
+const meta=JSON.parse(read('GWYF_签名信息.json'));
+const bytes=read('index.html');assert.deepEqual(bytes,read('GWYF_策略决策器.html'));
+const hash=createHash('sha256').update(bytes).digest('hex');assert.equal(hash,meta.sha256);
+const key=createPublicKey({key:Buffer.concat([Buffer.from('302a300506032b6570032100','hex'),Buffer.from(meta.publicKeyBase64,'base64')]),format:'der',type:'spki'});
+assert.equal(verify(null,Buffer.from(hash,'hex'),key,Buffer.from(meta.signatureBase64,'base64')),true);
+assert.equal(createHash('sha256').update(Buffer.from(meta.publicKeyBase64,'base64')).digest('hex'),meta.publicKeyFingerprintSha256);
+assert.ok(read('GWYF_SHA256.txt').toString().includes(hash+'  index.html'));
+const old=JSON.parse(read('archive/v5.6/GWYF_签名信息.json'));
+assert.equal(createHash('sha256').update(read('archive/v5.6/GWYF_策略决策器.html')).digest('hex'),old.sha256);
+console.log(`v${meta.version}: entry files, SHA-256, Ed25519 signature, key fingerprint and v5.6 backup verified`);

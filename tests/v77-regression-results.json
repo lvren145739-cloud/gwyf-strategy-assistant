@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "category navigation scrolls off the screen instead of covering game controls",
+    "complete Blackjack selection and current recommendation fit together at 320/360/390/430px",
+    "Blackjack recommendation updates immediately for hand, dealer and hand-stage changes",
+    "core controls and nearby result fit together for 12 other games at 390px",
+    "slider drag, Mines actions, Slots board and asynchronous Poker solve keep the nearby result current",
+    "22 pages fit four widths; no JavaScript errors or external requests"
+  ],
+  "errors": [],
+  "externalRequests": []
+}
