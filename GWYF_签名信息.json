@@ -1,15 +1,15 @@
 {
-  "version": "7.7.1",
+  "version": "7.7.2",
   "file": "GWYF_策略决策器.html",
   "attribution": "Created by lvren with GPT-6.1Sol.",
   "application": "Steam《朋友，梭哈吧》虚拟游戏币策略辅助工具",
   "algorithm": "Ed25519 signature over SHA-256 digest of exact UTF-8 HTML file bytes",
-  "sha256": "af773df2c69109e7a7726595f256db2e9048ecb26af6622143f4274b1f58e47f",
-  "publicKeyBase64": "XnPLx0N/EkOfdTzltKgEZAG+hp/slEVEV3jcVKndWJY=",
-  "signatureBase64": "SSBI3c5jztYS4sai+gYhis8yJcbUX2q70OK7S/OnS/RfBcQQufRHXbbEqMoAAY0mf9ilZOK+4lKSioAu9I4EAg==",
-  "publicKeyFingerprintSha256": "488117976578bc16019606a0bff8cd1111ede5d247acb82f67261be736313ca9",
-  "createdUTC": "2026-10-19T06:09:40.146772+00:00",
-  "note": "v7.7.1 uses a new per-release signing key, not a continuation of any old key. Its HTML embeds the complete noncommercial attribution license. Compare SHA-256 with the repository release commit; signatures verify consistency, not personal identity.",
-  "license": "LicenseRef-lvren-Noncommercial-Attribution-1.0",
+  "sha256": "87f763fd30af0b72ff98cfbff26aa9aa178c66407ec835933ec2de4b2ab59ad9",
+  "publicKeyBase64": "H4SBILL5E6jW3bQi8C/57UdTepRnEfQcdJGfEnRXAGM=",
+  "signatureBase64": "d+d+t9KsHGwY88HDU3cwODj87+tB2VuHHbIPDsGwJpsm7RFrmPKtOc3lVf4Tl+TNoQ0x2dk7uNoNJXNJAXqcAQ==",
+  "publicKeyFingerprintSha256": "8597f94b4dcfb4dfbd2448c73bcb86adfe42adc6db54fa60f3d6adab52b96867",
+  "createdUTC": "2026-10-19T06:18:40.022645+00:00",
+  "note": "v7.7.2 uses a new per-release signing key, not a continuation of any old key. Its HTML embeds the standard MIT License permitting commercial use. Compare SHA-256 with the repository release commit; signatures verify consistency, not personal identity.",
+  "license": "MIT",
   "licenseFile": "LICENSE"
 }

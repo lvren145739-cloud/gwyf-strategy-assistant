@@ -1,7 +1,7 @@
-/* Created by lvren with GPT-6.1Sol. | GWYF offline companion v7.7.1 */
+/* Created by lvren with GPT-6.1Sol. | GWYF offline companion v7.7.2 */
 (()=>{'use strict';
 const E=GWYFEngine,$=id=>document.getElementById(id),VERSION=7,KEY='GWYF_COMPANION_V7';
-const RELEASE='7.7.1';
+const RELEASE='7.7.2';
 const LICENSE_TEXT=/*__LICENSE__*/;
 const f=(x,n=2)=>Number.isFinite(x)?x.toLocaleString('zh-CN',{minimumFractionDigits:n,maximumFractionDigits:n}):'—';
 const pc=(x,n=2)=>x>0&&x<.00001?'＜0.001%':f(x*100,n)+'%';

@@ -1,8 +1,8 @@
 {
-  "release": "7.7.1",
+  "release": "7.7.2",
   "saveSchema": 7,
-  "checkedAt": "2026-10-19T06:09:40.148305+00:00",
-  "sha256": "af773df2c69109e7a7726595f256db2e9048ecb26af6622143f4274b1f58e47f",
+  "checkedAt": "2026-10-19T06:18:40.023209+00:00",
+  "sha256": "87f763fd30af0b72ff98cfbff26aa9aa178c66407ec835933ec2de4b2ab59ad9",
   "blackjack": {
     "checks": 861,
     "independentFixtures": 72,
@@ -92,26 +92,29 @@
   },
   "numericalEngineChangeInThisRelease": false,
   "licensing": {
-    "license": "LicenseRef-lvren-Noncommercial-Attribution-1.0",
+    "license": "MIT",
     "attribution": "Created by lvren with GPT-6.1Sol.",
-    "automaticNoncommercialGrant": true,
-    "paidRedistributionRequiresSeparatePermission": true,
+    "commercialUseAllowed": true,
+    "paidRedistributionAllowed": true,
+    "separateCommercialPermissionRequired": false,
+    "copyrightAndPermissionNoticeRequired": true,
+    "additionalAttributionRestrictions": false,
     "embeddedOfflineLicense": true
   },
-  "browserSuitesScope": "Existing gameplay suites apply to unchanged v7.7 computation and controls; v7.7.1 adds attribution and license presentation.",
+  "browserSuitesScope": "Existing gameplay suites cover unchanged v7.7 computation and controls; v7.7.2 changes license presentation to standard MIT.",
   "licensePresentationChecks": {
+    "license": "MIT",
     "licenseEmbeddedExactly": true,
-    "englishAttributionConsistent": true,
-    "offlineFooterEntryWorks": true,
-    "noHorizontalOverflowWidths": [
+    "commercialUseVisible": true,
+    "noPaidUseRestrictionInApp": true,
+    "offlineLicenseReadable": true,
+    "signatureVerifiedInBrowser": true,
+    "widths": [
       320,
       390,
       768,
       1440
     ],
-    "currentSignatureVerifiedInBrowser": true,
-    "oldVersionRejectedByCurrentVerifier": true,
-    "errors": [],
-    "externalRequests": []
+    "errors": []
   }
 }
