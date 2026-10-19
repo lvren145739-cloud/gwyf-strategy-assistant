@@ -1,8 +1,8 @@
 {
-  "release": "7.7",
+  "release": "7.7.1",
   "saveSchema": 7,
-  "checkedAt": "2026-10-18T18:08:46.407028+00:00",
-  "sha256": "e8f80d337f39b77e2d01aacca022ca36ebfd491d5b3742ba138d9c50d49b1ec1",
+  "checkedAt": "2026-10-19T06:09:40.148305+00:00",
+  "sha256": "af773df2c69109e7a7726595f256db2e9048ecb26af6622143f4274b1f58e47f",
   "blackjack": {
     "checks": 861,
     "independentFixtures": 72,
@@ -90,5 +90,28 @@
       430
     ]
   },
-  "numericalEngineChangeInThisRelease": false
+  "numericalEngineChangeInThisRelease": false,
+  "licensing": {
+    "license": "LicenseRef-lvren-Noncommercial-Attribution-1.0",
+    "attribution": "Created by lvren with GPT-6.1Sol.",
+    "automaticNoncommercialGrant": true,
+    "paidRedistributionRequiresSeparatePermission": true,
+    "embeddedOfflineLicense": true
+  },
+  "browserSuitesScope": "Existing gameplay suites apply to unchanged v7.7 computation and controls; v7.7.1 adds attribution and license presentation.",
+  "licensePresentationChecks": {
+    "licenseEmbeddedExactly": true,
+    "englishAttributionConsistent": true,
+    "offlineFooterEntryWorks": true,
+    "noHorizontalOverflowWidths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "currentSignatureVerifiedInBrowser": true,
+    "oldVersionRejectedByCurrentVerifier": true,
+    "errors": [],
+    "externalRequests": []
+  }
 }
