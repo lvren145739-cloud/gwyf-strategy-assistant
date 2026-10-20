@@ -21,7 +21,12 @@ def test():
   assert names==sorted(['status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact']),names
   report['realWebView2Bridge']=True
   rows=app.evaluate_js('window.pywebview.api.windows()')
-  target=next(r for r in rows if r['title']=='Gamble With Your Friends - test fixture')
+  report['enumeratedTitles']=[r['title'] for r in rows]
+  target_hwnd=int(fixture.native.Handle.ToInt64())
+  report['fixtureHandle']=str(target_hwnd)
+  report['fixtureVisible']=bool(api.native.user.IsWindowVisible(target_hwnd))
+  n=api.native.user.GetWindowTextLengthW(target_hwnd);buf=ctypes.create_unicode_buffer(n+1);api.native.user.GetWindowTextW(target_hwnd,buf,n+1);report['fixtureNativeTitle']=buf.value
+  target=next(r for r in rows if r['id']==str(target_hwnd))
   assert not any(r['title']==TITLE for r in rows)
   assert isinstance(target['id'],str)
   report['nativeEnumWindows']=True

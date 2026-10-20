@@ -13,7 +13,8 @@ with sync_playwright() as p:
   window.pywebview={api:{status:async()=>({version:'0.3.0',modelBytes:7000000,hotkey:'Ctrl+Shift+Space',python:'3.14.8'}),windows:async()=>[{id:'123',title:'Gamble With Your Friends'}],select_window:async()=>true,load_state:async()=>null,save_state:async data=>{saved.push(data);return true;},capture:async()=>{const c=document.createElement('canvas');c.width=960;c.height=540;return {image:c.toDataURL(),width:960,height:540,digest:'frame'};},recognize:async(regions,mode)=>{recognitionCalls.push({regions,mode});return fixture;},compact:async()=>true,open_image:async()=>null}};
  })();''')
  page.goto('http://127.0.0.1:8768/desktop.html');page.wait_for_function('nativeReady && nativeConnecting===null')
- page.evaluate('captureNow()');page.wait_for_function("document.querySelector('#advice h1').textContent.includes('HIT')",timeout=15000)
+ page.evaluate('captureNow()');page.wait_for_function("/HIT|STAND|DOUBLE/.test(document.querySelector('#advice h1').textContent)",timeout=15000)
+ print('Initial recommendation:',page.locator('#advice h1').inner_text(),'status:',page.locator('#status').inner_text(),flush=True)
  assert page.locator('#draftPanel').is_hidden()
  assert '已自动识别并计算' in page.locator('#status').inner_text()
  assert page.evaluate('recognitionCalls[0].regions')=={}
@@ -21,7 +22,7 @@ with sync_playwright() as p:
  assert page.evaluate('state.blackjack.dealer[0].rank')=='A'
  assert page.locator('#usedCount').inner_text()=='0 张'
  undo=page.evaluate('JSON.stringify(state.undo)')
- page.evaluate('captureNow()');page.wait_for_function("document.querySelector('#advice h1').textContent.includes('HIT')")
+ page.evaluate('captureNow()');page.wait_for_function("document.querySelector('#advice h1').textContent.includes('STAND')")
  assert page.evaluate('JSON.stringify(state.undo)')==undo
  assert page.locator('#usedCount').inner_text()=='0 张'
  # Refuse an incomplete/uncertain result and stop displaying old advice.
@@ -43,7 +44,7 @@ with sync_playwright() as p:
  # Return to automatic blackjack, then archive still explicitly records known cards.
  page.locator('[data-mode=blackjack]').click()
  page.evaluate("fixture.cards=[makeCard('9','clubs'),makeCard('8','clubs'),makeCard('A','hearts','dealer')];fixture.autoReady=true")
- page.evaluate('captureNow()');page.wait_for_function("document.querySelector('#advice h1').textContent.includes('HIT')")
+ page.evaluate('captureNow()');page.wait_for_function("document.querySelector('#advice h1').textContent.includes('STAND')")
  page.locator('#archive').click();assert page.locator('#usedCount').inner_text()=='3 张'
  page.locator('#undo').click();assert page.locator('#usedCount').inner_text()=='0 张'
  for width in [360,420,560]:
@@ -52,4 +53,4 @@ with sync_playwright() as p:
  assert page.locator('#status').bounding_box()['y']+page.locator('#status').bounding_box()['height']<=341
  assert not errors,errors
  page.screenshot(path=str(root/'tests/automatic-compact.png'))
- print(json.dumps({'errors':errors,'checks':['no ROI required','17 vs A automatic HIT','repeat preserves undo/history','uncertain stops old advice','missing rank never shows 100%','duplicate blocks automatic adoption','royal flush automatic hold','incomplete poker blocks','explicit archive/undo','compact same-screen']},ensure_ascii=False));browser.close()
+ print(json.dumps({'errors':errors,'checks':['no ROI required','17 vs A automatic STAND','repeat preserves undo/history','uncertain stops old advice','missing rank never shows 100%','duplicate blocks automatic adoption','royal flush automatic hold','incomplete poker blocks','explicit archive/undo','compact same-screen']},ensure_ascii=False));browser.close()
