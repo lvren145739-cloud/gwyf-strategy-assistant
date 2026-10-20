@@ -42,14 +42,8 @@ class WindowsCapture:
         self._enum_callback_type = ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.HWND, wintypes.LPARAM)
         self.user.EnumWindows.argtypes = [self._enum_callback_type, wintypes.LPARAM]
         self.user.EnumWindows.restype = wintypes.BOOL
-        self.user.GetWindowThreadProcessId.argtypes = [wintypes.HWND, ctypes.POINTER(wintypes.DWORD)]
-        self.user.GetWindowThreadProcessId.restype = wintypes.DWORD
-        self.user.GetThreadDesktop.argtypes = [wintypes.DWORD]
-        self.user.GetThreadDesktop.restype = wintypes.HANDLE
-        self.user.EnumDesktopWindows.argtypes = [wintypes.HANDLE, self._enum_callback_type, wintypes.LPARAM]
-        self.user.EnumDesktopWindows.restype = wintypes.BOOL
 
-    def windows(self, reference=None):
+    def windows(self):
         rows = []
         def visit(hwnd, _):
             if self.user.IsWindowVisible(hwnd):
@@ -63,16 +57,7 @@ class WindowsCapture:
             return True
         callback = self._enum_callback_type(visit)
         ctypes.set_last_error(0)
-        # RPC callbacks run in worker threads. On service/RDP hosts that thread
-        # may have a different default desktop from the visible GUI. Enumerate
-        # the GUI's actual desktop rather than silently returning an empty list.
-        desktop = None
-        if reference:
-            thread_id = self.user.GetWindowThreadProcessId(int(reference), None)
-            if thread_id:
-                desktop = self.user.GetThreadDesktop(thread_id)
-        ok = self.user.EnumDesktopWindows(desktop, callback, 0) if desktop else self.user.EnumWindows(callback, 0)
-        if not ok:
+        if not self.user.EnumWindows(callback, 0):
             raise OSError(ctypes.get_last_error(), '无法读取窗口列表，请点击刷新重试。')
         return sorted(rows, key=lambda r: ('gamble' not in r['title'].lower(), r['title']))
 
@@ -113,10 +98,7 @@ class API:
                 'modelBytes': sum(p.stat().st_size for p in (ROOT/'models').glob('*.onnx'))}
 
     def windows(self):
-        if not self.native:
-            return []
-        reference = int(self.window.native.Handle.ToInt64()) if self.window and self.window.native else None
-        return self.native.windows(reference) if reference else self.native.windows()
+        return self.native.windows() if self.native else []
 
     def select_window(self, target):
         if not target:

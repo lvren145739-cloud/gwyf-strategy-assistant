@@ -13,6 +13,15 @@ app=webview.create_window(TITLE,str(ROOT/'web/desktop.html'),js_api=DesktopBridg
 api.window=app
 fixture=webview.create_window('Gamble With Your Friends - test fixture',html='<html><body style="background:#315f42;color:white;font:40px Arial">Native capture fixture<div style="background:white;color:black">9 clubs / 8 clubs / A hearts</div></body></html>',width=640,height=450,x=20,y=30)
 
+def rpc(script):
+ # pywebview.evaluate_js returns resolved Promises ONLY via callback, not the
+ # direct return value. Inspecting that direct value tested {} instead of rows.
+ done=threading.Event();values=[]
+ def receive(value):values.append(value);done.set()
+ app.evaluate_js(script,callback=receive)
+ assert done.wait(15),'RPC timed out: '+script
+ return values[0]
+
 def test():
  try:
   assert app.events.loaded.wait(35),'WebView2 page did not load'
@@ -20,22 +29,14 @@ def test():
   names=app.evaluate_js('Object.keys(window.pywebview.api).sort()')
   assert names==sorted(['status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact']),names
   report['realWebView2Bridge']=True
-  rows=app.evaluate_js('window.pywebview.api.windows()')
-  report['enumeratedTitles']=[r['title'] for r in rows]
+  rows=rpc('window.pywebview.api.windows()')
   target_hwnd=int(fixture.native.Handle.ToInt64())
-  report['fixtureHandle']=str(target_hwnd)
-  tid=api.native.user.GetWindowThreadProcessId(target_hwnd,None)
-  report['guiDesktop']=str(api.native.user.GetThreadDesktop(tid))
-  report['rpcDesktop']=str(api.native.user.GetThreadDesktop(threading.get_native_id()))
-  report['directNativeTitles']=[r['title'] for r in api.windows()]
-  report['fixtureVisible']=bool(api.native.user.IsWindowVisible(target_hwnd))
-  n=api.native.user.GetWindowTextLengthW(target_hwnd);buf=ctypes.create_unicode_buffer(n+1);api.native.user.GetWindowTextW(target_hwnd,buf,n+1);report['fixtureNativeTitle']=buf.value
   target=next(r for r in rows if r['id']==str(target_hwnd))
   assert not any(r['title']==TITLE for r in rows)
   assert isinstance(target['id'],str)
   report['nativeEnumWindows']=True
-  assert app.evaluate_js('window.pywebview.api.select_window('+json.dumps(target['id'])+')')
-  status=app.evaluate_js('window.pywebview.api.status()');assert status['version']=='0.3.0';assert status['native']
+  assert rpc('window.pywebview.api.select_window('+json.dumps(target['id'])+')')
+  status=rpc('window.pywebview.api.status()');assert status['version']=='0.3.0';assert status['native']
   report['statusRPC']=True
   # Verify actual own-window capture only if this runner has foreground focus.
   hwnd=int(target['id']);api.native.user.SetForegroundWindow.argtypes=[wintypes.HWND]
