@@ -23,7 +23,7 @@ def main():
  folder.mkdir(parents=True,exist_ok=True);log_path=folder/'startup.log'
  logging.basicConfig(filename=log_path,level=logging.INFO,encoding='utf-8',format='%(asctime)s %(levelname)s %(message)s')
  try:
-  logging.info('Starting GWYF Vision 0.3; Python %s',sys.version.split()[0])
+  logging.info('Starting GWYF Vision 0.3.1; Python %s',sys.version.split()[0])
   if not webview2_installed():
    installer=ROOT/'runtime-support/MicrosoftEdgeWebView2RuntimeInstallerX64.exe'
    if not installer.is_file():raise RuntimeError('缺少WebView2运行时与随包安装器，请重新完整解压。')

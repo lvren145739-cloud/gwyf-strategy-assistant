@@ -6,7 +6,7 @@ with sync_playwright() as p:
  b=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
  page=b.new_page(viewport={'width':560,'height':820});errors=[]
  page.on('pageerror',lambda e:errors.append(str(e)))
- page.goto('http://127.0.0.1:8768/');page.wait_for_timeout(300)
+ page.goto('http://127.0.0.1:8769/');page.wait_for_timeout(300)
  page.locator('#manual summary').click()
  for r in ['10','6']:page.locator('[data-rank="'+r+'"]').click()
  page.locator('#role').select_option('dealer');page.locator('[data-rank="10"]').click()

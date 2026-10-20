@@ -1,0 +1,17 @@
+{
+  "errors": [],
+  "checks": [
+    "single-key and modifier recording; native pause/resume; staged until save",
+    "saved shortcuts restored after page reload",
+    "duplicate blocked; Escape restores native keys",
+    "OS conflict preserves previously active bindings",
+    "restore defaults and blur cancels recording",
+    "individual shortcut can be disabled",
+    "archive ignored while capture is busy",
+    "uncertain draft cannot archive the previous hand",
+    "archive callback counts once; undo restores hand and leaves shortcuts unchanged",
+    "custom reset shortcut; clear used cards; repeated reset preserves undo; undo preserves bindings",
+    "compact same-screen layout"
+  ],
+  "scope": "Real Chromium UI, simulated OS bridge. Actual Win32 registration and key delivery tested separately."
+}

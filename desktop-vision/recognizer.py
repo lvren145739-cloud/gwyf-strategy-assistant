@@ -77,11 +77,24 @@ def find_cards(image,region=None):
  # Limit pathological UI pages without selecting a random subset of tiny boxes.
  return sorted(sorted(found,key=lambda c:c['rect'][2]*c['rect'][3],reverse=True)[:240],key=lambda c:c['rect'][0])
 
-def normalise_glyph(image,kind='rank'):
+def normalise_glyph(image,kind='rank',clean_border=False):
  gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) if image.ndim==3 else image
  _,ink=cv2.threshold(gray,0,255,cv2.THRESH_BINARY_INV|cv2.THRESH_OTSU)
+ if clean_border:
+  h,w=gray.shape;dy,dx=max(1,h//6),max(1,w//6)
+  # Estimate ink against the paper interior, not the dark table beyond its
+  # rounded corner. Otherwise a faint red lower stroke of 4 disappears.
+  threshold,_=cv2.threshold(gray[dy:h-dy,dx:w-dx],0,255,cv2.THRESH_BINARY_INV|cv2.THRESH_OTSU)
+  ink=np.where(gray<=threshold,255,0).astype(np.uint8)
  n,labels,stats,_=cv2.connectedComponentsWithStats(ink)
  components=[(i,s) for i,s in enumerate(stats[1:],1) if s[4]>=3]
+ if clean_border:
+  # A rounded paper corner can leave a strip of dark table in the crop. It is
+  # not printed ink: discard boundary strips, keeping disconnected digits (10).
+  h,w=ink.shape
+  components=[(i,s) for i,s in components if not
+              ((s[0]==0 or s[1]==0 or s[0]+s[2]>=w or s[1]+s[3]>=h) and
+               (s[2]>.65*w and s[3]<.28*h or s[3]>.65*h and s[2]<.28*w))]
  if not components:return np.zeros((48,48),np.uint8)
  biggest=max(s[4] for _,s in components);clean=np.zeros_like(ink)
  for i,s in components:
@@ -145,7 +158,8 @@ class Recognizer:
   folder=Path(model_dir) if model_dir else ROOT/'models'
   self.glyph=DNNSession(folder/'glyph.onnx');self.card=DNNSession(folder/'card.onnx')
   self.legacy_rank=DNNSession(folder/'rank-v2.onnx');self.legacy_suit=DNNSession(folder/'suit-v2.onnx')
-  self.rank=HeadSession(self.glyph,0,15);self.suit=HeadSession(self.glyph,15,20);self.backend='OpenCV DNN / CPU · V3'
+  self.recovery_glyph=DNNSession(folder/'glyph-open.onnx');self.recovery_rank=DNNSession(folder/'rank-open.onnx')
+  self.rank=HeadSession(self.glyph,0,15);self.suit=HeadSession(self.glyph,15,20);self.backend='OpenCV DNN / CPU · V3.1'
 
  @staticmethod
  def classify(session,batch):
@@ -174,21 +188,42 @@ class Recognizer:
   for item in items:
    for k in range(4):
     card=cv2.resize(np.rot90(item['image'],k).copy(),(144,192));variants.append(card)
-    a,b=card_glyphs(card);top=normalise_glyph(card[:66,70:143],'suit');alt=normalise_glyph(card[:82,:69]);glyphs.extend([a,alt,b,top])
+    a,b=card_glyphs(card);top=normalise_glyph(card[:66,70:143],'suit');alt=normalise_glyph(card[:82,:69])
+    clean=normalise_glyph(card[:76,:65],clean_border=True);clean_alt=normalise_glyph(card[:82,:69],clean_border=True)
+    glyphs.extend([a,alt,clean,clean_alt,b,top])
   if glyphs:
    x=np.stack([cv2.resize(a,(64,64)) for a in glyphs]).astype(np.float32)[:,None]/255
    logits=self.glyph.predict(x);rp=softmax(logits[:,:15]);sp=softmax(logits[:,15:])
    oldx=np.stack(glyphs).astype(np.float32)[:,None]/255
    oldrp=softmax(self.legacy_rank.predict(oldx));oldsp=softmax(self.legacy_suit.predict(oldx))
+   # Only cleaned rank crops go through the specialist networks. Keeping the
+   # original networks as primary preserves already readable/occluded ranks.
+   recovery_indices=[j for j in range(len(glyphs)) if j%6 in (2,3)]
+   recovered=softmax(self.recovery_glyph.predict(x[recovery_indices])[:,:15])
+   recovered_small=softmax(self.recovery_rank.predict(oldx[recovery_indices]))
   results=[]
   for i,item in enumerate(items):
    scores=[];details=[]
    for k in range(4):
-    j=(i*4+k)*4
+    j=(i*4+k)*6
     ri,rankscore,rankp,strong=consensus([rp[j],rp[j+1],oldrp[j],oldrp[j+1]])
+    fallback=consensus([rp[j+2],rp[j+3],oldrp[j+2],oldrp[j+3]])
+    # Border cleanup is a second reading, not a lower confidence threshold.
+    # It may recover a rejected crop; a confidently read original keeps priority.
+    rank_margin=float(np.sort(rankp)[-1]-np.sort(rankp)[-2])
+    fallback_margin=float(np.sort(fallback[2])[-1]-np.sort(fallback[2])[-2])
+    if (ri>=13 or rankscore<.94 or strong<2 or rank_margin<.30) and fallback[0]<13 and fallback[1]>=.94 and fallback[3]>=2 and fallback_margin>=.30:
+     ri,rankscore,rankp,strong=fallback
+    rank_margin=float(np.sort(rankp)[-1]-np.sort(rankp)[-2])
+    if ri>=13 or rankscore<.94 or strong<2 or rank_margin<.30:
+     q=(i*4+k)*2
+     expert=consensus([recovered[q],recovered[q+1],recovered_small[q],recovered_small[q+1]])
+     expert_margin=float(np.sort(expert[2])[-1]-np.sort(expert[2])[-2])
+     if expert[0]<13 and expert[1]>=.97 and expert[3]>=3 and expert_margin>.40:
+      ri,rankscore,rankp,strong=expert
     card=variants[i*4+k];large_color=ink_color(card[74:189,40:143]);small_color=ink_color(card[:66,70:143]);color=large_color if large_color==small_color or small_color is None else small_color if large_color is None else None
     allowed=[1,2] if color=='red' else [0,3] if color=='black' else None
-    si,suit_score,suitp,suit_strong=consensus([sp[j+2],sp[j+3],oldsp[j+2],oldsp[j+3]],allowed)
+    si,suit_score,suitp,suit_strong=consensus([sp[j+4],sp[j+5],oldsp[j+4],oldsp[j+5]],allowed)
     # A single crop cannot promote a different suit over two mutually supported
     # positions; ink colour also rules out red/black suit contradictions.
     disagreement=large_color is not None and small_color is not None and large_color!=small_color
@@ -209,7 +244,9 @@ class Recognizer:
     if len(scores)>1 and sorted(scores,reverse=True)[0]-sorted(scores,reverse=True)[1]<.10:issues.append('牌面方向不够确定')
    if back:rank=None;suit=None
    if item['clipped']:rank=None;issues.append('牌面超出截图边缘')
-   margin=float(np.sort(rankp)[-1]-np.sort(rankp)[-2]);review=bool(issues or not back and (rankscore<.94 or suit_score<.92 or item['cardScore']<.94 or margin<.30))
+   margin=float(np.sort(rankp)[-1]-np.sort(rankp)[-2])
+   if not back and margin<.30:issues.append('点数模型意见仍有分歧')
+   review=bool(issues or not back and (rankscore<.94 or suit_score<.92 or item['cardScore']<.94 or margin<.30))
    if not back and ri>=13 and rankscore>.97:
     rejected+=1;continue
    if not back and item['cardScore']<.80 and (rank is None or suit is None or rankscore<.94 or suit_score<.92):

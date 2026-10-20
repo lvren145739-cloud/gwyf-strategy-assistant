@@ -4,8 +4,10 @@ let state=V.blank(),draft=[],frame=null,frameImage=null,selectRegion=null,drag=n
 const glyph={spades:'♠',hearts:'♥',diamonds:'♦',clubs:'♣'};
 const api=()=>window.pywebview?.api;
 const nativeRequired=!!document.querySelector('meta[name="gwyf-desktop"]');
-const bridgeMethods=['status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact'];
+const bridgeMethods=['status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact','hotkeys'];
 let nativeReady=false,nativeConnecting=null,stateRevision=0;
+const shortcutNames={capture:'识牌计算',archive:'归档本手',accept:'采用草稿',reset:'重置已用牌'};
+let shortcutConfig={...VisionHotkeys.defaults},shortcutDraft={...shortcutConfig},recordingAction=null,shortcutPending=false;
 function bridgeComplete(){return bridgeMethods.every(name=>typeof api()?.[name]==='function');}
 function desktopCall(name,...args){
  const bridge=api();
@@ -56,7 +58,7 @@ function render(){
 }
 function calculate(){
  stopSolver();const h=state[state.mode],id=job;
- if(!h.player.length){advice('等待识牌','选择游戏窗口，按 Ctrl+Shift+Space 自动识牌并计算。',false,'本地运行 · 按需截图');return;}
+ if(!h.player.length){advice('等待识牌',`选择游戏窗口，${shortcutConfig.capture?'按 '+shortcutConfig.capture:'点击识牌计算'} 自动识牌并计算。`,false,'本地运行 · 按需截图');return;}
  if(h.player.some(c=>!c)){advice('等待补牌','已丢弃的牌已计入历史；补全新牌后重新计算。',true);return;}
  const b=E.buffs(state.owned,state.settings,state.team);let payload;
  try{
@@ -103,11 +105,23 @@ $('#draft').addEventListener('change',event=>{const row=event.target.closest('[d
 $('#draft').addEventListener('click',event=>{if(event.target.dataset.remove!=null){draft.splice(+event.target.dataset.remove,1);renderDraft();}});
 $('#apply').onclick=()=>mutate(()=>V.commit(state,draft),'已采用本次牌面。截图没有增加历史计数。');
 $('#applyTop').onclick=()=>$('#apply').click();
-window.acceptDraft=()=>{if(!busy&&!$('#draftPanel').hidden&&!$('#apply').disabled)$('#apply').click();};
+window.acceptDraft=()=>{if(!busy&&!recordingAction&&!shortcutPending&&!$('#draftPanel').hidden&&!$('#apply').disabled)$('#apply').click();};
 $('#cancelDraft').onclick=()=>{draft=[];$('#draftPanel').hidden=true;render();calculate();message('已放弃草稿，保留原手牌和历史。');};
-$('#archive').onclick=()=>mutate(()=>V.archive(state),'已归档当前可见手牌；未看见的底牌不会凭空记入。');
+function archiveCurrent(){
+ if(busy||recordingAction||shortcutPending)return;
+ if(!$('#draftPanel').hidden){message('请先核对并采用草稿，再归档本手。',true);return;}
+ if($('#archive').disabled)return;
+ mutate(()=>V.archive(state),'已归档当前可见手牌；未看见的底牌不会凭空记入。');
+}
+window.archiveCurrent=archiveCurrent;$('#archive').onclick=archiveCurrent;
 $('#undo').onclick=()=>mutate(()=>{if(!state.undo)throw Error('没有可撤销的操作。');return V.clone(state.undo.snapshot);},'已撤销上次操作。');
-$('#resetDeck').onclick=()=>mutate(()=>V.resetDeck(state),'已清空当前手牌和已用牌，可撤销。仅在游戏实际洗牌后使用。');
+function resetUsedCards(){
+ if(busy||recordingAction||shortcutPending)return;
+ const h=state[state.mode],used=state.mode==='blackjack'?h.used.reduce((a,b)=>a+b,0):h.used.length;
+ if(!used&&!h.player.length&&!(h.dealer||[]).length){message('牌堆已是初始状态，无需再次重置。');return;}
+ mutate(()=>V.resetDeck(state),'已清空当前手牌和已用牌，可撤销。仅在游戏实际洗牌后使用。');
+}
+window.resetUsedCards=resetUsedCards;$('#resetDeck').onclick=resetUsedCards;
 $('#used').addEventListener('click',event=>addUsed(event,1));$('#used').addEventListener('contextmenu',event=>{if(event.target.dataset.addUsed!=null){event.preventDefault();addUsed(event,-1);}});
 function addUsed(event,delta){const v=event.target.dataset.addUsed;if(v==null)return;mutate(()=>{const s=V.clone(state);s.blackjack.used[+v]+=delta;V.assertDeck(s);s.undo={label:'历史补记',snapshot:V.clone({...state,undo:null})};return s;},'已更新已用牌，建议已重算。');}
 $$('[data-mode]').forEach(button=>button.onclick=()=>{if(busy)return;state.mode=button.dataset.mode;draft=[];$('#draftPanel').hidden=true;save();render();calculate();});
@@ -169,7 +183,7 @@ async function recognize(){
  advice('本次识别需要核对',checked.reasons.slice(0,2).join('；')||'核对草稿后点击采用；本次未写入手牌或历史。',true,'自动计算已暂停 · 原手牌保留');
 }
 async function captureNow(){
- if(busy)return;busy=true;$('#capture').disabled=true;
+ if(busy||recordingAction||shortcutPending)return;busy=true;$('#capture').disabled=true;
  // Stop a prior poker enumeration so its late result cannot replace the draft warning.
  stopSolver();
  draft=[];detections=[];$('#draftPanel').hidden=true;
@@ -206,6 +220,84 @@ function showNativeStatus(out){
  $('#nativeBadge').textContent=`桌面已连接 · ${out.version||'本地模型'} · ${out.modelBytes>1048576?(out.modelBytes/1048576).toFixed(1)+' MB':(out.modelBytes/1024).toFixed(0)+' KB'}`;
  $('#hotkey').textContent=out.hotkey+(out.python?' · Python '+out.python:'');
 }
+function shortcutMessage(text,error=false){$('#shortcutStatus').textContent=text;$('#shortcutStatus').classList.toggle('error',error);}
+function renderShortcuts(){
+ $('#shortcutRows').innerHTML=Object.keys(shortcutNames).map(a=>`<div class="shortcut-row"><span>${shortcutNames[a]}</span><button class="binding ${recordingAction===a?'recording':''}" data-record-shortcut="${a}" ${shortcutPending?'disabled':''} aria-label="设置${shortcutNames[a]}快捷键">${recordingAction===a?'请按新快捷键…':esc(shortcutDraft[a]||'已停用')}</button><button data-disable-shortcut="${a}" ${shortcutPending?'disabled':''}>停用</button></div>`).join('');
+ $('#saveShortcuts').disabled=shortcutPending;$('#resetShortcuts').disabled=shortcutPending;
+ for(const el of $$('[data-shortcut-label]'))el.textContent=shortcutConfig[el.dataset.shortcutLabel]||'';
+ $('#capture').title='识牌计算'+(shortcutConfig.capture?' · '+shortcutConfig.capture:'');
+ $('#archive').title='归档本手'+(shortcutConfig.archive?' · '+shortcutConfig.archive:'');
+}
+async function endShortcutRecording(){
+ if(!recordingAction)return;
+ recordingAction=null;shortcutPending=true;renderShortcuts();
+ try{if(nativeReady)await withTimeout(desktopCall('hotkeys',{op:'resume'}),6000,'恢复快捷键超时，请点击保存重试。');}
+ catch(e){shortcutMessage(e.message,true);}
+ finally{shortcutPending=false;renderShortcuts();}
+}
+async function beginShortcutRecording(action){
+ if(shortcutPending)return;
+ await endShortcutRecording();shortcutPending=true;renderShortcuts();
+ try{
+  if(nativeReady)await withTimeout(desktopCall('hotkeys',{op:'pause'}),6000,'暂停快捷键超时，请重试。');
+  if(!document.hasFocus()){if(nativeReady)await desktopCall('hotkeys',{op:'resume'});return;}
+  recordingAction=action;shortcutMessage('正在设置'+shortcutNames[action]+'：按下新快捷键，Esc 取消。');
+ }catch(e){shortcutMessage(e.message,true);}
+ finally{shortcutPending=false;renderShortcuts();}
+}
+$('#shortcutRows').onclick=async event=>{
+ const record=event.target.dataset.recordShortcut,disable=event.target.dataset.disableShortcut;
+ if(record)beginShortcutRecording(record);
+ if(disable&&!shortcutPending){await endShortcutRecording();shortcutDraft[disable]='';renderShortcuts();shortcutMessage('已停用'+shortcutNames[disable]+'，点击保存生效。');}
+};
+document.addEventListener('keydown',async event=>{
+ if(recordingAction){
+  event.preventDefault();event.stopPropagation();if(event.repeat)return;
+  if(event.key==='Escape'){await endShortcutRecording();shortcutMessage('已取消录入，原设置仍然有效。');return;}
+  try{
+   const value=VisionHotkeys.fromEvent(event);if(!value)return;
+   const action=recordingAction;shortcutDraft=VisionHotkeys.normalise({...shortcutDraft,[action]:value});
+   await endShortcutRecording();shortcutMessage('已录入 '+value+'，点击“保存并生效”。');
+  }catch(e){shortcutMessage(e.message,true);}
+  return;
+ }
+ // Native global shortcuts already dispatch via WM_HOTKEY. Never run them twice.
+ // In a browser preview, adopted/manual hands can still be archived in-page.
+ if(nativeReady||shortcutPending||event.repeat||/INPUT|SELECT|TEXTAREA/.test(event.target.tagName)||event.target.isContentEditable)return;
+ let value;try{value=VisionHotkeys.fromEvent(event);}catch(_){return;}
+ const action=Object.keys(shortcutConfig).find(a=>shortcutConfig[a]&&shortcutConfig[a]===value);
+ if(action){event.preventDefault();({capture:captureNow,archive:archiveCurrent,accept:window.acceptDraft,reset:resetUsedCards})[action]();}
+},true);
+window.addEventListener('blur',()=>{if(recordingAction)endShortcutRecording();});
+$('#shortcuts').addEventListener('toggle',()=>{if(!$('#shortcuts').open&&recordingAction)endShortcutRecording();});
+$('#saveShortcuts').onclick=async()=>{
+ if(shortcutPending)return;
+ await endShortcutRecording();shortcutPending=true;renderShortcuts();
+ try{
+  const candidate=VisionHotkeys.normalise(shortcutDraft);
+  if(nativeReady){
+   const out=await withTimeout(desktopCall('hotkeys',{op:'set',config:candidate}),6000,'保存快捷键超时，请重试。');
+   shortcutConfig=VisionHotkeys.normalise(out.config);
+  }else shortcutConfig=candidate;
+  try{localStorage.setItem('gwyf-vision-hotkeys',JSON.stringify(shortcutConfig));}catch(_){}
+  shortcutDraft={...shortcutConfig};shortcutMessage(nativeReady?'已保存并立即生效；下次启动自动恢复。':'已保存浏览器预览按键；游戏全局快捷键需要桌面版。');
+  if(nativeReady)showNativeStatus(await desktopCall('status'));
+  if(!state[state.mode].player.length&&$('#draftPanel').hidden)calculate();
+ }catch(e){shortcutMessage(e.message,true);}
+ finally{shortcutPending=false;renderShortcuts();}
+};
+$('#resetShortcuts').onclick=async()=>{if(shortcutPending)return;await endShortcutRecording();shortcutDraft={...VisionHotkeys.defaults};renderShortcuts();shortcutMessage('默认 F8 识牌、F9 归档、F10 采用、F11 重置，点击保存生效。');};
+$('#hotkeySettings').onclick=()=>{
+ if(compact){compact=false;document.body.classList.remove('compact');$('#compact').textContent='收起';if(nativeReady)desktopCall('compact',false).catch(e=>message(e.message,true));}
+ $('#shortcuts').open=true;$('#shortcuts').scrollIntoView({block:'start'});
+};
+async function loadShortcuts(){
+ try{
+  const out=await withTimeout(desktopCall('hotkeys',{op:'resume'}),6000,'读取快捷键超时');
+  shortcutConfig=VisionHotkeys.normalise(out.config);shortcutDraft={...shortcutConfig};renderShortcuts();
+  const errors=Object.values(out.errors||{});shortcutMessage(errors.length?errors.join('；'):'点击按键即可修改，保存后立即生效。',!!errors.length);
+ }catch(e){shortcutMessage(e.message,true);}
+}
 async function connectDesktop(manual=false){
  if(nativeReady)return true;
  if(nativeConnecting)return nativeConnecting;
@@ -221,7 +313,7 @@ async function connectDesktop(manual=false){
    let stateWarning='';
    try{const raw=await withTimeout(desktopCall('load_state'),2500,'读取本机存档超时');if(raw&&revision===stateRevision){state=V.restore(raw);showState();}}
    catch(e){stateWarning='本机存档未读取：'+e.message;}
-   nativeReady=true;showNativeStatus(out);
+   nativeReady=true;showNativeStatus(out);await loadShortcuts();
    await refreshWindows();
    message(stateWarning||'桌面已连接。'+$('#windowStatus').textContent,!!stateWarning);
    setTimeout(async()=>{try{showNativeStatus(await withTimeout(desktopCall('status'),3000,'桌面状态查询超时'));}catch(e){message(e.message,true);}},700);
@@ -235,6 +327,8 @@ async function connectDesktop(manual=false){
 }
 // Readiness can arrive before or after this script; an empty api object is not ready.
 try{const raw=JSON.parse(localStorage.getItem('gwyf-vision-v1')||'null');if(raw)state=V.restore(raw);}catch(e){message('浏览器存档无效，已使用空白状态。',true);}
+try{const raw=JSON.parse(localStorage.getItem('gwyf-vision-hotkeys')||'null');if(raw)shortcutConfig=VisionHotkeys.normalise(raw);}catch(_){}
+shortcutDraft={...shortcutConfig};renderShortcuts();
 showState();
 window.addEventListener('pywebviewready',()=>connectDesktop());
 if(nativeRequired||api())connectDesktop();

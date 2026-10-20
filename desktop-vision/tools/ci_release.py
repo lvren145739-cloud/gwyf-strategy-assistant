@@ -16,7 +16,7 @@ wheels=BUILD/'wheels'
 subprocess.run([sys.executable,'-m','pip','wheel','--wheel-dir',str(wheels),'--requirement',str(ROOT/'tests/windows-locks/python314.txt')],check=True)
 for script in ['build_preview.py','build_portable.py','build_package.py']:
  subprocess.run([sys.executable,str(ROOT/'tools'/script)],check=True)
-files=[ROOT.parent/'GWYF-Vision-0.3.0-Windows-免装Python.zip',ROOT.parent/'GWYF-Vision-0.3.0.zip']
-checksums=ROOT.parent/'GWYF-Vision-0.3.0-SHA256SUMS.txt'
+files=[ROOT.parent/'GWYF-Vision-0.3.1-Windows-Portable.zip',ROOT.parent/'GWYF-Vision-0.3.1.zip']
+checksums=ROOT.parent/'GWYF-Vision-0.3.1-SHA256SUMS.txt'
 checksums.write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in files),encoding='utf-8')
-subprocess.run(['gh','release','create','vision-v0.3.0',*[str(p) for p in files],str(checksums),'--target','desktop-vision-v0.3','--prerelease','--title','GWYF Vision 0.3.0 - Windows portable and automatic decisions','--notes-file',str(ROOT/'RELEASE.md')],check=True)
+subprocess.run(['gh','release','create','vision-v0.3.1',*[str(p) for p in files],str(checksums),'--target','desktop-vision-v0.3','--prerelease','--title','GWYF Vision 0.3.1 - Windows portable and automatic decisions','--notes-file',str(ROOT/'RELEASE.md')],check=True)

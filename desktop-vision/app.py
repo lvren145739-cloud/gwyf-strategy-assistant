@@ -11,7 +11,7 @@ import time
 
 ROOT = Path(__file__).resolve().parent
 TITLE = 'GWYF · 识牌实验版'
-VERSION = '0.3.0'
+VERSION = '0.3.1'
 
 
 def app_folder():
@@ -89,13 +89,33 @@ class API:
         self.model = None
         self.lock = threading.Lock()
         self.hotkey_status = '等待注册快捷键'
+        self.hotkey_manager = None
         self.target = None
         self.exclude_overlay = False
 
     def status(self):
-        return {'version': VERSION, 'bridgeVersion': 1,
-                'native': self.native is not None, 'hotkey': self.hotkey_status, 'python': sys.version.split()[0], 'backend': 'OpenCV DNN CPU',
+        return {'version': VERSION, 'bridgeVersion': 2,
+                'native': self.native is not None, 'hotkey': self.hotkey_manager.summary() if self.hotkey_manager else self.hotkey_status, 'python': sys.version.split()[0], 'backend': 'OpenCV DNN CPU',
                 'modelBytes': sum(p.stat().st_size for p in (ROOT/'models').glob('*.onnx'))}
+
+    def hotkeys(self, request):
+        from hotkeys import DEFAULTS
+        if not isinstance(request, dict):
+            raise ValueError('快捷键设置无效。')
+        if self.hotkey_manager:
+            return self.hotkey_manager.request(request)
+        if request.get('op', 'get') == 'get':
+            return {'config': dict(DEFAULTS), 'defaults': dict(DEFAULTS), 'registered': {},
+                    'errors': {}, 'paused': False, 'available': False}
+        raise ValueError('自定义全局快捷键需要 Windows 桌面版。')
+
+    def _hotkey_active(self):
+        try:
+            overlay = int(self.window.native.Handle.ToInt64())
+            foreground = self.native.user.GetAncestor(self.native.user.GetForegroundWindow(), 2)
+            return foreground == overlay or bool(self.target and foreground == int(self.target))
+        except Exception:
+            return False
 
     def windows(self):
         return self.native.windows() if self.native else []
@@ -234,6 +254,9 @@ class DesktopBridge:
     def compact(self, enabled):
         return self._controller.compact(enabled)
 
+    def hotkeys(self, request):
+        return self._controller.hotkeys(request)
+
 
 def main():
     import webview
@@ -246,37 +269,14 @@ def main():
     api.window = webview.create_window(TITLE, str(ROOT/'web/desktop.html'), js_api=DesktopBridge(api),
                                       width=560, height=820, min_size=(360, 260),
                                       on_top=True, background_color='#10191b', text_select=True)
-    stop = threading.Event()
-    thread_info = {}
+    if api.native:
+        from hotkeys import HotkeyManager
 
-    def register_hotkey():
-        if not api.native:
-            api.hotkey_status = '当前平台：仅图片测试'
-            return
-        user = api.native.user
-        kernel = ctypes.WinDLL('kernel32', use_last_error=True)
-        thread_info['id'] = kernel.GetCurrentThreadId()
-        message = wintypes.MSG()
-        # Force message queue creation before the main window may post WM_QUIT.
-        user.PeekMessageW(ctypes.byref(message), None, 0, 0, 0)
-        if not user.RegisterHotKey(None, 1, 0x4006, 0x20):
-            api.hotkey_status = 'Ctrl+Shift+Space 被占用；可用“截一帧”按钮'
-            return
-        registered = [1]
-        if user.RegisterHotKey(None, 2, 0x4006, 0x0D):
-            registered.append(2)
-        api.hotkey_status = 'Ctrl+Shift+Space 截图' + (' · Ctrl+Shift+Enter 采用牌面' if 2 in registered else ' · 采用快捷键被占用')
-        try:
-            while not stop.is_set() and user.GetMessageW(ctypes.byref(message), None, 0, 0) > 0:
-                if message.message == 0x0312:
-                    try:
-                        action = 'captureNow' if message.wParam == 1 else 'acceptDraft'
-                        api.window.evaluate_js('window.' + action + ' && window.' + action + '()')
-                    except Exception:
-                        pass
-        finally:
-            for hotkey_id in registered:
-                user.UnregisterHotKey(None, hotkey_id)
+        def dispatch(action):
+            name = {'capture': 'captureNow', 'archive': 'archiveCurrent', 'accept': 'acceptDraft', 'reset': 'resetUsedCards'}[action]
+            api.window.evaluate_js('window.'+name+' && window.'+name+'()')
+
+        api.hotkey_manager = HotkeyManager(api.native.user, dispatch, app_folder()/'hotkeys.json', api._hotkey_active)
 
     def loaded():
         if api.native:
@@ -286,15 +286,17 @@ def main():
                 api.exclude_overlay = bool(api.native.user.SetWindowDisplayAffinity(hwnd, 0x11))
             except Exception:
                 pass
-        threading.Thread(target=register_hotkey, daemon=True).start()
+        if api.hotkey_manager:
+            api.hotkey_manager.start()
+        else:
+            api.hotkey_status = '当前平台：仅图片测试'
 
     api.window.events.loaded += loaded
     try:
         webview.start(gui=gui, private_mode=True, http_server=True)
     finally:
-        stop.set()
-        if api.native and thread_info.get('id'):
-            api.native.user.PostThreadMessageW(thread_info['id'], 0x0012, 0, 0)
+        if api.hotkey_manager:
+            api.hotkey_manager.close()
 
 
 if __name__ == '__main__':

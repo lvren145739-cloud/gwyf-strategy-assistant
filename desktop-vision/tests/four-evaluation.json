@@ -1,0 +1,1946 @@
+{
+  "scope": "Selected synthetic open-4 layouts, not user attachment or independent accuracy tests. Original real 4 source was used for refinement.",
+  "cases": [
+    {
+      "name": "four-spades-0",
+      "expected": [
+        [
+          "dealer",
+          "4",
+          "spades"
+        ],
+        [
+          "player",
+          "2",
+          "clubs"
+        ],
+        [
+          "player",
+          "3",
+          "hearts"
+        ]
+      ],
+      "scope": "Synthetic scene from a reviewed gameplay glyph; not original attachment pixels.",
+      "v030": {
+        "exact": false,
+        "predicted": [
+          [
+            "dealer",
+            null,
+            "spades"
+          ],
+          [
+            "player",
+            "2",
+            "clubs"
+          ],
+          [
+            "player",
+            "3",
+            "hearts"
+          ]
+        ],
+        "autoReady": false,
+        "cards": [
+          {
+            "rect": [
+              512,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9951117634773254,
+            "rank": "2",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.99,
+            "suitScore": 0.9974,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              692,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.9969859719276428,
+            "rank": null,
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.3836,
+            "suitScore": 0.9984,
+            "rotation": 0,
+            "review": true,
+            "issues": [
+              "点数不够清晰",
+              "两次字形读取不一致",
+              "牌面方向不够确定"
+            ],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              863,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9961209893226624,
+            "rank": "3",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.995,
+            "suitScore": 0.9968,
+            "rotation": 0,
+            "review": true,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              971,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.002613934688270092,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.994,
+            "suitScore": 0.9983,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      },
+      "v031": {
+        "exact": true,
+        "predicted": [
+          [
+            "dealer",
+            "4",
+            "spades"
+          ],
+          [
+            "player",
+            "2",
+            "clubs"
+          ],
+          [
+            "player",
+            "3",
+            "hearts"
+          ]
+        ],
+        "autoReady": true,
+        "cards": [
+          {
+            "rect": [
+              512,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9951117634773254,
+            "rank": "2",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.99,
+            "suitScore": 0.9974,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              692,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.9969859719276428,
+            "rank": "4",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.9999,
+            "suitScore": 0.9984,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              863,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9961209893226624,
+            "rank": "3",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.998,
+            "suitScore": 0.9968,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              971,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.002613934688270092,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.994,
+            "suitScore": 0.9983,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "four-spades--20",
+      "expected": [
+        [
+          "dealer",
+          "4",
+          "spades"
+        ],
+        [
+          "player",
+          "2",
+          "clubs"
+        ],
+        [
+          "player",
+          "3",
+          "hearts"
+        ]
+      ],
+      "scope": "Synthetic scene from a reviewed gameplay glyph; not original attachment pixels.",
+      "v030": {
+        "exact": false,
+        "predicted": [
+          [
+            "dealer",
+            null,
+            "spades"
+          ],
+          [
+            "player",
+            "2",
+            "clubs"
+          ],
+          [
+            "player",
+            "3",
+            "hearts"
+          ]
+        ],
+        "autoReady": false,
+        "cards": [
+          {
+            "rect": [
+              422,
+              540,
+              266,
+              288
+            ],
+            "cardScore": 0.9954681396484375,
+            "rank": "2",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9902,
+            "suitScore": 0.9979,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              730,
+              325,
+              184,
+              163
+            ],
+            "cardScore": 0.9969125986099243,
+            "rank": null,
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.5162,
+            "suitScore": 0.998,
+            "rotation": 0,
+            "review": true,
+            "issues": [
+              "点数不够清晰",
+              "两次字形读取不一致",
+              "牌面方向不够确定"
+            ],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              752,
+              660,
+              266,
+              288
+            ],
+            "cardScore": 0.9965028762817383,
+            "rank": "3",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.9941,
+            "suitScore": 0.9961,
+            "rotation": 0,
+            "review": true,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              992,
+              420,
+              184,
+              163
+            ],
+            "cardScore": 0.0022770902141928673,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.997,
+            "suitScore": 0.9985,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      },
+      "v031": {
+        "exact": true,
+        "predicted": [
+          [
+            "dealer",
+            "4",
+            "spades"
+          ],
+          [
+            "player",
+            "2",
+            "clubs"
+          ],
+          [
+            "player",
+            "3",
+            "hearts"
+          ]
+        ],
+        "autoReady": true,
+        "cards": [
+          {
+            "rect": [
+              422,
+              540,
+              266,
+              288
+            ],
+            "cardScore": 0.9954681396484375,
+            "rank": "2",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9902,
+            "suitScore": 0.9979,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              730,
+              325,
+              184,
+              163
+            ],
+            "cardScore": 0.9969125986099243,
+            "rank": "4",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.9998,
+            "suitScore": 0.998,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              752,
+              660,
+              266,
+              288
+            ],
+            "cardScore": 0.9965028762817383,
+            "rank": "3",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.9972,
+            "suitScore": 0.9961,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              992,
+              420,
+              184,
+              163
+            ],
+            "cardScore": 0.0022770902141928673,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.997,
+            "suitScore": 0.9985,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "four-spades-20",
+      "expected": [
+        [
+          "dealer",
+          "4",
+          "spades"
+        ],
+        [
+          "player",
+          "2",
+          "clubs"
+        ],
+        [
+          "player",
+          "3",
+          "hearts"
+        ]
+      ],
+      "scope": "Synthetic scene from a reviewed gameplay glyph; not original attachment pixels.",
+      "v030": {
+        "exact": false,
+        "predicted": [
+          [
+            "dealer",
+            null,
+            "spades"
+          ],
+          [
+            "player",
+            "2",
+            "clubs"
+          ],
+          [
+            "player",
+            "3",
+            "hearts"
+          ]
+        ],
+        "autoReady": false,
+        "cards": [
+          {
+            "rect": [
+              591,
+              657,
+              267,
+              288
+            ],
+            "cardScore": 0.9952849745750427,
+            "rank": "2",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9895,
+            "suitScore": 0.9972,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              645,
+              340,
+              184,
+              163
+            ],
+            "cardScore": 0.9972201585769653,
+            "rank": null,
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.5486,
+            "suitScore": 0.9984,
+            "rotation": 0,
+            "review": true,
+            "issues": [
+              "点数不够清晰",
+              "两次字形读取不一致",
+              "牌面方向不够确定"
+            ],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              907,
+              245,
+              184,
+              163
+            ],
+            "cardScore": 0.003156606573611498,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.9964,
+            "suitScore": 0.9982,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              921,
+              537,
+              266,
+              288
+            ],
+            "cardScore": 0.9962499737739563,
+            "rank": "3",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.9952,
+            "suitScore": 0.9967,
+            "rotation": 0,
+            "review": true,
+            "issues": [],
+            "role": "player"
+          }
+        ]
+      },
+      "v031": {
+        "exact": true,
+        "predicted": [
+          [
+            "dealer",
+            "4",
+            "spades"
+          ],
+          [
+            "player",
+            "2",
+            "clubs"
+          ],
+          [
+            "player",
+            "3",
+            "hearts"
+          ]
+        ],
+        "autoReady": true,
+        "cards": [
+          {
+            "rect": [
+              591,
+              657,
+              267,
+              288
+            ],
+            "cardScore": 0.9952849745750427,
+            "rank": "2",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9895,
+            "suitScore": 0.9972,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              645,
+              340,
+              184,
+              163
+            ],
+            "cardScore": 0.9972201585769653,
+            "rank": "4",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.9997,
+            "suitScore": 0.9984,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              907,
+              245,
+              184,
+              163
+            ],
+            "cardScore": 0.003156606573611498,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.9964,
+            "suitScore": 0.9982,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              921,
+              537,
+              266,
+              288
+            ],
+            "cardScore": 0.9962499737739563,
+            "rank": "3",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.9977,
+            "suitScore": 0.9967,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          }
+        ]
+      }
+    },
+    {
+      "name": "four-hearts-0",
+      "expected": [
+        [
+          "dealer",
+          "4",
+          "hearts"
+        ],
+        [
+          "player",
+          "10",
+          "diamonds"
+        ],
+        [
+          "player",
+          "7",
+          "spades"
+        ]
+      ],
+      "scope": "Synthetic scene from a reviewed gameplay glyph; not original attachment pixels.",
+      "v030": {
+        "exact": false,
+        "predicted": [
+          [
+            "dealer",
+            null,
+            "hearts"
+          ],
+          [
+            "player",
+            "10",
+            "diamonds"
+          ],
+          [
+            "player",
+            "7",
+            "spades"
+          ]
+        ],
+        "autoReady": false,
+        "cards": [
+          {
+            "rect": [
+              512,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9974449872970581,
+            "rank": "7",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.9933,
+            "suitScore": 0.9984,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              692,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.996650755405426,
+            "rank": null,
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.3812,
+            "suitScore": 0.997,
+            "rotation": 0,
+            "review": true,
+            "issues": [
+              "点数不够清晰",
+              "两次字形读取不一致",
+              "牌面方向不够确定"
+            ],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              863,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9942386150360107,
+            "rank": "10",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 0.9912,
+            "suitScore": 0.9962,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              971,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.002613934688270092,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.994,
+            "suitScore": 0.9983,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      },
+      "v031": {
+        "exact": true,
+        "predicted": [
+          [
+            "dealer",
+            "4",
+            "hearts"
+          ],
+          [
+            "player",
+            "10",
+            "diamonds"
+          ],
+          [
+            "player",
+            "7",
+            "spades"
+          ]
+        ],
+        "autoReady": true,
+        "cards": [
+          {
+            "rect": [
+              512,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9974449872970581,
+            "rank": "7",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.9933,
+            "suitScore": 0.9984,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              692,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.996650755405426,
+            "rank": "4",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.9999,
+            "suitScore": 0.997,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              863,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9942386150360107,
+            "rank": "10",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 0.9912,
+            "suitScore": 0.9962,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              971,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.002613934688270092,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.994,
+            "suitScore": 0.9983,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "four-hearts--20",
+      "expected": [
+        [
+          "dealer",
+          "4",
+          "hearts"
+        ],
+        [
+          "player",
+          "10",
+          "diamonds"
+        ],
+        [
+          "player",
+          "7",
+          "spades"
+        ]
+      ],
+      "scope": "Synthetic scene from a reviewed gameplay glyph; not original attachment pixels.",
+      "v030": {
+        "exact": false,
+        "predicted": [
+          [
+            "dealer",
+            null,
+            "hearts"
+          ],
+          [
+            "player",
+            "10",
+            "diamonds"
+          ],
+          [
+            "player",
+            "7",
+            "spades"
+          ]
+        ],
+        "autoReady": false,
+        "cards": [
+          {
+            "rect": [
+              422,
+              540,
+              266,
+              288
+            ],
+            "cardScore": 0.9976696372032166,
+            "rank": "7",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.994,
+            "suitScore": 0.9985,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              730,
+              325,
+              184,
+              163
+            ],
+            "cardScore": 0.9965831637382507,
+            "rank": null,
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.5162,
+            "suitScore": 0.9966,
+            "rotation": 0,
+            "review": true,
+            "issues": [
+              "点数不够清晰",
+              "两次字形读取不一致",
+              "牌面方向不够确定"
+            ],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              752,
+              660,
+              266,
+              288
+            ],
+            "cardScore": 0.9945386052131653,
+            "rank": "10",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 0.9863,
+            "suitScore": 0.9957,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              992,
+              420,
+              184,
+              163
+            ],
+            "cardScore": 0.0022770902141928673,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.997,
+            "suitScore": 0.9985,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      },
+      "v031": {
+        "exact": true,
+        "predicted": [
+          [
+            "dealer",
+            "4",
+            "hearts"
+          ],
+          [
+            "player",
+            "10",
+            "diamonds"
+          ],
+          [
+            "player",
+            "7",
+            "spades"
+          ]
+        ],
+        "autoReady": true,
+        "cards": [
+          {
+            "rect": [
+              422,
+              540,
+              266,
+              288
+            ],
+            "cardScore": 0.9976696372032166,
+            "rank": "7",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.994,
+            "suitScore": 0.9985,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              730,
+              325,
+              184,
+              163
+            ],
+            "cardScore": 0.9965831637382507,
+            "rank": "4",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.9998,
+            "suitScore": 0.9966,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              752,
+              660,
+              266,
+              288
+            ],
+            "cardScore": 0.9945386052131653,
+            "rank": "10",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 0.9863,
+            "suitScore": 0.9957,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              992,
+              420,
+              184,
+              163
+            ],
+            "cardScore": 0.0022770902141928673,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.997,
+            "suitScore": 0.9985,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "four-hearts-20",
+      "expected": [
+        [
+          "dealer",
+          "4",
+          "hearts"
+        ],
+        [
+          "player",
+          "10",
+          "diamonds"
+        ],
+        [
+          "player",
+          "7",
+          "spades"
+        ]
+      ],
+      "scope": "Synthetic scene from a reviewed gameplay glyph; not original attachment pixels.",
+      "v030": {
+        "exact": false,
+        "predicted": [
+          [
+            "dealer",
+            null,
+            "hearts"
+          ],
+          [
+            "player",
+            "10",
+            "diamonds"
+          ],
+          [
+            "player",
+            "7",
+            "spades"
+          ]
+        ],
+        "autoReady": false,
+        "cards": [
+          {
+            "rect": [
+              591,
+              657,
+              267,
+              288
+            ],
+            "cardScore": 0.9976542592048645,
+            "rank": "7",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.9935,
+            "suitScore": 0.9983,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              645,
+              340,
+              184,
+              163
+            ],
+            "cardScore": 0.9970466494560242,
+            "rank": null,
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.5486,
+            "suitScore": 0.9969,
+            "rotation": 0,
+            "review": true,
+            "issues": [
+              "点数不够清晰",
+              "两次字形读取不一致",
+              "牌面方向不够确定"
+            ],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              907,
+              245,
+              184,
+              163
+            ],
+            "cardScore": 0.003156606573611498,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.9964,
+            "suitScore": 0.9982,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              921,
+              537,
+              266,
+              288
+            ],
+            "cardScore": 0.9942692518234253,
+            "rank": "10",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 0.9893,
+            "suitScore": 0.9963,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          }
+        ]
+      },
+      "v031": {
+        "exact": true,
+        "predicted": [
+          [
+            "dealer",
+            "4",
+            "hearts"
+          ],
+          [
+            "player",
+            "10",
+            "diamonds"
+          ],
+          [
+            "player",
+            "7",
+            "spades"
+          ]
+        ],
+        "autoReady": true,
+        "cards": [
+          {
+            "rect": [
+              591,
+              657,
+              267,
+              288
+            ],
+            "cardScore": 0.9976542592048645,
+            "rank": "7",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.9935,
+            "suitScore": 0.9983,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              645,
+              340,
+              184,
+              163
+            ],
+            "cardScore": 0.9970466494560242,
+            "rank": "4",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 0.9998,
+            "suitScore": 0.9969,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              907,
+              245,
+              184,
+              163
+            ],
+            "cardScore": 0.003156606573611498,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.9964,
+            "suitScore": 0.9982,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              921,
+              537,
+              266,
+              288
+            ],
+            "cardScore": 0.9942692518234253,
+            "rank": "10",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 0.9893,
+            "suitScore": 0.9963,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          }
+        ]
+      }
+    },
+    {
+      "name": "four-clubs-0",
+      "expected": [
+        [
+          "dealer",
+          "4",
+          "clubs"
+        ],
+        [
+          "player",
+          "8",
+          "clubs"
+        ],
+        [
+          "player",
+          "9",
+          "clubs"
+        ]
+      ],
+      "scope": "Synthetic scene from a reviewed gameplay glyph; not original attachment pixels.",
+      "v030": {
+        "exact": false,
+        "predicted": [
+          [
+            "dealer",
+            null,
+            "clubs"
+          ],
+          [
+            "player",
+            "8",
+            "clubs"
+          ],
+          [
+            "player",
+            "9",
+            "clubs"
+          ]
+        ],
+        "autoReady": false,
+        "cards": [
+          {
+            "rect": [
+              512,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9947757720947266,
+            "rank": "9",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9956,
+            "suitScore": 0.9974,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              692,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.9957422614097595,
+            "rank": null,
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.3836,
+            "suitScore": 0.9972,
+            "rotation": 0,
+            "review": true,
+            "issues": [
+              "点数不够清晰",
+              "两次字形读取不一致",
+              "牌面方向不够确定"
+            ],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              863,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9949339032173157,
+            "rank": "8",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9966,
+            "suitScore": 0.9974,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              971,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.002613934688270092,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.994,
+            "suitScore": 0.9983,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      },
+      "v031": {
+        "exact": true,
+        "predicted": [
+          [
+            "dealer",
+            "4",
+            "clubs"
+          ],
+          [
+            "player",
+            "8",
+            "clubs"
+          ],
+          [
+            "player",
+            "9",
+            "clubs"
+          ]
+        ],
+        "autoReady": true,
+        "cards": [
+          {
+            "rect": [
+              512,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9947757720947266,
+            "rank": "9",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9956,
+            "suitScore": 0.9974,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              692,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.9957422614097595,
+            "rank": "4",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9999,
+            "suitScore": 0.9972,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              863,
+              631,
+              235,
+              235
+            ],
+            "cardScore": 0.9949339032173157,
+            "rank": "8",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9966,
+            "suitScore": 0.9974,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              971,
+              343,
+              172,
+              118
+            ],
+            "cardScore": 0.002613934688270092,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.994,
+            "suitScore": 0.9983,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "four-clubs--20",
+      "expected": [
+        [
+          "dealer",
+          "4",
+          "clubs"
+        ],
+        [
+          "player",
+          "8",
+          "clubs"
+        ],
+        [
+          "player",
+          "9",
+          "clubs"
+        ]
+      ],
+      "scope": "Synthetic scene from a reviewed gameplay glyph; not original attachment pixels.",
+      "v030": {
+        "exact": false,
+        "predicted": [
+          [
+            "dealer",
+            null,
+            "clubs"
+          ],
+          [
+            "player",
+            "8",
+            "clubs"
+          ],
+          [
+            "player",
+            "9",
+            "clubs"
+          ]
+        ],
+        "autoReady": false,
+        "cards": [
+          {
+            "rect": [
+              422,
+              540,
+              266,
+              288
+            ],
+            "cardScore": 0.9950858950614929,
+            "rank": "9",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9954,
+            "suitScore": 0.9979,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              730,
+              325,
+              184,
+              163
+            ],
+            "cardScore": 0.995677649974823,
+            "rank": null,
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.5162,
+            "suitScore": 0.9973,
+            "rotation": 0,
+            "review": true,
+            "issues": [
+              "点数不够清晰",
+              "两次字形读取不一致",
+              "牌面方向不够确定"
+            ],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              752,
+              660,
+              266,
+              288
+            ],
+            "cardScore": 0.9954655766487122,
+            "rank": "8",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9959,
+            "suitScore": 0.9979,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              992,
+              420,
+              184,
+              163
+            ],
+            "cardScore": 0.0022770902141928673,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.997,
+            "suitScore": 0.9985,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      },
+      "v031": {
+        "exact": true,
+        "predicted": [
+          [
+            "dealer",
+            "4",
+            "clubs"
+          ],
+          [
+            "player",
+            "8",
+            "clubs"
+          ],
+          [
+            "player",
+            "9",
+            "clubs"
+          ]
+        ],
+        "autoReady": true,
+        "cards": [
+          {
+            "rect": [
+              422,
+              540,
+              266,
+              288
+            ],
+            "cardScore": 0.9950858950614929,
+            "rank": "9",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9954,
+            "suitScore": 0.9979,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              730,
+              325,
+              184,
+              163
+            ],
+            "cardScore": 0.995677649974823,
+            "rank": "4",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9998,
+            "suitScore": 0.9973,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              752,
+              660,
+              266,
+              288
+            ],
+            "cardScore": 0.9954655766487122,
+            "rank": "8",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9959,
+            "suitScore": 0.9979,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              992,
+              420,
+              184,
+              163
+            ],
+            "cardScore": 0.0022770902141928673,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.997,
+            "suitScore": 0.9985,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "four-clubs-20",
+      "expected": [
+        [
+          "dealer",
+          "4",
+          "clubs"
+        ],
+        [
+          "player",
+          "8",
+          "clubs"
+        ],
+        [
+          "player",
+          "9",
+          "clubs"
+        ]
+      ],
+      "scope": "Synthetic scene from a reviewed gameplay glyph; not original attachment pixels.",
+      "v030": {
+        "exact": false,
+        "predicted": [
+          [
+            "dealer",
+            null,
+            "clubs"
+          ],
+          [
+            "player",
+            "8",
+            "clubs"
+          ],
+          [
+            "player",
+            "9",
+            "clubs"
+          ]
+        ],
+        "autoReady": false,
+        "cards": [
+          {
+            "rect": [
+              591,
+              657,
+              267,
+              288
+            ],
+            "cardScore": 0.994820237159729,
+            "rank": "9",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.996,
+            "suitScore": 0.9972,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              645,
+              340,
+              184,
+              163
+            ],
+            "cardScore": 0.995965838432312,
+            "rank": null,
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.5486,
+            "suitScore": 0.9974,
+            "rotation": 0,
+            "review": true,
+            "issues": [
+              "点数不够清晰",
+              "两次字形读取不一致",
+              "牌面方向不够确定"
+            ],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              907,
+              245,
+              184,
+              163
+            ],
+            "cardScore": 0.003156606573611498,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.9964,
+            "suitScore": 0.9982,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              921,
+              537,
+              266,
+              288
+            ],
+            "cardScore": 0.9951556921005249,
+            "rank": "8",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9966,
+            "suitScore": 0.9973,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          }
+        ]
+      },
+      "v031": {
+        "exact": true,
+        "predicted": [
+          [
+            "dealer",
+            "4",
+            "clubs"
+          ],
+          [
+            "player",
+            "8",
+            "clubs"
+          ],
+          [
+            "player",
+            "9",
+            "clubs"
+          ]
+        ],
+        "autoReady": true,
+        "cards": [
+          {
+            "rect": [
+              591,
+              657,
+              267,
+              288
+            ],
+            "cardScore": 0.994820237159729,
+            "rank": "9",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.996,
+            "suitScore": 0.9972,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          },
+          {
+            "rect": [
+              645,
+              340,
+              184,
+              163
+            ],
+            "cardScore": 0.995965838432312,
+            "rank": "4",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9997,
+            "suitScore": 0.9974,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              907,
+              245,
+              184,
+              163
+            ],
+            "cardScore": 0.003156606573611498,
+            "rank": null,
+            "suit": null,
+            "faceDown": true,
+            "score": 0.9964,
+            "suitScore": 0.9982,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "dealer"
+          },
+          {
+            "rect": [
+              921,
+              537,
+              266,
+              288
+            ],
+            "cardScore": 0.9951556921005249,
+            "rank": "8",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9966,
+            "suitScore": 0.9973,
+            "rotation": 0,
+            "review": false,
+            "issues": [],
+            "role": "player"
+          }
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "cases": 9,
+    "v030Exact": 0,
+    "v031Exact": 9,
+    "automatic": 9
+  }
+}

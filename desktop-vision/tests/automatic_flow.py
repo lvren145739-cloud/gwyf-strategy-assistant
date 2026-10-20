@@ -10,9 +10,9 @@ with sync_playwright() as p:
   window.makeCard=make;
   window.fixture={autoReady:true,warnings:[],rejectedCount:7,hiddenCount:1,recognitionMs:150,cards:[make('9','clubs'),make('8','clubs'),make('A','hearts','dealer'),{role:'dealer',faceDown:true,review:false}]};
   window.recognitionCalls=[];window.saved=[];
-  window.pywebview={api:{status:async()=>({version:'0.3.0',modelBytes:7000000,hotkey:'Ctrl+Shift+Space',python:'3.14.8'}),windows:async()=>[{id:'123',title:'Gamble With Your Friends'}],select_window:async()=>true,load_state:async()=>null,save_state:async data=>{saved.push(data);return true;},capture:async()=>{const c=document.createElement('canvas');c.width=960;c.height=540;return {image:c.toDataURL(),width:960,height:540,digest:'frame'};},recognize:async(regions,mode)=>{recognitionCalls.push({regions,mode});return fixture;},compact:async()=>true,open_image:async()=>null}};
+  window.pywebview={api:{status:async()=>({version:'0.3.1',modelBytes:7000000,hotkey:'Ctrl+Shift+Space',python:'3.14.8'}),windows:async()=>[{id:'123',title:'Gamble With Your Friends'}],select_window:async()=>true,load_state:async()=>null,save_state:async data=>{saved.push(data);return true;},capture:async()=>{const c=document.createElement('canvas');c.width=960;c.height=540;return {image:c.toDataURL(),width:960,height:540,digest:'frame'};},recognize:async(regions,mode)=>{recognitionCalls.push({regions,mode});return fixture;},compact:async()=>true,open_image:async()=>null,hotkeys:async()=>({config:{capture:'F8',archive:'F9',accept:'F10'},errors:{}})}};
  })();''')
- page.goto('http://127.0.0.1:8768/desktop.html');page.wait_for_function('nativeReady && nativeConnecting===null')
+ page.goto('http://127.0.0.1:8769/desktop.html');page.wait_for_function('nativeReady && nativeConnecting===null')
  page.evaluate('captureNow()');page.wait_for_function("/HIT|STAND|DOUBLE/.test(document.querySelector('#advice h1').textContent)",timeout=15000)
  print('Initial recommendation:',page.locator('#advice h1').inner_text(),'status:',page.locator('#status').inner_text(),flush=True)
  assert page.locator('#draftPanel').is_hidden()

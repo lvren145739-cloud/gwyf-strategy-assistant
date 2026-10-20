@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "seed": 3301,
   "realCrops": 106,
   "reviewedBackgroundCrops": 341,
@@ -49,6 +49,14 @@
     "legacy-suit": {
       "parameters": 84701,
       "purpose": "Independent V2 suit/crop check"
+    },
+    "recovery-glyph": {
+      "parameters": 818012,
+      "purpose": "Conservative second reading for ambiguous/edge-contaminated rank crops"
+    },
+    "recovery-rank": {
+      "parameters": 85351,
+      "purpose": "Independent confirmation of the recovery glyph network"
     }
   },
   "scoresCalibrated": false,
@@ -129,9 +137,17 @@
     "glyph.onnx": {
       "bytes": 3271494,
       "sha256": "17cf2814eab88618f1d4dae0b8136ea99573414f187bb5fd6c624cbdad80ad0b"
+    },
+    "glyph-open.onnx": {
+      "bytes": 3271494,
+      "sha256": "b8794aa65a95e6a90003dceead17305d962d8748d959abafbca1e587d4d30eff"
+    },
+    "rank-open.onnx": {
+      "bytes": 343612,
+      "sha256": "e0c42adeb63763be147eeb06b6925e031161fd1ef47c5d2c9370c3e00b143832"
     }
   },
-  "totalParameters": 1847539,
+  "totalParameters": 2750902,
   "rankClasses": [
     "A",
     "2",
@@ -178,6 +194,55 @@
     "localOnly": true,
     "automaticCalculation": "complete, high-score, consistent, deck-valid hands only; uncertain drafts remain editable",
     "scoresCalibrated": false,
-    "ensemble": "V3 shared glyph head and separate V2 rank/suit heads; two rank crops, large/small suit, red/black ink consistency"
+    "ensemble": "V3 shared glyph head and separate V2 rank/suit heads; two rank crops, large/small suit, red/black ink consistency",
+    "recovery": "Original V3 models remain the primary reading. Recovery requires independently refined glyph/rank models and cleaned crop consensus; no lower adoption threshold."
+  },
+  "openFourRefinement": {
+    "source": "bili-cards/023.jpg",
+    "quad": [
+      [
+        326.0,
+        337.0
+      ],
+      [
+        353.0,
+        434.0
+      ],
+      [
+        160.0,
+        489.0
+      ],
+      [
+        155.0,
+        387.0
+      ]
+    ],
+    "rank": "4",
+    "suit": "hearts",
+    "reviewedAdditionalPhysicalHands": 1,
+    "sharedEpochs": 6,
+    "independentEpochs": 9,
+    "examples": 3220,
+    "sharedLoss": [
+      0.16699,
+      0.12355,
+      0.11156,
+      0.10609,
+      0.10178,
+      0.09818
+    ],
+    "independentLoss": [
+      0.49424,
+      0.34275,
+      0.28178,
+      0.24385,
+      0.21915,
+      0.19453,
+      0.18112,
+      0.16932,
+      0.16019
+    ],
+    "seconds": 86.8,
+    "replay": "all rank/suit classes, UNKNOWN and rotated open fours; no selected holdout frame used"
   }
 }

@@ -1,0 +1,12 @@
+const assert=require('node:assert/strict');
+const H=require('../web/hotkeys.js');
+assert.equal(H.canonical('Shift+Ctrl+A'),'Ctrl+Shift+A');
+assert.equal(H.fromEvent({code:'KeyQ',key:'q',ctrlKey:true,altKey:true}),'Ctrl+Alt+Q');
+assert.equal(H.fromEvent({code:'Digit4',key:'$',shiftKey:true}),'Shift+4');
+assert.equal(H.fromEvent({code:'Numpad2',key:'2'}),'Num2');
+assert.equal(H.fromEvent({code:'F8',key:'F8'}),'F8');
+assert.equal(H.fromEvent({code:'ControlLeft',key:'Control'}),null);
+assert.throws(()=>H.normalise({capture:'F8',archive:'F8',accept:'F10'}),/重复/);
+assert.throws(()=>H.canonical('Ctrl+Unknown'));
+assert.deepEqual(H.normalise({...H.defaults,capture:''}),{capture:'',archive:'F9',accept:'F10',reset:'F11'});
+console.log('Shortcut parsing, physical keys, modifiers, duplicate rejection and disabling passed.');

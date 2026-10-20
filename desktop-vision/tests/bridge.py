@@ -11,7 +11,7 @@ root=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(root))
 from app import API,DesktopBridge
 
-METHODS={'status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact'}
+METHODS={'status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact','hotkeys'}
 class NativeFixture:
     def __init__(self):
         self.fail=False
@@ -72,7 +72,7 @@ with sync_playwright() as p:
         assert page.locator('#nativeBadge').inner_text().startswith('桌面已连接')
         assert controller.target=='1234567890123'
     # UI runs before native API injection. An empty API must not be treated as ready.
-    page,errors=new_page();page.goto('http://127.0.0.1:8768/desktop.html')
+    page,errors=new_page();page.goto('http://127.0.0.1:8769/desktop.html')
     page.evaluate(scripts[0]);page.wait_for_timeout(150)
     assert page.evaluate('typeof window.pywebview.api.windows')=='undefined'
     assert page.locator('#nativeBadge').inner_text()=='正在连接桌面…'
@@ -107,10 +107,10 @@ with sync_playwright() as p:
     assert not errors,errors
     checks.append('empty list, native exception, recovery')
     # Exercise the remaining JS->Python RPC wrappers, including JSON arguments.
-    page.evaluate("() => {window.rpcDone=false;Promise.all([pywebview.api.capture(),pywebview.api.open_image(),pywebview.api.recognize({player:[0,0,1,1]},'blackjack'),pywebview.api.save_state({test:1}),pywebview.api.compact(true)]).then(v=>{window.rpcValues=v;window.rpcDone=true});}")
+    page.evaluate("() => {window.rpcDone=false;Promise.all([pywebview.api.capture(),pywebview.api.open_image(),pywebview.api.recognize({player:[0,0,1,1]},'blackjack'),pywebview.api.save_state({test:1}),pywebview.api.compact(true),pywebview.api.hotkeys({op:'get'})]).then(v=>{window.rpcValues=v;window.rpcDone=true});}")
     pump(page,'window.rpcDone===true');assert controller.saved=={'test':1}
     assert page.evaluate('rpcValues[0].fixture')
-    checks.append('all nine exported RPC methods return through real Python bridge')
+    checks.append('all ten exported RPC methods return through real Python bridge')
     # Drain the delayed status update before switching pages (one test Window).
     until=time.monotonic()+.8
     while time.monotonic()<until:
@@ -121,11 +121,11 @@ with sync_playwright() as p:
     page,errors=new_page()
     early_code=scripts[0]+'\n'+scripts[1]+'\n'+(root/'web/ui.js').read_text('utf-8')
     page.route('**/ui.js',lambda route:route.fulfill(status=200,content_type='application/javascript',body=early_code))
-    page.goto('http://127.0.0.1:8768/desktop.html');ready(page);assert not errors,errors
+    page.goto('http://127.0.0.1:8769/desktop.html');ready(page);assert not errors,errors
     checks.append('bridge ready before UI and event listener')
     page.close()
     # Real native entry detects incomplete interfaces and offers retry.
-    page,errors=new_page();page.goto('http://127.0.0.1:8768/desktop.html')
+    page,errors=new_page();page.goto('http://127.0.0.1:8769/desktop.html')
     page.evaluate(scripts[0]);page.evaluate(scripts[1].replace('"windows"','"missing_windows"'))
     pump(page,"document.querySelector('#nativeBadge').textContent==='桌面连接失败'",15)
     assert '超时' in page.locator('#windowStatus').inner_text()
@@ -136,7 +136,7 @@ with sync_playwright() as p:
     page.screenshot(path=str(root/'tests/bridge-connected.png'),full_page=True)
     page.close()
     # Manual browser preview remains usable and does not claim a native connection.
-    page,errors=new_page();page.goto('http://127.0.0.1:8768/')
+    page,errors=new_page();page.goto('http://127.0.0.1:8769/')
     page.locator('#refresh').click()
     assert 'Start-Windows.bat' in page.locator('#status').inner_text()
     assert page.locator('#nativeBadge').inner_text()=='浏览器预览'

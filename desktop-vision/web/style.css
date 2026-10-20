@@ -2,3 +2,4 @@
 
 [hidden]{display:none!important}
 .compact header{padding:5px 12px}.compact header button{padding:3px 8px;font-size:12px}
+.header-buttons{display:flex;gap:6px}.shortcut-row{display:grid;grid-template-columns:70px minmax(0,1fr) 55px;align-items:center;gap:8px;margin-top:8px}.shortcut-row .binding{min-width:0;overflow-wrap:anywhere}.shortcut-row .recording{border-color:var(--mint);color:var(--mint)}#shortcutStatus.error{color:#ffb6a2}#shortcutRows button{padding:7px 5px}

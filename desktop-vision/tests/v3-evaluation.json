@@ -103,11 +103,11 @@
                   627.1221923828125
                 ]
               ],
-              "cardScore": 0.9972553849220276,
+              "cardScore": 0.9972469806671143,
               "rank": "5",
               "suit": "hearts",
               "faceDown": false,
-              "score": 0.9894,
+              "score": 0.9891,
               "suitScore": 0.9977,
               "rotation": 0,
               "review": false,
@@ -139,12 +139,12 @@
                   474.0
                 ]
               ],
-              "cardScore": 0.9973994493484497,
+              "cardScore": 0.9974051117897034,
               "rank": "9",
               "suit": "clubs",
               "faceDown": false,
               "score": 0.999,
-              "suitScore": 0.9928,
+              "suitScore": 0.9934,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -175,12 +175,12 @@
                   475.4620666503906
                 ]
               ],
-              "cardScore": 0.0008276470471173525,
+              "cardScore": 0.0008256358560174704,
               "rank": null,
               "suit": null,
               "faceDown": true,
-              "score": 0.9882,
-              "suitScore": 0.9974,
+              "score": 0.9881,
+              "suitScore": 0.9975,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -211,7 +211,7 @@
                   629.0
                 ]
               ],
-              "cardScore": 0.9970364570617676,
+              "cardScore": 0.9970371723175049,
               "rank": "2",
               "suit": "hearts",
               "faceDown": false,
@@ -228,7 +228,7 @@
           "warnings": [],
           "uncertainCards": [],
           "autoReady": true,
-          "recognitionMs": 1258.1
+          "recognitionMs": 1518.0
         }
       }
     },
@@ -334,11 +334,11 @@
                   577.99267578125
                 ]
               ],
-              "cardScore": 0.9957017302513123,
+              "cardScore": 0.995718777179718,
               "rank": "Q",
               "suit": "hearts",
               "faceDown": false,
-              "score": 0.9871,
+              "score": 0.9873,
               "suitScore": 0.9983,
               "rotation": 0,
               "review": false,
@@ -370,12 +370,12 @@
                   423.0
                 ]
               ],
-              "cardScore": 0.9973351359367371,
+              "cardScore": 0.9973379969596863,
               "rank": "3",
               "suit": "hearts",
               "faceDown": false,
-              "score": 0.9901,
-              "suitScore": 0.9963,
+              "score": 0.9895,
+              "suitScore": 0.9959,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -406,12 +406,12 @@
                   585.0866088867188
                 ]
               ],
-              "cardScore": 0.9972846508026123,
+              "cardScore": 0.9972878694534302,
               "rank": "9",
               "suit": "diamonds",
               "faceDown": false,
               "score": 0.9961,
-              "suitScore": 0.9949,
+              "suitScore": 0.9954,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -423,7 +423,7 @@
           "warnings": [],
           "uncertainCards": [],
           "autoReady": true,
-          "recognitionMs": 842.4
+          "recognitionMs": 1065.6
         }
       }
     },
@@ -538,12 +538,12 @@
                   573.1929931640625
                 ]
               ],
-              "cardScore": 0.9960607886314392,
+              "cardScore": 0.9960669875144958,
               "rank": "8",
               "suit": "clubs",
               "faceDown": false,
               "score": 0.9967,
-              "suitScore": 0.9957,
+              "suitScore": 0.9958,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -574,12 +574,12 @@
                   576.0
                 ]
               ],
-              "cardScore": 0.9966937303543091,
+              "cardScore": 0.9966654181480408,
               "rank": "2",
               "suit": "diamonds",
               "faceDown": false,
-              "score": 0.9908,
-              "suitScore": 0.9959,
+              "score": 0.9909,
+              "suitScore": 0.9961,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -610,11 +610,11 @@
                   578.0
                 ]
               ],
-              "cardScore": 0.9937937259674072,
+              "cardScore": 0.9937918782234192,
               "rank": "J",
               "suit": "spades",
               "faceDown": false,
-              "score": 0.9943,
+              "score": 0.9944,
               "suitScore": 0.993,
               "rotation": 0,
               "review": false,
@@ -629,7 +629,7 @@
           ],
           "uncertainCards": [],
           "autoReady": false,
-          "recognitionMs": 971.0
+          "recognitionMs": 1107.0
         }
       }
     },
@@ -759,12 +759,12 @@
                   500.0
                 ]
               ],
-              "cardScore": 0.9975117444992065,
+              "cardScore": 0.9975097179412842,
               "rank": "6",
               "suit": "diamonds",
               "faceDown": false,
               "score": 0.9938,
-              "suitScore": 0.994,
+              "suitScore": 0.9939,
               "rotation": 90,
               "review": false,
               "issues": [],
@@ -795,12 +795,12 @@
                   500.0
                 ]
               ],
-              "cardScore": 0.9964141249656677,
+              "cardScore": 0.9964145421981812,
               "rank": "8",
               "suit": "diamonds",
               "faceDown": false,
-              "score": 0.9968,
-              "suitScore": 0.9954,
+              "score": 0.9969,
+              "suitScore": 0.9955,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -831,12 +831,12 @@
                   514.0
                 ]
               ],
-              "cardScore": 0.9960259199142456,
+              "cardScore": 0.9960411787033081,
               "rank": "6",
               "suit": "clubs",
               "faceDown": false,
               "score": 0.9942,
-              "suitScore": 0.9964,
+              "suitScore": 0.9963,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -867,11 +867,11 @@
                   523.0
                 ]
               ],
-              "cardScore": 0.9951896667480469,
+              "cardScore": 0.9951350092887878,
               "rank": "8",
               "suit": "spades",
               "faceDown": false,
-              "score": 0.9923,
+              "score": 0.9924,
               "suitScore": 0.9925,
               "rotation": 0,
               "review": false,
@@ -903,11 +903,11 @@
                   534.0
                 ]
               ],
-              "cardScore": 0.9990129470825195,
+              "cardScore": 0.9990092515945435,
               "rank": "7",
               "suit": "hearts",
               "faceDown": false,
-              "score": 0.9949,
+              "score": 0.9951,
               "suitScore": 0.9982,
               "rotation": 0,
               "review": false,
@@ -920,7 +920,7 @@
           "warnings": [],
           "uncertainCards": [],
           "autoReady": true,
-          "recognitionMs": 1016.0
+          "recognitionMs": 1186.5
         }
       }
     },
@@ -1020,12 +1020,12 @@
                   579.0
                 ]
               ],
-              "cardScore": 0.9964014291763306,
+              "cardScore": 0.9964040517807007,
               "rank": "7",
               "suit": "clubs",
               "faceDown": false,
-              "score": 0.9919,
-              "suitScore": 0.9984,
+              "score": 0.9921,
+              "suitScore": 0.9985,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -1056,11 +1056,11 @@
                   494.6095886230469
                 ]
               ],
-              "cardScore": 0.9952390193939209,
+              "cardScore": 0.9952332377433777,
               "rank": "9",
               "suit": "spades",
               "faceDown": false,
-              "score": 0.9955,
+              "score": 0.9956,
               "suitScore": 0.9984,
               "rotation": 0,
               "review": false,
@@ -1092,12 +1092,12 @@
                   423.0
                 ]
               ],
-              "cardScore": 0.9956814050674438,
+              "cardScore": 0.9956508278846741,
               "rank": "J",
               "suit": "diamonds",
               "faceDown": false,
-              "score": 0.9935,
-              "suitScore": 0.996,
+              "score": 0.9936,
+              "suitScore": 0.9954,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -1111,7 +1111,7 @@
           ],
           "uncertainCards": [],
           "autoReady": false,
-          "recognitionMs": 901.8
+          "recognitionMs": 1029.1
         }
       }
     },
@@ -1211,12 +1211,12 @@
                   604.0
                 ]
               ],
-              "cardScore": 0.9960755705833435,
+              "cardScore": 0.9960876703262329,
               "rank": "Q",
               "suit": "hearts",
               "faceDown": false,
-              "score": 0.9877,
-              "suitScore": 0.9957,
+              "score": 0.9874,
+              "suitScore": 0.9959,
               "rotation": 90,
               "review": false,
               "issues": [],
@@ -1247,12 +1247,12 @@
                   717.454345703125
                 ]
               ],
-              "cardScore": 0.9975523352622986,
+              "cardScore": 0.9975570440292358,
               "rank": "10",
               "suit": "spades",
               "faceDown": false,
               "score": 0.9968,
-              "suitScore": 0.9975,
+              "suitScore": 0.9976,
               "rotation": 90,
               "review": false,
               "issues": [],
@@ -1283,12 +1283,12 @@
                   486.0
                 ]
               ],
-              "cardScore": 0.9969655871391296,
+              "cardScore": 0.996976375579834,
               "rank": "10",
               "suit": "clubs",
               "faceDown": false,
-              "score": 0.9951,
-              "suitScore": 0.9942,
+              "score": 0.9952,
+              "suitScore": 0.9943,
               "rotation": 90,
               "review": false,
               "issues": [],
@@ -1302,7 +1302,7 @@
           ],
           "uncertainCards": [],
           "autoReady": false,
-          "recognitionMs": 765.7
+          "recognitionMs": 857.4
         }
       }
     },
@@ -1432,7 +1432,7 @@
                   571.0
                 ]
               ],
-              "cardScore": 0.997745931148529,
+              "cardScore": 0.9977450370788574,
               "rank": "A",
               "suit": "hearts",
               "faceDown": false,
@@ -1468,12 +1468,12 @@
                   571.0
                 ]
               ],
-              "cardScore": 0.9955412745475769,
+              "cardScore": 0.9955509901046753,
               "rank": "7",
               "suit": "clubs",
               "faceDown": false,
-              "score": 0.9943,
-              "suitScore": 0.9955,
+              "score": 0.9944,
+              "suitScore": 0.9957,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -1504,12 +1504,12 @@
                   573.1929931640625
                 ]
               ],
-              "cardScore": 0.9960607886314392,
+              "cardScore": 0.9960669875144958,
               "rank": "8",
               "suit": "clubs",
               "faceDown": false,
               "score": 0.9967,
-              "suitScore": 0.9957,
+              "suitScore": 0.9958,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -1540,12 +1540,12 @@
                   576.0
                 ]
               ],
-              "cardScore": 0.9966937303543091,
+              "cardScore": 0.9966654181480408,
               "rank": "2",
               "suit": "diamonds",
               "faceDown": false,
-              "score": 0.9908,
-              "suitScore": 0.9959,
+              "score": 0.9909,
+              "suitScore": 0.9961,
               "rotation": 0,
               "review": false,
               "issues": [],
@@ -1576,11 +1576,11 @@
                   578.0
                 ]
               ],
-              "cardScore": 0.9937937259674072,
+              "cardScore": 0.9937918782234192,
               "rank": "J",
               "suit": "spades",
               "faceDown": false,
-              "score": 0.9943,
+              "score": 0.9944,
               "suitScore": 0.993,
               "rotation": 0,
               "review": false,
@@ -1593,7 +1593,7 @@
           "warnings": [],
           "uncertainCards": [],
           "autoReady": true,
-          "recognitionMs": 1147.9
+          "recognitionMs": 1495.6
         }
       }
     },
@@ -1663,11 +1663,11 @@
                   555.0
                 ]
               ],
-              "cardScore": 0.9958792924880981,
+              "cardScore": 0.9958723187446594,
               "rank": "3",
               "suit": "clubs",
               "faceDown": false,
-              "score": 0.9946,
+              "score": 0.9947,
               "suitScore": 0.9968,
               "rotation": 270,
               "review": false,
@@ -1682,7 +1682,7 @@
           ],
           "uncertainCards": [],
           "autoReady": false,
-          "recognitionMs": 428.9
+          "recognitionMs": 476.1
         }
       }
     },
@@ -1722,7 +1722,7 @@
           ],
           "uncertainCards": [],
           "autoReady": false,
-          "recognitionMs": 462.6
+          "recognitionMs": 478.9
         }
       }
     }
@@ -1792,11 +1792,11 @@
               627.1221923828125
             ]
           ],
-          "cardScore": 0.9972553849220276,
+          "cardScore": 0.9972469806671143,
           "rank": "5",
           "suit": "hearts",
           "faceDown": false,
-          "score": 0.9894,
+          "score": 0.9891,
           "suitScore": 0.9977,
           "rotation": 0,
           "review": false,
@@ -1828,12 +1828,12 @@
               474.0
             ]
           ],
-          "cardScore": 0.9973994493484497,
+          "cardScore": 0.9974051117897034,
           "rank": "9",
           "suit": "clubs",
           "faceDown": false,
           "score": 0.999,
-          "suitScore": 0.9928,
+          "suitScore": 0.9934,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -1864,12 +1864,12 @@
               475.4620666503906
             ]
           ],
-          "cardScore": 0.0008276470471173525,
+          "cardScore": 0.0008256358560174704,
           "rank": null,
           "suit": null,
           "faceDown": true,
-          "score": 0.9882,
-          "suitScore": 0.9974,
+          "score": 0.9881,
+          "suitScore": 0.9975,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -1900,7 +1900,7 @@
               629.0
             ]
           ],
-          "cardScore": 0.9970364570617676,
+          "cardScore": 0.9970371723175049,
           "rank": "2",
           "suit": "hearts",
           "faceDown": false,
@@ -1917,7 +1917,7 @@
       "warnings": [],
       "uncertainCards": [],
       "autoReady": true,
-      "recognitionMs": 1484.1
+      "recognitionMs": 1770.8
     },
     {
       "file": "full-1435.jpg",
@@ -1983,11 +1983,11 @@
               577.99267578125
             ]
           ],
-          "cardScore": 0.9957017302513123,
+          "cardScore": 0.995718777179718,
           "rank": "Q",
           "suit": "hearts",
           "faceDown": false,
-          "score": 0.9871,
+          "score": 0.9873,
           "suitScore": 0.9983,
           "rotation": 0,
           "review": false,
@@ -2019,12 +2019,12 @@
               423.0
             ]
           ],
-          "cardScore": 0.9973351359367371,
+          "cardScore": 0.9973379969596863,
           "rank": "3",
           "suit": "hearts",
           "faceDown": false,
-          "score": 0.9901,
-          "suitScore": 0.9963,
+          "score": 0.9895,
+          "suitScore": 0.9959,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -2055,12 +2055,12 @@
               585.0866088867188
             ]
           ],
-          "cardScore": 0.9972846508026123,
+          "cardScore": 0.9972878694534302,
           "rank": "9",
           "suit": "diamonds",
           "faceDown": false,
           "score": 0.9961,
-          "suitScore": 0.9949,
+          "suitScore": 0.9954,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -2072,7 +2072,7 @@
       "warnings": [],
       "uncertainCards": [],
       "autoReady": true,
-      "recognitionMs": 1007.0
+      "recognitionMs": 1122.7
     },
     {
       "file": "full-2024.jpg",
@@ -2158,7 +2158,7 @@
               571.0
             ]
           ],
-          "cardScore": 0.997745931148529,
+          "cardScore": 0.9977450370788574,
           "rank": "A",
           "suit": "hearts",
           "faceDown": false,
@@ -2194,12 +2194,12 @@
               571.0
             ]
           ],
-          "cardScore": 0.9955412745475769,
+          "cardScore": 0.9955509901046753,
           "rank": "7",
           "suit": "clubs",
           "faceDown": false,
-          "score": 0.9943,
-          "suitScore": 0.9955,
+          "score": 0.9944,
+          "suitScore": 0.9957,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -2230,12 +2230,12 @@
               573.1929931640625
             ]
           ],
-          "cardScore": 0.9960607886314392,
+          "cardScore": 0.9960669875144958,
           "rank": "8",
           "suit": "clubs",
           "faceDown": false,
           "score": 0.9967,
-          "suitScore": 0.9957,
+          "suitScore": 0.9958,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -2266,12 +2266,12 @@
               576.0
             ]
           ],
-          "cardScore": 0.9966937303543091,
+          "cardScore": 0.9966654181480408,
           "rank": "2",
           "suit": "diamonds",
           "faceDown": false,
-          "score": 0.9908,
-          "suitScore": 0.9959,
+          "score": 0.9909,
+          "suitScore": 0.9961,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -2302,11 +2302,11 @@
               578.0
             ]
           ],
-          "cardScore": 0.9937937259674072,
+          "cardScore": 0.9937918782234192,
           "rank": "J",
           "suit": "spades",
           "faceDown": false,
-          "score": 0.9943,
+          "score": 0.9944,
           "suitScore": 0.993,
           "rotation": 0,
           "review": false,
@@ -2319,7 +2319,7 @@
       "warnings": [],
       "uncertainCards": [],
       "autoReady": true,
-      "recognitionMs": 1528.0
+      "recognitionMs": 1681.2
     },
     {
       "file": "full-2066.jpg",
@@ -2405,12 +2405,12 @@
               500.0
             ]
           ],
-          "cardScore": 0.9975117444992065,
+          "cardScore": 0.9975097179412842,
           "rank": "6",
           "suit": "diamonds",
           "faceDown": false,
           "score": 0.9938,
-          "suitScore": 0.994,
+          "suitScore": 0.9939,
           "rotation": 90,
           "review": false,
           "issues": [],
@@ -2441,12 +2441,12 @@
               500.0
             ]
           ],
-          "cardScore": 0.9964141249656677,
+          "cardScore": 0.9964145421981812,
           "rank": "8",
           "suit": "diamonds",
           "faceDown": false,
-          "score": 0.9968,
-          "suitScore": 0.9954,
+          "score": 0.9969,
+          "suitScore": 0.9955,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -2477,12 +2477,12 @@
               514.0
             ]
           ],
-          "cardScore": 0.9960259199142456,
+          "cardScore": 0.9960411787033081,
           "rank": "6",
           "suit": "clubs",
           "faceDown": false,
           "score": 0.9942,
-          "suitScore": 0.9964,
+          "suitScore": 0.9963,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -2513,11 +2513,11 @@
               523.0
             ]
           ],
-          "cardScore": 0.9951896667480469,
+          "cardScore": 0.9951350092887878,
           "rank": "8",
           "suit": "spades",
           "faceDown": false,
-          "score": 0.9923,
+          "score": 0.9924,
           "suitScore": 0.9925,
           "rotation": 0,
           "review": false,
@@ -2549,11 +2549,11 @@
               534.0
             ]
           ],
-          "cardScore": 0.9990129470825195,
+          "cardScore": 0.9990092515945435,
           "rank": "7",
           "suit": "hearts",
           "faceDown": false,
-          "score": 0.9949,
+          "score": 0.9951,
           "suitScore": 0.9982,
           "rotation": 0,
           "review": false,
@@ -2566,7 +2566,7 @@
       "warnings": [],
       "uncertainCards": [],
       "autoReady": true,
-      "recognitionMs": 1298.6
+      "recognitionMs": 1448.6
     },
     {
       "file": "poker-a/0057.jpg",
@@ -2652,12 +2652,12 @@
               399.0
             ]
           ],
-          "cardScore": 0.9974468946456909,
+          "cardScore": 0.997443675994873,
           "rank": "A",
           "suit": "diamonds",
           "faceDown": false,
           "score": 0.9979,
-          "suitScore": 0.9942,
+          "suitScore": 0.994,
           "rotation": 90,
           "review": false,
           "issues": [],
@@ -2665,35 +2665,35 @@
         },
         {
           "rect": [
-            471,
-            348,
-            114,
-            56
+            469,
+            346,
+            118,
+            59
           ],
           "quad": [
             [
-              508.0,
-              348.0
+              506.487060546875,
+              346.16766357421875
             ],
             [
-              584.0,
-              351.0
+              586.5301513671875,
+              350.4366455078125
             ],
             [
-              560.0,
-              403.0
+              559.84912109375,
+              404.8659362792969
             ],
             [
-              471.0,
-              397.0
+              469.13360595703125,
+              399.5297546386719
             ]
           ],
-          "cardScore": 0.9966922998428345,
+          "cardScore": 0.9974526762962341,
           "rank": "9",
           "suit": "diamonds",
           "faceDown": false,
-          "score": 0.9956,
-          "suitScore": 0.9958,
+          "score": 0.9951,
+          "suitScore": 0.9966,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -2724,15 +2724,17 @@
               398.56854248046875
             ]
           ],
-          "cardScore": 0.9990596175193787,
+          "cardScore": 0.9990599751472473,
           "rank": "5",
           "suit": "clubs",
           "faceDown": false,
-          "score": 0.9261,
+          "score": 0.9258,
           "suitScore": 0.9917,
           "rotation": 0,
           "review": true,
-          "issues": [],
+          "issues": [
+            "点数模型意见仍有分歧"
+          ],
           "role": "player"
         },
         {
@@ -2760,12 +2762,12 @@
               407.0
             ]
           ],
-          "cardScore": 0.9968847632408142,
+          "cardScore": 0.9969019889831543,
           "rank": "2",
           "suit": "hearts",
           "faceDown": false,
-          "score": 0.993,
-          "suitScore": 0.9983,
+          "score": 0.9929,
+          "suitScore": 0.9984,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -2796,11 +2798,11 @@
               410.0
             ]
           ],
-          "cardScore": 0.9937185049057007,
+          "cardScore": 0.9937953948974609,
           "rank": "K",
           "suit": "spades",
           "faceDown": false,
-          "score": 0.9942,
+          "score": 0.9939,
           "suitScore": 0.9941,
           "rotation": 0,
           "review": false,
@@ -2843,7 +2845,7 @@
         }
       ],
       "autoReady": false,
-      "recognitionMs": 1739.4
+      "recognitionMs": 2080.2
     }
   ],
   "syntheticReportedLayouts": [
@@ -2912,11 +2914,11 @@
               833.621826171875
             ]
           ],
-          "cardScore": 0.9965298771858215,
+          "cardScore": 0.9964945912361145,
           "rank": "9",
           "suit": "clubs",
           "faceDown": false,
-          "score": 0.9968,
+          "score": 0.9969,
           "suitScore": 0.9966,
           "rotation": 0,
           "review": false,
@@ -2948,12 +2950,12 @@
               436.0
             ]
           ],
-          "cardScore": 0.9947710633277893,
+          "cardScore": 0.9947509169578552,
           "rank": "A",
           "suit": "hearts",
           "faceDown": false,
-          "score": 0.9868,
-          "suitScore": 0.9768,
+          "score": 0.987,
+          "suitScore": 0.9769,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -2984,12 +2986,12 @@
               824.0
             ]
           ],
-          "cardScore": 0.9916737675666809,
+          "cardScore": 0.9916921854019165,
           "rank": "8",
           "suit": "clubs",
           "faceDown": false,
-          "score": 0.9972,
-          "suitScore": 0.9931,
+          "score": 0.9971,
+          "suitScore": 0.9934,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -3020,12 +3022,12 @@
               436.0
             ]
           ],
-          "cardScore": 0.002413014881312847,
+          "cardScore": 0.00242827576585114,
           "rank": null,
           "suit": null,
           "faceDown": true,
-          "score": 0.9978,
-          "suitScore": 0.9589,
+          "score": 0.9976,
+          "suitScore": 0.9614,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -3037,7 +3039,7 @@
       "warnings": [],
       "uncertainCards": [],
       "autoReady": true,
-      "recognitionMs": 766.1
+      "recognitionMs": 1036.8
     },
     {
       "name": "slanted-left",
@@ -3104,12 +3106,12 @@
               691.1294555664062
             ]
           ],
-          "cardScore": 0.9961245656013489,
+          "cardScore": 0.9961230158805847,
           "rank": "9",
           "suit": "clubs",
           "faceDown": false,
           "score": 0.9964,
-          "suitScore": 0.9963,
+          "suitScore": 0.9964,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -3140,12 +3142,12 @@
               798.0
             ]
           ],
-          "cardScore": 0.9913289546966553,
+          "cardScore": 0.9913779497146606,
           "rank": "8",
           "suit": "clubs",
           "faceDown": false,
-          "score": 0.9965,
-          "suitScore": 0.993,
+          "score": 0.9966,
+          "suitScore": 0.9936,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -3176,12 +3178,12 @@
               407.0
             ]
           ],
-          "cardScore": 0.9947499632835388,
+          "cardScore": 0.9947699904441833,
           "rank": "A",
           "suit": "hearts",
           "faceDown": false,
           "score": 0.9858,
-          "suitScore": 0.9802,
+          "suitScore": 0.9804,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -3212,12 +3214,12 @@
               489.0
             ]
           ],
-          "cardScore": 0.00225837342441082,
+          "cardScore": 0.0022611503954976797,
           "rank": null,
           "suit": null,
           "faceDown": true,
           "score": 0.9982,
-          "suitScore": 0.969,
+          "suitScore": 0.9686,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -3229,7 +3231,7 @@
       "warnings": [],
       "uncertainCards": [],
       "autoReady": true,
-      "recognitionMs": 679.8
+      "recognitionMs": 913.2
     },
     {
       "name": "slanted-right",
@@ -3296,11 +3298,11 @@
               906.0
             ]
           ],
-          "cardScore": 0.9969005584716797,
+          "cardScore": 0.9969077706336975,
           "rank": "9",
           "suit": "clubs",
           "faceDown": false,
-          "score": 0.9954,
+          "score": 0.9953,
           "suitScore": 0.9966,
           "rotation": 0,
           "review": false,
@@ -3332,11 +3334,11 @@
               467.0
             ]
           ],
-          "cardScore": 0.9947047829627991,
+          "cardScore": 0.9946683049201965,
           "rank": "A",
           "suit": "hearts",
           "faceDown": false,
-          "score": 0.9837,
+          "score": 0.9851,
           "suitScore": 0.9797,
           "rotation": 0,
           "review": false,
@@ -3368,12 +3370,12 @@
               385.0
             ]
           ],
-          "cardScore": 0.002277960069477558,
+          "cardScore": 0.0022792103700339794,
           "rank": null,
           "suit": null,
           "faceDown": true,
           "score": 0.997,
-          "suitScore": 0.9426,
+          "suitScore": 0.9425,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -3404,12 +3406,12 @@
               783.0
             ]
           ],
-          "cardScore": 0.9914212822914124,
+          "cardScore": 0.9914114475250244,
           "rank": "8",
           "suit": "clubs",
           "faceDown": false,
           "score": 0.9973,
-          "suitScore": 0.9939,
+          "suitScore": 0.9935,
           "rotation": 0,
           "review": false,
           "issues": [],
@@ -3421,7 +3423,7 @@
       "warnings": [],
       "uncertainCards": [],
       "autoReady": true,
-      "recognitionMs": 759.2
+      "recognitionMs": 950.2
     }
   ],
   "negativeScenes": [
@@ -3439,7 +3441,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 482.3
+        "recognitionMs": 470.0
       }
     },
     {
@@ -3456,7 +3458,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 324.2
+        "recognitionMs": 351.0
       }
     },
     {
@@ -3473,7 +3475,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 1202.9
+        "recognitionMs": 1347.0
       }
     },
     {
@@ -3484,13 +3486,13 @@
       "details": {
         "cards": [],
         "hiddenCount": 0,
-        "rejectedCount": 188,
+        "rejectedCount": 189,
         "warnings": [
           "扑克需要完整五张，当前检测到0张。"
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 2858.4
+        "recognitionMs": 3380.4
       }
     },
     {
@@ -3507,7 +3509,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 977.7
+        "recognitionMs": 1106.8
       }
     },
     {
@@ -3524,7 +3526,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 601.1
+        "recognitionMs": 595.6
       }
     },
     {
@@ -3541,7 +3543,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 1822.5
+        "recognitionMs": 1987.3
       }
     },
     {
@@ -3558,7 +3560,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 1050.5
+        "recognitionMs": 1115.6
       }
     },
     {
@@ -3575,7 +3577,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 2005.7
+        "recognitionMs": 2295.3
       }
     },
     {
@@ -3592,7 +3594,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 1366.1
+        "recognitionMs": 1458.3
       }
     },
     {
@@ -3609,7 +3611,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 1837.8
+        "recognitionMs": 2070.5
       }
     },
     {
@@ -3626,7 +3628,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 1537.4
+        "recognitionMs": 1852.5
       }
     },
     {
@@ -3643,7 +3645,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 565.1
+        "recognitionMs": 629.6
       }
     },
     {
@@ -3660,7 +3662,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 1375.4
+        "recognitionMs": 1479.2
       }
     },
     {
@@ -3677,7 +3679,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 1355.6
+        "recognitionMs": 1485.6
       }
     },
     {
@@ -3694,7 +3696,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 1447.6
+        "recognitionMs": 1420.2
       }
     },
     {
@@ -3711,7 +3713,7 @@
         ],
         "uncertainCards": [],
         "autoReady": false,
-        "recognitionMs": 757.8
+        "recognitionMs": 793.7
       }
     }
   ],

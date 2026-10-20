@@ -6,7 +6,7 @@ html=(web/'index.html').read_text('utf-8')
 html=html.replace('<link rel="stylesheet" href="style.css">','<style>'+(web/'style.css').read_text('utf-8')+'</style>')
 worker=(web/'engine.js').read_text('utf-8')+'\n'+(web/'blackjack-engine.js').read_text('utf-8')+'\n'+(web/'solver-worker.js').read_text('utf-8').replace("importScripts('engine.js','blackjack-engine.js');",'')
 scripts=''
-for name in ['engine.js','state.js','recognition-policy.js','ui.js']:
+for name in ['engine.js','state.js','recognition-policy.js','hotkeys.js','ui.js']:
     code=(web/name).read_text('utf-8')
     if name=='ui.js':
         import json

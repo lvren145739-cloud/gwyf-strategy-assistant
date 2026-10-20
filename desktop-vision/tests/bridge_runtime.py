@@ -16,6 +16,6 @@ util.inject_pywebview('edgechromium',w)
 assert w.events._pywebviewready.wait(2),'Desktop bridge registration timed out'
 assert len(scripts)==2
 funcs=json.loads(re.search(r"JSON.parse\('(.*)'\)",scripts[1]).group(1))
-expected={'status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact'}
+expected={'status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact','hotkeys'}
 assert {f['func'] for f in funcs}==expected
 print(json.dumps({'python':sys.version.split()[0],'pywebview':version('pywebview'),'methods':len(funcs),'injectionMs':round((time.perf_counter()-started)*1000,2),'scope':'real API registration only; no GUI or Win32 capture'},ensure_ascii=False))
