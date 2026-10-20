@@ -1,5 +1,8 @@
 name: Publish Desktop Vision 0.3
 on:
+  push:
+    branches: [desktop-vision-v0.3]
+    paths: ['.github/workflows/desktop-vision-release.yml']
   workflow_dispatch:
 permissions:
   contents: read
