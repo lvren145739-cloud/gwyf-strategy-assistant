@@ -24,6 +24,10 @@ def test():
   report['enumeratedTitles']=[r['title'] for r in rows]
   target_hwnd=int(fixture.native.Handle.ToInt64())
   report['fixtureHandle']=str(target_hwnd)
+  tid=api.native.user.GetWindowThreadProcessId(target_hwnd,None)
+  report['guiDesktop']=str(api.native.user.GetThreadDesktop(tid))
+  report['rpcDesktop']=str(api.native.user.GetThreadDesktop(threading.get_native_id()))
+  report['directNativeTitles']=[r['title'] for r in api.windows()]
   report['fixtureVisible']=bool(api.native.user.IsWindowVisible(target_hwnd))
   n=api.native.user.GetWindowTextLengthW(target_hwnd);buf=ctypes.create_unicode_buffer(n+1);api.native.user.GetWindowTextW(target_hwnd,buf,n+1);report['fixtureNativeTitle']=buf.value
   target=next(r for r in rows if r['id']==str(target_hwnd))
