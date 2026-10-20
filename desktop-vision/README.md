@@ -35,7 +35,7 @@ Windows CI 已用真实 WebView2、原生 EnumWindows 和 MSS 完成自建窗口
 
 ## 源码开发
 
-源码包的 `启动识牌助手.bat` 可配置标准 CPython 3.11–3.15 x64 环境；普通用户优先下载免装 Python 版。自由线程 Python 和 32 位环境暂不支持。Linux 各版本推理、JSON 返回值和中文模型路径验证见 tests/python-compatibility.json。开发者重新训练需另备视频帧及训练依赖；源码包不分发原始游戏视频。
+源码包先运行 `Setup-Windows.bat` 配置，再用 `Start-Windows.bat` 启动；支持标准 CPython 3.11–3.15 x64 环境；普通用户优先下载免装 Python 版。自由线程 Python 和 32 位环境暂不支持。Linux 各版本推理、JSON 返回值和中文模型路径验证见 tests/python-compatibility.json。开发者重新训练需另备视频帧及训练依赖；源码包不分发原始游戏视频。
 
 `界面预览-无需安装.html` 只演示手动录牌与计算，桌面截图和模型推理由 app.py 提供。
 

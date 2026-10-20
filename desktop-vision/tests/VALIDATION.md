@@ -9,7 +9,7 @@
 - `automatic_flow.py`：默认无需框区、17 对 A 自动停牌、重复截图保持撤销和历史、缺牌停用旧建议、重复牌阻止自动采用、皇家同花顺自动计算、扑克不足五张保留草稿、归档撤销、420×341 紧凑同屏通过。
 - `recognition-policy.test.js` / `state.test.js`：完整性、分数、牌背、重复牌、牌组/历史记录校验通过。
 - `bridge-results.json`：实际 pywebview 扫描、注入脚本与 Python RPC，通过全部 9 个接口和错误恢复。
-- `windows-native-results.json`：真实 Windows 3.14 嵌入式 Python、WebView2 Promise RPC、EnumWindows 和 MSS 自建窗口截图通过。首次完成的运行：https://github.com/lvren145739-cloud/gwyf-strategy-assistant/actions/runs/39413613979 。不是实际游戏测试，DPI、多屏、游戏焦点和全局快捷键不在此次证明范围。
+- `windows-native-results.json`：真实 Windows 3.14 嵌入式 Python、WebView2 Promise RPC、EnumWindows 和 MSS 自建窗口截图通过。最终模型通过的运行：https://github.com/lvren145739-cloud/gwyf-strategy-assistant/actions/runs/39419730116 。不是实际游戏测试，DPI、多屏、游戏焦点和全局快捷键不在此次证明范围。
 - `python-compatibility.json`：标准 Python 3.11–3.15 在独立 Linux 环境实际加载当前四个模型、整帧识别、中文路径与 JSON 返回校验。Windows 各版本依赖锁见 windows-locks；真实原生 GUI 仅测嵌入式 3.14。
 - 性能实测见 `benchmark.json`，整帧 CPU 识别包括候选定位、模型复核和预览生成；不含截屏和策略计算，不能当作 Windows 完整延迟。
 

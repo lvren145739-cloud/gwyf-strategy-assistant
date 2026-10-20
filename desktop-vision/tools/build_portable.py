@@ -30,6 +30,9 @@ def main():
   target=DIST/folder
   if target.exists():shutil.rmtree(target)
   shutil.copytree(ROOT/folder,target,ignore=shutil.ignore_patterns('preview-test.html','__pycache__','*.log'))
+ validation=DIST/'validation';validation.mkdir(exist_ok=True)
+ for name in ['VALIDATION.md','windows-native-results.json','v3-evaluation.json','python-compatibility.json','benchmark.json']:
+  shutil.copyfile(ROOT/'tests'/name,validation/name)
  support=DIST/'runtime-support';support.mkdir(exist_ok=True)
  for name in ['MicrosoftEdgeWebView2RuntimeInstallerX64.exe','webview2-offline-source.json','python-source.json']:shutil.copyfile(BUILD/name,support/name)
  # Windows Script Host is present on ordinary Win10/11. CMD alternative is also
