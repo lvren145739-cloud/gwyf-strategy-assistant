@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self' 'unsafe-eval' 'unsafe-inline'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'">
+<title>GWYF · 识牌实验版</title><style>:root{color-scheme:dark;--bg:#10191b;--panel:#192528;--line:#2b3b3e;--text:#e8eeee;--muted:#93a7a9;--mint:#8ce6bc;--amber:#e5bd75}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 "Segoe UI","Microsoft YaHei",sans-serif}button,select,input{font:inherit;color:inherit;border:1px solid var(--line);border-radius:9px;background:#202e31;padding:8px 10px}button{cursor:pointer;touch-action:manipulation}button:hover{border-color:var(--mint)}button:disabled{opacity:.4;cursor:default}input{width:76px}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--mint);outline-offset:2px}header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 10px}header small{display:block;color:var(--muted);font-size:11px;letter-spacing:1px}.tag{font-size:10px;font-weight:500;border:1px solid #43705f;color:var(--mint);padding:2px 5px;border-radius:4px;margin-left:5px}main{padding:0 14px 20px;max-width:850px;margin:auto}.tabs{display:flex;gap:6px;margin-bottom:10px}.tabs button{flex:1;padding:6px}.tabs .active{color:var(--mint);background:#243f35;border-color:#527e6b}.advice{border:1px solid #36564b;background:linear-gradient(120deg,#1b3b30,#1b2d30);border-radius:12px;padding:13px 16px}.advice small{color:var(--mint);font-size:11px}.advice h1{font-size:27px;line-height:1.25;margin:4px 0 6px}.advice p{margin:0;font-size:12px;color:#b8ccca}.advice.warn{border-color:#7e6741;background:linear-gradient(120deg,#3c3324,#292e2a)}.advice.warn small{color:var(--amber)}.actions{display:flex;gap:6px;margin-top:10px}.actions button{white-space:nowrap;padding:7px 9px}.primary{background:var(--mint);color:#14261e;border-color:var(--mint);font-weight:650}.primary:hover{background:#b8f6d8}kbd{font:10px monospace;margin-left:3px;opacity:.65}.current{display:flex;flex-direction:column;gap:4px;margin-top:8px}.cardsline{display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-height:27px}.cardsline small{width:38px;color:var(--muted);font-size:11px}.chip{font-weight:650;font-size:14px;padding:2px 6px;border:1px solid #3b5152;border-radius:5px;background:#243438}.red{color:#ffaaa5}.status{font-size:11px;color:var(--muted);margin:7px 2px;min-height:16px}.status.error{color:#ffb6a2}section:not(.advice),details{margin-top:10px;border:1px solid var(--line);border-radius:11px;background:var(--panel);padding:12px}summary{cursor:pointer;font-weight:600;list-style-position:inside}summary span{font-size:10px;color:var(--muted);font-weight:400;float:right;margin-top:3px}.row{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:10px}.row label{font-size:11px;color:var(--muted)}.row label select,.row label input{margin-left:3px}.row select#target{flex:1;min-width:140px;max-width:100%}.muted{font-size:11px;color:var(--muted);line-height:1.6}.section-title{display:flex;justify-content:space-between;align-items:center}.section-title span{font-size:11px;color:var(--muted)}.full{width:100%;margin-top:10px}#draft{display:grid;gap:7px}.draft-card{display:flex;align-items:center;gap:5px;border:1px solid var(--line);padding:6px;border-radius:8px}.draft-card.review{border-color:#a18048}.draft-card img{width:34px;height:44px;object-fit:contain;border-radius:3px}.draft-card select{padding:6px 3px;min-width:45px}.draft-card .card-role{width:82px}.draft-card .score{font-size:10px;color:var(--muted);margin-left:auto}.draft-card button{padding:5px 8px}.rank-pad{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:10px}.rank-pad button{padding:7px 0}.buffs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.buffs label{display:flex;justify-content:space-between;align-items:center;font-size:12px}.buffs input{width:55px;padding:4px}#frameWrap{position:relative;margin-top:10px;background:#0b1214;border-radius:8px;overflow:hidden}#frame{display:block;width:100%;height:auto;touch-action:none;max-height:420px;object-fit:contain}#emptyFrame{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;color:var(--muted);font-size:12px}.legend{display:flex;align-items:center;gap:10px;font-size:10px;margin-top:7px;color:#8ce6bc}.legend span:nth-child(2){color:#e5bd75}.legend button{font-size:10px;margin-left:auto;padding:3px 5px}footer{text-align:center;color:#688284;font-size:10px;margin:24px 0 6px}a{color:var(--mint)}details p{font-size:12px;color:#b2c3c5}.used-grid{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.used-grid button{font-size:12px;padding:5px 8px}.compact .expanded,.compact kbd{display:none}.compact main{padding-bottom:5px}.compact header{padding:8px 14px}.compact header small{display:none}.compact .advice{padding:9px 12px}.compact .advice h1{font-size:23px}.compact .tabs{margin-bottom:6px}.compact .current{gap:2px;margin-top:5px}.compact .status{margin:4px 0}.compact .actions{margin-top:6px}.compact .actions button{font-size:12px}.compact .tag{font-size:9px}@media(max-width:420px){main{padding-left:10px;padding-right:10px}header{padding-left:13px;padding-right:13px}.actions button{font-size:12px;padding:7px}.actions kbd{display:none}.draft-card .score{max-width:45px}.draft-card .card-role{width:68px}.buffs{grid-template-columns:1fr}}
+
+[hidden]{display:none!important}
+.compact header{padding:5px 12px}.compact header button{padding:3px 8px;font-size:12px}
+</style></head>
+<body>
+<header><div><b>GWYF <span class="tag">VISION 0.3</span></b><small>自动找牌 · 本地计算</small></div><button id="compact" title="切换小浮窗">收起</button></header>
+<main>
+ <div class="tabs"><button data-mode="blackjack" class="active">二十一点</button><button data-mode="poker">单人扑克</button></div>
+ <section id="advice" class="advice" aria-live="polite"><small>先录入当前牌面</small><h1>等待识牌</h1><p>选择游戏窗口，按 Ctrl+Shift+Space 自动识牌并计算。</p></section>
+ <div id="current" class="current"></div>
+ <div class="actions"><button id="capture" class="primary">识牌计算 <kbd>Ctrl⇧Space</kbd></button><button id="archive">归档本手</button><button id="undo" title="撤销上次手牌更新、换牌或归档">撤销</button></div>
+ <div id="status" class="status" role="status"></div>
+ <div class="expanded">
+  <section id="draftPanel" hidden>
+   <div class="section-title"><b>识别草稿</b><span id="timing"></span><button id="applyTop" class="primary">采用 ⇧Ctrl↵</button></div>
+   <p class="muted">这次识别有疑点，未自动采用。核对点数、花色、归属和张数后计算；模型分数不等于准确率。</p>
+   <div id="draft"></div>
+   <button id="apply" class="primary full">采用牌面并计算</button>
+   <button id="cancelDraft" class="full">放弃草稿 · 保留原手牌</button>
+  </section>
+  <details id="manual"><summary>快速改牌 / 补录庄家牌</summary>
+   <div class="row"><label>添加到 <select id="role"><option value="player">我的手牌</option><option value="dealer">庄家</option></select></label><select id="suit" aria-label="花色"><option value="spades">♠</option><option value="hearts">♥</option><option value="diamonds">♦</option><option value="clubs">♣</option></select><button id="clearDraft">清空草稿</button></div>
+   <div id="rankPad" class="rank-pad"></div><p class="muted">点牌面下方的 × 删除。二十一点庄家第一张为明牌，之后依次补录已翻开的底牌和补牌。</p>
+  </details>
+  <details id="setup" open><summary>截图与识别 <span id="nativeBadge">浏览器预览</span></summary>
+   <div class="row"><select id="target" aria-label="游戏窗口"><option value="">选择游戏窗口</option></select><button id="refresh">刷新</button><button id="openImage">打开测试图片</button></div>
+   <p id="windowStatus" class="muted" role="status"></p>
+   <p id="hotkey" class="muted">桌面版使用 Windows WebView2；浏览器支持手动录牌和识图界面预览。</p>
+   <div class="row"><button id="autoLocate" class="active">自动找牌 · 默认</button><button data-region="player">框选我的牌区</button><button data-region="dealer">框选庄家牌区</button><button id="read" class="primary">识别这一帧</button></div>
+   <p id="regionHint" class="muted">默认先找完整牌面，再自动分组，无需先框牌。只有归属不明确时才框选自己的牌区和庄家牌区；框选不再裁切牌面。</p>
+   <div id="frameWrap"><canvas id="frame" width="960" height="540" aria-label="拖动框选牌区"></canvas><div id="emptyFrame">截图只在内存中处理，不会上传</div></div>
+   <div class="legend"><span>● 我的牌区</span><span>● 庄家牌区</span><button id="clearRegions">清除牌区</button></div>
+  </details>
+  <details><summary>生效道具与升级 <span id="buffLabel">默认无加成</span></summary>
+   <div id="buffs" class="buffs"></div>
+   <div class="row"><label>游玩方式 <select id="team"><option value="solo">单人</option><option value="group">多人</option></select></label><label>饮料正利润倍率 <input id="tipsy" type="number" min="1" max="20" step="0.1" value="2"></label><label>麦克风旋律 <input id="melody" type="number" min="0" max="1" step="0.05" value="1"></label></div>
+   <p class="muted">数量即正在生效的数量，可叠加。延用网页已公开的道具结算模型；以上两个数值填写游戏当前效果。</p>
+  </details>
+  <details><summary>已用牌 <span id="usedCount">0 张</span></summary><div id="used"></div><button id="resetDeck">游戏已洗牌 · 清空当前与历史</button><p class="muted">截图仅更新本手，不自动归档。扑克点“按推荐换牌”时，丢弃的牌立即进入已用牌。二十一点归档包含所有已录入的庄家牌。</p></details>
+  <details><summary>实验范围与规则</summary><p>完整且通过校验的识别会自动计算；疑点显示可修正草稿。截图不会自动归档。这是可校正的截图识牌原型，牌面被遮挡、运动模糊或视角变化时可能漏识。只处理当前屏幕可见的牌，不读取游戏内存。</p><p>策略沿用网页 v7.7.2 的原版 v1.0.30 规则模型：单副牌持续消耗；庄家软17停牌；初始两张可加倍；自然21总返还3×；不含分牌。若游戏版本或模组规则不同，建议不适用。</p><p>本版增加整牌真伪模型、更大的共享字形模型和实况负样本。未证明能适配所有桌型、分辨率与游戏版本。快捷截图、置顶和焦点行为需在 Windows 实机继续验证。牌区只需在视角稳定时设置一次。</p><a href="https://lvren145739-cloud.github.io/gwyf-strategy-assistant/" target="_blank" rel="noopener">打开稳定网页决策器 ↗</a></details>
+  <footer>Created by lvren with GPT-6.1Sol. · MIT<br>截图保留在内存，牌区与已用牌保存在本机。</footer>
+ </div>
+</main>
+<script>/* Deterministic probability engine. All payouts include the stake. */
+const GWYFEngine=(()=>{
+'use strict';
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const reds=new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
+const roulette={};
+function def(key,name,nums,gross){roulette[key]={key,name,nums,gross};}
+for(let n=0;n<=36;n++)def('n'+n,String(n),[n],36);
+def('red','红色',[...reds],2);def('black','黑色',Array.from({length:36},(_,i)=>i+1).filter(n=>!reds.has(n)),2);
+for(const [key,name,predicate] of [['odd','奇数',n=>n%2===1],['even','偶数',n=>n%2===0],['low','1–18',n=>n<=18],['high','19–36',n=>n>=19]])def(key,name,Array.from({length:36},(_,i)=>i+1).filter(predicate),2);
+for(let i=0;i<3;i++){def('doz'+i,`${i*12+1}–${i*12+12}`,Array.from({length:12},(_,j)=>i*12+j+1),3);def('col'+i,`第${i+1}列`,Array.from({length:12},(_,j)=>i+1+j*3),3);}
+const rouletteScenarios=Array.from({length:37},(_,id)=>({id,p:1/37}));
+const baccaratDefs={player:{name:'闲 PLAYER',gross:2,count:2927104},banker:{name:'庄 BANKER',gross:2,count:2927104},tie:{name:'和 TIE',gross:10,count:643192}};
+const baccaratScenarios=Object.keys(baccaratDefs).map(id=>({id,p:baccaratDefs[id].count/6497400}));
+const fortune=[{g:0,n:1},{g:.1,n:5},{g:.25,n:4},{g:.5,n:3},{g:2,n:2},{g:3,n:2},{g:5,n:1}];
+const money={green:{name:'绿色',n:14,g:2,color:'#7fc39b'},blue:{name:'蓝色',n:10,g:3,color:'#7faed5'},red:{name:'红色',n:8,g:5,color:'#db8a82'},orange:{name:'橙色',n:5,g:10,color:'#e5b16c'}};
+const penguin=[1,1.2,1.5,2,3,5,10,25,75,250,1000];
+const dragon=Array.from({length:7},(_,i)=>(4/3)**i);
+const plinko=[24,6,2.8,1.2,.5,.2,.2,.5,1.2,2.8,6,24];
+const pay=[0,1,2,3,4,6,9,25,50];
+const handNames=['高牌','一对','两对','三条','顺子','同花','葫芦','四条','同花顺'];
+const diceWays={2:1,3:2,4:3,5:4,6:5,7:6,8:5,9:4,10:3,11:2,12:1};
+const duckBaseline=Object.freeze({p:.25,g:4}); // Symmetry benchmark, not measured live odds.
+// Early reverse-engineering model; not a verified live RNG distribution.
+const slotSymbols=[{name:'莲花',en:'Lotus',glyph:'❀',factor:1.75,q:7},{name:'甲虫',en:'Beetle',glyph:'♜',factor:1.25,q:5},{name:'权杖',en:'Staff',glyph:'⚚',factor:.75,q:3},{name:'眼睛',en:'Eye',glyph:'◉',factor:.25,q:1}];
+const slotPatterns=[
+ {name:'上横线',cells:[0,1,2],g:2},{name:'中横线',cells:[3,4,5],g:2},{name:'下横线',cells:[6,7,8],g:2},
+ {name:'左竖线',cells:[0,3,6],g:2},{name:'中竖线',cells:[1,4,7],g:2},{name:'右竖线',cells:[2,5,8],g:2},
+ {name:'斜线 ＼',cells:[0,4,8],g:2},{name:'斜线 ／',cells:[2,4,6],g:2},
+ {name:'菱形',cells:[1,3,5,7],g:5},{name:'X形',cells:[0,2,4,6,8],g:20},{name:'九格满盘',cells:[0,1,2,3,4,5,6,7,8],g:59}
+];
+function slotMatches(board){
+ if(!Array.isArray(board)||board.length!==9||board.some(v=>!Number.isInteger(v)||v<0||v>3))throw Error('请为九个格子各选择一种图案。');
+ return slotPatterns.flatMap((p,index)=>{const symbol=board[p.cells[0]];return p.cells.every(i=>board[i]===symbol)?[{index,symbol,g:p.g*slotSymbols[symbol].factor}]:[];});
+}
+let slotCache=null;
+function slotsIID(){
+ if(slotCache)return slotCache;
+ const total=4**9,hist=new Map(),counts=Array(11).fill(0),board=new Array(9);
+ for(let code=0;code<total;code++){
+  let bits=code,q=0;for(let i=0;i<9;i++){board[i]=bits&3;bits>>=2;}
+  for(let j=0;j<slotPatterns.length;j++){const p=slotPatterns[j],symbol=board[p.cells[0]];let hit=true;for(let k=1;k<p.cells.length;k++)if(board[p.cells[k]]!==symbol){hit=false;break;}if(hit){q+=p.g*slotSymbols[symbol].q;counts[j]++;}}
+  hist.set(q,(hist.get(q)||0)+1);
+ }
+ const rows=[...hist].sort((a,b)=>a[0]-b[0]).map(([q,count])=>({g:q/4,count,p:count/total}));
+ slotCache={total,counts,rows};return slotCache;
+}
+function buffs(owned={},settings={},team='group'){
+ const n=id=>Number(owned[id])||0,S=1+.5*n('stakeholder');
+ const melody=n('microphone')?clamp(settings.melody??1,0,1):0;
+ const tipsy=n('drink')?clamp(settings.tipsy??2,1,20):1;
+ const a=(1+.5*n('confidence'))*tipsy*(1+melody);
+ const recovery=n('statue')?1:clamp(1-.75**n('insurance')+melody,0,1);
+ const camera=!!n('camera')&&team==='group';
+ return {a,b:1-recovery,recovery,S,melody,tipsy,camera,cameraRate:camera?.25*S*n('camera'):0,bonusChance:clamp(.1*n('bonus'),0,1)};
+}
+function settle(raw,b={a:1,b:1,cameraRate:0}){return Math.abs(raw)<1e-10?0:raw>0?raw*b.a*(1+(b.cameraRate||0)):raw*b.b;}
+function distribution(rows,b={a:1,b:1,cameraRate:0},total=1){
+ let ev=0,base=0,win=0,flat=0,any=0,min=Infinity,max=-Infinity,square=0;
+ const out=rows.map(r=>{const raw=r.raw??total*(r.g-1),net=settle(raw,b),p=r.p;ev+=p*net;base+=p*raw;square+=p*net*net;if(net>1e-8)win+=p;else if(net>=-1e-8)flat+=p;if(r.hit??r.g>0)any+=p;if(p>0){min=Math.min(min,net);max=Math.max(max,net);}return {...r,raw,net};});
+ if(Math.abs(ev)<1e-12*Math.max(1,total))ev=0;if(Math.abs(base)<1e-12*Math.max(1,total))base=0;
+ return {total,ev,roi:total?ev/total:0,base,win:clamp(win,0,1),flat:clamp(flat,0,1),lose:clamp(1-win-flat,0,1),any:clamp(any,0,1),min:total?min:0,max:total?max:0,sd:Math.sqrt(Math.max(0,square-ev*ev)),out};
+}
+function single(p,g,b){return distribution([{id:'hit',p,g,hit:true},{id:'miss',p:1-p,g:0,hit:false}],b);}
+function portfolio(wagers,kind,b){
+ const defs=kind==='roulette'?roulette:baccaratDefs,scenarios=kind==='roulette'?rouletteScenarios:baccaratScenarios;
+ const total=wagers.reduce((z,w)=>z+w.amount,0);
+ return distribution(scenarios.map(s=>{let raw=0,hit=false;for(const w of wagers){const d=defs[w.key];if(!d)continue;const yes=kind==='roulette'?d.nums.includes(s.id):w.key===s.id;const g=yes?d.gross:0;raw+=w.amount*(g-1);if(yes)hit=true;}return {...s,raw,hit};}),b,total);
+}
+function pointModel(point,left=3){const w=diceWays[point]/36,l=6/36,r=1-w-l,t=r**left;return [{id:'point',p:w*(1-t)/(w+l),g:4},{id:'loss',p:l*(1-t)/(w+l),g:0},{id:'push',p:t,g:1}];}
+function crapsRows(){const rows=[{id:'comeout',p:8/36,g:2},{id:'immediateLoss',p:4/36,g:0}];for(const point of [4,5,6,8,9,10])for(const r of pointModel(point))rows.push({...r,id:point+'-'+r.id,p:r.p*diceWays[point]/36});return rows;}
+function minesP(m,k){let p=1;for(let i=0;i<k;i++)p*=(25-m-i)/(25-i);return p;}
+function minesRoutes(target,a=1){
+ if(!Number.isFinite(target)||target<1||!Number.isFinite(a)||a<=0)throw Error('目标和利润倍数无效。');
+ const rows=[];
+ for(let m=1;m<=24;m++){
+  let p=1,clicks=0;
+  for(let k=1;k<=25-m;k++){
+   clicks+=p;p*=(26-m-k)/(26-k);const g=1/p,final=1+(g-1)*a;
+   if(final+1e-8>=target){rows.push({m,k,p,g,final,expectedClicks:clicks/p});break;}
+  }
+ }
+ return rows;
+}
+function choose(n,k){if(k<0||k>n)return 0;k=Math.min(k,n-k);let v=1;for(let i=1;i<=k;i++)v=v*(n-k+i)/i;return v;}
+function kenoRows(n,estimated=1){const rows=Array.from({length:n+1},(_,h)=>({id:h,p:choose(10,h)*choose(38,n-h)/choose(48,n),g:h?2**h:0,hit:h>0}));const scale=estimated/rows.reduce((z,r)=>z+r.p*r.g,0);return rows.map(r=>({...r,g:r.g*scale}));}
+function bjValue(cards){let low=0,aces=0;for(const c of cards){if(c==='A'){low++;aces++;}else low+=['J','Q','K'].includes(c)?10:Number(c);}const soft=aces>0&&low+10<=21;return {total:low+(soft?10:0),soft};}
+function bjNext(total,soft,rank){let low=total-(soft?10:0);const ace=rank==='A';low+=ace?1:Number(rank);return low+((soft||ace)&&low+10<=21?10:0);}
+// Vanilla rules, not user-selectable casino variants. See the dated source notes.
+const bjRules=Object.freeze({dealerStand:17,hitSoft17:false,doubleInitialOnly:true,naturalGross:3,split:false});
+function bjCanDouble(s){return s.two===true&&s.total<21;}
+function bjReference(s,d){
+ const canDouble=bjCanDouble(s);
+ const t=s.total,dealer=d==='A'?11:Number(d);let action='H',why='点数偏低，常规查表倾向要牌。';
+ if(t>21)return {action:'B',why:'手牌已超过21点。'};
+ if(t===21)return {action:'S',why:'21点停牌；初始两张自然21按游戏规则已直接结算。'};
+ if(s.soft){
+  if(t>=20){action='S';why='软20以上，常规查表倾向停牌。';}
+  else if(t===19){action='S';why='软19，常规S17查表参考停牌。';}
+  else if(t===18){action=dealer>=3&&dealer<=6?'DS':[2,7,8].includes(dealer)?'S':'H';why='软18对3–6参考加倍，对2/7/8停牌，对9/10/A要牌。';}
+  else if(t===17){action=dealer>=3&&dealer<=6?'DH':'H';why='软17通常要牌，对3–6可参考加倍。';}
+  else if(t===15||t===16){action=dealer>=4&&dealer<=6?'DH':'H';why='软15/16对4–6可参考加倍。';}
+  else if(t===13||t===14){action=dealer>=5&&dealer<=6?'DH':'H';why='软13/14对5–6可参考加倍。';}
+ }else{
+  if(t>=17){action='S';why='硬17以上，常规查表倾向停牌。';}
+  else if(t>=13){action=dealer<=6?'S':'H';why='硬13–16：庄家2–6时停牌，7–A时要牌。';}
+  else if(t===12){action=dealer>=4&&dealer<=6?'S':'H';why='硬12只对4、5、6停牌。';}
+  else if(t===11){action=dealer!==11?'DH':'H';why='硬11通常加倍；常规S17查表对A参考要牌。';}
+  else if(t===10){action=dealer<=9?'DH':'H';why='硬10对2–9可参考加倍。';}
+  else if(t===9){action=dealer>=3&&dealer<=6?'DH':'H';why='硬9对3–6可参考加倍。';}
+ }
+ if(action==='DH'||action==='DS'){const fallback=action==='DH'?'H':'S';return {action:canDouble?'D':fallback,why:why+(canDouble?'':' 已经要过牌，按原版规则不能再加倍，采用备用动作。'),fallback};}
+ return {action,why};
+}
+function pokerCategory(ids){
+ let mask=0,flush=true,firstSuit=ids[0]/13|0;const counts=new Uint8Array(13);
+ for(let i=0;i<5;i++){const id=ids[i],r=id%13;counts[r]++;mask|=1<<r;if((id/13|0)!==firstSuit)flush=false;}
+ let pairs=0,triple=0,quad=0;for(let i=0;i<13;i++){if(counts[i]===4)quad++;else if(counts[i]===3)triple++;else if(counts[i]===2)pairs++;}
+ let straight=false;if(!pairs&&!triple&&!quad){straight=mask===4111;for(let i=0;i<=8&&!straight;i++)straight=mask===(31<<i);}
+ return straight&&flush?8:quad?7:triple&&pairs?6:flush?5:straight?4:triple?3:pairs===2?2:pairs?1:0;
+}
+function* pokerSolve(data){
+ const {cards,used=[],a=1,b=1,cameraRate=0,objective='ev'}=data;
+ if(cards.length!==5||cards.some(id=>!Number.isInteger(id)||id<0||id>51))throw Error('请先录入完整的五张手牌。');
+ if(new Set(cards).size!==5)throw Error('五张手牌不能重复。');
+ const absent=new Set([...cards,...used]);const rem=Array.from({length:52},(_,i)=>i).filter(id=>!absent.has(id));
+ if(rem.length<5)throw Error('剩余不足5张，换牌可能跨越重建边界。请核对游戏内重洗状态后重新记录。');
+ const total=choose(rem.length+5,5),solutions=[];let done=0,chunk=0;const grossPay=[0,1,2,3,4,6,9,25,50];
+ for(let mask=31;mask>=0;mask--){
+  const fixed=cards.filter((_,i)=>mask&(1<<i)),need=5-fixed.length,hist=Array(9).fill(0),work=[...fixed],idx=Array.from({length:need},(_,i)=>i);let n=0;
+  for(;;){for(let j=0;j<need;j++)work[fixed.length+j]=rem[idx[j]];hist[pokerCategory(work)]++;n++;done++;chunk++;
+   if(chunk>=25000){chunk=0;yield {progress:done/total,done,total};}
+   if(need===0)break;let j=need-1;while(j>=0&&idx[j]===rem.length-need+j)j--;if(j<0)break;idx[j]++;for(let k=j+1;k<need;k++)idx[k]=idx[k-1]+1;
+  }
+  let ev=0,base=0,win=0,flat=0,sq=0;for(let k=0;k<9;k++){const raw=grossPay[k]-1,net=raw>0?raw*a*(1+cameraRate):raw*b,p=hist[k]/n;ev+=p*net;base+=p*raw;sq+=p*net*net;if(net>1e-8)win+=p;else if(net>=-1e-8)flat+=p;}
+  solutions.push({mask,n,hist,ev,base,win,flat,lose:Math.max(0,1-win-flat),sd:Math.sqrt(Math.max(0,sq-ev*ev))});
+ }
+ solutions.sort((x,y)=>objective==='win'?y.win-x.win||y.ev-x.ev||y.mask-x.mask:y.ev-x.ev||y.win-x.win||y.mask-x.mask);
+ return {solutions,total,remaining:rem.length};
+}
+return {clamp,reds,roulette,rouletteScenarios,baccaratDefs,baccaratScenarios,fortune,money,penguin,dragon,plinko,pay,handNames,diceWays,duckBaseline,slotSymbols,slotPatterns,slotMatches,slotsIID,buffs,settle,distribution,single,portfolio,pointModel,crapsRows,minesP,minesRoutes,choose,kenoRows,bjValue,bjNext,bjRules,bjCanDouble,bjReference,pokerCategory,pokerSolve};
+})();
+if(typeof module!=='undefined'&&module.exports)module.exports=GWYFEngine;
+</script>
+<script>/* Explicit, reversible visible-card history. Screenshots never archive by themselves. */
+const VisionState=(()=>{
+'use strict';
+const ranks=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+const suits=['spades','hearts','diamonds','clubs'];
+const pokerRanks=['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+const blank=()=>({schema:1,mode:'blackjack',regions:{blackjack:{},poker:{}},aspect:{},owned:{},settings:{},team:'solo',
+ blackjack:{player:[],dealer:[],used:Array(10).fill(0)},poker:{player:[],used:[],phase:'initial'},undo:null});
+const clone=x=>JSON.parse(JSON.stringify(x));
+function validateCards(cards,mode){
+ if(!Array.isArray(cards)||cards.some(c=>!c||!ranks.includes(c.rank)||(mode==='poker'&&!suits.includes(c.suit))))throw Error('请先补全牌面。');
+ if(mode==='poker'){
+  const ids=cards.map(cardId);if(ids.length!==5||new Set(ids).size!==5)throw Error('扑克需要五张互不重复的牌。');
+ }
+}
+function cardId(c){return suits.indexOf(c.suit)*13+pokerRanks.indexOf(c.rank);}
+const rankIndex=r=>r==='A'?0:Math.min(10,['J','Q','K'].includes(r)?10:Number(r))-1;
+function assertDeck(s){
+ const hand=s.blackjack,counts=hand.used.slice();
+ for(const c of [...hand.player,...hand.dealer])counts[rankIndex(c.rank)]++;
+ if(counts.some((n,i)=>!Number.isInteger(n)||n<0||n>(i===9?16:4)))throw Error('记录超过单副牌数量；请检查识别结果或在游戏洗牌后重置牌堆。');
+}
+function commit(s,cards){
+ const next=clone(s);const mode=s.mode;
+ const player=cards.filter(c=>c.role==='player').map(({rank,suit})=>({rank,suit}));
+ const dealer=cards.filter(c=>c.role==='dealer').map(({rank,suit})=>({rank,suit}));
+ validateCards(player,mode);
+ if(mode==='blackjack'){
+  validateCards(dealer,mode);
+  if(player.length<2||dealer.length<1)throw Error('请至少录入两张手牌和一张庄家明牌。');
+  next.blackjack.player=player;next.blackjack.dealer=dealer;assertDeck(next);
+ }else{
+  const hand=next.poker,ids=player.map(cardId);
+  if(ids.some(id=>hand.used.includes(id)))throw Error('这张牌已在已用牌中；请检查识别或先撤销错误归档。');
+  if(hand.phase==='replacement'){
+   const old=hand.player;
+   for(const retained of old.filter(Boolean))if(!ids.includes(cardId(retained)))throw Error('补牌结果缺少保留牌，请核对五张牌。');
+  }
+  hand.player=player;
+ }
+ next.undo={label:'更新手牌',snapshot:clone({...s,undo:null})};
+ return next;
+}
+function archive(s){
+ const next=clone(s),hand=next[s.mode];
+ if(!hand.player.length)throw Error('当前没有可归档手牌。');
+ if(s.mode==='blackjack'){
+  assertDeck(s);
+  for(const c of [...hand.player,...hand.dealer])hand.used[rankIndex(c.rank)]++;
+  hand.player=[];hand.dealer=[];
+ }else{
+  validateCards(hand.player,'poker');
+  hand.used=[...new Set([...hand.used,...hand.player.map(cardId)])];hand.player=[];hand.phase='initial';
+ }
+ next.undo={label:'归档',snapshot:clone({...s,undo:null})};return next;
+}
+function discard(s,mask){
+ if(s.mode!=='poker'||!Number.isInteger(mask)||mask<0||mask>31)throw Error('换牌计划无效。');
+ const next=clone(s),hand=next.poker;validateCards(hand.player,'poker');
+ if(hand.phase!=='initial')throw Error('本手已进入补牌阶段。');
+ const discarded=hand.player.filter((_,i)=>!(mask&(1<<i))).map(cardId);
+ if(!discarded.length)throw Error('推荐保留全部五张，无需换牌。');
+ hand.used=[...new Set([...hand.used,...discarded])];
+ hand.player=hand.player.map((c,i)=>mask&(1<<i)?c:null);hand.phase='replacement';
+ next.undo={label:'换牌',snapshot:clone({...s,undo:null})};return next;
+}
+function resetDeck(s){
+ const next=clone(s);
+ if(s.mode==='blackjack')next.blackjack={player:[],dealer:[],used:Array(10).fill(0)};
+ else next.poker={player:[],used:[],phase:'initial'};
+ next.undo={label:'重置牌堆',snapshot:clone({...s,undo:null})};return next;
+}
+function restore(raw){
+ // Saved state is untrusted. Keep only data fields used by the prototype.
+ const s=blank();if(!raw||raw.schema!==1)return s;
+ if(['blackjack','poker'].includes(raw.mode))s.mode=raw.mode;
+ for(const mode of ['blackjack','poker']){
+  const h=raw[mode];if(!h)continue;
+  try{
+   if(!Array.isArray(h.player)||h.player.length>16)continue;
+   const known=h.player.filter(Boolean);validateCards(known,'blackjack');
+   if(mode==='blackjack'){
+    validateCards(h.dealer,'blackjack');
+    if(h.dealer.length>16||!Array.isArray(h.used)||h.used.length!==10)continue;
+    s.blackjack=clone(h);assertDeck(s);
+   }else{
+    if(known.some(c=>!suits.includes(c.suit))||!Array.isArray(h.used)||h.used.some(x=>!Number.isInteger(x)||x<0||x>51))continue;
+    s.poker={player:clone(h.player),used:[...new Set(h.used)],phase:h.phase==='replacement'?'replacement':'initial'};
+   }
+  }catch(_){s[mode]=blank()[mode];}
+ }
+ if(raw.regions&&typeof raw.regions==='object')for(const mode of ['blackjack','poker'])for(const role of ['player','dealer']){
+  const r=raw.regions[mode]?.[role];
+  if(Array.isArray(r)&&r.length===4&&r.every(x=>Number.isFinite(x)&&x>=0&&x<=1)&&r[0]<r[2]&&r[1]<r[3])s.regions[mode][role]=r;
+ }
+ if(raw.aspect&&typeof raw.aspect==='object')for(const mode of ['blackjack','poker'])if(Number.isFinite(raw.aspect[mode]))s.aspect[mode]=raw.aspect[mode];
+ for(const id of ['confidence','insurance','statue','stakeholder','drink','microphone','camera']){
+  const v=raw.owned?.[id];if(Number.isInteger(v)&&v>=0&&v<=100)s.owned[id]=v;
+ }
+ if(raw.settings?.captureMode==='manual')s.settings.captureMode='manual';
+ if(raw.team==='group')s.team='group';
+ for(const [id,min,max] of [['tipsy',1,20],['melody',0,1]])if(Number.isFinite(raw.settings?.[id]))s.settings[id]=Math.max(min,Math.min(max,raw.settings[id]));
+ return s;
+}
+return {ranks,suits,pokerRanks,blank,clone,rankIndex,cardId,commit,archive,discard,resetDeck,restore,assertDeck};
+})();
+if(typeof module!=='undefined')module.exports=VisionState;
+</script>
+<script>/* Recognition can update this visible hand, never archive or press game buttons. */
+const VisionRecognition=(()=>{
+'use strict';
+function assess(state,out){
+ const reasons=[];
+ if(!out||!Array.isArray(out.cards))return {ok:false,reasons:['识别结果格式无效']};
+ const cards=out.cards.filter(c=>!c.faceDown),players=cards.filter(c=>c.role==='player'),dealer=cards.filter(c=>c.role==='dealer');
+ if(out.autoReady!==true)reasons.push('整手识别尚未通过校验');
+ if((out.warnings||[]).length)reasons.push(...out.warnings);
+ if(cards.some(c=>!Number.isFinite(c.score)||c.score<.94||!Number.isFinite(c.suitScore)||c.suitScore<.92||!Number.isFinite(c.cardScore)||c.cardScore<.94))reasons.push('牌面清晰度未达到自动计算条件');
+ if(out.cards.some(c=>c.review))reasons.push('存在需要核对的牌');
+ if(cards.some(c=>!VisionState.ranks.includes(c.rank)||!VisionState.suits.includes(c.suit)))reasons.push('点数或花色没有读全');
+ if(cards.some(c=>!['player','dealer'].includes(c.role)))reasons.push('牌的归属不完整');
+ if(state.mode==='poker'&&(players.length!==5||dealer.length))reasons.push('扑克必须是自己的完整五张牌');
+ if(state.mode==='blackjack'&&(players.length<2||dealer.length<1))reasons.push('需要至少两张手牌和庄家明牌');
+ const ids=cards.map(c=>c.rank+':'+c.suit);
+ if(new Set(ids).size!==ids.length)reasons.push('单副牌中出现了重复牌面');
+ if(out.cards.filter(c=>c.faceDown).some(c=>c.role!=='dealer')||out.cards.filter(c=>c.faceDown).length>1)reasons.push('暗牌的数量或归属不确定');
+ if(!reasons.length){try{VisionState.commit(state,cards);}catch(e){reasons.push(e.message);}}
+ return {ok:reasons.length===0,reasons:[...new Set(reasons)],cards};
+}
+return {assess};
+})();
+if(typeof module!=='undefined')module.exports=VisionRecognition;
+</script>
+<script>const GWYF_WORKER_URL=URL.createObjectURL(new Blob(["/* Deterministic probability engine. All payouts include the stake. */\nconst GWYFEngine=(()=>{\n'use strict';\nconst clamp=(v,a,b)=>Math.max(a,Math.min(b,v));\nconst reds=new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);\nconst roulette={};\nfunction def(key,name,nums,gross){roulette[key]={key,name,nums,gross};}\nfor(let n=0;n<=36;n++)def('n'+n,String(n),[n],36);\ndef('red','红色',[...reds],2);def('black','黑色',Array.from({length:36},(_,i)=>i+1).filter(n=>!reds.has(n)),2);\nfor(const [key,name,predicate] of [['odd','奇数',n=>n%2===1],['even','偶数',n=>n%2===0],['low','1–18',n=>n<=18],['high','19–36',n=>n>=19]])def(key,name,Array.from({length:36},(_,i)=>i+1).filter(predicate),2);\nfor(let i=0;i<3;i++){def('doz'+i,`${i*12+1}–${i*12+12}`,Array.from({length:12},(_,j)=>i*12+j+1),3);def('col'+i,`第${i+1}列`,Array.from({length:12},(_,j)=>i+1+j*3),3);}\nconst rouletteScenarios=Array.from({length:37},(_,id)=>({id,p:1/37}));\nconst baccaratDefs={player:{name:'闲 PLAYER',gross:2,count:2927104},banker:{name:'庄 BANKER',gross:2,count:2927104},tie:{name:'和 TIE',gross:10,count:643192}};\nconst baccaratScenarios=Object.keys(baccaratDefs).map(id=>({id,p:baccaratDefs[id].count/6497400}));\nconst fortune=[{g:0,n:1},{g:.1,n:5},{g:.25,n:4},{g:.5,n:3},{g:2,n:2},{g:3,n:2},{g:5,n:1}];\nconst money={green:{name:'绿色',n:14,g:2,color:'#7fc39b'},blue:{name:'蓝色',n:10,g:3,color:'#7faed5'},red:{name:'红色',n:8,g:5,color:'#db8a82'},orange:{name:'橙色',n:5,g:10,color:'#e5b16c'}};\nconst penguin=[1,1.2,1.5,2,3,5,10,25,75,250,1000];\nconst dragon=Array.from({length:7},(_,i)=>(4/3)**i);\nconst plinko=[24,6,2.8,1.2,.5,.2,.2,.5,1.2,2.8,6,24];\nconst pay=[0,1,2,3,4,6,9,25,50];\nconst handNames=['高牌','一对','两对','三条','顺子','同花','葫芦','四条','同花顺'];\nconst diceWays={2:1,3:2,4:3,5:4,6:5,7:6,8:5,9:4,10:3,11:2,12:1};\nconst duckBaseline=Object.freeze({p:.25,g:4}); // Symmetry benchmark, not measured live odds.\n// Early reverse-engineering model; not a verified live RNG distribution.\nconst slotSymbols=[{name:'莲花',en:'Lotus',glyph:'❀',factor:1.75,q:7},{name:'甲虫',en:'Beetle',glyph:'♜',factor:1.25,q:5},{name:'权杖',en:'Staff',glyph:'⚚',factor:.75,q:3},{name:'眼睛',en:'Eye',glyph:'◉',factor:.25,q:1}];\nconst slotPatterns=[\n {name:'上横线',cells:[0,1,2],g:2},{name:'中横线',cells:[3,4,5],g:2},{name:'下横线',cells:[6,7,8],g:2},\n {name:'左竖线',cells:[0,3,6],g:2},{name:'中竖线',cells:[1,4,7],g:2},{name:'右竖线',cells:[2,5,8],g:2},\n {name:'斜线 ＼',cells:[0,4,8],g:2},{name:'斜线 ／',cells:[2,4,6],g:2},\n {name:'菱形',cells:[1,3,5,7],g:5},{name:'X形',cells:[0,2,4,6,8],g:20},{name:'九格满盘',cells:[0,1,2,3,4,5,6,7,8],g:59}\n];\nfunction slotMatches(board){\n if(!Array.isArray(board)||board.length!==9||board.some(v=>!Number.isInteger(v)||v<0||v>3))throw Error('请为九个格子各选择一种图案。');\n return slotPatterns.flatMap((p,index)=>{const symbol=board[p.cells[0]];return p.cells.every(i=>board[i]===symbol)?[{index,symbol,g:p.g*slotSymbols[symbol].factor}]:[];});\n}\nlet slotCache=null;\nfunction slotsIID(){\n if(slotCache)return slotCache;\n const total=4**9,hist=new Map(),counts=Array(11).fill(0),board=new Array(9);\n for(let code=0;code<total;code++){\n  let bits=code,q=0;for(let i=0;i<9;i++){board[i]=bits&3;bits>>=2;}\n  for(let j=0;j<slotPatterns.length;j++){const p=slotPatterns[j],symbol=board[p.cells[0]];let hit=true;for(let k=1;k<p.cells.length;k++)if(board[p.cells[k]]!==symbol){hit=false;break;}if(hit){q+=p.g*slotSymbols[symbol].q;counts[j]++;}}\n  hist.set(q,(hist.get(q)||0)+1);\n }\n const rows=[...hist].sort((a,b)=>a[0]-b[0]).map(([q,count])=>({g:q/4,count,p:count/total}));\n slotCache={total,counts,rows};return slotCache;\n}\nfunction buffs(owned={},settings={},team='group'){\n const n=id=>Number(owned[id])||0,S=1+.5*n('stakeholder');\n const melody=n('microphone')?clamp(settings.melody??1,0,1):0;\n const tipsy=n('drink')?clamp(settings.tipsy??2,1,20):1;\n const a=(1+.5*n('confidence'))*tipsy*(1+melody);\n const recovery=n('statue')?1:clamp(1-.75**n('insurance')+melody,0,1);\n const camera=!!n('camera')&&team==='group';\n return {a,b:1-recovery,recovery,S,melody,tipsy,camera,cameraRate:camera?.25*S*n('camera'):0,bonusChance:clamp(.1*n('bonus'),0,1)};\n}\nfunction settle(raw,b={a:1,b:1,cameraRate:0}){return Math.abs(raw)<1e-10?0:raw>0?raw*b.a*(1+(b.cameraRate||0)):raw*b.b;}\nfunction distribution(rows,b={a:1,b:1,cameraRate:0},total=1){\n let ev=0,base=0,win=0,flat=0,any=0,min=Infinity,max=-Infinity,square=0;\n const out=rows.map(r=>{const raw=r.raw??total*(r.g-1),net=settle(raw,b),p=r.p;ev+=p*net;base+=p*raw;square+=p*net*net;if(net>1e-8)win+=p;else if(net>=-1e-8)flat+=p;if(r.hit??r.g>0)any+=p;if(p>0){min=Math.min(min,net);max=Math.max(max,net);}return {...r,raw,net};});\n if(Math.abs(ev)<1e-12*Math.max(1,total))ev=0;if(Math.abs(base)<1e-12*Math.max(1,total))base=0;\n return {total,ev,roi:total?ev/total:0,base,win:clamp(win,0,1),flat:clamp(flat,0,1),lose:clamp(1-win-flat,0,1),any:clamp(any,0,1),min:total?min:0,max:total?max:0,sd:Math.sqrt(Math.max(0,square-ev*ev)),out};\n}\nfunction single(p,g,b){return distribution([{id:'hit',p,g,hit:true},{id:'miss',p:1-p,g:0,hit:false}],b);}\nfunction portfolio(wagers,kind,b){\n const defs=kind==='roulette'?roulette:baccaratDefs,scenarios=kind==='roulette'?rouletteScenarios:baccaratScenarios;\n const total=wagers.reduce((z,w)=>z+w.amount,0);\n return distribution(scenarios.map(s=>{let raw=0,hit=false;for(const w of wagers){const d=defs[w.key];if(!d)continue;const yes=kind==='roulette'?d.nums.includes(s.id):w.key===s.id;const g=yes?d.gross:0;raw+=w.amount*(g-1);if(yes)hit=true;}return {...s,raw,hit};}),b,total);\n}\nfunction pointModel(point,left=3){const w=diceWays[point]/36,l=6/36,r=1-w-l,t=r**left;return [{id:'point',p:w*(1-t)/(w+l),g:4},{id:'loss',p:l*(1-t)/(w+l),g:0},{id:'push',p:t,g:1}];}\nfunction crapsRows(){const rows=[{id:'comeout',p:8/36,g:2},{id:'immediateLoss',p:4/36,g:0}];for(const point of [4,5,6,8,9,10])for(const r of pointModel(point))rows.push({...r,id:point+'-'+r.id,p:r.p*diceWays[point]/36});return rows;}\nfunction minesP(m,k){let p=1;for(let i=0;i<k;i++)p*=(25-m-i)/(25-i);return p;}\nfunction minesRoutes(target,a=1){\n if(!Number.isFinite(target)||target<1||!Number.isFinite(a)||a<=0)throw Error('目标和利润倍数无效。');\n const rows=[];\n for(let m=1;m<=24;m++){\n  let p=1,clicks=0;\n  for(let k=1;k<=25-m;k++){\n   clicks+=p;p*=(26-m-k)/(26-k);const g=1/p,final=1+(g-1)*a;\n   if(final+1e-8>=target){rows.push({m,k,p,g,final,expectedClicks:clicks/p});break;}\n  }\n }\n return rows;\n}\nfunction choose(n,k){if(k<0||k>n)return 0;k=Math.min(k,n-k);let v=1;for(let i=1;i<=k;i++)v=v*(n-k+i)/i;return v;}\nfunction kenoRows(n,estimated=1){const rows=Array.from({length:n+1},(_,h)=>({id:h,p:choose(10,h)*choose(38,n-h)/choose(48,n),g:h?2**h:0,hit:h>0}));const scale=estimated/rows.reduce((z,r)=>z+r.p*r.g,0);return rows.map(r=>({...r,g:r.g*scale}));}\nfunction bjValue(cards){let low=0,aces=0;for(const c of cards){if(c==='A'){low++;aces++;}else low+=['J','Q','K'].includes(c)?10:Number(c);}const soft=aces>0&&low+10<=21;return {total:low+(soft?10:0),soft};}\nfunction bjNext(total,soft,rank){let low=total-(soft?10:0);const ace=rank==='A';low+=ace?1:Number(rank);return low+((soft||ace)&&low+10<=21?10:0);}\n// Vanilla rules, not user-selectable casino variants. See the dated source notes.\nconst bjRules=Object.freeze({dealerStand:17,hitSoft17:false,doubleInitialOnly:true,naturalGross:3,split:false});\nfunction bjCanDouble(s){return s.two===true&&s.total<21;}\nfunction bjReference(s,d){\n const canDouble=bjCanDouble(s);\n const t=s.total,dealer=d==='A'?11:Number(d);let action='H',why='点数偏低，常规查表倾向要牌。';\n if(t>21)return {action:'B',why:'手牌已超过21点。'};\n if(t===21)return {action:'S',why:'21点停牌；初始两张自然21按游戏规则已直接结算。'};\n if(s.soft){\n  if(t>=20){action='S';why='软20以上，常规查表倾向停牌。';}\n  else if(t===19){action='S';why='软19，常规S17查表参考停牌。';}\n  else if(t===18){action=dealer>=3&&dealer<=6?'DS':[2,7,8].includes(dealer)?'S':'H';why='软18对3–6参考加倍，对2/7/8停牌，对9/10/A要牌。';}\n  else if(t===17){action=dealer>=3&&dealer<=6?'DH':'H';why='软17通常要牌，对3–6可参考加倍。';}\n  else if(t===15||t===16){action=dealer>=4&&dealer<=6?'DH':'H';why='软15/16对4–6可参考加倍。';}\n  else if(t===13||t===14){action=dealer>=5&&dealer<=6?'DH':'H';why='软13/14对5–6可参考加倍。';}\n }else{\n  if(t>=17){action='S';why='硬17以上，常规查表倾向停牌。';}\n  else if(t>=13){action=dealer<=6?'S':'H';why='硬13–16：庄家2–6时停牌，7–A时要牌。';}\n  else if(t===12){action=dealer>=4&&dealer<=6?'S':'H';why='硬12只对4、5、6停牌。';}\n  else if(t===11){action=dealer!==11?'DH':'H';why='硬11通常加倍；常规S17查表对A参考要牌。';}\n  else if(t===10){action=dealer<=9?'DH':'H';why='硬10对2–9可参考加倍。';}\n  else if(t===9){action=dealer>=3&&dealer<=6?'DH':'H';why='硬9对3–6可参考加倍。';}\n }\n if(action==='DH'||action==='DS'){const fallback=action==='DH'?'H':'S';return {action:canDouble?'D':fallback,why:why+(canDouble?'':' 已经要过牌，按原版规则不能再加倍，采用备用动作。'),fallback};}\n return {action,why};\n}\nfunction pokerCategory(ids){\n let mask=0,flush=true,firstSuit=ids[0]/13|0;const counts=new Uint8Array(13);\n for(let i=0;i<5;i++){const id=ids[i],r=id%13;counts[r]++;mask|=1<<r;if((id/13|0)!==firstSuit)flush=false;}\n let pairs=0,triple=0,quad=0;for(let i=0;i<13;i++){if(counts[i]===4)quad++;else if(counts[i]===3)triple++;else if(counts[i]===2)pairs++;}\n let straight=false;if(!pairs&&!triple&&!quad){straight=mask===4111;for(let i=0;i<=8&&!straight;i++)straight=mask===(31<<i);}\n return straight&&flush?8:quad?7:triple&&pairs?6:flush?5:straight?4:triple?3:pairs===2?2:pairs?1:0;\n}\nfunction* pokerSolve(data){\n const {cards,used=[],a=1,b=1,cameraRate=0,objective='ev'}=data;\n if(cards.length!==5||cards.some(id=>!Number.isInteger(id)||id<0||id>51))throw Error('请先录入完整的五张手牌。');\n if(new Set(cards).size!==5)throw Error('五张手牌不能重复。');\n const absent=new Set([...cards,...used]);const rem=Array.from({length:52},(_,i)=>i).filter(id=>!absent.has(id));\n if(rem.length<5)throw Error('剩余不足5张，换牌可能跨越重建边界。请核对游戏内重洗状态后重新记录。');\n const total=choose(rem.length+5,5),solutions=[];let done=0,chunk=0;const grossPay=[0,1,2,3,4,6,9,25,50];\n for(let mask=31;mask>=0;mask--){\n  const fixed=cards.filter((_,i)=>mask&(1<<i)),need=5-fixed.length,hist=Array(9).fill(0),work=[...fixed],idx=Array.from({length:need},(_,i)=>i);let n=0;\n  for(;;){for(let j=0;j<need;j++)work[fixed.length+j]=rem[idx[j]];hist[pokerCategory(work)]++;n++;done++;chunk++;\n   if(chunk>=25000){chunk=0;yield {progress:done/total,done,total};}\n   if(need===0)break;let j=need-1;while(j>=0&&idx[j]===rem.length-need+j)j--;if(j<0)break;idx[j]++;for(let k=j+1;k<need;k++)idx[k]=idx[k-1]+1;\n  }\n  let ev=0,base=0,win=0,flat=0,sq=0;for(let k=0;k<9;k++){const raw=grossPay[k]-1,net=raw>0?raw*a*(1+cameraRate):raw*b,p=hist[k]/n;ev+=p*net;base+=p*raw;sq+=p*net*net;if(net>1e-8)win+=p;else if(net>=-1e-8)flat+=p;}\n  solutions.push({mask,n,hist,ev,base,win,flat,lose:Math.max(0,1-win-flat),sd:Math.sqrt(Math.max(0,sq-ev*ev))});\n }\n solutions.sort((x,y)=>objective==='win'?y.win-x.win||y.ev-x.ev||y.mask-x.mask:y.ev-x.ev||y.win-x.win||y.mask-x.mask);\n return {solutions,total,remaining:rem.length};\n}\nreturn {clamp,reds,roulette,rouletteScenarios,baccaratDefs,baccaratScenarios,fortune,money,penguin,dragon,plinko,pay,handNames,diceWays,duckBaseline,slotSymbols,slotPatterns,slotMatches,slotsIID,buffs,settle,distribution,single,portfolio,pointModel,crapsRows,minesP,minesRoutes,choose,kenoRows,bjValue,bjNext,bjRules,bjCanDouble,bjReference,pokerCategory,pokerSolve};\n})();\nif(typeof module!=='undefined'&&module.exports)module.exports=GWYFEngine;\n\n/* Finite-deck Blackjack expectimax. Unknown dealer hole is never revealed to a decision. */\nfunction GWYFBlackjackSolve(data){\n 'use strict';\n const full=[4,4,4,4,4,4,4,4,4,16],radix=[],ranks=[1,2,3,4,5,6,7,8,9,10];\n let mult=1;for(let i=0;i<10;i++){radix[i]=mult;mult*=full[i]+1;}\n const codeOf=c=>c.reduce((z,n,i)=>z+n*radix[i],0),fullCode=codeOf(full),sum=c=>c.reduce((z,n)=>z+n,0);\n const A=(data.a??1)*(1+(data.cameraRate||0)),B=data.b??1,up=data.dealer==='A'?11:Number(data.dealer);\n if(!(up>=2&&up<=11)||!Number.isFinite(A)||A<0||!Number.isFinite(B)||B<0)throw Error('庄家明牌或结算参数无效。');\n const next=(t,soft,i)=>{const low=t-(soft?10:0)+ranks[i],flex=(soft||i===0)&&low+10<=21;return [low+(flex?10:0),!!flex];};\n const ev=v=>A*v[0]-B*v[2],loss=[0,0,1],pMemo=new Map(),dMemo=new Map();\n let states=0,rebuild=false;\n const touch=()=>{if(++states>1800000)throw Error('此局分支较多，请逐张输入以缩小牌池或减少未知组成。');};\n function dealer(c,n,code,t,soft){\n  if(t>21)return [1,0,0,0,0,0];\n  if(t>=17){const v=[0,0,0,0,0,0];v[t-16]=1;return v;}\n  if(n===0){rebuild=true;return dealer(full.slice(),52,fullCode,t,soft);}\n  const key=code*64+t+(soft?32:0),cached=dMemo.get(key);if(cached)return cached;touch();\n  const out=[0,0,0,0,0,0];\n  for(let i=0;i<10;i++)if(c[i]){const p=c[i]/n;c[i]--;const v=next(t,soft,i),dist=dealer(c,n-1,code-radix[i],v[0],v[1]);c[i]++;for(let j=0;j<6;j++)out[j]+=p*dist[j];}\n  dMemo.set(key,out);return out;\n }\n function stand(c,n,code,t,hole){\n  let start=up,soft=up===11;\n  if(hole>=0){const v=next(start,soft,hole);start=v[0];soft=v[1];}\n  const d=dealer(c,n,code,start,soft);let win=d[0],push=0;\n  for(let v=17;v<=21;v++){if(v<t)win+=d[v-16];else if(v===t)push+=d[v-16];}\n  return [win,push,Math.max(0,1-win-push)];\n }\n function draw(c,n,code,t,soft,hole,forceStand){\n  // With an unobserved hole, n includes that reserved card. The last card is\n  // then inferable, and the physical draw pile is empty: rebuild without drawing it.\n  if(hole<0&&n===1){rebuild=true;const h=c.findIndex(x=>x>0);return draw(full.slice(),52,fullCode,t,soft,h,forceStand);}\n  if(n===0){rebuild=true;return draw(full.slice(),52,fullCode,t,soft,hole,forceStand);}\n  const out=[0,0,0];\n  for(let i=0;i<10;i++)if(c[i]){\n   const p=c[i]/n;c[i]--;const v=next(t,soft,i),result=v[0]>21?loss:forceStand?stand(c,n-1,code-radix[i],v[0],hole):play(c,n-1,code-radix[i],v[0],v[1],hole);c[i]++;\n   for(let j=0;j<3;j++)out[j]+=p*result[j];\n  }\n  return out;\n }\n function play(c,n,code,t,soft,hole){\n  if(t>21)return loss;\n  const key=(code*64+t+(soft?32:0))*12+hole+1,cached=pMemo.get(key);if(cached)return cached;touch();\n  const s=stand(c,n,code,t,hole);if(t===21){pMemo.set(key,s);return s;}\n  const h=draw(c,n,code,t,soft,hole,false),best=ev(h)>ev(s)+1e-12?h:s;pMemo.set(key,best);return best;\n }\n const scenarios=data.scenarios||[{counts:data.counts,weight:1}],totalWeight=scenarios.reduce((z,s)=>z+s.weight,0);\n if(!scenarios.length||!Number.isFinite(totalWeight)||totalWeight<=0||!Number.isInteger(data.total)||data.total<2||data.total>21)throw Error('当前手牌或剩余牌无效。');\n if(data.two&&data.total===21)return {natural:true,action:'N',actions:[],ev:2*A,rebuild:false,states:0};\n const defs=[['S',false],['H',false],...(data.canDouble&&data.two?[['D',true]]:[])],actions=defs.map(([action])=>({action,win:0,push:0,lose:0,ev:0,stake:action==='D'?2:1}));\n for(const scenario of scenarios){\n  const c=scenario.counts?.slice();if(!Array.isArray(c)||c.length!==10||c.some((n,i)=>!Number.isInteger(n)||n<0||n>full[i]))throw Error('剩余牌超过单副牌数量。');\n  const n=sum(c);if(n<1)throw Error('未知牌池至少应包含一张庄家底牌；请核对牌堆是否已重建。');\n  const code=codeOf(c),w=scenario.weight/totalWeight;\n  for(const row of actions){const v=row.action==='S'?stand(c,n,code,data.total,-1):draw(c,n,code,data.total,!!data.soft,-1,row.action==='D');row.win+=w*v[0];row.push+=w*v[1];row.lose+=w*v[2];row.ev+=w*ev(v)*row.stake;}\n }\n actions.sort((x,y)=>y.ev-x.ev||x.stake-y.stake||(['S','H','D'].indexOf(x.action)-['S','H','D'].indexOf(y.action)));\n return {action:actions[0].action,ev:actions[0].ev,actions,rebuild,states,playerStates:pMemo.size,dealerStates:dMemo.size};\n}\nif(typeof module==='object'&&module.exports)module.exports=GWYFBlackjackSolve;\n\n\nself.onmessage=({data})=>{\n const {id,mode,payload}=data;\n try{\n  if(mode==='blackjack')postMessage({id,result:GWYFBlackjackSolve(payload)});\n  else{\n   const gen=GWYFEngine.pokerSolve(payload);let next;\n   do{next=gen.next();if(!next.done)postMessage({id,progress:next.value.progress});}while(!next.done);\n   postMessage({id,result:next.value});\n  }\n }catch(e){postMessage({id,error:e.message});}\n};\n"],{type:"application/javascript"}));
+'use strict';
+const V=VisionState,E=GWYFEngine,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let state=V.blank(),draft=[],frame=null,frameImage=null,selectRegion=null,drag=null,busy=false,worker=null,job=0,lastResult=null,compact=false,detections=[];
+const glyph={spades:'♠',hearts:'♥',diamonds:'♦',clubs:'♣'};
+const api=()=>window.pywebview?.api;
+const nativeRequired=!!document.querySelector('meta[name="gwyf-desktop"]');
+const bridgeMethods=['status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact'];
+let nativeReady=false,nativeConnecting=null,stateRevision=0;
+function bridgeComplete(){return bridgeMethods.every(name=>typeof api()?.[name]==='function');}
+function desktopCall(name,...args){
+ const bridge=api();
+ if(typeof bridge?.[name]!=='function')throw Error(bridge||nativeRequired?'桌面接口尚未连接完成，请点击“刷新”重新连接。':'请通过 Start-Windows.bat 启动；浏览器预览不能读取游戏窗口。');
+ return bridge[name](...args);
+}
+function withTimeout(promise,ms,note){
+ return new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error(note)),ms);Promise.resolve(promise).then(value=>{clearTimeout(timer);resolve(value);},error=>{clearTimeout(timer);reject(error);});});
+}
+function waitForBridge(){
+ if(bridgeComplete())return Promise.resolve();
+ return new Promise((resolve,reject)=>{const started=Date.now();const timer=setInterval(()=>{
+  if(bridgeComplete()){clearInterval(timer);resolve();}
+  else if(Date.now()-started>=12000){clearInterval(timer);reject(Error('桌面接口连接超时。请关闭旧浮窗，完整解压0.3版后使用 Start-Windows.bat 启动。'));}
+ },100);});
+}
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const label=c=>c?`${glyph[c.suit]||''}${c.rank||'?'}`:'待补';
+const red=c=>['hearts','diamonds'].includes(c?.suit)?'red':'';
+function message(text,error=false){$('#status').textContent=text;$('#status').classList.toggle('error',error);}
+function advice(title,body='',warn=false,kicker='当前手牌 · 已考虑已用牌'){
+ $('#advice').classList.toggle('warn',warn);$('#advice').innerHTML=`<small>${esc(kicker)}</small><h1>${esc(title)}</h1><p>${esc(body)}</p>`;
+}
+let saveQueue=Promise.resolve();
+function save(){
+ stateRevision++;
+ const snapshot=JSON.parse(JSON.stringify({...state,undo:null}));
+ try{localStorage.setItem('gwyf-vision-v1',JSON.stringify(snapshot));}catch(_){}
+ if(nativeReady)saveQueue=saveQueue.then(()=>desktopCall('save_state',snapshot)).catch(e=>message('状态未保存：'+e.message,true));
+}
+function stopSolver(){job++;if(worker){worker.terminate();worker=null;}lastResult=null;}
+function render(){
+ $$('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===state.mode));
+ const h=state[state.mode];
+ $('#autoLocate').classList.toggle('active',state.settings.captureMode!=='manual');
+ $('#current').innerHTML=[['我',h.player],...(state.mode==='blackjack'?[['庄',h.dealer]]:[])].map(([n,cards])=>`<div class="cardsline"><small>${n}</small>${cards.length?cards.map(c=>`<span class="chip ${red(c)}">${esc(label(c))}</span>`).join(''):'<span class="muted">尚未录入</span>'}</div>`).join('');
+ $('#undo').disabled=!state.undo;
+ $('#archive').disabled=!h.player.length||h.player.some(c=>!c);
+ $('#role option[value=dealer]').disabled=state.mode==='poker';
+ if(state.mode==='poker')$('#role').value='player';
+ $('[data-region=dealer]').hidden=state.mode==='poker';
+ $('#suit').hidden=state.mode==='blackjack';
+ $('#usedCount').textContent=(state.mode==='blackjack'?h.used.reduce((a,b)=>a+b,0):h.used.length)+' 张';
+ if(state.mode==='blackjack')$('#used').innerHTML='<div class="used-grid">'+h.used.map((n,i)=>`<button data-add-used="${i}" title="点一次补记一张；右键减一">${i===0?'A':i+1} · ${n}</button>`).join('')+'</div><p class="muted">点一次加一，右键减一；10包含J/Q/K。不要重复补记当前牌。</p>';
+ else $('#used').innerHTML='<div class="used-grid">'+h.used.map(id=>{const c={rank:V.pokerRanks[id%13],suit:V.suits[Math.floor(id/13)]};return `<span class="chip ${red(c)}">${esc(label(c))}</span>`;}).join('')+'</div>';
+ const b=E.buffs(state.owned,state.settings,state.team);$('#buffLabel').textContent=`净赢 ×${(b.a*(1+b.cameraRate)).toFixed(2)} / 净亏 ${(b.b*100).toFixed(1)}%`;
+ paintFrame();
+}
+function calculate(){
+ stopSolver();const h=state[state.mode],id=job;
+ if(!h.player.length){advice('等待识牌','选择游戏窗口，按 Ctrl+Shift+Space 自动识牌并计算。',false,'本地运行 · 按需截图');return;}
+ if(h.player.some(c=>!c)){advice('等待补牌','已丢弃的牌已计入历史；补全新牌后重新计算。',true);return;}
+ const b=E.buffs(state.owned,state.settings,state.team);let payload;
+ try{
+  if(state.mode==='blackjack'){
+   V.assertDeck(state);const value=E.bjValue(h.player.map(c=>c.rank));
+   if(value.total>21){advice('已爆牌','补录庄家已亮出的牌后，可归档本手。',true);return;}
+   if(!h.dealer.length){advice('等待庄家明牌','请录入庄家第一张可见牌。',true);return;}
+   if(h.dealer.length>1){advice('庄家阶段 · 可归档','庄家已亮出底牌；此时不再推荐玩家要牌。');return;}
+   const counts=h.used.map((n,i)=>(i===9?16:4)-n);
+   for(const c of [...h.player,...h.dealer])counts[V.rankIndex(c.rank)]--;
+   payload={counts,...value,two:h.player.length===2,canDouble:h.player.length===2,dealer:['J','Q','K'].includes(h.dealer[0].rank)?'10':h.dealer[0].rank,...b};
+  }else{
+   if(h.phase==='replacement'){advice('补牌完成 · 等待结算','本手已经换过牌，不再推荐第二次换牌。');return;}
+   payload={cards:h.player.map(V.cardId),used:h.used,objective:'ev',...b};
+  }
+  advice('计算中…','在后台工作线程中计算，界面仍可操作。');
+  worker=new Worker(GWYF_WORKER_URL);
+  worker.onerror=()=>{if(id===job)advice('无法启动策略线程','请通过桌面启动器或本地HTTP打开。',true);};
+  worker.onmessage=({data})=>{
+   if(data.id!==job)return;
+   if(data.error){advice('需要核对',data.error,true);return;}
+   if(data.progress!=null){advice('计算中…',`扑克方案枚举 ${Math.min(100,Math.round(data.progress*100))}%`);return;}
+   lastResult=data.result;worker.terminate();worker=null;
+   if(state.mode==='blackjack'){
+    const names={H:'要牌 HIT',S:'停牌 STAND',D:'加倍 DOUBLE',N:'自然21 · 已结算'};
+    const r=data.result;advice(names[r.action]||'请核对',r.natural?'初始两张自然21，按原版模型总返还3×。':`期望净收益 ${r.ev>=0?'+':''}${r.ev.toFixed(3)} / 原始下注 · ${E.bjValue(h.player.map(c=>c.rank)).total}点${r.rebuild?' · 包含牌堆重建分支':''}`);
+   }else{
+    const r=data.result.solutions[0],keep=h.player.filter((_,i)=>r.mask&(1<<i));
+    advice(r.mask===31?'保留全部五张':`保留 ${keep.length} 张 · 换 ${5-keep.length} 张`,`${keep.length?keep.map(label).join(' '):'全部换掉'} · 期望净收益 ${r.ev>=0?'+':''}${r.ev.toFixed(3)}`);
+    if(r.mask!==31){const button=document.createElement('button');button.textContent='按推荐换牌 · 丢弃牌立即入历史';button.className='primary full';button.id='discard';button.onclick=()=>mutate(()=>V.discard(state,r.mask),'已记录丢弃牌，按快捷键识别补牌后的五张牌。');$('#advice').append(button);}
+   }
+  };
+  worker.postMessage({id,mode:state.mode,payload});
+ }catch(e){advice('需要核对',e.message,true);}
+}
+function mutate(fn,note){try{state=fn();draft=[];$('#draftPanel').hidden=true;save();render();calculate();message(note||'已更新。');}catch(e){message(e.message,true);}}
+function renderDraft(){
+ $('#draftPanel').hidden=false;
+ $('#archive').disabled=true;
+ $('#draft').innerHTML=draft.map((c,i)=>`<div class="draft-card ${c.review?'review':''}" data-index="${i}">${c.preview?`<img src="${c.preview}" alt="自动转正牌面" title="${esc((c.issues||[]).join('；')||(c.rotation?'自动转正 '+c.rotation+'°':'原始牌面'))}">`:''}<select class="card-role" data-field="role" aria-label="第${i+1}张归属"><option value="player" ${c.role==='player'?'selected':''}>我的牌</option><option value="dealer" ${c.role==='dealer'?'selected':''}>庄家牌</option></select><select data-field="rank" aria-label="第${i+1}张点数"><option value="">?</option>${V.ranks.map(r=>`<option ${r===c.rank?'selected':''}>${r}</option>`).join('')}</select>${state.mode==='poker'?`<select data-field="suit" aria-label="第${i+1}张花色"><option value="">?</option>${V.suits.map(s=>`<option value="${s}" ${s===c.suit?'selected':''}>${glyph[s]}</option>`).join('')}</select>`:''}<span class="score" title="${esc((c.issues||[]).join('；')+(c.score!=null?' · 模型分数 '+c.score+'，不是准确率':''))}">${c.score==null?'手动':!c.rank||(state.mode==='poker'&&!c.suit)?'未读全':c.review?'待核对':'已读取'}</span><button data-remove="${i}" aria-label="排除此牌">×</button></div>`).join('');
+ $('#apply').disabled=!draft.length;
+}
+$('#draft').addEventListener('change',event=>{const row=event.target.closest('[data-index]');if(row&&event.target.dataset.field){const c=draft[+row.dataset.index];c[event.target.dataset.field]=event.target.value;c.review=false;}});
+$('#draft').addEventListener('click',event=>{if(event.target.dataset.remove!=null){draft.splice(+event.target.dataset.remove,1);renderDraft();}});
+$('#apply').onclick=()=>mutate(()=>V.commit(state,draft),'已采用本次牌面。截图没有增加历史计数。');
+$('#applyTop').onclick=()=>$('#apply').click();
+window.acceptDraft=()=>{if(!busy&&!$('#draftPanel').hidden&&!$('#apply').disabled)$('#apply').click();};
+$('#cancelDraft').onclick=()=>{draft=[];$('#draftPanel').hidden=true;render();calculate();message('已放弃草稿，保留原手牌和历史。');};
+$('#archive').onclick=()=>mutate(()=>V.archive(state),'已归档当前可见手牌；未看见的底牌不会凭空记入。');
+$('#undo').onclick=()=>mutate(()=>{if(!state.undo)throw Error('没有可撤销的操作。');return V.clone(state.undo.snapshot);},'已撤销上次操作。');
+$('#resetDeck').onclick=()=>mutate(()=>V.resetDeck(state),'已清空当前手牌和已用牌，可撤销。仅在游戏实际洗牌后使用。');
+$('#used').addEventListener('click',event=>addUsed(event,1));$('#used').addEventListener('contextmenu',event=>{if(event.target.dataset.addUsed!=null){event.preventDefault();addUsed(event,-1);}});
+function addUsed(event,delta){const v=event.target.dataset.addUsed;if(v==null)return;mutate(()=>{const s=V.clone(state);s.blackjack.used[+v]+=delta;V.assertDeck(s);s.undo={label:'历史补记',snapshot:V.clone({...state,undo:null})};return s;},'已更新已用牌，建议已重算。');}
+$$('[data-mode]').forEach(button=>button.onclick=()=>{if(busy)return;state.mode=button.dataset.mode;draft=[];$('#draftPanel').hidden=true;save();render();calculate();});
+$('#rankPad').innerHTML=V.ranks.map(r=>`<button data-rank="${r}">${r}</button>`).join('');
+function editCurrent(){if(!draft.length){const h=state[state.mode];draft=[...h.player.filter(Boolean).map(c=>({...c,role:'player'})),...(h.dealer||[]).map(c=>({...c,role:'dealer'}))];}}
+$('#manual').addEventListener('toggle',()=>{if($('#manual').open){editCurrent();renderDraft();}});
+$('#rankPad').onclick=event=>{if(event.target.dataset.rank){draft.push({rank:event.target.dataset.rank,suit:$('#suit').value,role:$('#role').value});renderDraft();}};
+$('#clearDraft').onclick=()=>{draft=[];renderDraft();};
+const buffs=[['confidence','赌徒自信'],['insurance','保险'],['statue','神圣雕像'],['stakeholder','利益相关者'],['camera','相机'],['drink','饮料'],['microphone','麦克风']];
+$('#buffs').innerHTML=buffs.map(([id,n])=>`<label>${n}<input data-buff="${id}" type="number" min="0" max="100" step="1" value="0"></label>`).join('');
+$('#buffs').onchange=event=>{const id=event.target.dataset.buff,n=Number(event.target.value);if(id&&Number.isInteger(n)&&n>=0&&n<=100){state.owned[id]=n;save();render();calculate();}else message('道具数量需要是0–100的整数。',true);};
+for(const id of ['tipsy','melody','team'])$('#'+id).onchange=()=>{state.team=$('#team').value;state.settings.tipsy=Math.max(1,Math.min(20,Number($('#tipsy').value)||1));state.settings.melody=Math.max(0,Math.min(1,Number($('#melody').value)||0));save();render();calculate();};
+$('#compact').onclick=()=>{compact=!compact;document.body.classList.toggle('compact',compact);$('#compact').textContent=compact?'展开':'收起';if(nativeReady)desktopCall('compact',compact).catch(e=>message(e.message,true));};
+async function refreshWindows(){
+ const previous=$('#target').value;
+ const rows=await withTimeout(desktopCall('windows'),5000,'读取窗口列表超时，请点击刷新重试。');
+ if(!Array.isArray(rows))throw Error('桌面窗口列表格式无效，请完整更新程序。');
+ $('#target').innerHTML='<option value="">选择游戏窗口</option>'+rows.map(r=>`<option value="${esc(r.id)}">${esc(r.title)}${r.minimized?'（已最小化）':''}</option>`).join('');
+ const chosen=rows.find(r=>String(r.id)===previous)||rows.find(r=>/gamble.*friends|朋友.*梭哈|gwyf/i.test(r.title));
+ $('#target').value=chosen?String(chosen.id):'';
+ await desktopCall('select_window',$('#target').value);
+ $('#windowStatus').textContent=!rows.length?'未找到可选择的窗口。先打开游戏，再点击刷新。':chosen?(chosen.minimized?'已找到游戏窗口，请先恢复游戏再截图。':'已选择：'+chosen.title):`找到 ${rows.length} 个窗口，请选择游戏窗口。`;
+}
+async function refresh(){
+ try{
+  if(!nativeReady){const connected=await connectDesktop(true);if(!connected)return;}
+  else {await refreshWindows();message($('#windowStatus').textContent);}
+ }catch(e){$('#windowStatus').textContent=e.message;message(e.message,true);}
+}
+$('#refresh').onclick=refresh;
+$('#target').onchange=async()=>{try{await desktopCall('select_window',$('#target').value);$('#windowStatus').textContent=$('#target').value?'已选择：'+$('#target').selectedOptions[0].textContent:'请选择游戏窗口。';message($('#windowStatus').textContent);}catch(e){$('#windowStatus').textContent=e.message;message(e.message,true);}};
+function setFrame(data){
+ frame=data;frameImage=new Image();frameImage.onload=paintFrame;frameImage.src=data.image;$('#emptyFrame').hidden=true;
+ const old=state.aspect[state.mode],now=data.width/data.height;
+ if(old&&Math.abs(old/now-1)>.02){state.regions[state.mode]={};state.settings.captureMode='auto';message('窗口宽高比已改变，已切回自动找牌。');}
+ state.aspect[state.mode]=now;
+}
+async function recognize(){
+ if(!frame){message('请先截图或打开测试图片。',true);return;}
+ const regions=state.settings.captureMode==='manual'?state.regions[state.mode]:{};
+ if(state.settings.captureMode==='manual'&&(!regions.player||(state.mode==='blackjack'&&!regions.dealer))){message('请框出双方牌区，或点“自动找牌”。',true);$('#setup').open=true;return;}
+ const start=performance.now();draft=[];detections=[];$('#draftPanel').hidden=true;message('正在本地找牌、核对并计算…');
+ const out=await desktopCall('recognize',regions,state.mode);
+ detections=out.cards||[];paintFrame();
+ $('#timing').textContent=`识别 ${out.recognitionMs} ms / 往返 ${Math.round(performance.now()-start)} ms`;
+ const checked=VisionRecognition.assess(state,out);
+ if(checked.ok){
+  const next=V.commit(state,checked.cards),oldHand=JSON.stringify(state[state.mode]),newHand=JSON.stringify(next[next.mode]);
+  if(oldHand!==newHand){state=next;save();}
+  draft=[];$('#draftPanel').hidden=true;render();calculate();
+  message(`已自动识别并计算 · ${checked.cards.filter(c=>c.role==='player').map(label).join(' ')}${out.hiddenCount?' · 庄家暗牌不读取':''}${out.rejectedCount?` · 已排除 ${out.rejectedCount} 个非牌面候选`:''}`);
+  return;
+ }
+ draft=detections.filter(c=>!c.faceDown);renderDraft();
+ const players=draft.filter(c=>c.role==='player').length;
+ message(!draft.length?'没有找到可靠牌面。请对准当前牌桌再试。':`本次需核对 · 我的牌 ${players} 张${out.hiddenCount?` · 排除 ${out.hiddenCount} 张背面`:''}${out.rejectedCount?` · 排除 ${out.rejectedCount} 个非牌面`:''}`,true);
+ if(compact){compact=false;document.body.classList.remove('compact');$('#compact').textContent='收起';if(nativeReady)desktopCall('compact',false).catch(e=>message(e.message,true));}
+ advice('本次识别需要核对',checked.reasons.slice(0,2).join('；')||'核对草稿后点击采用；本次未写入手牌或历史。',true,'自动计算已暂停 · 原手牌保留');
+}
+async function captureNow(){
+ if(busy)return;busy=true;$('#capture').disabled=true;
+ // Stop a prior poker enumeration so its late result cannot replace the draft warning.
+ stopSolver();
+ draft=[];detections=[];$('#draftPanel').hidden=true;
+ try{
+  const data=await desktopCall('capture');setFrame(data);await recognize();
+ }catch(e){message(e.message||String(e),true);advice('截图未完成','请检查游戏窗口是否可见；旧手牌仍保留。',true);}
+ finally{busy=false;$('#capture').disabled=false;}
+}
+window.captureNow=captureNow;$('#capture').onclick=captureNow;
+$('#openImage').onclick=async()=>{if(busy)return;try{busy=true;const data=await desktopCall('open_image');if(data){stopSolver();detections=[];setFrame(data);await recognize();}}catch(e){message(e.message,true);}finally{busy=false;}};
+$('#read').onclick=async()=>{if(busy)return;busy=true;stopSolver();try{await recognize();}catch(e){message(e.message,true);advice('识别未完成','请调整牌区或手动录牌；本帧尚未采用。',true);}finally{busy=false;}};
+function paintFrame(){
+ const canvas=$('#frame'),ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);
+ if(!frameImage?.complete||!frame)return;
+ canvas.width=frameImage.naturalWidth;canvas.height=frameImage.naturalHeight;ctx.drawImage(frameImage,0,0);
+ const regions={...state.regions[state.mode]};if(drag&&selectRegion)regions[selectRegion]=[Math.min(drag[0],drag[2]),Math.min(drag[1],drag[3]),Math.max(drag[0],drag[2]),Math.max(drag[1],drag[3])];
+ for(const c of detections){if(!c.quad)continue;ctx.strokeStyle=c.review?'#e5bd75':c.role==='player'?'#8ce6bc':'#8fbbff';ctx.lineWidth=Math.max(2,canvas.width/450);ctx.beginPath();c.quad.forEach((p,i)=>i?ctx.lineTo(p[0]*canvas.width/frame.width,p[1]*canvas.height/frame.height):ctx.moveTo(p[0]*canvas.width/frame.width,p[1]*canvas.height/frame.height));ctx.closePath();ctx.stroke();}
+ for(const [role,r] of Object.entries(regions)){if(state.mode==='poker'&&role==='dealer')continue;ctx.strokeStyle=role==='player'?'#8ce6bc':'#e5bd75';ctx.lineWidth=Math.max(2,canvas.width/400);ctx.strokeRect(r[0]*canvas.width,r[1]*canvas.height,(r[2]-r[0])*canvas.width,(r[3]-r[1])*canvas.height);}
+}
+$$('[data-region]').forEach(button=>button.onclick=()=>{if(!frame){message('请先截一帧。',true);return;}selectRegion=button.dataset.region;$('#regionHint').textContent=`在截图上拖动框选${selectRegion==='player'?'我的手牌':'庄家牌'}，只包含对应的一排牌。`;});
+const point=event=>{const r=$('#frame').getBoundingClientRect();return [Math.max(0,Math.min(1,(event.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(event.clientY-r.top)/r.height))];};
+$('#frame').onpointerdown=event=>{if(!selectRegion||!frame)return;const p=point(event);drag=[...p,...p];event.target.setPointerCapture(event.pointerId);};
+$('#frame').onpointermove=event=>{if(drag){const p=point(event);drag[2]=p[0];drag[3]=p[1];paintFrame();}};
+$('#frame').onpointerup=()=>{if(!drag||!selectRegion)return;const r=[Math.min(drag[0],drag[2]),Math.min(drag[1],drag[3]),Math.max(drag[0],drag[2]),Math.max(drag[1],drag[3])];if(r[2]-r[0]>.015&&r[3]-r[1]>.01){state.regions[state.mode][selectRegion]=r;state.settings.captureMode='manual';save();render();message('归属牌区已保存。完整牌面不会被选区边界裁开。');}drag=null;selectRegion=null;paintFrame();};
+$('#frame').onpointercancel=()=>{drag=null;paintFrame();};
+$('#clearRegions').onclick=()=>{state.regions[state.mode]={};state.settings.captureMode='auto';save();render();message('已切回自动找牌。');};
+$('#autoLocate').onclick=()=>{state.settings.captureMode='auto';save();render();message('已启用自动找牌，无需先框选。');};
+function showState(){
+ for(const [id] of buffs)$(`[data-buff=${id}]`).value=state.owned[id]||0;
+ $('#tipsy').value=state.settings.tipsy??2;$('#melody').value=state.settings.melody??1;$('#team').value=state.team;
+ render();calculate();
+}
+function showNativeStatus(out){
+ $('#nativeBadge').textContent=`桌面已连接 · ${out.version||'本地模型'} · ${out.modelBytes>1048576?(out.modelBytes/1048576).toFixed(1)+' MB':(out.modelBytes/1024).toFixed(0)+' KB'}`;
+ $('#hotkey').textContent=out.hotkey+(out.python?' · Python '+out.python:'');
+}
+async function connectDesktop(manual=false){
+ if(nativeReady)return true;
+ if(nativeConnecting)return nativeConnecting;
+ if(!api()&&!nativeRequired){if(manual)message('请通过 Start-Windows.bat 启动；浏览器预览不能读取游戏窗口。',true);return false;}
+ $('#nativeBadge').textContent='正在连接桌面…';
+ $('#windowStatus').textContent='等待桌面接口就绪…';
+ $('#refresh').disabled=true;
+ const revision=stateRevision;
+ nativeConnecting=(async()=>{
+  try{
+   await waitForBridge();
+   const out=await withTimeout(desktopCall('status'),5000,'桌面服务没有响应，请关闭并重新启动浮窗。');
+   let stateWarning='';
+   try{const raw=await withTimeout(desktopCall('load_state'),2500,'读取本机存档超时');if(raw&&revision===stateRevision){state=V.restore(raw);showState();}}
+   catch(e){stateWarning='本机存档未读取：'+e.message;}
+   nativeReady=true;showNativeStatus(out);
+   await refreshWindows();
+   message(stateWarning||'桌面已连接。'+$('#windowStatus').textContent,!!stateWarning);
+   setTimeout(async()=>{try{showNativeStatus(await withTimeout(desktopCall('status'),3000,'桌面状态查询超时'));}catch(e){message(e.message,true);}},700);
+   return true;
+  }catch(e){
+   if(!nativeReady){$('#nativeBadge').textContent='桌面连接失败';$('#hotkey').textContent='连接失败时仍可手动录牌；点击刷新可重试连接。';}
+   $('#windowStatus').textContent=e.message;message(e.message,true);return false;
+  }finally{nativeConnecting=null;$('#refresh').disabled=false;}
+ })();
+ return nativeConnecting;
+}
+// Readiness can arrive before or after this script; an empty api object is not ready.
+try{const raw=JSON.parse(localStorage.getItem('gwyf-vision-v1')||'null');if(raw)state=V.restore(raw);}catch(e){message('浏览器存档无效，已使用空白状态。',true);}
+showState();
+window.addEventListener('pywebviewready',()=>connectDesktop());
+if(nativeRequired||api())connectDesktop();
+else {
+ const started=Date.now();const probe=setInterval(()=>{if(api()){clearInterval(probe);connectDesktop();}else if(Date.now()-started>15000)clearInterval(probe);},100);
+}
+</script>
+</body></html>

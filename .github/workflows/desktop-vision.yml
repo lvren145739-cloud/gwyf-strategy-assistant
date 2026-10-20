@@ -1,0 +1,38 @@
+name: Desktop Vision Windows
+on:
+  push:
+    branches: [desktop-vision-v0.3]
+    paths: ['desktop-vision/**', '.github/workflows/desktop-vision.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  embedded-runtime:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Assemble pinned embedded Python (end users do not install Python)
+        run: python desktop-vision/tools/ci_prepare_portable.py
+      - name: Import native dependencies from embedded runtime
+        run: .\desktop-vision\runtime\python.exe -c "import cv2,numpy,mss,webview,clr; clr.AddReference('System.Windows.Forms'); print('Windows embedded imports passed')"
+      - name: Real framework registration
+        run: .\desktop-vision\runtime\python.exe desktop-vision/tests/bridge_runtime.py
+      - name: Real Windows WebView2 and EnumWindows
+        run: .\desktop-vision\runtime\python.exe desktop-vision/tests/windows_native.py
+      - name: Validate models when present
+        shell: pwsh
+        run: |
+          if (Test-Path desktop-vision/models/glyph.onnx) {
+            .\desktop-vision\runtime\python.exe desktop-vision/tools/check_install.py
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: windows-native-validation
+          path: desktop-vision/tests/windows-native-results.json
+          if-no-files-found: warn

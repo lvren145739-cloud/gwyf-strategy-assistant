@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self' 'unsafe-eval' 'unsafe-inline'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'">
+<title>GWYF · 识牌实验版</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><div><b>GWYF <span class="tag">VISION 0.3</span></b><small>自动找牌 · 本地计算</small></div><button id="compact" title="切换小浮窗">收起</button></header>
+<main>
+ <div class="tabs"><button data-mode="blackjack" class="active">二十一点</button><button data-mode="poker">单人扑克</button></div>
+ <section id="advice" class="advice" aria-live="polite"><small>先录入当前牌面</small><h1>等待识牌</h1><p>选择游戏窗口，按 Ctrl+Shift+Space 自动识牌并计算。</p></section>
+ <div id="current" class="current"></div>
+ <div class="actions"><button id="capture" class="primary">识牌计算 <kbd>Ctrl⇧Space</kbd></button><button id="archive">归档本手</button><button id="undo" title="撤销上次手牌更新、换牌或归档">撤销</button></div>
+ <div id="status" class="status" role="status"></div>
+ <div class="expanded">
+  <section id="draftPanel" hidden>
+   <div class="section-title"><b>识别草稿</b><span id="timing"></span><button id="applyTop" class="primary">采用 ⇧Ctrl↵</button></div>
+   <p class="muted">这次识别有疑点，未自动采用。核对点数、花色、归属和张数后计算；模型分数不等于准确率。</p>
+   <div id="draft"></div>
+   <button id="apply" class="primary full">采用牌面并计算</button>
+   <button id="cancelDraft" class="full">放弃草稿 · 保留原手牌</button>
+  </section>
+  <details id="manual"><summary>快速改牌 / 补录庄家牌</summary>
+   <div class="row"><label>添加到 <select id="role"><option value="player">我的手牌</option><option value="dealer">庄家</option></select></label><select id="suit" aria-label="花色"><option value="spades">♠</option><option value="hearts">♥</option><option value="diamonds">♦</option><option value="clubs">♣</option></select><button id="clearDraft">清空草稿</button></div>
+   <div id="rankPad" class="rank-pad"></div><p class="muted">点牌面下方的 × 删除。二十一点庄家第一张为明牌，之后依次补录已翻开的底牌和补牌。</p>
+  </details>
+  <details id="setup" open><summary>截图与识别 <span id="nativeBadge">浏览器预览</span></summary>
+   <div class="row"><select id="target" aria-label="游戏窗口"><option value="">选择游戏窗口</option></select><button id="refresh">刷新</button><button id="openImage">打开测试图片</button></div>
+   <p id="windowStatus" class="muted" role="status"></p>
+   <p id="hotkey" class="muted">桌面版使用 Windows WebView2；浏览器支持手动录牌和识图界面预览。</p>
+   <div class="row"><button id="autoLocate" class="active">自动找牌 · 默认</button><button data-region="player">框选我的牌区</button><button data-region="dealer">框选庄家牌区</button><button id="read" class="primary">识别这一帧</button></div>
+   <p id="regionHint" class="muted">默认先找完整牌面，再自动分组，无需先框牌。只有归属不明确时才框选自己的牌区和庄家牌区；框选不再裁切牌面。</p>
+   <div id="frameWrap"><canvas id="frame" width="960" height="540" aria-label="拖动框选牌区"></canvas><div id="emptyFrame">截图只在内存中处理，不会上传</div></div>
+   <div class="legend"><span>● 我的牌区</span><span>● 庄家牌区</span><button id="clearRegions">清除牌区</button></div>
+  </details>
+  <details><summary>生效道具与升级 <span id="buffLabel">默认无加成</span></summary>
+   <div id="buffs" class="buffs"></div>
+   <div class="row"><label>游玩方式 <select id="team"><option value="solo">单人</option><option value="group">多人</option></select></label><label>饮料正利润倍率 <input id="tipsy" type="number" min="1" max="20" step="0.1" value="2"></label><label>麦克风旋律 <input id="melody" type="number" min="0" max="1" step="0.05" value="1"></label></div>
+   <p class="muted">数量即正在生效的数量，可叠加。延用网页已公开的道具结算模型；以上两个数值填写游戏当前效果。</p>
+  </details>
+  <details><summary>已用牌 <span id="usedCount">0 张</span></summary><div id="used"></div><button id="resetDeck">游戏已洗牌 · 清空当前与历史</button><p class="muted">截图仅更新本手，不自动归档。扑克点“按推荐换牌”时，丢弃的牌立即进入已用牌。二十一点归档包含所有已录入的庄家牌。</p></details>
+  <details><summary>实验范围与规则</summary><p>完整且通过校验的识别会自动计算；疑点显示可修正草稿。截图不会自动归档。这是可校正的截图识牌原型，牌面被遮挡、运动模糊或视角变化时可能漏识。只处理当前屏幕可见的牌，不读取游戏内存。</p><p>策略沿用网页 v7.7.2 的原版 v1.0.30 规则模型：单副牌持续消耗；庄家软17停牌；初始两张可加倍；自然21总返还3×；不含分牌。若游戏版本或模组规则不同，建议不适用。</p><p>本版增加整牌真伪模型、更大的共享字形模型和实况负样本。未证明能适配所有桌型、分辨率与游戏版本。快捷截图、置顶和焦点行为需在 Windows 实机继续验证。牌区只需在视角稳定时设置一次。</p><a href="https://lvren145739-cloud.github.io/gwyf-strategy-assistant/" target="_blank" rel="noopener">打开稳定网页决策器 ↗</a></details>
+  <footer>Created by lvren with GPT-6.1Sol. · MIT<br>截图保留在内存，牌区与已用牌保存在本机。</footer>
+ </div>
+</main>
+<script src="engine.js"></script><script src="state.js"></script><script src="recognition-policy.js"></script><script src="ui.js"></script>
+</body></html>

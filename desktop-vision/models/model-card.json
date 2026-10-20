@@ -1,0 +1,303 @@
+{
+  "version": "0.2.0",
+  "seed": 2201,
+  "architecture": "GlyphNetV2 16/24/32, dense64, dropout, balanced real/synthetic sampling",
+  "trainingRecords": [
+    {
+      "source": "bj-a_0013_0",
+      "rank": "5",
+      "suit": 1
+    },
+    {
+      "source": "bj-a_0013_1",
+      "rank": "BACK",
+      "suit": 4
+    },
+    {
+      "source": "bj-a_0013_2",
+      "rank": "2",
+      "suit": 1
+    },
+    {
+      "source": "bj-a_0019_1",
+      "rank": "9",
+      "suit": 3
+    },
+    {
+      "source": "bj-a_0019_4",
+      "rank": "2",
+      "suit": 2
+    },
+    {
+      "source": "bj-a_0022_5",
+      "rank": "A",
+      "suit": 0
+    },
+    {
+      "source": "bj-a_0025_0",
+      "rank": "K",
+      "suit": 3
+    },
+    {
+      "source": "poker-a_0007_0",
+      "rank": "7",
+      "suit": 3
+    },
+    {
+      "source": "poker-a_0007_1",
+      "rank": "8",
+      "suit": 3
+    },
+    {
+      "source": "poker-a_0007_2",
+      "rank": "2",
+      "suit": 2
+    },
+    {
+      "source": "poker-a_0019_0",
+      "rank": "A",
+      "suit": 1
+    },
+    {
+      "source": "poker-a_0019_1",
+      "rank": "10",
+      "suit": 3
+    },
+    {
+      "source": "poker-a_0019_2",
+      "rank": "J",
+      "suit": 2
+    },
+    {
+      "source": "poker-a_0040_0",
+      "rank": "K",
+      "suit": 2
+    },
+    {
+      "source": "poker-a_0040_1",
+      "rank": "K",
+      "suit": 1
+    },
+    {
+      "source": "fullcard-240-dealer-0",
+      "rank": "9",
+      "suit": 3
+    },
+    {
+      "source": "fullcard-240-dealer-1",
+      "rank": "BACK",
+      "suit": 4
+    },
+    {
+      "source": "fullcard-1435-dealer-0",
+      "rank": "3",
+      "suit": 1
+    },
+    {
+      "source": "fullcard-2066-player-0",
+      "rank": "6",
+      "suit": 2
+    },
+    {
+      "source": "full-1435.jpg:0:rotation0",
+      "rank": "Q",
+      "suit": 1
+    },
+    {
+      "source": "full-1435.jpg:1:rotation0",
+      "rank": "9",
+      "suit": 2
+    },
+    {
+      "source": "full-2066.jpg:1:rotation0",
+      "rank": "8",
+      "suit": 2
+    },
+    {
+      "source": "full-2066.jpg:2:rotation0",
+      "rank": "6",
+      "suit": 3
+    },
+    {
+      "source": "full-2066.jpg:3:rotation0",
+      "rank": "8",
+      "suit": 0
+    },
+    {
+      "source": "full-2066.jpg:4:rotation0",
+      "rank": "7",
+      "suit": 1
+    },
+    {
+      "source": "bili-cards/017.jpg:1:rotation1",
+      "rank": "K",
+      "suit": 2
+    },
+    {
+      "source": "bili-cards/017.jpg:2:rotation1",
+      "rank": "2",
+      "suit": 1
+    },
+    {
+      "source": "bili-cards/022.jpg:1:rotation0",
+      "rank": "7",
+      "suit": 3
+    },
+    {
+      "source": "bili-cards/022.jpg:2:rotation0",
+      "rank": "9",
+      "suit": 0
+    },
+    {
+      "source": "bili-cards/022.jpg:3:rotation0",
+      "rank": "J",
+      "suit": 2
+    }
+  ],
+  "trainingPhysicalCardCrops": 30,
+  "fonts": [
+    "LilitaOne.ttf",
+    "LuckiestGuy.ttf",
+    "Kalam.ttf",
+    "DejaVuMathTeXGyre.ttf",
+    "DejaVuSans-Bold.ttf",
+    "DejaVuSans-BoldOblique.ttf",
+    "DejaVuSans-ExtraLight.ttf",
+    "DejaVuSans-Oblique.ttf",
+    "DejaVuSans.ttf",
+    "DejaVuSansCondensed-Bold.ttf",
+    "DejaVuSansCondensed-BoldOblique.ttf",
+    "DejaVuSansCondensed-Oblique.ttf",
+    "DejaVuSansCondensed.ttf",
+    "DejaVuSansMono-Bold.ttf",
+    "DejaVuSansMono-BoldOblique.ttf",
+    "DejaVuSansMono-Oblique.ttf",
+    "DejaVuSansMono.ttf",
+    "DejaVuSerif-Bold.ttf",
+    "DejaVuSerif-BoldItalic.ttf",
+    "DejaVuSerif-Italic.ttf",
+    "DejaVuSerif.ttf",
+    "DejaVuSerifCondensed-Bold.ttf",
+    "DejaVuSerifCondensed-BoldItalic.ttf",
+    "DejaVuSerifCondensed-Italic.ttf",
+    "DejaVuSerifCondensed.ttf"
+  ],
+  "heads": {
+    "rank": {
+      "parameters": 85351,
+      "syntheticBases": [
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        2,
+        98
+      ],
+      "realUniqueGlyphs": [
+        2,
+        4,
+        1,
+        0,
+        1,
+        2,
+        3,
+        3,
+        4,
+        1,
+        2,
+        1,
+        4,
+        2,
+        0
+      ]
+    },
+    "suit": {
+      "parameters": 84701,
+      "syntheticBases": [
+        2,
+        2,
+        2,
+        2,
+        142
+      ],
+      "realUniqueGlyphs": [
+        6,
+        16,
+        18,
+        16,
+        0
+      ]
+    }
+  },
+  "epochs": 22,
+  "examplesPerClass": 1200,
+  "runtime": "OpenCV DNN CPU; no ONNX Runtime dependency",
+  "warning": "Small development dataset. Old regression cases influenced development; no overall accuracy claim. BV1eD5x6NEEs and Bili frames025/026 were excluded from training.",
+  "files": {
+    "suit.onnx": {
+      "bytes": 341012,
+      "sha256": "36b60b61944360ca883aad44632967edbc10b239e09e04860be399481c4d646d"
+    },
+    "rank.onnx": {
+      "bytes": 343612,
+      "sha256": "3f08034e0d68aa393bd139e57a4b907ac7fdca7f4f975e8656f3581f873c7455"
+    }
+  },
+  "rankClasses": [
+    "A",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "J",
+    "Q",
+    "K",
+    "BACK",
+    "UNKNOWN"
+  ],
+  "suitClasses": [
+    "spades",
+    "hearts",
+    "diamonds",
+    "clubs",
+    "UNKNOWN"
+  ],
+  "input": {
+    "shape": [
+      "batch",
+      1,
+      48,
+      48
+    ],
+    "type": "float32",
+    "range": [
+      0,
+      1
+    ]
+  },
+  "inference": {
+    "orientations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "lowScoreAbstention": 0.75,
+    "manualAdoptionRequired": true,
+    "scoresCalibrated": false
+  }
+}

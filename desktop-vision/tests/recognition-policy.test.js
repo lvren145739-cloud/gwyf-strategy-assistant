@@ -1,0 +1,13 @@
+'use strict';
+const assert=require('assert');global.VisionState=require('../web/state.js');const V=VisionState,R=require('../web/recognition-policy.js');
+const make=(rank,suit,role='player')=>({rank,suit,role,score:.999,suitScore:.999,cardScore:.999,review:false});
+const base={cards:[make('9','clubs'),make('8','clubs'),make('A','hearts','dealer'),{role:'dealer',faceDown:true,review:false}],autoReady:true,warnings:[]};
+let s=V.blank();assert(R.assess(s,base).ok);
+const bad=edit=>{const o=V.clone(base);edit(o);assert(!R.assess(s,o).ok);};
+bad(o=>o.autoReady=false);bad(o=>o.cards[0].review=true);bad(o=>o.cards[0].rank=null);bad(o=>o.cards[0].suit=null);bad(o=>o.cards[0].score=.90);bad(o=>o.cards[0].cardScore=.90);bad(o=>delete o.cards[0].score);bad(o=>o.cards[0].suitScore=.90);bad(o=>o.cards[1]=V.clone(o.cards[0]));bad(o=>o.cards[3].role='player');bad(o=>o.cards.push(V.clone(o.cards[3])));bad(o=>o.cards.splice(2,1));bad(o=>o.cards.splice(0,1));bad(o=>o.warnings=['归属不确定']);bad(o=>o.cards[0].role='other');
+s.blackjack.used[8]=4;assert(!R.assess(s,base).ok);s=V.blank();
+const adopted=V.commit(s,R.assess(s,base).cards);assert.deepEqual(adopted.blackjack.used,Array(10).fill(0));assert.equal(adopted.blackjack.player.length,2);assert.equal(adopted.blackjack.dealer.length,1);
+const again=V.commit(adopted,R.assess(adopted,base).cards);assert.deepEqual(again.blackjack.used,Array(10).fill(0));
+let p=V.blank();p.mode='poker';const royal={cards:['10','J','Q','K','A'].map(rank=>make(rank,'spades')),autoReady:true,warnings:[]};assert(R.assess(p,royal).ok);royal.cards.pop();assert(!R.assess(p,royal).ok);
+const restored=V.restore({...V.blank(),settings:{captureMode:'manual'}});assert.equal(restored.settings.captureMode,'manual');assert.notEqual(V.restore(V.blank()).settings.captureMode,'manual');
+console.log('Automatic recognition: full hand, confidence, dealer/back, duplicate/deck checks, history preservation and manual-mode restore passed.');

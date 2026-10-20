@@ -1,0 +1,1714 @@
+{
+  "scope": "Selected development examples, NOT an accuracy estimate. Several regression cases overlap training; the legacy cropped-ROI case is retained unchanged and has a separate corrected-input case. New held-out hand has only one visible card; new video provides a negative example only.",
+  "cases": [
+    {
+      "name": "front-blackjack",
+      "file": "full-240.jpg",
+      "mode": "blackjack",
+      "regions": {
+        "player": [
+          0.42,
+          0.45,
+          0.75,
+          0.63
+        ],
+        "dealer": [
+          0.48,
+          0.405,
+          0.6,
+          0.443
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "5",
+          "hearts"
+        ],
+        [
+          "player",
+          "2",
+          "hearts"
+        ],
+        [
+          "dealer",
+          "9",
+          "clubs"
+        ]
+      ],
+      "set": "legacy-regression",
+      "v01": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "5",
+            "hearts"
+          ],
+          [
+            "player",
+            "2",
+            "hearts"
+          ],
+          [
+            "dealer",
+            "9",
+            "clubs"
+          ]
+        ],
+        "milliseconds": 6.93,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              930,
+              553,
+              133,
+              80
+            ],
+            "rank": "5",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 1.0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1100,
+              553,
+              161,
+              80
+            ],
+            "rank": "2",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 1.0,
+            "review": false
+          },
+          {
+            "role": "dealer",
+            "rect": [
+              940,
+              445,
+              83,
+              29
+            ],
+            "rank": "9",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 1.0,
+            "review": false
+          }
+        ]
+      },
+      "v02": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "5",
+            "hearts"
+          ],
+          [
+            "player",
+            "2",
+            "hearts"
+          ],
+          [
+            "dealer",
+            "9",
+            "clubs"
+          ]
+        ],
+        "milliseconds": 23.25,
+        "reviews": 1,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              930,
+              553,
+              133,
+              80
+            ],
+            "rank": "5",
+            "suit": "hearts",
+            "faceDown": false,
+            "guessedRank": "5",
+            "guessedSuit": "hearts",
+            "issues": [],
+            "score": 0.9809,
+            "suitScore": 0.9982,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1100,
+              553,
+              161,
+              80
+            ],
+            "rank": "2",
+            "suit": "hearts",
+            "faceDown": false,
+            "guessedRank": "2",
+            "guessedSuit": "hearts",
+            "issues": [
+              "多个朝向接近，请核对"
+            ],
+            "score": 0.9635,
+            "suitScore": 0.9985,
+            "rotation": 0,
+            "review": true
+          },
+          {
+            "role": "dealer",
+            "rect": [
+              940,
+              445,
+              83,
+              29
+            ],
+            "rank": "9",
+            "suit": "clubs",
+            "faceDown": false,
+            "guessedRank": "9",
+            "guessedSuit": "clubs",
+            "issues": [],
+            "score": 0.9964,
+            "suitScore": 0.9958,
+            "rotation": 0,
+            "review": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "second-blackjack",
+      "file": "full-1435.jpg",
+      "mode": "blackjack",
+      "regions": {
+        "player": [
+          0.42,
+          0.45,
+          0.75,
+          0.63
+        ],
+        "dealer": [
+          0.46,
+          0.355,
+          0.6,
+          0.398
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "Q",
+          "hearts"
+        ],
+        [
+          "player",
+          "9",
+          "diamonds"
+        ],
+        [
+          "dealer",
+          "3",
+          "hearts"
+        ]
+      ],
+      "set": "legacy-regression",
+      "v01": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "Q",
+            "hearts"
+          ],
+          [
+            "player",
+            "9",
+            "diamonds"
+          ],
+          [
+            "dealer",
+            "3",
+            "hearts"
+          ]
+        ],
+        "milliseconds": 4.94,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              861,
+              504,
+              139,
+              85
+            ],
+            "rank": "Q",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 1.0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1059,
+              511,
+              140,
+              82
+            ],
+            "rank": "9",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 0.9871,
+            "review": false
+          },
+          {
+            "role": "dealer",
+            "rect": [
+              980,
+              394,
+              86,
+              32
+            ],
+            "rank": "3",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 1.0,
+            "review": false
+          }
+        ]
+      },
+      "v02": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "Q",
+            "hearts"
+          ],
+          [
+            "player",
+            "9",
+            "diamonds"
+          ],
+          [
+            "dealer",
+            "3",
+            "hearts"
+          ]
+        ],
+        "milliseconds": 15.03,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              861,
+              504,
+              139,
+              85
+            ],
+            "rank": "Q",
+            "suit": "hearts",
+            "faceDown": false,
+            "guessedRank": "Q",
+            "guessedSuit": "hearts",
+            "issues": [],
+            "score": 0.9763,
+            "suitScore": 0.9982,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1059,
+              511,
+              140,
+              82
+            ],
+            "rank": "9",
+            "suit": "diamonds",
+            "faceDown": false,
+            "guessedRank": "9",
+            "guessedSuit": "diamonds",
+            "issues": [],
+            "score": 0.9853,
+            "suitScore": 0.9962,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "dealer",
+            "rect": [
+              980,
+              394,
+              86,
+              32
+            ],
+            "rank": "3",
+            "suit": "hearts",
+            "faceDown": false,
+            "guessedRank": "3",
+            "guessedSuit": "hearts",
+            "issues": [],
+            "score": 0.9819,
+            "suitScore": 0.9972,
+            "rotation": 0,
+            "review": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "occluded-first-poker",
+      "file": "full-2024.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.38,
+          0.42,
+          0.93,
+          0.57
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "A",
+          "hearts"
+        ],
+        [
+          "player",
+          "7",
+          "clubs"
+        ],
+        [
+          "player",
+          "8",
+          "clubs"
+        ],
+        [
+          "player",
+          "2",
+          "diamonds"
+        ],
+        [
+          "player",
+          "J",
+          "spades"
+        ]
+      ],
+      "set": "legacy-regression",
+      "v01": {
+        "exact": false,
+        "predicted": [
+          [
+            "player",
+            null,
+            null
+          ],
+          [
+            "player",
+            "8",
+            "clubs"
+          ],
+          [
+            "player",
+            "2",
+            "diamonds"
+          ],
+          [
+            "player",
+            "J",
+            "spades"
+          ]
+        ],
+        "milliseconds": 5.99,
+        "reviews": 1,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              729,
+              491,
+              86,
+              85
+            ],
+            "rank": null,
+            "suit": null,
+            "faceDown": false,
+            "score": 0.9972,
+            "suitScore": 1.0,
+            "review": true
+          },
+          {
+            "role": "player",
+            "rect": [
+              832,
+              492,
+              147,
+              86
+            ],
+            "rank": "8",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9999,
+            "suitScore": 1.0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1018,
+              493,
+              159,
+              87
+            ],
+            "rank": "2",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 0.9191,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1182,
+              494,
+              180,
+              86
+            ],
+            "rank": "J",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.9974,
+            "suitScore": 1.0,
+            "review": false
+          }
+        ]
+      },
+      "v02": {
+        "exact": false,
+        "predicted": [
+          [
+            "player",
+            null,
+            "hearts"
+          ],
+          [
+            "player",
+            "8",
+            "clubs"
+          ],
+          [
+            "player",
+            "2",
+            "diamonds"
+          ],
+          [
+            "player",
+            "J",
+            "spades"
+          ]
+        ],
+        "milliseconds": 19.14,
+        "reviews": 1,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              729,
+              491,
+              86,
+              85
+            ],
+            "rank": null,
+            "suit": "hearts",
+            "faceDown": false,
+            "guessedRank": "K",
+            "guessedSuit": "hearts",
+            "issues": [
+              "牌区截断，请扩大选区",
+              "点数分数不足，已留空"
+            ],
+            "score": 0.4758,
+            "suitScore": 0.9406,
+            "rotation": 270,
+            "review": true
+          },
+          {
+            "role": "player",
+            "rect": [
+              832,
+              492,
+              147,
+              86
+            ],
+            "rank": "8",
+            "suit": "clubs",
+            "faceDown": false,
+            "guessedRank": "8",
+            "guessedSuit": "clubs",
+            "issues": [],
+            "score": 0.9961,
+            "suitScore": 0.9972,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1018,
+              493,
+              159,
+              87
+            ],
+            "rank": "2",
+            "suit": "diamonds",
+            "faceDown": false,
+            "guessedRank": "2",
+            "guessedSuit": "diamonds",
+            "issues": [],
+            "score": 0.9542,
+            "suitScore": 0.9956,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1182,
+              494,
+              180,
+              86
+            ],
+            "rank": "J",
+            "suit": "spades",
+            "faceDown": false,
+            "guessedRank": "J",
+            "guessedSuit": "spades",
+            "issues": [],
+            "score": 0.9586,
+            "suitScore": 0.9914,
+            "rotation": 0,
+            "review": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "second-poker",
+      "file": "full-2066.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.25,
+          0.37,
+          0.85,
+          0.55
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "6",
+          "diamonds"
+        ],
+        [
+          "player",
+          "8",
+          "diamonds"
+        ],
+        [
+          "player",
+          "6",
+          "clubs"
+        ],
+        [
+          "player",
+          "8",
+          "spades"
+        ],
+        [
+          "player",
+          "7",
+          "hearts"
+        ]
+      ],
+      "set": "legacy-regression",
+      "v01": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "6",
+            "diamonds"
+          ],
+          [
+            "player",
+            "8",
+            "diamonds"
+          ],
+          [
+            "player",
+            "6",
+            "clubs"
+          ],
+          [
+            "player",
+            "8",
+            "spades"
+          ],
+          [
+            "player",
+            "7",
+            "hearts"
+          ]
+        ],
+        "milliseconds": 7.0,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              564,
+              418,
+              180,
+              85
+            ],
+            "rank": "6",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 0.9997,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              735,
+              424,
+              167,
+              89
+            ],
+            "rank": "8",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 0.9999,
+            "suitScore": 0.9684,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              926,
+              431,
+              148,
+              92
+            ],
+            "rank": "6",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 1.0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1110,
+              438,
+              171,
+              96
+            ],
+            "rank": "8",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 0.9992,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1283,
+              445,
+              203,
+              95
+            ],
+            "rank": "7",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 0.9951,
+            "review": false
+          }
+        ]
+      },
+      "v02": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "6",
+            "diamonds"
+          ],
+          [
+            "player",
+            "8",
+            "diamonds"
+          ],
+          [
+            "player",
+            "6",
+            "clubs"
+          ],
+          [
+            "player",
+            "8",
+            "spades"
+          ],
+          [
+            "player",
+            "7",
+            "hearts"
+          ]
+        ],
+        "milliseconds": 23.96,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              564,
+              418,
+              180,
+              85
+            ],
+            "rank": "6",
+            "suit": "diamonds",
+            "faceDown": false,
+            "guessedRank": "6",
+            "guessedSuit": "diamonds",
+            "issues": [],
+            "score": 0.9784,
+            "suitScore": 0.9932,
+            "rotation": 90,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              735,
+              424,
+              167,
+              89
+            ],
+            "rank": "8",
+            "suit": "diamonds",
+            "faceDown": false,
+            "guessedRank": "8",
+            "guessedSuit": "diamonds",
+            "issues": [],
+            "score": 0.9959,
+            "suitScore": 0.995,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              926,
+              431,
+              148,
+              92
+            ],
+            "rank": "6",
+            "suit": "clubs",
+            "faceDown": false,
+            "guessedRank": "6",
+            "guessedSuit": "clubs",
+            "issues": [],
+            "score": 0.9842,
+            "suitScore": 0.9961,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1110,
+              438,
+              171,
+              96
+            ],
+            "rank": "8",
+            "suit": "spades",
+            "faceDown": false,
+            "guessedRank": "8",
+            "guessedSuit": "spades",
+            "issues": [],
+            "score": 0.9954,
+            "suitScore": 0.9955,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1283,
+              445,
+              203,
+              95
+            ],
+            "rank": "7",
+            "suit": "hearts",
+            "faceDown": false,
+            "guessedRank": "7",
+            "guessedSuit": "hearts",
+            "issues": [],
+            "score": 0.9937,
+            "suitScore": 0.9984,
+            "rotation": 0,
+            "review": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "cross-video-clear-subregion",
+      "file": "bili-cards/022.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.67,
+          0.29,
+          0.845,
+          0.54
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "7",
+          "clubs"
+        ],
+        [
+          "player",
+          "9",
+          "spades"
+        ],
+        [
+          "player",
+          "J",
+          "diamonds"
+        ]
+      ],
+      "set": "legacy-regression",
+      "v01": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "7",
+            "clubs"
+          ],
+          [
+            "player",
+            "9",
+            "spades"
+          ],
+          [
+            "player",
+            "J",
+            "diamonds"
+          ]
+        ],
+        "milliseconds": 4.33,
+        "reviews": 1,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              1289,
+              446,
+              199,
+              134
+            ],
+            "rank": "7",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 0.9978,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1361,
+              386,
+              179,
+              107
+            ],
+            "rank": "9",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 0.9998,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1419,
+              336,
+              165,
+              88
+            ],
+            "rank": "J",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 0.9999,
+            "suitScore": 0.8402,
+            "review": true
+          }
+        ]
+      },
+      "v02": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "7",
+            "clubs"
+          ],
+          [
+            "player",
+            "9",
+            "spades"
+          ],
+          [
+            "player",
+            "J",
+            "diamonds"
+          ]
+        ],
+        "milliseconds": 14.14,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              1289,
+              446,
+              199,
+              134
+            ],
+            "rank": "7",
+            "suit": "clubs",
+            "faceDown": false,
+            "guessedRank": "7",
+            "guessedSuit": "clubs",
+            "issues": [],
+            "score": 0.993,
+            "suitScore": 0.9992,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1361,
+              386,
+              179,
+              107
+            ],
+            "rank": "9",
+            "suit": "spades",
+            "faceDown": false,
+            "guessedRank": "9",
+            "guessedSuit": "spades",
+            "issues": [],
+            "score": 0.9937,
+            "suitScore": 0.998,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1419,
+              336,
+              165,
+              88
+            ],
+            "rank": "J",
+            "suit": "diamonds",
+            "faceDown": false,
+            "guessedRank": "J",
+            "guessedSuit": "diamonds",
+            "issues": [],
+            "score": 0.991,
+            "suitScore": 0.9965,
+            "rotation": 0,
+            "review": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "cross-video-extreme-angle",
+      "file": "bili-cards/025.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.01,
+          0.32,
+          0.15,
+          0.68
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "Q",
+          "hearts"
+        ],
+        [
+          "player",
+          "10",
+          "spades"
+        ],
+        [
+          "player",
+          "10",
+          "clubs"
+        ]
+      ],
+      "set": "legacy-regression",
+      "v01": {
+        "exact": false,
+        "predicted": [
+          [
+            "player",
+            "A",
+            "clubs"
+          ],
+          [
+            "player",
+            "A",
+            "clubs"
+          ],
+          [
+            "player",
+            null,
+            "clubs"
+          ]
+        ],
+        "milliseconds": 4.6,
+        "reviews": 2,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              55,
+              452,
+              208,
+              156
+            ],
+            "rank": "A",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9985,
+            "suitScore": 0.9476,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              65,
+              560,
+              191,
+              160
+            ],
+            "rank": "A",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9992,
+            "suitScore": 0.8059,
+            "review": true
+          },
+          {
+            "role": "player",
+            "rect": [
+              82,
+              382,
+              156,
+              108
+            ],
+            "rank": null,
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9999,
+            "suitScore": 0.9758,
+            "review": true
+          }
+        ]
+      },
+      "v02": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "Q",
+            "hearts"
+          ],
+          [
+            "player",
+            "10",
+            "spades"
+          ],
+          [
+            "player",
+            "10",
+            "clubs"
+          ]
+        ],
+        "milliseconds": 14.05,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              55,
+              452,
+              208,
+              156
+            ],
+            "rank": "Q",
+            "suit": "hearts",
+            "faceDown": false,
+            "guessedRank": "Q",
+            "guessedSuit": "hearts",
+            "issues": [],
+            "score": 0.9813,
+            "suitScore": 0.9967,
+            "rotation": 90,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              65,
+              560,
+              191,
+              160
+            ],
+            "rank": "10",
+            "suit": "spades",
+            "faceDown": false,
+            "guessedRank": "10",
+            "guessedSuit": "spades",
+            "issues": [],
+            "score": 0.9936,
+            "suitScore": 0.9963,
+            "rotation": 90,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              82,
+              382,
+              156,
+              108
+            ],
+            "rank": "10",
+            "suit": "clubs",
+            "faceDown": false,
+            "guessedRank": "10",
+            "guessedSuit": "clubs",
+            "issues": [],
+            "score": 0.9972,
+            "suitScore": 0.9981,
+            "rotation": 90,
+            "review": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "corrected-wide-poker-region",
+      "file": "full-2024.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.23,
+          0.44,
+          0.74,
+          0.55
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "A",
+          "hearts"
+        ],
+        [
+          "player",
+          "7",
+          "clubs"
+        ],
+        [
+          "player",
+          "8",
+          "clubs"
+        ],
+        [
+          "player",
+          "2",
+          "diamonds"
+        ],
+        [
+          "player",
+          "J",
+          "spades"
+        ]
+      ],
+      "set": "corrected-input",
+      "note": "Legacy case excluded the entire first card by its ROI; BOTH models receive this same corrected ROI.",
+      "v01": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "A",
+            "hearts"
+          ],
+          [
+            "player",
+            "7",
+            "clubs"
+          ],
+          [
+            "player",
+            "8",
+            "clubs"
+          ],
+          [
+            "player",
+            "2",
+            "diamonds"
+          ],
+          [
+            "player",
+            "J",
+            "spades"
+          ]
+        ],
+        "milliseconds": 7.04,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              454,
+              490,
+              201,
+              85
+            ],
+            "rank": "A",
+            "suit": "hearts",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 1.0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              636,
+              491,
+              179,
+              86
+            ],
+            "rank": "7",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 0.9999,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              832,
+              492,
+              147,
+              86
+            ],
+            "rank": "8",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 0.9999,
+            "suitScore": 1.0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1018,
+              493,
+              159,
+              87
+            ],
+            "rank": "2",
+            "suit": "diamonds",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 0.9191,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1182,
+              494,
+              180,
+              86
+            ],
+            "rank": "J",
+            "suit": "spades",
+            "faceDown": false,
+            "score": 0.9974,
+            "suitScore": 1.0,
+            "review": false
+          }
+        ]
+      },
+      "v02": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "A",
+            "hearts"
+          ],
+          [
+            "player",
+            "7",
+            "clubs"
+          ],
+          [
+            "player",
+            "8",
+            "clubs"
+          ],
+          [
+            "player",
+            "2",
+            "diamonds"
+          ],
+          [
+            "player",
+            "J",
+            "spades"
+          ]
+        ],
+        "milliseconds": 23.39,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              454,
+              490,
+              201,
+              85
+            ],
+            "rank": "A",
+            "suit": "hearts",
+            "faceDown": false,
+            "guessedRank": "A",
+            "guessedSuit": "hearts",
+            "issues": [],
+            "score": 0.9984,
+            "suitScore": 0.9978,
+            "rotation": 90,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              636,
+              491,
+              179,
+              86
+            ],
+            "rank": "7",
+            "suit": "clubs",
+            "faceDown": false,
+            "guessedRank": "7",
+            "guessedSuit": "clubs",
+            "issues": [],
+            "score": 0.9959,
+            "suitScore": 0.9964,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              832,
+              492,
+              147,
+              86
+            ],
+            "rank": "8",
+            "suit": "clubs",
+            "faceDown": false,
+            "guessedRank": "8",
+            "guessedSuit": "clubs",
+            "issues": [],
+            "score": 0.9961,
+            "suitScore": 0.9972,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1018,
+              493,
+              159,
+              87
+            ],
+            "rank": "2",
+            "suit": "diamonds",
+            "faceDown": false,
+            "guessedRank": "2",
+            "guessedSuit": "diamonds",
+            "issues": [],
+            "score": 0.9542,
+            "suitScore": 0.9956,
+            "rotation": 0,
+            "review": false
+          },
+          {
+            "role": "player",
+            "rect": [
+              1182,
+              494,
+              180,
+              86
+            ],
+            "rank": "J",
+            "suit": "spades",
+            "faceDown": false,
+            "guessedRank": "J",
+            "guessedSuit": "spades",
+            "issues": [],
+            "score": 0.9586,
+            "suitScore": 0.9914,
+            "rotation": 0,
+            "review": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "new-hand-club-three",
+      "file": "bili-cards/026.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.7,
+          0.42,
+          0.825,
+          0.615
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "3",
+          "clubs"
+        ]
+      ],
+      "set": "not-trained-hand",
+      "note": "A separate hand, one fully visible card only. Not a complete poker hand.",
+      "v01": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "3",
+            "clubs"
+          ]
+        ],
+        "milliseconds": 1.81,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              1363,
+              461,
+              219,
+              196
+            ],
+            "rank": "3",
+            "suit": "clubs",
+            "faceDown": false,
+            "score": 1.0,
+            "suitScore": 0.9981,
+            "review": false
+          }
+        ]
+      },
+      "v02": {
+        "exact": true,
+        "predicted": [
+          [
+            "player",
+            "3",
+            "clubs"
+          ]
+        ],
+        "milliseconds": 5.44,
+        "reviews": 0,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              1363,
+              461,
+              219,
+              196
+            ],
+            "rank": "3",
+            "suit": "clubs",
+            "faceDown": false,
+            "guessedRank": "3",
+            "guessedSuit": "clubs",
+            "issues": [],
+            "score": 0.9926,
+            "suitScore": 0.9961,
+            "rotation": 270,
+            "review": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "new-video-duck-negative",
+      "file": "v2-unseen/001.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.25,
+          0.45,
+          0.75,
+          0.7
+        ]
+      },
+      "expected": [],
+      "set": "new-video-negative",
+      "note": "Independent video has ducks, not cards. Never used in training.",
+      "v01": {
+        "exact": false,
+        "predicted": [
+          [
+            "player",
+            "J",
+            null
+          ]
+        ],
+        "milliseconds": 2.33,
+        "reviews": 1,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              739,
+              519,
+              74,
+              72
+            ],
+            "rank": "J",
+            "suit": null,
+            "faceDown": false,
+            "score": 0.9566,
+            "suitScore": 0.8326,
+            "review": true
+          }
+        ]
+      },
+      "v02": {
+        "exact": false,
+        "predicted": [
+          [
+            "player",
+            null,
+            "spades"
+          ]
+        ],
+        "milliseconds": 5.47,
+        "reviews": 1,
+        "details": [
+          {
+            "role": "player",
+            "rect": [
+              739,
+              519,
+              74,
+              72
+            ],
+            "rank": null,
+            "suit": "spades",
+            "faceDown": false,
+            "guessedRank": "J",
+            "guessedSuit": "spades",
+            "issues": [
+              "点数分数不足，已留空"
+            ],
+            "score": 0.6229,
+            "suitScore": 0.8389,
+            "rotation": 270,
+            "review": true
+          }
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "v01": {
+      "exactCases": 6,
+      "totalCases": 9
+    },
+    "v02": {
+      "exactCases": 7,
+      "totalCases": 9
+    }
+  }
+}

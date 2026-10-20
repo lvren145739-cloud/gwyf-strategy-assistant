@@ -1,0 +1,37 @@
+[
+  {
+    "python": "3.11.17",
+    "pywebview": "6.2.1",
+    "methods": 9,
+    "injectionMs": 2.39,
+    "scope": "real API registration only; no GUI or Win32 capture"
+  },
+  {
+    "python": "3.12.14",
+    "pywebview": "6.2.1",
+    "methods": 9,
+    "injectionMs": 4.43,
+    "scope": "real API registration only; no GUI or Win32 capture"
+  },
+  {
+    "python": "3.13.5",
+    "pywebview": "6.2.1",
+    "methods": 9,
+    "injectionMs": 2.9,
+    "scope": "real API registration only; no GUI or Win32 capture"
+  },
+  {
+    "python": "3.14.8",
+    "pywebview": "6.2.1",
+    "methods": 9,
+    "injectionMs": 6.75,
+    "scope": "real API registration only; no GUI or Win32 capture"
+  },
+  {
+    "python": "3.15.0",
+    "pywebview": "6.2.1",
+    "methods": 9,
+    "injectionMs": 9.11,
+    "scope": "real API registration only; no GUI or Win32 capture"
+  }
+]

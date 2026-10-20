@@ -1,0 +1,698 @@
+{
+  "scope": "Six manually selected development cases. Cases overlap training and are not a random or blind validation sample. No population accuracy estimate. Cross-video clear subregion contains only 3 visible cards, not a complete poker hand.",
+  "trainingVideo": "https://archive.org/details/pc-longplay-gamble-with-your-friends",
+  "crossVideo": "https://www.bilibili.com/video/BV1XGVH6DEou/",
+  "cases": [
+    {
+      "name": "front-blackjack",
+      "file": "full-240.jpg",
+      "mode": "blackjack",
+      "regions": {
+        "player": [
+          0.42,
+          0.45,
+          0.75,
+          0.63
+        ],
+        "dealer": [
+          0.48,
+          0.405,
+          0.6,
+          0.443
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "5",
+          "hearts"
+        ],
+        [
+          "player",
+          "2",
+          "hearts"
+        ],
+        [
+          "dealer",
+          "9",
+          "clubs"
+        ]
+      ],
+      "trainingOverlap": true,
+      "predicted": [
+        [
+          "player",
+          "5",
+          "hearts"
+        ],
+        [
+          "player",
+          "2",
+          "hearts"
+        ],
+        [
+          "dealer",
+          "9",
+          "clubs"
+        ]
+      ],
+      "exactSelectedRegion": true,
+      "cards": [
+        {
+          "role": "player",
+          "rect": [
+            930,
+            553,
+            133,
+            80
+          ],
+          "rank": "5",
+          "suit": "hearts",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 1.0,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            1100,
+            553,
+            161,
+            80
+          ],
+          "rank": "2",
+          "suit": "hearts",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 1.0,
+          "review": false
+        },
+        {
+          "role": "dealer",
+          "rect": [
+            940,
+            445,
+            83,
+            29
+          ],
+          "rank": "9",
+          "suit": "clubs",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 1.0,
+          "review": false
+        },
+        {
+          "role": "dealer",
+          "rect": [
+            1051,
+            445,
+            94,
+            29
+          ],
+          "rank": null,
+          "suit": null,
+          "faceDown": true,
+          "score": 1.0,
+          "suitScore": 1.0,
+          "review": true
+        }
+      ],
+      "recognitionMs": 7.0
+    },
+    {
+      "name": "second-blackjack",
+      "file": "full-1435.jpg",
+      "mode": "blackjack",
+      "regions": {
+        "player": [
+          0.42,
+          0.45,
+          0.75,
+          0.63
+        ],
+        "dealer": [
+          0.46,
+          0.355,
+          0.6,
+          0.398
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "Q",
+          "hearts"
+        ],
+        [
+          "player",
+          "9",
+          "diamonds"
+        ],
+        [
+          "dealer",
+          "3",
+          "hearts"
+        ]
+      ],
+      "trainingOverlap": "Dealer trained, player cards not trained",
+      "predicted": [
+        [
+          "player",
+          "Q",
+          "hearts"
+        ],
+        [
+          "player",
+          "9",
+          "diamonds"
+        ],
+        [
+          "dealer",
+          "3",
+          "hearts"
+        ]
+      ],
+      "exactSelectedRegion": true,
+      "cards": [
+        {
+          "role": "player",
+          "rect": [
+            861,
+            504,
+            139,
+            85
+          ],
+          "rank": "Q",
+          "suit": "hearts",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 1.0,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            1059,
+            511,
+            140,
+            82
+          ],
+          "rank": "9",
+          "suit": "diamonds",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 0.9871,
+          "review": false
+        },
+        {
+          "role": "dealer",
+          "rect": [
+            980,
+            394,
+            86,
+            32
+          ],
+          "rank": "3",
+          "suit": "hearts",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 1.0,
+          "review": false
+        }
+      ],
+      "recognitionMs": 4.3
+    },
+    {
+      "name": "occluded-first-poker",
+      "file": "full-2024.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.38,
+          0.42,
+          0.93,
+          0.57
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "A",
+          "hearts"
+        ],
+        [
+          "player",
+          "7",
+          "clubs"
+        ],
+        [
+          "player",
+          "8",
+          "clubs"
+        ],
+        [
+          "player",
+          "2",
+          "diamonds"
+        ],
+        [
+          "player",
+          "J",
+          "spades"
+        ]
+      ],
+      "trainingOverlap": true,
+      "predicted": [
+        [
+          "player",
+          null,
+          null
+        ],
+        [
+          "player",
+          "8",
+          "clubs"
+        ],
+        [
+          "player",
+          "2",
+          "diamonds"
+        ],
+        [
+          "player",
+          "J",
+          "spades"
+        ]
+      ],
+      "exactSelectedRegion": false,
+      "cards": [
+        {
+          "role": "player",
+          "rect": [
+            729,
+            491,
+            86,
+            85
+          ],
+          "rank": null,
+          "suit": null,
+          "faceDown": false,
+          "score": 0.9972,
+          "suitScore": 1.0,
+          "review": true
+        },
+        {
+          "role": "player",
+          "rect": [
+            832,
+            492,
+            147,
+            86
+          ],
+          "rank": "8",
+          "suit": "clubs",
+          "faceDown": false,
+          "score": 0.9999,
+          "suitScore": 1.0,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            1018,
+            493,
+            159,
+            87
+          ],
+          "rank": "2",
+          "suit": "diamonds",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 0.9191,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            1182,
+            494,
+            180,
+            86
+          ],
+          "rank": "J",
+          "suit": "spades",
+          "faceDown": false,
+          "score": 0.9974,
+          "suitScore": 1.0,
+          "review": false
+        }
+      ],
+      "recognitionMs": 5.5
+    },
+    {
+      "name": "second-poker",
+      "file": "full-2066.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.25,
+          0.37,
+          0.85,
+          0.55
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "6",
+          "diamonds"
+        ],
+        [
+          "player",
+          "8",
+          "diamonds"
+        ],
+        [
+          "player",
+          "6",
+          "clubs"
+        ],
+        [
+          "player",
+          "8",
+          "spades"
+        ],
+        [
+          "player",
+          "7",
+          "hearts"
+        ]
+      ],
+      "trainingOverlap": "6-diamonds trained; same-hand card checks are correlated",
+      "predicted": [
+        [
+          "player",
+          "6",
+          "diamonds"
+        ],
+        [
+          "player",
+          "8",
+          "diamonds"
+        ],
+        [
+          "player",
+          "6",
+          "clubs"
+        ],
+        [
+          "player",
+          "8",
+          "spades"
+        ],
+        [
+          "player",
+          "7",
+          "hearts"
+        ]
+      ],
+      "exactSelectedRegion": true,
+      "cards": [
+        {
+          "role": "player",
+          "rect": [
+            564,
+            418,
+            180,
+            85
+          ],
+          "rank": "6",
+          "suit": "diamonds",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 0.9997,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            735,
+            424,
+            167,
+            89
+          ],
+          "rank": "8",
+          "suit": "diamonds",
+          "faceDown": false,
+          "score": 0.9999,
+          "suitScore": 0.9684,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            926,
+            431,
+            148,
+            92
+          ],
+          "rank": "6",
+          "suit": "clubs",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 1.0,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            1110,
+            438,
+            171,
+            96
+          ],
+          "rank": "8",
+          "suit": "spades",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 0.9992,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            1283,
+            445,
+            203,
+            95
+          ],
+          "rank": "7",
+          "suit": "hearts",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 0.9951,
+          "review": false
+        }
+      ],
+      "recognitionMs": 24.7
+    },
+    {
+      "name": "cross-video-clear-subregion",
+      "file": "bili-cards/022.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.67,
+          0.29,
+          0.845,
+          0.54
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "7",
+          "clubs"
+        ],
+        [
+          "player",
+          "9",
+          "spades"
+        ],
+        [
+          "player",
+          "J",
+          "diamonds"
+        ]
+      ],
+      "trainingOverlap": false,
+      "completeHand": false,
+      "predicted": [
+        [
+          "player",
+          "7",
+          "clubs"
+        ],
+        [
+          "player",
+          "9",
+          "spades"
+        ],
+        [
+          "player",
+          "J",
+          "diamonds"
+        ]
+      ],
+      "exactSelectedRegion": true,
+      "cards": [
+        {
+          "role": "player",
+          "rect": [
+            1289,
+            446,
+            199,
+            134
+          ],
+          "rank": "7",
+          "suit": "clubs",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 0.9978,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            1361,
+            386,
+            179,
+            107
+          ],
+          "rank": "9",
+          "suit": "spades",
+          "faceDown": false,
+          "score": 1.0,
+          "suitScore": 0.9998,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            1419,
+            336,
+            165,
+            88
+          ],
+          "rank": "J",
+          "suit": "diamonds",
+          "faceDown": false,
+          "score": 0.9999,
+          "suitScore": 0.8402,
+          "review": true
+        }
+      ],
+      "recognitionMs": 4.1
+    },
+    {
+      "name": "cross-video-extreme-angle",
+      "file": "bili-cards/025.jpg",
+      "mode": "poker",
+      "regions": {
+        "player": [
+          0.01,
+          0.32,
+          0.15,
+          0.68
+        ]
+      },
+      "expected": [
+        [
+          "player",
+          "Q",
+          "hearts"
+        ],
+        [
+          "player",
+          "10",
+          "spades"
+        ],
+        [
+          "player",
+          "10",
+          "clubs"
+        ]
+      ],
+      "trainingOverlap": false,
+      "completeHand": false,
+      "predicted": [
+        [
+          "player",
+          "A",
+          "clubs"
+        ],
+        [
+          "player",
+          "A",
+          "clubs"
+        ],
+        [
+          "player",
+          null,
+          "clubs"
+        ]
+      ],
+      "exactSelectedRegion": false,
+      "cards": [
+        {
+          "role": "player",
+          "rect": [
+            55,
+            452,
+            208,
+            156
+          ],
+          "rank": "A",
+          "suit": "clubs",
+          "faceDown": false,
+          "score": 0.9985,
+          "suitScore": 0.9476,
+          "review": false
+        },
+        {
+          "role": "player",
+          "rect": [
+            65,
+            560,
+            191,
+            160
+          ],
+          "rank": "A",
+          "suit": "clubs",
+          "faceDown": false,
+          "score": 0.9992,
+          "suitScore": 0.8059,
+          "review": true
+        },
+        {
+          "role": "player",
+          "rect": [
+            82,
+            382,
+            156,
+            108
+          ],
+          "rank": null,
+          "suit": "clubs",
+          "faceDown": false,
+          "score": 0.9999,
+          "suitScore": 0.9758,
+          "review": true
+        }
+      ],
+      "recognitionMs": 4.5
+    }
+  ]
+}

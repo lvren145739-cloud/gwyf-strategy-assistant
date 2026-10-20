@@ -1,0 +1,133 @@
+{
+  "scope": "Real standard CPython Linux x64 inference/import/JSON/Unicode-path checks. Windows dependency locks separately resolved for 3.11-3.15; Windows native GUI/capture not executed. Free-threaded builds not supported.",
+  "runtimes": [
+    {
+      "python": "3.11.17",
+      "numpy": "2.2.6",
+      "opencv": "5.0.0",
+      "backend": "OpenCV DNN / CPU",
+      "visible": [
+        [
+          "5",
+          "player"
+        ],
+        [
+          "2",
+          "player"
+        ],
+        [
+          "9",
+          "dealer"
+        ]
+      ],
+      "unicodePath": true,
+      "jsonBridge": true,
+      "freeThreadGuard": true,
+      "recognitionDigest": "1bf8d0c747d5632bc16bf6b49e0b7c3cdfbee85837bba1b00f254c5d1c8824c1"
+    },
+    {
+      "python": "3.12.14",
+      "numpy": "2.5.4",
+      "opencv": "5.0.0",
+      "backend": "OpenCV DNN / CPU",
+      "visible": [
+        [
+          "5",
+          "player"
+        ],
+        [
+          "2",
+          "player"
+        ],
+        [
+          "9",
+          "dealer"
+        ]
+      ],
+      "unicodePath": true,
+      "jsonBridge": true,
+      "freeThreadGuard": true,
+      "recognitionDigest": "1bf8d0c747d5632bc16bf6b49e0b7c3cdfbee85837bba1b00f254c5d1c8824c1"
+    },
+    {
+      "python": "3.13.5",
+      "numpy": "2.5.4",
+      "opencv": "5.0.0",
+      "backend": "OpenCV DNN / CPU",
+      "visible": [
+        [
+          "5",
+          "player"
+        ],
+        [
+          "2",
+          "player"
+        ],
+        [
+          "9",
+          "dealer"
+        ]
+      ],
+      "unicodePath": true,
+      "jsonBridge": true,
+      "freeThreadGuard": true,
+      "recognitionDigest": "1bf8d0c747d5632bc16bf6b49e0b7c3cdfbee85837bba1b00f254c5d1c8824c1"
+    },
+    {
+      "python": "3.14.8",
+      "numpy": "2.5.4",
+      "opencv": "5.0.0",
+      "backend": "OpenCV DNN / CPU",
+      "visible": [
+        [
+          "5",
+          "player"
+        ],
+        [
+          "2",
+          "player"
+        ],
+        [
+          "9",
+          "dealer"
+        ]
+      ],
+      "unicodePath": true,
+      "jsonBridge": true,
+      "freeThreadGuard": true,
+      "recognitionDigest": "1bf8d0c747d5632bc16bf6b49e0b7c3cdfbee85837bba1b00f254c5d1c8824c1"
+    },
+    {
+      "python": "3.15.0",
+      "numpy": "2.5.4",
+      "opencv": "5.0.0",
+      "backend": "OpenCV DNN / CPU",
+      "visible": [
+        [
+          "5",
+          "player"
+        ],
+        [
+          "2",
+          "player"
+        ],
+        [
+          "9",
+          "dealer"
+        ]
+      ],
+      "unicodePath": true,
+      "jsonBridge": true,
+      "freeThreadGuard": true,
+      "recognitionDigest": "1bf8d0c747d5632bc16bf6b49e0b7c3cdfbee85837bba1b00f254c5d1c8824c1"
+    }
+  ],
+  "sameOutput": true,
+  "windowsDependencyLocks": [
+    "python313.txt",
+    "python315.txt",
+    "python311.txt",
+    "python314.txt",
+    "python312.txt"
+  ]
+}
