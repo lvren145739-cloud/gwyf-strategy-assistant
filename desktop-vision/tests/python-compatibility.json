@@ -1,125 +1,125 @@
 {
-  "scope": "Real standard CPython Linux x64 inference/import/JSON/Unicode-path checks. Windows dependency locks separately resolved for 3.11-3.15; Windows native GUI/capture not executed. Free-threaded builds not supported.",
+  "scope": "Real standard CPython Linux x64 inference/import/JSON/Unicode-path checks. Windows dependency locks separately resolved for 3.11-3.15; Windows embedded 3.14 native GUI/capture validated separately in windows-native-results.json. Free-threaded builds not supported.",
   "runtimes": [
     {
       "python": "3.11.17",
       "numpy": "2.2.6",
       "opencv": "5.0.0",
-      "backend": "OpenCV DNN / CPU",
+      "backend": "OpenCV DNN / CPU \u00b7 V3",
       "visible": [
         [
           "5",
           "player"
         ],
         [
-          "2",
-          "player"
-        ],
-        [
           "9",
           "dealer"
+        ],
+        [
+          "2",
+          "player"
         ]
       ],
       "unicodePath": true,
       "jsonBridge": true,
       "freeThreadGuard": true,
-      "recognitionDigest": "1bf8d0c747d5632bc16bf6b49e0b7c3cdfbee85837bba1b00f254c5d1c8824c1"
+      "recognitionDigest": "b60881285af3088606c3a3da15d8521dd924e03625f7610c814949674553d931"
     },
     {
       "python": "3.12.14",
       "numpy": "2.5.4",
       "opencv": "5.0.0",
-      "backend": "OpenCV DNN / CPU",
+      "backend": "OpenCV DNN / CPU \u00b7 V3",
       "visible": [
         [
           "5",
           "player"
         ],
         [
-          "2",
-          "player"
-        ],
-        [
           "9",
           "dealer"
+        ],
+        [
+          "2",
+          "player"
         ]
       ],
       "unicodePath": true,
       "jsonBridge": true,
       "freeThreadGuard": true,
-      "recognitionDigest": "1bf8d0c747d5632bc16bf6b49e0b7c3cdfbee85837bba1b00f254c5d1c8824c1"
+      "recognitionDigest": "b60881285af3088606c3a3da15d8521dd924e03625f7610c814949674553d931"
     },
     {
       "python": "3.13.5",
       "numpy": "2.5.4",
       "opencv": "5.0.0",
-      "backend": "OpenCV DNN / CPU",
+      "backend": "OpenCV DNN / CPU \u00b7 V3",
       "visible": [
         [
           "5",
           "player"
         ],
         [
-          "2",
-          "player"
-        ],
-        [
           "9",
           "dealer"
+        ],
+        [
+          "2",
+          "player"
         ]
       ],
       "unicodePath": true,
       "jsonBridge": true,
       "freeThreadGuard": true,
-      "recognitionDigest": "1bf8d0c747d5632bc16bf6b49e0b7c3cdfbee85837bba1b00f254c5d1c8824c1"
+      "recognitionDigest": "b60881285af3088606c3a3da15d8521dd924e03625f7610c814949674553d931"
     },
     {
       "python": "3.14.8",
       "numpy": "2.5.4",
       "opencv": "5.0.0",
-      "backend": "OpenCV DNN / CPU",
+      "backend": "OpenCV DNN / CPU \u00b7 V3",
       "visible": [
         [
           "5",
           "player"
         ],
         [
-          "2",
-          "player"
-        ],
-        [
           "9",
           "dealer"
+        ],
+        [
+          "2",
+          "player"
         ]
       ],
       "unicodePath": true,
       "jsonBridge": true,
       "freeThreadGuard": true,
-      "recognitionDigest": "1bf8d0c747d5632bc16bf6b49e0b7c3cdfbee85837bba1b00f254c5d1c8824c1"
+      "recognitionDigest": "b60881285af3088606c3a3da15d8521dd924e03625f7610c814949674553d931"
     },
     {
       "python": "3.15.0",
       "numpy": "2.5.4",
       "opencv": "5.0.0",
-      "backend": "OpenCV DNN / CPU",
+      "backend": "OpenCV DNN / CPU \u00b7 V3",
       "visible": [
         [
           "5",
           "player"
         ],
         [
-          "2",
-          "player"
-        ],
-        [
           "9",
           "dealer"
+        ],
+        [
+          "2",
+          "player"
         ]
       ],
       "unicodePath": true,
       "jsonBridge": true,
       "freeThreadGuard": true,
-      "recognitionDigest": "1bf8d0c747d5632bc16bf6b49e0b7c3cdfbee85837bba1b00f254c5d1c8824c1"
+      "recognitionDigest": "b60881285af3088606c3a3da15d8521dd924e03625f7610c814949674553d931"
     }
   ],
   "sameOutput": true,

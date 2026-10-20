@@ -1,0 +1,13 @@
+{
+  "platform": "win32",
+  "python": "3.14.8",
+  "realWebView2Bridge": true,
+  "nativeEnumWindows": true,
+  "statusRPC": true,
+  "mssOwnWindowCapture": {
+    "width": 624,
+    "height": 411
+  },
+  "scope": "Windows native GUI and synthetic own-window capture. No real game run.",
+  "source": "https://github.com/lvren145739-cloud/gwyf-strategy-assistant/actions/runs/39413613979"
+}

@@ -1,0 +1,7 @@
+{
+  "file": "poker-a/0057.jpg",
+  "initialHandAceLabel": "hearts",
+  "correctedAceLabel": "diamonds",
+  "evidence": "Manual reinspection of the full 1280x720 frame and upright crop shows a solid red diamond for both small and large suit. This hand was excluded from training; the annotation correction does not modify weights.",
+  "discardedCard": "8 hearts is visibly behind the five active cards and must not be counted as a sixth current card."
+}

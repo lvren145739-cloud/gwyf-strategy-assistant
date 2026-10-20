@@ -8,7 +8,11 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import webview
 from app import API,DesktopBridge,TITLE
 assert os.name=='nt'
-api=API();report={'platform':sys.platform,'python':sys.version.split()[0]};error=[]
+import importlib.util
+spec=importlib.util.spec_from_file_location('portable_launcher',ROOT/'portable-launch.py')
+launcher=importlib.util.module_from_spec(spec);spec.loader.exec_module(launcher)
+assert launcher.webview2_installed(),'Portable launcher must detect the installed WebView2 runtime'
+api=API();report={'platform':sys.platform,'python':sys.version.split()[0],'portableWebView2Detection':True};error=[]
 app=webview.create_window(TITLE,str(ROOT/'web/desktop.html'),js_api=DesktopBridge(api),width=560,height=820,x=700,y=30)
 api.window=app
 fixture=webview.create_window('Gamble With Your Friends - test fixture',html='<html><body style="background:#315f42;color:white;font:40px Arial">Native capture fixture<div style="background:white;color:black">9 clubs / 8 clubs / A hearts</div></body></html>',width=640,height=450,x=20,y=30)

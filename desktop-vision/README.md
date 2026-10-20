@@ -1,7 +1,42 @@
-# GWYF Vision 0.3 — development branch
+# GWYF Vision 0.3.0 — 本地截图识牌决策助手
 
 Created by lvren with GPT-6.1Sol.
 
-This branch validates the embedded Windows runtime, WebView2 RPC and native window enumeration while the larger recognition model is trained. The stable decision webpage on main is unchanged. This is not the final desktop release.
+适用于《朋友，梭哈吧》的二十一点和单人扑克截图识牌。按快捷键截一帧，自动寻找可见牌面；识别完整且通过一致性、牌组和历史记录检查后，直接计算建议。看不清的牌保留为可编辑草稿，不覆盖原手牌，也不继续显示过时建议。不会读取游戏内存或预知底牌。
 
-The full release will include the Python runtime and dependencies, local whole-card verification and glyph models, automatic calculation of complete validated hands, and editable drafts for uncertain recognition. All project code and self-trained weights remain MIT.
+## Windows 免装 Python 版
+
+1. 完整解压 `GWYF-Vision-0.3.0-Windows-免装Python.zip`，不要在压缩包内部运行。
+2. 双击 `启动识牌助手.cmd`；也可用 `.vbs` 静默启动。
+3. 选择游戏窗口，按 **Ctrl+Shift+Space** 截一帧。默认整帧找牌，不必先框牌区。
+4. 有疑点时直接改草稿中的牌、归属或删除多余候选，再采用并计算。**Ctrl+Shift+Enter** 可采用已核对草稿。
+
+适用于 Windows 10/11 x64。包内有标准 Python 3.14、依赖、CPU 模型和微软 WebView2 离线安装器；不用安装系统 Python、不运行 pip、不依赖云端识别或 GPU。缺少 WebView2 时首次启动会使用包内安装器准备，可能需要稍等。体积主要来自完整运行环境和微软离线安装器，模型本身约 **7.05 MiB**。第三方组件各有许可，见 NOTICE.md。
+
+默认自动确定牌区；手动框区用于限定归属，中心点筛选不会直接裁掉完整牌角。浮窗支持紧凑显示，可靠识别后返回结果区域。换位置或改变视角后可重新校准或切回自动找牌。最小化游戏请先恢复窗口；独占全屏无法截图时可用无边框窗口模式。
+
+截图只在本机内存处理，不自动上传或保存。存档与启动日志位于 `%LOCALAPPDATA%\GWYF-Vision-Prototype`。重复截图不增加已用牌；归档需要主动点击。扑克确认换牌即记录弃牌，重新截图不会把桌面后方弃牌计为当前五张牌。
+
+## 这一版改进
+
+- 增加整张牌的正反面/背景分类模型，先排除桌面文字、漂浮总点数和非牌面，再读取牌角。
+- 更大的点数/花色网络与独立旧模型复核，结合两种牌角裁块、大小花色和红黑颜色检查；四个模型共 1,847,539 参数。
+- 完整牌面定位、多尺度轮廓、四朝向校正；旧牌区不再强制裁切图片。
+- 二十一点区分玩家牌、庄家明牌和不可读的背面；扑克区分当前五张与后方弃牌。
+- 可靠且完整时自动计算；缺牌、重复牌、低分和归属不清时保留修改入口。界面不将模型分数称作准确率。
+
+## 验证与边界
+
+选定开发案例中，5 个完整桌面牌面均正确，4 个满足自动计算条件，另 1 个因遮挡留待核对；17 个无牌场景没有触发自动计算。按用户照片所示 9♣、8♣ 对庄家 A♥ 制作的 3 个合成布局均读对并自动计算。**合成布局不是用户原始照片；没有取得这 5 张原照片的本地像素文件，不能声称已对它们完成实测。**样本较少且有训练重叠，这些结果不是整体准确率，详见 tests/VALIDATION.md。
+
+Windows CI 已用真实 WebView2、原生 EnumWindows 和 MSS 完成自建窗口截图与 RPC 验证。它没有运行真实游戏；游戏焦点、所有 DPI、多显示器和全局快捷键仍需实际游戏环境验证。不能承诺完美识别，遮挡、强反光、动画、特殊角度仍可能需要修正。
+
+识牌与策略是两层功能。决策引擎沿用网页 v7.7.2，规则依据以原有 v1.0.30 资料为准；照片中的游戏 v1.0.33 未因此被声称完成全部规则复核。建议仅使用已经可见的牌，不会推断未知底牌。
+
+## 源码开发
+
+源码包的 `启动识牌助手.bat` 可配置标准 CPython 3.11–3.15 x64 环境；普通用户优先下载免装 Python 版。自由线程 Python 和 32 位环境暂不支持。Linux 各版本推理、JSON 返回值和中文模型路径验证见 tests/python-compatibility.json。开发者重新训练需另备视频帧及训练依赖；源码包不分发原始游戏视频。
+
+`界面预览-无需安装.html` 只演示手动录牌与计算，桌面截图和模型推理由 app.py 提供。
+
+项目代码与自训练模型采用 **MIT License**，允许商用，保留版权和许可声明。线上稳定网页保持独立，桌面版仍为实验版本。

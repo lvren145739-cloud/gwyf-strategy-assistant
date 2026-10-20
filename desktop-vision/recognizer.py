@@ -45,8 +45,12 @@ def find_cards(image,region=None):
  sizes=sorted({1,max(3,round(sh*.007))|1,max(5,round(sh*.016))|1})
  for brightness in [190,160]:
   base=cv2.inRange(hsv,np.array([0,0,brightness]),np.array([180,110,255]))
+  outer,_=cv2.findContours(base,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+  filled=np.zeros_like(base);cv2.drawContours(filled,outer,-1,255,cv2.FILLED)
   for kernel in sizes:
-   mask=base if kernel==1 else cv2.morphologyEx(base,cv2.MORPH_OPEN,np.ones((kernel,kernel),np.uint8))
+   # Fill printed glyph holes before opening: otherwise the ink cuts the paper
+   # into fragments and deletes its corner. Only thin external totals are removed.
+   mask=base if kernel==1 else cv2.morphologyEx(filled,cv2.MORPH_OPEN,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(kernel,kernel)))
    contours,_=cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
    for contour in contours:
     area=cv2.contourArea(contour);x,y,cw,ch=cv2.boundingRect(contour)
@@ -58,6 +62,8 @@ def find_cards(image,region=None):
      candidate=cv2.approxPolyDP(hull,epsilon*cv2.arcLength(hull,True),True)
      if len(candidate)==4 and cv2.isContourConvex(candidate):q=order_corners(candidate);break
     if q is None:continue
+    if kernel>1:
+     center=q.mean(axis=0);q=center+(q-center)*(1+.30*kernel/max(12,min(cw,ch)))
     q=q/scale
     if any(quad_iou(q,c['quad'])>.94 for c in found):continue
     ox,oy,ow,oh=cv2.boundingRect(q)
@@ -92,6 +98,27 @@ def card_glyphs(card):
  h,w=card.shape[:2]
  return normalise_glyph(card[:round(h*51/128),:round(w*43/96)]),normalise_glyph(card[round(h*49/128):round(h*126/128),round(w*27/96):round(w*95/96)],'suit')
 
+def ink_color(crop):
+ gray=cv2.cvtColor(crop,cv2.COLOR_BGR2GRAY)
+ _,mask=cv2.threshold(gray,0,255,cv2.THRESH_BINARY_INV|cv2.THRESH_OTSU)
+ pixels=crop[(mask>0)&(gray<180)]
+ if len(pixels)<8:return None
+ advantage=pixels[:,2].astype(float)-np.maximum(pixels[:,0],pixels[:,1])
+ red=float(np.median(advantage))
+ return 'red' if red>40 else 'black' if red<20 else None
+
+def consensus(vectors,valid=None,weights=None):
+ """Model support, never a calibrated probability of correctness.
+ Two distinct networks and two crops can recover a damaged individual crop.
+ """
+ vectors=np.asarray(vectors);weights=np.asarray(weights or [1.25,1.25,1.,1.])
+ support=np.average(vectors,axis=0,weights=weights)
+ if valid is not None:
+  allowed=np.zeros_like(support);allowed[valid]=1;allowed[-1]=1;support*=allowed
+ winner=int(support.argmax());votes=sorted([float(v[winner]) for v in vectors],reverse=True)
+ score=float(np.mean(votes[:2]));strong=sum(v>.85 for v in votes)
+ return winner,score,support,strong
+
 def softmax(logits):
  x=logits-logits.max(axis=1,keepdims=True);p=np.exp(x);return p/p.sum(axis=1,keepdims=True)
 
@@ -117,6 +144,7 @@ class Recognizer:
  def __init__(self,model_dir=None):
   folder=Path(model_dir) if model_dir else ROOT/'models'
   self.glyph=DNNSession(folder/'glyph.onnx');self.card=DNNSession(folder/'card.onnx')
+  self.legacy_rank=DNNSession(folder/'rank-v2.onnx');self.legacy_suit=DNNSession(folder/'suit-v2.onnx')
   self.rank=HeadSession(self.glyph,0,15);self.suit=HeadSession(self.glyph,15,20);self.backend='OpenCV DNN / CPU · V3'
 
  @staticmethod
@@ -150,18 +178,27 @@ class Recognizer:
   if glyphs:
    x=np.stack([cv2.resize(a,(64,64)) for a in glyphs]).astype(np.float32)[:,None]/255
    logits=self.glyph.predict(x);rp=softmax(logits[:,:15]);sp=softmax(logits[:,15:])
+   oldx=np.stack(glyphs).astype(np.float32)[:,None]/255
+   oldrp=softmax(self.legacy_rank.predict(oldx));oldsp=softmax(self.legacy_suit.predict(oldx))
   results=[]
   for i,item in enumerate(items):
    scores=[];details=[]
    for k in range(4):
-    j=(i*4+k)*4;rankp=(rp[j]+rp[j+1])/2;ri=int(rankp.argmax());rankscore=float(rankp[ri]);rcons=int(rp[j].argmax())==int(rp[j+1].argmax())
-    large,small=sp[j+2],sp[j+3];li,ti=int(large.argmax()),int(small.argmax());lp,tp=float(large[li]),float(small[ti]);disagree=li<4 and ti<4 and li!=ti and min(lp,tp)>.85
-    suitp=(large+small)/2 if li==ti else (large if lp>=tp else small);si=int(suitp.argmax());suit_score=float(suitp[si]);support=max(float(large[:4].max()),float(small[:4].max()))
-    scores.append((rankscore*support if ri<13 else 0)*(.90 if disagree else 1))
-    details.append((ri,rankscore,rankp,rcons,si,suit_score,disagree))
+    j=(i*4+k)*4
+    ri,rankscore,rankp,strong=consensus([rp[j],rp[j+1],oldrp[j],oldrp[j+1]])
+    card=variants[i*4+k];large_color=ink_color(card[74:189,40:143]);small_color=ink_color(card[:66,70:143]);color=large_color if large_color==small_color or small_color is None else small_color if large_color is None else None
+    allowed=[1,2] if color=='red' else [0,3] if color=='black' else None
+    si,suit_score,suitp,suit_strong=consensus([sp[j+2],sp[j+3],oldsp[j+2],oldsp[j+3]],allowed)
+    # A single crop cannot promote a different suit over two mutually supported
+    # positions; ink colour also rules out red/black suit contradictions.
+    disagreement=large_color is not None and small_color is not None and large_color!=small_color
+    quality=rankscore*suit_score*min(1.,strong/2)*min(1.,suit_strong/2)
+    scores.append(quality if ri<13 and si<4 else 0)
+    details.append((ri,rankscore,rankp,strong>=2,si,suit_score,disagreement))
    best=int(np.argmax(scores));ri,rankscore,rankp,rcons,si,suit_score,disagree=details[best]
    image0=item['image'];hsv=cv2.cvtColor(image0,cv2.COLOR_BGR2HSV);blue=float(np.mean((hsv[:,:,0]>=65)&(hsv[:,:,0]<=125)&(hsv[:,:,1]>=20)))
    back=item['backScore']>.87 and blue>.20 and item['backScore']>item['cardScore']
+   if mode=='poker' and back:rejected+=1;continue
    rank=RANKS[ri] if ri<13 else None;suit=SUITS[si] if si<4 else None;issues=[]
    if not back:
     if item['cardScore']<.80:issues.append('整张牌面判断不够确定')
@@ -170,8 +207,11 @@ class Recognizer:
     if suit_score<.80:suit=None;issues.append('花色不够清晰')
     if disagree:issues.append('大小花色不一致')
     if len(scores)>1 and sorted(scores,reverse=True)[0]-sorted(scores,reverse=True)[1]<.10:issues.append('牌面方向不够确定')
+   if back:rank=None;suit=None
    if item['clipped']:rank=None;issues.append('牌面超出截图边缘')
-   margin=float(np.sort(rankp)[-1]-np.sort(rankp)[-2]);review=bool(issues or not back and (rankscore<.94 or suit_score<.92 or item['cardScore']<.94 or margin<.55))
+   margin=float(np.sort(rankp)[-1]-np.sort(rankp)[-2]);review=bool(issues or not back and (rankscore<.94 or suit_score<.92 or item['cardScore']<.94 or margin<.30))
+   if not back and ri>=13 and rankscore>.97:
+    rejected+=1;continue
    if not back and item['cardScore']<.80 and (rank is None or suit is None or rankscore<.94 or suit_score<.92):
     rejected+=1;continue
    result={k:item[k] for k in ('rect','quad','cardScore')}
@@ -182,12 +222,20 @@ class Recognizer:
   for c in sorted(results,key=lambda c:c['_selection'],reverse=True):
    if not any(quad_iou(c['quad'],a['quad'])>.48 for a in chosen):chosen.append(c)
   chosen.sort(key=lambda c:c['rect'][0]);warnings=[]
+  uncertain=[c for c in chosen if not c['faceDown'] and c['rank'] is None and c['suit'] is None]
+  chosen=[c for c in chosen if c not in uncertain]
+  rejected+=len(uncertain)
   if manual:
    for c in chosen:
     roles=[(role,r) for role,r in regions.items() if r and center_inside(c,r,w,h) and (role=='player' or mode=='blackjack')]
     c['role']=min(roles,key=lambda item:((c['rect'][0]+c['rect'][2]/2)/w-(item[1][0]+item[1][2])/2)**2+((c['rect'][1]+c['rect'][3]/2)/h-(item[1][1]+item[1][3])/2)**2)[0]
   else:
    chosen,group_warnings=self.group_table(chosen,mode,w,h);warnings+=group_warnings
+  suspicious=[]
+  for u in uncertain:
+   ux,uy,uw,uh=u['rect'];uc=np.array([ux+uw/2,uy+uh/2])
+   if u['cardScore']>.97 and any(.60<max(uw,uh)/max(c['rect'][2:])<1.7 and np.linalg.norm(uc-np.array([c['rect'][0]+c['rect'][2]/2,c['rect'][1]+c['rect'][3]/2]))<1.5*max(c['rect'][2:]) for c in chosen):suspicious.append({'quad':u['quad'],'rect':u['rect'],'review':True})
+  if suspicious:warnings.append(f'另有{len(suspicious)}处可能未读完整的牌面，请核对。')
   for c in chosen:
    c.pop('_selection',None)
    if c['faceDown'] and c['role']!='dealer':c['faceDown']=False;c['rank']=None;c['review']=True;c['issues'].append('自己的暗牌不能读取')
@@ -197,7 +245,7 @@ class Recognizer:
   auto_ready=bool(complete and not warnings and visible and all(c['rank'] and c['suit'] and not c['review'] for c in visible) and all(not c['review'] for c in chosen))
   if mode=='poker' and len(player)!=5:warnings.append(f'扑克需要完整五张，当前检测到{len(player)}张。')
   if mode=='blackjack' and (len(player)<2 or not dealer):warnings.append('没有确定完整的玩家牌和庄家明牌。')
-  return {'cards':chosen,'hiddenCount':sum(c['faceDown'] for c in chosen),'rejectedCount':rejected,'warnings':warnings,'autoReady':auto_ready,'recognitionMs':round((time.perf_counter()-start)*1000,1)}
+  return {'cards':chosen,'hiddenCount':sum(c['faceDown'] for c in chosen),'rejectedCount':rejected,'warnings':warnings,'uncertainCards':suspicious,'autoReady':auto_ready,'recognitionMs':round((time.perf_counter()-start)*1000,1)}
 
  @staticmethod
  def group_table(cards,mode,w,h):
@@ -215,6 +263,20 @@ class Recognizer:
    groups.append(group)
   chosen=max(groups,key=lambda g:sum(c['rect'][2]*c['rect'][3] for c in g));warnings=[]
   if mode=='poker':
+   if len(chosen)>5:
+    # Cards that were replaced can remain behind the active five-card row.
+    # Fit the row in screen space; do not count a discarded table card as sixth.
+    best_row=None;best_score=-1
+    for i,a in enumerate(chosen):
+     for b in chosen[i+1:]:
+      delta=center(b)-center(a);length=float(np.linalg.norm(delta))
+      if length<1:continue
+      normal=np.array([-delta[1],delta[0]])/length
+      row=[c for c in chosen if abs(float(np.dot(center(c)-center(a),normal)))<.32*np.hypot(c['rect'][2],c['rect'][3])]
+      if len(row)!=5:continue
+      score=sum(c['rect'][2]*c['rect'][3] for c in row)
+      if score>best_score:best_score=score;best_row=row
+    if best_row is not None:chosen=best_row
    for c in chosen:c['role']='player'
    return chosen,warnings
   backs=[c for c in chosen if c['faceDown']]

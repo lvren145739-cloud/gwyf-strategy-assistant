@@ -6,7 +6,7 @@ import json,sys
 from pathlib import Path
 import cv2,numpy as np
 root=Path(__file__).resolve().parents[1];sys.path.insert(0,str(root))
-from recognizer import find_cards
+from training.legacy_geometry import find_cards
 def order_corners(q):
     p=np.asarray(q,np.float32).reshape(4,2);p=p[np.argsort(p[:,1])];top=p[:2][np.argsort(p[:2,0])];bottom=p[2:][np.argsort(p[2:,0])];return np.float32([top[0],top[1],bottom[1],bottom[0]])
 research=root/'research';(research/'cards').mkdir(parents=True,exist_ok=True)

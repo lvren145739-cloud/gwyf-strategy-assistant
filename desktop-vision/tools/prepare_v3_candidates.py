@@ -3,8 +3,7 @@ import sys,json,importlib.util
 import cv2,numpy as np
 from PIL import Image,ImageDraw
 r=Path('/workspace/vision-prototype/research');out=r/'v3-data';out.mkdir(exist_ok=True);(out/'candidates').mkdir(exist_ok=True)
-spec=importlib.util.spec_from_file_location('legacy','/workspace/vision-window-fix/recognizer.py');legacy=importlib.util.module_from_spec(spec);spec.loader.exec_module(legacy)
-classifier=legacy.Recognizer('/workspace/vision-window-fix/models')
+spec=importlib.util.spec_from_file_location('legacy',str(Path(__file__).resolve().parents[1]/'training/legacy_geometry.py'));legacy=importlib.util.module_from_spec(spec);spec.loader.exec_module(legacy)
 groups=[('bj-a',[13,16,19,22,25],[.35,.23,.85,.62]),('bj-b',[13,17,19,21],[.32,.27,.8,.6]),('poker-a',[7,10,13,17,19,33,37,40,41,53,57],[.20,.25,.95,.65]),('bili-cards',[17,18,22,23],[.01,.20,.95,.9])]
 files=[(r/folder/f'{n:04d}.jpg' if folder!='bili-cards' else r/folder/f'{n:03d}.jpg',region) for folder,ns,region in groups for n in ns]
 files += [(p,[0,0,1,1]) for p in sorted((r/'v3-frames').glob('*.jpg'))]

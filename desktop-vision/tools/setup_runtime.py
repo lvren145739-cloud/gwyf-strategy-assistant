@@ -39,7 +39,7 @@ def main():
  run([python,'-m','pip','install','--upgrade','pip'])
  run([python,'-m','pip','install','--prefer-binary','--only-binary=numpy,opencv-python-headless,pythonnet,cffi,clr_loader','-r',ROOT/'requirements.txt'])
  run([python,ROOT/'tools/check_install.py'])
- ready.write_text(json.dumps({'project':'GWYF Vision','version':'0.2.1','python':info},indent=2),'utf-8')
+ ready.write_text(json.dumps({'project':'GWYF Vision','version':'0.3.0','python':info},indent=2),'utf-8')
  print('\nReady. Run Start-Windows.bat. State in LOCALAPPDATA is preserved.')
 
 if __name__=='__main__':main()

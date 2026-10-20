@@ -476,17 +476,18 @@ async function recognize(){
  if(state.settings.captureMode==='manual'&&(!regions.player||(state.mode==='blackjack'&&!regions.dealer))){message('请框出双方牌区，或点“自动找牌”。',true);$('#setup').open=true;return;}
  const start=performance.now();draft=[];detections=[];$('#draftPanel').hidden=true;message('正在本地找牌、核对并计算…');
  const out=await desktopCall('recognize',regions,state.mode);
- detections=out.cards||[];paintFrame();
+ detections=[...(out.cards||[]),...(out.uncertainCards||[])];paintFrame();
  $('#timing').textContent=`识别 ${out.recognitionMs} ms / 往返 ${Math.round(performance.now()-start)} ms`;
  const checked=VisionRecognition.assess(state,out);
  if(checked.ok){
   const next=V.commit(state,checked.cards),oldHand=JSON.stringify(state[state.mode]),newHand=JSON.stringify(next[next.mode]);
   if(oldHand!==newHand){state=next;save();}
   draft=[];$('#draftPanel').hidden=true;render();calculate();
+  window.scrollTo({top:0,behavior:'instant'});
   message(`已自动识别并计算 · ${checked.cards.filter(c=>c.role==='player').map(label).join(' ')}${out.hiddenCount?' · 庄家暗牌不读取':''}${out.rejectedCount?` · 已排除 ${out.rejectedCount} 个非牌面候选`:''}`);
   return;
  }
- draft=detections.filter(c=>!c.faceDown);renderDraft();
+ draft=(out.cards||[]).filter(c=>!c.faceDown);renderDraft();
  const players=draft.filter(c=>c.role==='player').length;
  message(!draft.length?'没有找到可靠牌面。请对准当前牌桌再试。':`本次需核对 · 我的牌 ${players} 张${out.hiddenCount?` · 排除 ${out.hiddenCount} 张背面`:''}${out.rejectedCount?` · 排除 ${out.rejectedCount} 个非牌面`:''}`,true);
  if(compact){compact=false;document.body.classList.remove('compact');$('#compact').textContent='收起';if(nativeReady)desktopCall('compact',false).catch(e=>message(e.message,true));}
@@ -509,7 +510,7 @@ function paintFrame(){
  const canvas=$('#frame'),ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);
  if(!frameImage?.complete||!frame)return;
  canvas.width=frameImage.naturalWidth;canvas.height=frameImage.naturalHeight;ctx.drawImage(frameImage,0,0);
- const regions={...state.regions[state.mode]};if(drag&&selectRegion)regions[selectRegion]=[Math.min(drag[0],drag[2]),Math.min(drag[1],drag[3]),Math.max(drag[0],drag[2]),Math.max(drag[1],drag[3])];
+ const regions=state.settings.captureMode==='manual'?{...state.regions[state.mode]}:{};if(drag&&selectRegion)regions[selectRegion]=[Math.min(drag[0],drag[2]),Math.min(drag[1],drag[3]),Math.max(drag[0],drag[2]),Math.max(drag[1],drag[3])];
  for(const c of detections){if(!c.quad)continue;ctx.strokeStyle=c.review?'#e5bd75':c.role==='player'?'#8ce6bc':'#8fbbff';ctx.lineWidth=Math.max(2,canvas.width/450);ctx.beginPath();c.quad.forEach((p,i)=>i?ctx.lineTo(p[0]*canvas.width/frame.width,p[1]*canvas.height/frame.height):ctx.moveTo(p[0]*canvas.width/frame.width,p[1]*canvas.height/frame.height));ctx.closePath();ctx.stroke();}
  for(const [role,r] of Object.entries(regions)){if(state.mode==='poker'&&role==='dealer')continue;ctx.strokeStyle=role==='player'?'#8ce6bc':'#e5bd75';ctx.lineWidth=Math.max(2,canvas.width/400);ctx.strokeRect(r[0]*canvas.width,r[1]*canvas.height,(r[2]-r[0])*canvas.width,(r[3]-r[1])*canvas.height);}
 }

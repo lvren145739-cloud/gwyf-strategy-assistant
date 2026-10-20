@@ -12,6 +12,8 @@ Research used public gameplay videos listed in DATA_SOURCES.md. Those videos ret
 
 Synthetic training glyphs use locally installed DejaVu fonts and Google Fonts: Kalam, Lilita One (SIL Open Font License) and Luckiest Guy (Apache License 2.0 at the referenced Google Fonts path). Fonts are not bundled. Their original license files and authorship remain available in their respective upstream directories.
 
-Runtime dependencies are installed separately by pip: NumPy (BSD), OpenCV (Apache 2.0), MSS (MIT), pywebview (BSD), and their dependencies. Refer to the installed packages' license and notice files. Microsoft WebView2 and Python retain their own licenses. PyTorch, ONNX and Pillow are development tools, not dependencies downloaded by the end-user setup script.
+The Windows portable package bundles the official embedded CPython 3.14.8 x64 runtime and binary runtime dependencies: NumPy (BSD), OpenCV (Apache 2.0), MSS (MIT), pywebview (BSD), and their dependencies. All bundled package dist-info/license files are preserved. Refer to those files for each component’s terms. Microsoft WebView2 and Python retain their own licenses. PyTorch, ONNX and Pillow are development tools, not included in the end-user portable package.
 
 Version 0.2 uses OpenCV DNN for inference. ONNX Runtime is no longer a runtime requirement. Models were retrained with balanced data and an expanded architecture.
+
+Version 0.3 includes Microsoft’s official Evergreen WebView2 x64 Standalone Installer, unmodified, for offline per-user preparation when WebView2 is missing. Microsoft’s own license and installation terms apply to that component; this project’s MIT license does not relicense it. Source URLs and SHA-256 checksums are preserved in runtime-support. The project does not install or change the user’s system Python.

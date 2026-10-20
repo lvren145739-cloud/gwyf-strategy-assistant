@@ -11,7 +11,7 @@ ROOT=Path(__file__).resolve().parents[1];R=ROOT/'research';D=R/'v3-data'
 sys.path.insert(0,str(ROOT));sys.path.insert(0,str(ROOT/'tools'))
 # Freeze V2 crop normalization for the training input; runtime V3 uses the same
 # masks, then scales to 64px. Geometry proposals are upgraded independently.
-spec=importlib.util.spec_from_file_location('legacy',str(ROOT.parent/'vision-window-fix/recognizer.py'));legacy=importlib.util.module_from_spec(spec);spec.loader.exec_module(legacy)
+spec=importlib.util.spec_from_file_location('legacy',str(ROOT/'training/legacy_geometry.py'));legacy=importlib.util.module_from_spec(spec);spec.loader.exec_module(legacy)
 from training_primitives import draw_suit
 SEED=3301;random.seed(SEED);np.random.seed(SEED);torch.manual_seed(SEED);torch.set_num_threads(2);cv2.setNumThreads(1)
 RANKS=legacy.RANKS
@@ -31,6 +31,8 @@ class CardNetV3(nn.Module):
  def forward(self,x):return self.net(x)
 
 def records():
+ authoritative=ROOT/'training/v3-labels.json'
+ if authoritative.exists():return json.loads(authoritative.read_text('utf-8'))
  old=json.loads((D/'reviewed-initial.json').read_text());extra=json.loads((D/'extra-candidates.json').read_text())
  labels={55:('K',0,1),56:('9',0,1),65:('6',3,1),66:('8',1,1),67:('Q',1,1),68:('Q',0,1),69:('Q',3,1),70:('6',2,1),83:('5',2,1),84:('9',2,1),85:('10',1,1),98:('Q',0,1),99:('6',0,1)}
  ignore={0,3,4,5,10,16,17,18,19,25,32,35,36,37,39,40,41,49,57,61,77,86,87,92,100,101,105,110,111,112,122,123,128,136,140,141,142,143,144,145,151}

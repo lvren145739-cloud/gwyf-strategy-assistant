@@ -49,3 +49,13 @@ ffmpeg -ss 240 -i https://archive.org/download/pc-longplay-gamble-with-your-frie
 另取第三视频 https://www.bilibili.com/video/BV1eD5x6NEEs/ 前80秒左右的抽帧，内容主要是介绍和非牌面，未用于训练。只把第1帧白鸭子场景作为独立负例，没有把它算成新的跨视频正牌识别证明。下载在约120秒超时后保留20个已完成帧，未声称拿到完整录像。原始帧和视频不随包分发。
 
 0.2的tools/prepare_training_crops.py读取training/v01-training-records.json重建基础裁块；tools/train_v2.py从已抽好的原始帧生成新增裁块。合成花色生成器在tools/training_primitives.py。训练另需开发依赖与本地字体，普通运行不需要。
+
+## 0.3整牌验证与数据扩充
+
+从上述Archive.org全流程及BV1XGVH6DEou另抽33张1920宽实况帧，时间点在tools/collect_v3_frames.py中。人工审阅原有与新增牌块及背景候选，训练记录在training/v3-labels.json。106张标注牌块包括之前的基础牌块和同一手牌的不同视角/时间，不代表106手独立牌。实际训练字形去重情况与模型参数见models/model-card.json。
+
+另在4张已用于开发的完整牌桌画面上按新版多尺度定位挖掘424个背景候选，人工检查确认主要是按钮、数字键、人物、墙面及白色碎片；记录在training/v3-hard-negatives.json。结合原有341个已审阅背景，追加整牌判别训练。合成字形和自绘牌面使用与之前相同字体/图形，不含第三方预训练权重。
+
+未参与训练：bili-cards/025.jpg、026.jpg；poker-a/0057.jpg所在的后续牌局与long-2075/2082；新增bili-630.jpg牌局；第三视频v2-unseen全部帧。这些是开发检查或预留场景，不是随机盲测；不得把开发案例比率换算成游戏中的准确率。
+
+用户提供的五张屏幕照片用于视觉诊断（9♣、8♣对庄家A♥及蓝色背面，含视角变化与界面碎片）。这些附件未作为可读取的本地像素文件提供给训练脚本，因此没有声称已经逐张运行原照片、没有把用户照片算入训练量或测试准确率。定位、截断和错分组问题由其他实况及人工构造的等价手牌场景进行回归。

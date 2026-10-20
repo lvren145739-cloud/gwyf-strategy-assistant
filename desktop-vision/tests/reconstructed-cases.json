@@ -1,0 +1,68 @@
+[
+  {
+    "name": "front-with-total",
+    "file": "v3-data/reconstructed/front-with-total.png",
+    "expected": [
+      [
+        "player",
+        "9",
+        "clubs"
+      ],
+      [
+        "player",
+        "8",
+        "clubs"
+      ],
+      [
+        "dealer",
+        "A",
+        "hearts"
+      ]
+    ],
+    "scope": "Synthetic reconstruction of the user-reported failure layout; not original attachment pixels."
+  },
+  {
+    "name": "slanted-left",
+    "file": "v3-data/reconstructed/slanted-left.png",
+    "expected": [
+      [
+        "player",
+        "9",
+        "clubs"
+      ],
+      [
+        "player",
+        "8",
+        "clubs"
+      ],
+      [
+        "dealer",
+        "A",
+        "hearts"
+      ]
+    ],
+    "scope": "Synthetic reconstruction of the user-reported failure layout; not original attachment pixels."
+  },
+  {
+    "name": "slanted-right",
+    "file": "v3-data/reconstructed/slanted-right.png",
+    "expected": [
+      [
+        "player",
+        "9",
+        "clubs"
+      ],
+      [
+        "player",
+        "8",
+        "clubs"
+      ],
+      [
+        "dealer",
+        "A",
+        "hearts"
+      ]
+    ],
+    "scope": "Synthetic reconstruction of the user-reported failure layout; not original attachment pixels."
+  }
+]

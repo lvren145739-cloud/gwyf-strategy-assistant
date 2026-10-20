@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parent
 def webview2_installed():
  import winreg
  # Evergreen runtime client GUID. Check per-user, machine and WOW64 views.
- client='{F3017226-FE2A-4295-8BDF-00C72BCB2035}'
+ client='{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}'
  for hive in (winreg.HKEY_CURRENT_USER,winreg.HKEY_LOCAL_MACHINE):
   for view in (winreg.KEY_WOW64_32KEY,winreg.KEY_WOW64_64KEY):
    try:
