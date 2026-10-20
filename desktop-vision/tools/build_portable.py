@@ -74,6 +74,6 @@ if errorlevel 1 pause
  output=ROOT.parent/'GWYF-Vision-0.3.0-Windows-免装Python.zip'
  with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED,compresslevel=7) as z:
   for p in files:z.write(p,DIST.name+'/'+p.relative_to(DIST).as_posix())
- print(output.name,output.stat().st_size,hashlib.sha256(output.read_bytes()).hexdigest(),len(files),'files')
+ print(output.name.encode('ascii','backslashreplace').decode('ascii'),output.stat().st_size,hashlib.sha256(output.read_bytes()).hexdigest(),len(files),'files')
 
 if __name__=='__main__':main()
