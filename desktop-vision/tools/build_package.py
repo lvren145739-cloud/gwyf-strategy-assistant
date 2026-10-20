@@ -8,7 +8,7 @@ files=[]
 for p in sorted(root.rglob('*')):
     if not p.is_file():continue
     rel=p.relative_to(root)
-    if any(part in {'research','__pycache__'} or part.startswith('.venv') for part in rel.parts):continue
+    if any(part in {'research','runtime','__pycache__'} or part.startswith('.venv') for part in rel.parts):continue
     if p.name in {'SHA256SUMS.txt','preview-test.html'} or p.suffix in {'.pyc','.zip','.log'}:continue
     if rel.parts[0]=='tests' and p.suffix=='.png' and p.name not in {'compact-actual.png','preview-draft.png'}:continue
     files.append(p)

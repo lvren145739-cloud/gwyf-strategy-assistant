@@ -1,0 +1,26 @@
+name: Publish Desktop Vision 0.3
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  portable-release:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Prepare pinned embedded runtime
+        run: python desktop-vision/tools/ci_prepare_portable.py
+      - name: Verify model integrity and CPU inference
+        run: .\desktop-vision\runtime\python.exe desktop-vision/tools/check_install.py
+      - name: Verify native window capture and portable runtime detection
+        run: .\desktop-vision\runtime\python.exe desktop-vision/tests/windows_native.py
+      - name: Build and publish portable prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python desktop-vision/tools/ci_release.py
