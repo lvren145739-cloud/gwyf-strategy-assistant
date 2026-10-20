@@ -5,7 +5,7 @@
 - `hotkeys_test.py`：解析、重复绑定、冲突回滚、交换、暂停恢复、磁盘写失败恢复、部分按键占用、独立存档通过。
 - `shortcuts-results.json`：实际 Chromium 界面通过四项按键录入、保存还原、Esc/失焦取消、占用错误、单项停用、归档保护、重置清零与撤销、重复重置保留撤销、紧凑同屏。
 - `automatic_flow.py` 和原界面/状态检查继续通过：可靠识别自动计算；重复截图不入历史；疑点停止旧建议；采用、归档与撤销正确。
-- Windows 原生按键、模型和接口验证记录见本版 windows-native-results.json；发布前更新为最终运行结果。模型散列与六模型 CPU 推理均需通过。
+- Windows 真实键盘事件触发四项操作、按住不重复、占用冲突回滚、暂停恢复、离开前台释放按键、配置保存、WebView2 RPC、EnumWindows 与 MSS 自建窗口截图通过；六模型散列与 CPU 推理通过。记录见 windows-native-results.json，运行：https://github.com/lvren145739-cloud/gwyf-strategy-assistant/actions/runs/39440288836 。不代表实际游戏测试。
 - Python 3.11–3.15 独立 Linux 环境推理、中文路径和 JSON 验证及性能见同目录相应报告。
 
 本轮没有运行用户真实游戏窗口或用户三张原图，不能声称在用户设备上达到完美识别。合成牌面、框架测试和 Windows 原生测试分别记录范围。

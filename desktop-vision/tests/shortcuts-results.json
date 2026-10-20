@@ -6,6 +6,7 @@
     "duplicate blocked; Escape restores native keys",
     "OS conflict preserves previously active bindings",
     "restore defaults and blur cancels recording",
+    "clicking away exits recording and restores native keys",
     "individual shortcut can be disabled",
     "archive ignored while capture is busy",
     "uncertain draft cannot archive the previous hand",

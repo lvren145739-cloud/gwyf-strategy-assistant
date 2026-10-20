@@ -16,6 +16,8 @@ wheels=BUILD/'wheels'
 subprocess.run([sys.executable,'-m','pip','wheel','--wheel-dir',str(wheels),'--requirement',str(ROOT/'tests/windows-locks/python314.txt')],check=True)
 for script in ['build_preview.py','build_portable.py','build_package.py']:
  subprocess.run([sys.executable,str(ROOT/'tools'/script)],check=True)
+portable=BUILD/'GWYF-Vision-0.3.1-Windows'
+subprocess.run([str(portable/'runtime/python.exe'),'-c',"import app,hotkeys,recognizer,cv2,numpy,webview,clr; clr.AddReference('System.Windows.Forms'); assert app.VERSION=='0.3.1'; assert hotkeys.DEFAULTS['reset']=='F11'; recognizer.Recognizer(); print('Actual portable runtime, shortcut module and six models passed')"],cwd=portable,check=True)
 files=[ROOT.parent/'GWYF-Vision-0.3.1-Windows-Portable.zip',ROOT.parent/'GWYF-Vision-0.3.1.zip']
 checksums=ROOT.parent/'GWYF-Vision-0.3.1-SHA256SUMS.txt'
 checksums.write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in files),encoding='utf-8')

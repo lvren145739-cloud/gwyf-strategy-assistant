@@ -5,7 +5,7 @@
       "python": "3.11.17",
       "numpy": "2.2.6",
       "opencv": "5.0.0",
-      "backend": "OpenCV DNN / CPU \u00b7 V3",
+      "backend": "OpenCV DNN / CPU \u00b7 V3.1",
       "visible": [
         [
           "5",
@@ -29,7 +29,7 @@
       "python": "3.12.14",
       "numpy": "2.5.4",
       "opencv": "5.0.0",
-      "backend": "OpenCV DNN / CPU \u00b7 V3",
+      "backend": "OpenCV DNN / CPU \u00b7 V3.1",
       "visible": [
         [
           "5",
@@ -53,7 +53,7 @@
       "python": "3.13.5",
       "numpy": "2.5.4",
       "opencv": "5.0.0",
-      "backend": "OpenCV DNN / CPU \u00b7 V3",
+      "backend": "OpenCV DNN / CPU \u00b7 V3.1",
       "visible": [
         [
           "5",
@@ -77,7 +77,7 @@
       "python": "3.14.8",
       "numpy": "2.5.4",
       "opencv": "5.0.0",
-      "backend": "OpenCV DNN / CPU \u00b7 V3",
+      "backend": "OpenCV DNN / CPU \u00b7 V3.1",
       "visible": [
         [
           "5",
@@ -101,7 +101,7 @@
       "python": "3.15.0",
       "numpy": "2.5.4",
       "opencv": "5.0.0",
-      "backend": "OpenCV DNN / CPU \u00b7 V3",
+      "backend": "OpenCV DNN / CPU \u00b7 V3.1",
       "visible": [
         [
           "5",

@@ -231,6 +231,7 @@ function renderShortcuts(){
 async function endShortcutRecording(){
  if(!recordingAction)return;
  recordingAction=null;shortcutPending=true;renderShortcuts();
+ shortcutMessage('已结束按键录入；未保存的修改需点击保存。');
  try{if(nativeReady)await withTimeout(desktopCall('hotkeys',{op:'resume'}),6000,'恢复快捷键超时，请点击保存重试。');}
  catch(e){shortcutMessage(e.message,true);}
  finally{shortcutPending=false;renderShortcuts();}
@@ -269,6 +270,7 @@ document.addEventListener('keydown',async event=>{
  if(action){event.preventDefault();({capture:captureNow,archive:archiveCurrent,accept:window.acceptDraft,reset:resetUsedCards})[action]();}
 },true);
 window.addEventListener('blur',()=>{if(recordingAction)endShortcutRecording();});
+document.addEventListener('pointerdown',event=>{if(recordingAction&&!event.target.closest('[data-record-shortcut],[data-disable-shortcut],#saveShortcuts,#resetShortcuts'))endShortcutRecording();},true);
 $('#shortcuts').addEventListener('toggle',()=>{if(!$('#shortcuts').open&&recordingAction)endShortcutRecording();});
 $('#saveShortcuts').onclick=async()=>{
  if(shortcutPending)return;

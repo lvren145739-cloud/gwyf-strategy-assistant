@@ -2,18 +2,18 @@
   "cpu": "AMD EPYC 7763, container 3 vCPU, OpenCV DNN 1 thread",
   "runtime": {
     "backend": "OpenCV DNN",
-    "opencv": "4.11.0",
-    "numpy": "2.2.6"
+    "opencv": "5.0.0",
+    "numpy": "2.5.4"
   },
   "image": [
     1920,
     1080
   ],
   "iterations": 12,
-  "modelLoadMs": 14.89,
-  "recognitionP50Ms": 1084.3,
-  "recognitionP95Ms": 1301.75,
-  "processPeakRssMiB": 265.9,
-  "modelBytes": 7395502,
+  "modelLoadMs": 18.63,
+  "recognitionP50Ms": 2551.44,
+  "recognitionP95Ms": 3138.71,
+  "processPeakRssMiB": 278.1,
+  "modelBytes": 11010608,
   "scope": "Image already in memory. Includes contour detection, glyph inference and card previews. Excludes screen capture, desktop shell, confirmation and decision solver. Linux process RSS is not Windows overlay RSS."
 }

@@ -33,6 +33,7 @@ with sync_playwright() as p:
  page.locator('#resetShortcuts').click();page.locator('#saveShortcuts').click();page.wait_for_function("shortcutConfig.capture==='F8'")
  page.locator('[data-record-shortcut=archive]').click();page.wait_for_function("recordingAction==='archive'");page.evaluate("dispatchEvent(new Event('blur'))");page.wait_for_function('recordingAction===null && !shortcutPending');assert not page.evaluate('keyPaused')
  checks.append('restore defaults and blur cancels recording')
+ page.locator('[data-record-shortcut=capture]').click();page.wait_for_function("recordingAction==='capture'");page.locator('.tabs [data-mode=blackjack]').click();page.wait_for_function('recordingAction===null && !shortcutPending');assert not page.evaluate('keyPaused');checks.append('clicking away exits recording and restores native keys')
  page.locator('[data-disable-shortcut=accept]').click();page.locator('#saveShortcuts').click();page.wait_for_function("shortcutConfig.accept===''");checks.append('individual shortcut can be disabled')
  page.evaluate('captureNow()');page.wait_for_function("document.querySelector('#advice h1').textContent.includes('HIT')")
  page.evaluate('busy=true;archiveCurrent();busy=false');assert page.locator('#usedCount').inner_text()=='0 张';checks.append('archive ignored while capture is busy')

@@ -1,13 +1,13 @@
 {
   "framework": "pywebview 6.2.1",
-  "injectionMs": 0.92,
+  "injectionMs": 1.25,
   "checks": [
     "late bridge + initially empty API + real generated windows() RPC",
     "readiness is idempotent",
     "manual selection survives refresh; 64-bit HWND stays a string",
     "minimized game remains listed with restore hint",
     "empty list, native exception, recovery",
-    "all nine exported RPC methods return through real Python bridge",
+    "all ten exported RPC methods return through real Python bridge",
     "bridge ready before UI and event listener",
     "missing method: visible timeout and retry recovery",
     "manual preview accurately explains native-only functions"

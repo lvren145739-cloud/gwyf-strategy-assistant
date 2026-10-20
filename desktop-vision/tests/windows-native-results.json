@@ -5,10 +5,24 @@
   "realWebView2Bridge": true,
   "nativeEnumWindows": true,
   "statusRPC": true,
+  "nativeHotkeys": {
+    "actions": [
+      "capture",
+      "archive",
+      "accept",
+      "reset"
+    ],
+    "keyboardEvents": true,
+    "noRepeat": true,
+    "conflictRollback": true,
+    "pauseResume": true,
+    "savedConfiguration": true,
+    "inactiveContextReleasesKeys": true
+  },
   "mssOwnWindowCapture": {
     "width": 624,
     "height": 411
   },
   "scope": "Windows native GUI and synthetic own-window capture. No real game run.",
-  "sourceURL": "https://github.com/lvren145739-cloud/gwyf-strategy-assistant/actions/runs/39419730116"
+  "sourceURL": "https://github.com/lvren145739-cloud/gwyf-strategy-assistant/actions/runs/39440288836"
 }

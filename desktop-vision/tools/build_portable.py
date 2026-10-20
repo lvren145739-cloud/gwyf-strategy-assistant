@@ -74,6 +74,11 @@ if errorlevel 1 pause
  output=ROOT.parent/'GWYF-Vision-0.3.1-Windows-Portable.zip'
  with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED,compresslevel=7) as z:
   for p in files:z.write(p,DIST.name+'/'+p.relative_to(DIST).as_posix())
+ with zipfile.ZipFile(output) as z:
+  assert z.testzip() is None
+  for line in manifest.splitlines():
+   digest,path=line.split('  ',1)
+   assert hashlib.sha256(z.read(DIST.name+'/'+path)).hexdigest()==digest,path
  print(output.name.encode('ascii','backslashreplace').decode('ascii'),output.stat().st_size,hashlib.sha256(output.read_bytes()).hexdigest(),len(files),'files')
 
 if __name__=='__main__':main()
