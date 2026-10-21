@@ -36,6 +36,13 @@ def test():
  try:
   assert app.events.loaded.wait(35),'WebView2 page did not load'
   assert fixture.events.shown.wait(15),'Fixture window not shown'
+  # The UI resumes hotkeys while connecting. Wait for that real asynchronous
+  # setup before testing pause/release; otherwise its late resume races us.
+  deadline=time.monotonic()+20
+  while time.monotonic()<deadline:
+   if app.evaluate_js('typeof nativeReady!=="undefined" && nativeReady && nativeConnecting===null && !shortcutPending'):break
+   time.sleep(.05)
+  else:raise AssertionError('Desktop UI connection did not settle before native shortcut tests')
   names=app.evaluate_js('Object.keys(window.pywebview.api).sort()')
   assert names==sorted(['status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact','hotkeys']),names
   report['realWebView2Bridge']=True
