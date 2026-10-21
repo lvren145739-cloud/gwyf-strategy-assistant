@@ -11,7 +11,7 @@ import time
 
 ROOT = Path(__file__).resolve().parent
 TITLE = 'GWYF · 识牌实验版'
-VERSION = '0.3.1'
+VERSION = '0.3.2'
 
 
 def app_folder():
@@ -273,7 +273,7 @@ def main():
         from hotkeys import HotkeyManager
 
         def dispatch(action):
-            name = {'capture': 'captureNow', 'archive': 'archiveCurrent', 'accept': 'acceptDraft', 'reset': 'resetUsedCards'}[action]
+            name = {'capture': 'captureNow', 'archive': 'archiveCurrent', 'accept': 'acceptDraft', 'reset': 'resetUsedCards', 'discard': 'swapRecommended'}[action]
             api.window.evaluate_js('window.'+name+' && window.'+name+'()')
 
         api.hotkey_manager = HotkeyManager(api.native.user, dispatch, app_folder()/'hotkeys.json', api._hotkey_active)

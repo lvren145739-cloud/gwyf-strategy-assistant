@@ -8,5 +8,9 @@ assert.equal(H.fromEvent({code:'F8',key:'F8'}),'F8');
 assert.equal(H.fromEvent({code:'ControlLeft',key:'Control'}),null);
 assert.throws(()=>H.normalise({capture:'F8',archive:'F8',accept:'F10'}),/重复/);
 assert.throws(()=>H.canonical('Ctrl+Unknown'));
-assert.deepEqual(H.normalise({...H.defaults,capture:''}),{capture:'',archive:'F9',accept:'F10',reset:'F11'});
+assert.deepEqual(H.normalise({...H.defaults,capture:''}),{capture:'',archive:'F9',accept:'F10',reset:'F11',discard:'F7'});
 console.log('Shortcut parsing, physical keys, modifiers, duplicate rejection and disabling passed.');
+
+assert.deepEqual(H.normalise({capture:'F7',archive:'F9',accept:'F10',reset:'F11'}),{capture:'F7',archive:'F9',accept:'F10',reset:'F11',discard:''});
+assert.equal(H.normalise({capture:'F8',archive:'F9',accept:'F11'}).reset,'');
+assert.equal(H.normalise({capture:'F8',archive:'F9',accept:'F10',reset:'F11'}).discard,'F7');

@@ -1,6 +1,6 @@
 'use strict';
 const VisionHotkeys=(()=>{
- const defaults=Object.freeze({capture:'F8',archive:'F9',accept:'F10',reset:'F11'});
+ const defaults=Object.freeze({capture:'F8',archive:'F9',accept:'F10',reset:'F11',discard:'F7'});
  const modifiers=['Ctrl','Alt','Shift','Win'];
  const named=['Space','Enter','Tab','Backspace','Insert','Delete','Home','End','PageUp','PageDown','Up','Down','Left','Right','Escape'];
  function keyAllowed(key){return named.includes(key)||/^[A-Z0-9]$/.test(key)||/^Num[0-9]$/.test(key)||/^F([1-9]|1[0-9]|2[0-4])$/.test(key);}
@@ -12,11 +12,12 @@ const VisionHotkeys=(()=>{
   return [...modifiers.filter(m=>parts.includes(m)),key].join('+');
  }
  function normalise(config){
-  if(config&&Object.keys(config).sort().join(',')==='accept,archive,capture')config={...defaults,...config};
-  if(!config||typeof config!=='object'||Object.keys(config).sort().join(',')!==Object.keys(defaults).sort().join(','))throw Error('需要分别设置四个操作的快捷键。');
-  const result=Object.fromEntries(Object.keys(defaults).map(a=>[a,canonical(config[a])])),enabled=Object.values(result).filter(Boolean);
+  const keys=config&&typeof config==='object'?Object.keys(config).sort().join(','):'';
+  if(!['accept,archive,capture','accept,archive,capture,reset',Object.keys(defaults).sort().join(',')].includes(keys))throw Error('需要分别设置五个操作的快捷键。');
+  const result=Object.fromEntries(Object.entries(config).map(([a,value])=>[a,canonical(value)])),enabled=Object.values(result).filter(Boolean);
   if(new Set(enabled).size!==enabled.length)throw Error('快捷键重复，请为不同操作设置不同按键。');
-  return result;
+  for(const [action,value] of Object.entries(defaults))if(!(action in result)){result[action]=enabled.includes(value)?'':value;if(result[action])enabled.push(value);}
+  return Object.fromEntries(Object.keys(defaults).map(a=>[a,result[a]]));
  }
  function fromEvent(event){
   if(['Control','Shift','Alt','Meta','AltGraph'].includes(event.key))return null;

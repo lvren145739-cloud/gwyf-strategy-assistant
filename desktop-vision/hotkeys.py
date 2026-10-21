@@ -8,8 +8,8 @@ import queue
 import threading
 import time
 
-DEFAULTS = {'capture': 'F8', 'archive': 'F9', 'accept': 'F10', 'reset': 'F11'}
-LABELS = {'capture': '识牌', 'archive': '归档', 'accept': '采用', 'reset': '重置'}
+DEFAULTS = {'capture': 'F8', 'archive': 'F9', 'accept': 'F10', 'reset': 'F11', 'discard': 'F7'}
+LABELS = {'capture': '识牌', 'archive': '归档', 'accept': '采用', 'reset': '重置', 'discard': '扑克换牌'}
 MODIFIERS = {'Ctrl': 2, 'Alt': 1, 'Shift': 4, 'Win': 8}
 KEYS = {'Space': 0x20, 'Enter': 0x0D, 'Tab': 9, 'Backspace': 8,
         'Insert': 0x2D, 'Delete': 0x2E, 'Home': 0x24, 'End': 0x23,
@@ -35,15 +35,19 @@ def parse(binding):
 
 
 def normalise(config):
-    if isinstance(config, dict) and set(config) == set(DEFAULTS)-{'reset'}:
-        config = {**DEFAULTS, **config}
-    if not isinstance(config, dict) or set(config) != set(DEFAULTS):
-        raise ValueError('需要分别设置识牌、归档、采用和重置快捷键。')
-    result = {action: parse(config[action])[0] for action in DEFAULTS}
+    legacy = ({'capture', 'archive', 'accept'}, {'capture', 'archive', 'accept', 'reset'})
+    if not isinstance(config, dict) or set(config) not in (*legacy, set(DEFAULTS)):
+        raise ValueError('需要分别设置识牌、归档、采用、重置和扑克换牌快捷键。')
+    result = {action: parse(value)[0] for action, value in config.items()}
     enabled = [value for value in result.values() if value]
     if len(set(enabled)) != len(enabled):
         raise ValueError('不同操作不能使用相同快捷键；不需要的操作可以停用。')
-    return result
+    for action, default in DEFAULTS.items():
+        if action not in result:
+            # New actions must never overwrite an existing user's binding.
+            result[action] = default if default not in enabled else ''
+            if result[action]:enabled.append(result[action])
+    return {action: result[action] for action in DEFAULTS}
 
 
 class HotkeyManager:
@@ -52,7 +56,10 @@ class HotkeyManager:
         self.config = dict(DEFAULTS)
         self.errors = {}
         try:
-            self.config = normalise(json.loads(self.path.read_text('utf-8')))
+            raw = json.loads(self.path.read_text('utf-8'))
+            self.config = normalise(raw)
+            if 'discard' not in raw and not self.config['discard']:
+                self.errors['upgrade'] = '原设置已占用 F7；扑克换牌快捷键暂未启用，可在这里另设按键。'
         except FileNotFoundError:
             pass
         except (OSError, ValueError):

@@ -8,7 +8,7 @@ root=Path(__file__).resolve().parents[1]
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
  page=b.new_page(viewport={'width':560,'height':820});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
- page.goto('http://127.0.0.1:8769/')
+ page.goto('http://127.0.0.1:8770/')
  page.evaluate('''() => {
    localStorage.clear(); state=VisionState.blank();
    state.regions.blackjack={player:[.3,.5,.7,.7],dealer:[.3,.3,.7,.4]};

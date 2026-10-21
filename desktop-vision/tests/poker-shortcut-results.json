@@ -1,0 +1,21 @@
+{
+  "checks": [
+    "real solver keep-all no-op",
+    "F7 applies current recommendation",
+    "busy capture blocks mutation",
+    "draft invalidates old advice",
+    "stale ordered-hand mask rejected",
+    "discarded cards immediately recorded",
+    "no repeated exchange",
+    "undo restores hand/history",
+    "custom Ctrl+G recording/save/reload",
+    "old key inactive after customization",
+    "discarded card rejected in replacement",
+    "replacement complete no second exchange",
+    "archive includes discarded plus final cards",
+    "archive undo",
+    "compact same-screen and no horizontal scrolling"
+  ],
+  "errors": [],
+  "scope": "Actual Chromium UI and solver workers; native OS registration tested separately on Windows; no game inputs."
+}

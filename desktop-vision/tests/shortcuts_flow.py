@@ -6,11 +6,11 @@ ROOT=Path(__file__).resolve().parents[1]
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox']);page=b.new_page(viewport={'width':420,'height':820});errors=[];checks=[];page.on('pageerror',lambda e:errors.append(str(e)))
  page.add_init_script('''(() => {
-  window.keyConfig=JSON.parse(localStorage.getItem('fixtureKeys')||'null')||{capture:'F8',archive:'F9',accept:'F10',reset:'F11'};
+  window.keyConfig=JSON.parse(localStorage.getItem('fixtureKeys')||'null')||{capture:'F8',archive:'F9',accept:'F10',reset:'F11',discard:'F7'};
   window.keyPaused=false;window.keyCalls=[];
   const make=(rank,suit,role='player')=>({rank,suit,role,score:.999,suitScore:.999,cardScore:.999,review:false});
   window.fixture={autoReady:true,warnings:[],hiddenCount:1,recognitionMs:90,cards:[make('2','clubs'),make('3','hearts'),make('4','spades','dealer')]};
-  window.pywebview={api:{status:async()=>({version:'0.3.1',modelBytes:11000000,hotkey:'F8 识牌 · F9 归档 · F10 采用'}),windows:async()=>[{id:'123',title:'Gamble With Your Friends'}],select_window:async()=>true,load_state:async()=>null,save_state:async()=>true,compact:async()=>true,open_image:async()=>null,
+  window.pywebview={api:{status:async()=>({version:'0.3.2',modelBytes:11000000,hotkey:'F8 识牌 · F9 归档 · F10 采用'}),windows:async()=>[{id:'123',title:'Gamble With Your Friends'}],select_window:async()=>true,load_state:async()=>null,save_state:async()=>true,compact:async()=>true,open_image:async()=>null,
    capture:async()=>{const c=document.createElement('canvas');c.width=960;c.height=540;return {image:c.toDataURL(),width:960,height:540};},recognize:async()=>fixture,
    hotkeys:async req=>{keyCalls.push(req.op);if(req.op==='pause')keyPaused=true;if(req.op==='resume')keyPaused=false;if(req.op==='set'){if(req.config.capture==='F12')throw Error('F12 被占用；原快捷键保持生效。');keyConfig={...req.config};localStorage.setItem('fixtureKeys',JSON.stringify(keyConfig));}return {config:{...keyConfig},errors:{},paused:keyPaused,available:true};}
   }};
@@ -18,17 +18,17 @@ with sync_playwright() as p:
  def ready():page.wait_for_function('nativeReady && nativeConnecting===null')
  def record(action,key):
   page.locator('[data-record-shortcut="'+action+'"]').click();page.wait_for_function('recordingAction==='+json.dumps(action));page.keyboard.press(key);page.wait_for_function('recordingAction===null && !shortcutPending')
- page.goto('http://127.0.0.1:8769/desktop.html');ready();page.bring_to_front()
+ page.goto('http://127.0.0.1:8770/desktop.html');ready();page.bring_to_front()
  assert page.locator('[data-shortcut-label=capture]').inner_text()=='F8'
- page.locator('#hotkeySettings').click();record('capture','F7');assert page.evaluate('keyPaused') is False
+ page.locator('#hotkeySettings').click();record('capture','F6');assert page.evaluate('keyPaused') is False
  assert page.locator('[data-shortcut-label=capture]').inner_text()=='F8'
- record('archive','Control+Alt+a');page.locator('#saveShortcuts').click();page.wait_for_function("shortcutConfig.capture==='F7' && shortcutConfig.archive==='Ctrl+Alt+A'")
+ record('archive','Control+Alt+a');page.locator('#saveShortcuts').click();page.wait_for_function("shortcutConfig.capture==='F6' && shortcutConfig.archive==='Ctrl+Alt+A'")
  checks.append('single-key and modifier recording; native pause/resume; staged until save')
- page.reload();ready();assert page.locator('[data-shortcut-label=capture]').inner_text()=='F7';assert page.locator('[data-shortcut-label=archive]').inner_text()=='Ctrl+Alt+A'
+ page.reload();ready();assert page.locator('[data-shortcut-label=capture]').inner_text()=='F6';assert page.locator('[data-shortcut-label=archive]').inner_text()=='Ctrl+Alt+A'
  checks.append('saved shortcuts restored after page reload')
- page.locator('#hotkeySettings').click();page.locator('[data-record-shortcut=accept]').click();page.wait_for_function("recordingAction==='accept'");page.keyboard.press('F7');assert '重复' in page.locator('#shortcutStatus').inner_text();page.keyboard.press('Escape');page.wait_for_function('recordingAction===null && !shortcutPending');assert not page.evaluate('keyPaused')
+ page.locator('#hotkeySettings').click();page.locator('[data-record-shortcut=accept]').click();page.wait_for_function("recordingAction==='accept'");page.keyboard.press('F6');assert '重复' in page.locator('#shortcutStatus').inner_text();page.keyboard.press('Escape');page.wait_for_function('recordingAction===null && !shortcutPending');assert not page.evaluate('keyPaused')
  checks.append('duplicate blocked; Escape restores native keys')
- record('capture','F12');page.locator('#saveShortcuts').click();page.wait_for_function("document.querySelector('#shortcutStatus').textContent.includes('被占用')");assert page.evaluate('shortcutConfig.capture')=='F7'
+ record('capture','F12');page.locator('#saveShortcuts').click();page.wait_for_function("document.querySelector('#shortcutStatus').textContent.includes('被占用')");assert page.evaluate('shortcutConfig.capture')=='F6'
  checks.append('OS conflict preserves previously active bindings')
  page.locator('#resetShortcuts').click();page.locator('#saveShortcuts').click();page.wait_for_function("shortcutConfig.capture==='F8'")
  page.locator('[data-record-shortcut=archive]').click();page.wait_for_function("recordingAction==='archive'");page.evaluate("dispatchEvent(new Event('blur'))");page.wait_for_function('recordingAction===null && !shortcutPending');assert not page.evaluate('keyPaused')

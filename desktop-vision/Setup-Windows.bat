@@ -1,8 +1,8 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-title GWYF Vision 0.3.1 - Setup
-echo GWYF Vision 0.3.1 - Python 3.11 through 3.15 x64
+title GWYF Vision 0.3.2 - Setup
+echo GWYF Vision 0.3.2 - Python 3.11 through 3.15 x64
 py -3 -c "import sys" >nul 2>&1
 if not errorlevel 1 (
  py -3 tools\setup_runtime.py

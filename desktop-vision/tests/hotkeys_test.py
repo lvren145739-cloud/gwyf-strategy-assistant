@@ -54,7 +54,15 @@ class HotkeyTests(unittest.TestCase):
         self.manager._unregister();self.native.occupied.add(parse('F8')[1])
         self.manager._initial_registration()
         self.assertIn('capture',self.manager.errors)
-        self.assertEqual({a for _,a in self.manager.registered.values()},{'archive','accept','reset'})
+        self.assertEqual({a for _,a in self.manager.registered.values()},{'archive','accept','reset','discard'})
+    def test_legacy_migration_preserves_custom_keys(self):
+        old=dict(capture='F7',archive='F9',accept='F10',reset='F11')
+        self.path.write_text(__import__('json').dumps(old))
+        loaded=HotkeyManager(self.native,print,self.path)
+        self.assertEqual(loaded.config,{**old,'discard':''})
+        self.assertIn('upgrade',loaded.errors)
+        self.assertEqual(normalise(dict(capture='F8',archive='F9',accept='F11'))['reset'],'')
+        self.assertEqual(normalise(dict(capture='F8',archive='F9',accept='F10',reset='F11')),DEFAULTS)
     def test_disable_and_bad_saved_config(self):
         self.manager._handle({'op':'set','config':dict(capture='',archive='F9',accept='F10')})
         self.assertFalse(self.manager._snapshot()['registered']['capture'])

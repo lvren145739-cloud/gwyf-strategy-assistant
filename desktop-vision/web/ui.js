@@ -1,12 +1,12 @@
 'use strict';
 const V=VisionState,E=GWYFEngine,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-let state=V.blank(),draft=[],frame=null,frameImage=null,selectRegion=null,drag=null,busy=false,worker=null,job=0,lastResult=null,compact=false,detections=[];
+let state=V.blank(),draft=[],frame=null,frameImage=null,selectRegion=null,drag=null,busy=false,worker=null,job=0,lastResult=null,lastResultKey=null,compact=false,detections=[];
 const glyph={spades:'♠',hearts:'♥',diamonds:'♦',clubs:'♣'};
 const api=()=>window.pywebview?.api;
 const nativeRequired=!!document.querySelector('meta[name="gwyf-desktop"]');
 const bridgeMethods=['status','windows','select_window','capture','open_image','recognize','load_state','save_state','compact','hotkeys'];
 let nativeReady=false,nativeConnecting=null,stateRevision=0;
-const shortcutNames={capture:'识牌计算',archive:'归档本手',accept:'采用草稿',reset:'重置已用牌'};
+const shortcutNames={capture:'识牌计算',archive:'归档本手',accept:'采用草稿',reset:'重置已用牌',discard:'扑克按推荐换牌'};
 let shortcutConfig={...VisionHotkeys.defaults},shortcutDraft={...shortcutConfig},recordingAction=null,shortcutPending=false;
 function bridgeComplete(){return bridgeMethods.every(name=>typeof api()?.[name]==='function');}
 function desktopCall(name,...args){
@@ -38,7 +38,8 @@ function save(){
  try{localStorage.setItem('gwyf-vision-v1',JSON.stringify(snapshot));}catch(_){}
  if(nativeReady)saveQueue=saveQueue.then(()=>desktopCall('save_state',snapshot)).catch(e=>message('状态未保存：'+e.message,true));
 }
-function stopSolver(){job++;if(worker){worker.terminate();worker=null;}lastResult=null;}
+function stopSolver(){job++;if(worker){worker.terminate();worker=null;}lastResult=null;lastResultKey=null;}
+function pokerPlanKey(){return JSON.stringify({cards:state.poker.player.map(c=>c?V.cardId(c):null),used:state.poker.used,buffs:E.buffs(state.owned,state.settings,state.team)});}
 function render(){
  $$('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===state.mode));
  const h=state[state.mode];
@@ -59,7 +60,7 @@ function render(){
 function calculate(){
  stopSolver();const h=state[state.mode],id=job;
  if(!h.player.length){advice('等待识牌',`选择游戏窗口，${shortcutConfig.capture?'按 '+shortcutConfig.capture:'点击识牌计算'} 自动识牌并计算。`,false,'本地运行 · 按需截图');return;}
- if(h.player.some(c=>!c)){advice('等待补牌','已丢弃的牌已计入历史；补全新牌后重新计算。',true);return;}
+ if(h.player.some(c=>!c)){advice('等待补牌',`弃牌已计入历史。请在游戏换牌后，${shortcutConfig.capture?'按 '+shortcutConfig.capture:'点击识牌计算'} 识别完整五张。`,true);return;}
  const b=E.buffs(state.owned,state.settings,state.team);let payload;
  try{
   if(state.mode==='blackjack'){
@@ -76,26 +77,40 @@ function calculate(){
   }
   advice('计算中…','在后台工作线程中计算，界面仍可操作。');
   worker=new Worker('solver-worker.js');
-  worker.onerror=()=>{if(id===job)advice('无法启动策略线程','请通过桌面启动器或本地HTTP打开。',true);};
+  worker.onerror=()=>{if(id===job){stopSolver();advice('无法启动策略线程','请通过桌面启动器或本地HTTP打开。',true);}};
   worker.onmessage=({data})=>{
    if(data.id!==job)return;
-   if(data.error){advice('需要核对',data.error,true);return;}
+   if(data.error){stopSolver();advice('需要核对',data.error,true);return;}
    if(data.progress!=null){advice('计算中…',`扑克方案枚举 ${Math.min(100,Math.round(data.progress*100))}%`);return;}
-   lastResult=data.result;worker.terminate();worker=null;
+   lastResult=data.result;lastResultKey=state.mode==='poker'?pokerPlanKey():null;worker.terminate();worker=null;
    if(state.mode==='blackjack'){
     const names={H:'要牌 HIT',S:'停牌 STAND',D:'加倍 DOUBLE',N:'自然21 · 已结算'};
     const r=data.result;advice(names[r.action]||'请核对',r.natural?'初始两张自然21，按原版模型总返还3×。':`期望净收益 ${r.ev>=0?'+':''}${r.ev.toFixed(3)} / 原始下注 · ${E.bjValue(h.player.map(c=>c.rank)).total}点${r.rebuild?' · 包含牌堆重建分支':''}`);
    }else{
     const r=data.result.solutions[0],keep=h.player.filter((_,i)=>r.mask&(1<<i));
     advice(r.mask===31?'保留全部五张':`保留 ${keep.length} 张 · 换 ${5-keep.length} 张`,`${keep.length?keep.map(label).join(' '):'全部换掉'} · 期望净收益 ${r.ev>=0?'+':''}${r.ev.toFixed(3)}`);
-    if(r.mask!==31){const button=document.createElement('button');button.textContent='按推荐换牌 · 丢弃牌立即入历史';button.className='primary full';button.id='discard';button.onclick=()=>mutate(()=>V.discard(state,r.mask),'已记录丢弃牌，按快捷键识别补牌后的五张牌。');$('#advice').append(button);}
+    if(r.mask!==31){const button=document.createElement('button');button.innerHTML='按推荐换牌 <kbd data-shortcut-label="discard">'+esc(shortcutConfig.discard)+'</kbd>';button.title='在助手内确认推荐方案并记录弃牌，游戏中仍需手动换牌';button.className='primary full';button.id='discard';button.onclick=swapRecommended;$('#advice').append(button);}
    }
   };
   worker.postMessage({id,mode:state.mode,payload});
  }catch(e){advice('需要核对',e.message,true);}
 }
-function mutate(fn,note){try{state=fn();draft=[];$('#draftPanel').hidden=true;save();render();calculate();message(note||'已更新。');}catch(e){message(e.message,true);}}
+function mutate(fn,note){if(busy){message('正在识牌，请完成后再修改手牌或历史。',true);return false;}try{state=fn();draft=[];$('#draftPanel').hidden=true;save();render();calculate();message(note||'已更新。');return true;}catch(e){message(e.message,true);return false;}}
+function swapRecommended(){
+ if(busy||recordingAction||shortcutPending)return;
+ if(state.mode!=='poker'){message('按推荐换牌仅用于单人扑克。');return;}
+ if(!$('#draftPanel').hidden){message('请先核对并采用草稿，再确认换牌。',true);return;}
+ if(document.activeElement?.matches('input,select,textarea'))document.activeElement.blur();
+ if(state.poker.phase!=='initial'){message('本手已确认过换牌，请先完成补牌或结算。');return;}
+ if(worker||!lastResult?.solutions?.length){message('请先识别完整五张，并等待当前换牌建议算完。',true);return;}
+ if(lastResultKey!==pokerPlanKey()){calculate();message('手牌或加成已改变，正在重算换牌建议。',true);return;}
+ const mask=lastResult.solutions[0].mask;
+ if(mask===31){message('当前建议保留全部五张，无需换牌。');return;}
+ mutate(()=>V.discard(state,mask),`弃牌已计入已用牌。请在游戏换牌后，${shortcutConfig.capture?'按 '+shortcutConfig.capture:'点击识牌计算'} 识别补牌。`);
+}
+window.swapRecommended=swapRecommended;
 function renderDraft(){
+ stopSolver();advice('草稿尚未采用','核对后采用，或放弃草稿返回原手牌。',true,'旧建议已暂停');
  $('#draftPanel').hidden=false;
  $('#archive').disabled=true;
  $('#draft').innerHTML=draft.map((c,i)=>`<div class="draft-card ${c.review?'review':''}" data-index="${i}">${c.preview?`<img src="${c.preview}" alt="自动转正牌面" title="${esc((c.issues||[]).join('；')||(c.rotation?'自动转正 '+c.rotation+'°':'原始牌面'))}">`:''}<select class="card-role" data-field="role" aria-label="第${i+1}张归属"><option value="player" ${c.role==='player'?'selected':''}>我的牌</option><option value="dealer" ${c.role==='dealer'?'selected':''}>庄家牌</option></select><select data-field="rank" aria-label="第${i+1}张点数"><option value="">?</option>${V.ranks.map(r=>`<option ${r===c.rank?'selected':''}>${r}</option>`).join('')}</select>${state.mode==='poker'?`<select data-field="suit" aria-label="第${i+1}张花色"><option value="">?</option>${V.suits.map(s=>`<option value="${s}" ${s===c.suit?'selected':''}>${glyph[s]}</option>`).join('')}</select>`:''}<span class="score" title="${esc((c.issues||[]).join('；')+(c.score!=null?' · 模型分数 '+c.score+'，不是准确率':''))}">${c.score==null?'手动':!c.rank||(state.mode==='poker'&&!c.suit)?'未读全':c.review?'待核对':'已读取'}</span><button data-remove="${i}" aria-label="排除此牌">×</button></div>`).join('');
@@ -267,7 +282,7 @@ document.addEventListener('keydown',async event=>{
  if(nativeReady||shortcutPending||event.repeat||/INPUT|SELECT|TEXTAREA/.test(event.target.tagName)||event.target.isContentEditable)return;
  let value;try{value=VisionHotkeys.fromEvent(event);}catch(_){return;}
  const action=Object.keys(shortcutConfig).find(a=>shortcutConfig[a]&&shortcutConfig[a]===value);
- if(action){event.preventDefault();({capture:captureNow,archive:archiveCurrent,accept:window.acceptDraft,reset:resetUsedCards})[action]();}
+ if(action){event.preventDefault();({capture:captureNow,archive:archiveCurrent,accept:window.acceptDraft,reset:resetUsedCards,discard:swapRecommended})[action]();}
 },true);
 window.addEventListener('blur',()=>{if(recordingAction)endShortcutRecording();});
 document.addEventListener('pointerdown',event=>{if(recordingAction&&!event.target.closest('[data-record-shortcut],[data-disable-shortcut],#saveShortcuts,#resetShortcuts'))endShortcutRecording();},true);
@@ -288,7 +303,7 @@ $('#saveShortcuts').onclick=async()=>{
  }catch(e){shortcutMessage(e.message,true);}
  finally{shortcutPending=false;renderShortcuts();}
 };
-$('#resetShortcuts').onclick=async()=>{if(shortcutPending)return;await endShortcutRecording();shortcutDraft={...VisionHotkeys.defaults};renderShortcuts();shortcutMessage('默认 F8 识牌、F9 归档、F10 采用、F11 重置，点击保存生效。');};
+$('#resetShortcuts').onclick=async()=>{if(shortcutPending)return;await endShortcutRecording();shortcutDraft={...VisionHotkeys.defaults};renderShortcuts();shortcutMessage('默认 F7 扑克换牌、F8 识牌、F9 归档、F10 采用、F11 重置，点击保存生效。');};
 $('#hotkeySettings').onclick=()=>{
  if(compact){compact=false;document.body.classList.remove('compact');$('#compact').textContent='收起';if(nativeReady)desktopCall('compact',false).catch(e=>message(e.message,true));}
  $('#shortcuts').open=true;$('#shortcuts').scrollIntoView({block:'start'});

@@ -14,12 +14,12 @@ for p in sorted(root.rglob('*')):
     files.append(p)
 manifest=''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.relative_to(root).as_posix()+'\n' for p in files)
 (root/'SHA256SUMS.txt').write_text(manifest,'utf-8');files.append(root/'SHA256SUMS.txt')
-output=root.parent/'GWYF-Vision-0.3.1.zip'
+output=root.parent/'GWYF-Vision-0.3.2.zip'
 with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
-    for p in files:z.write(p,'GWYF-Vision-0.3.1/'+p.relative_to(root).as_posix())
+    for p in files:z.write(p,'GWYF-Vision-0.3.2/'+p.relative_to(root).as_posix())
 with zipfile.ZipFile(output) as z:
     assert z.testzip() is None
     for line in manifest.splitlines():
         digest,path=line.split('  ',1)
-        assert hashlib.sha256(z.read('GWYF-Vision-0.3.1/'+path)).hexdigest()==digest
+        assert hashlib.sha256(z.read('GWYF-Vision-0.3.2/'+path)).hexdigest()==digest
 print(output.name,output.stat().st_size,hashlib.sha256(output.read_bytes()).hexdigest(),len(files),'files')

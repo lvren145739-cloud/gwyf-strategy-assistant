@@ -46,12 +46,12 @@ def test():
   assert isinstance(target['id'],str)
   report['nativeEnumWindows']=True
   assert rpc('window.pywebview.api.select_window('+json.dumps(target['id'])+')')
-  status=rpc('window.pywebview.api.status()');assert status['version']=='0.3.1';assert status['native']
+  status=rpc('window.pywebview.api.status()');assert status['version']=='0.3.2';assert status['native']
   report['statusRPC']=True
   # Register and reconfigure real global keys on the dedicated message thread.
   keys=rpc("window.pywebview.api.hotkeys({op:'get'})")
   assert keys['config']==DEFAULTS
-  custom={'capture':'F13','archive':'F14','accept':'F15','reset':'F16'}
+  custom={'capture':'F13','archive':'F14','accept':'F15','reset':'F16','discard':'F17'}
   result=rpc('window.pywebview.api.hotkeys('+json.dumps({'op':'set','config':custom})+')')
   assert all(result['registered'].values())
   assert json.loads((Path(hotkey_folder.name)/'hotkeys.json').read_text())==custom
@@ -75,13 +75,13 @@ def test():
   # Deliver actual Windows keyboard events; MOD_NOREPEAT rejects repeated down.
   user.keybd_event.argtypes=[wintypes.BYTE,wintypes.BYTE,wintypes.DWORD,ctypes.c_size_t]
   before=len(actions)
-  for key in [0x7C,0x7D,0x7E,0x7F]:
+  for key in [0x7C,0x7D,0x7E,0x7F,0x80]:
    user.keybd_event(key,0,0,0);time.sleep(.035)
    user.keybd_event(key,0,0,0);time.sleep(.035)
    user.keybd_event(key,0,2,0)
   deadline=time.monotonic()+3
-  while len(actions)<before+4 and time.monotonic()<deadline:time.sleep(.02)
-  assert actions[before:]==['capture','archive','accept','reset'],actions
+  while len(actions)<before+5 and time.monotonic()<deadline:time.sleep(.02)
+  assert actions[before:]==['capture','archive','accept','reset','discard'],actions
   api.hotkey_manager.active=lambda:False
   time.sleep(.12)
   assert not api.hotkey_manager.registered
@@ -89,7 +89,7 @@ def test():
   user.UnregisterHotKey(None,9003)
   api.hotkey_manager.active=lambda:True
   time.sleep(.12)
-  assert len(api.hotkey_manager.registered)==4
+  assert len(api.hotkey_manager.registered)==5
   report['nativeHotkeys']={'actions':actions[before:],'keyboardEvents':True,'noRepeat':True,
                           'conflictRollback':True,'pauseResume':True,'savedConfiguration':True,
                           'inactiveContextReleasesKeys':True}
