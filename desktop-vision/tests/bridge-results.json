@@ -1,6 +1,6 @@
 {
   "framework": "pywebview 6.2.1",
-  "injectionMs": 1.25,
+  "injectionMs": 1.06,
   "checks": [
     "late bridge + initially empty API + real generated windows() RPC",
     "readiness is idempotent",

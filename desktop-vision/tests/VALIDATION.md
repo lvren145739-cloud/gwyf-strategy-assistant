@@ -4,7 +4,7 @@
 - `hotkeys_test.py` 8 项通过；JavaScript 快捷键解析、旧三项/四项配置迁移、F7/F11 占用保留原配置、重复与停用通过。
 - `shortcuts_flow.py`、`automatic_flow.py`、状态与自动采用策略回归通过。实际浏览器测试不模拟识别准确率。
 - 识别模型沿用 0.3.1；未调整阈值或重新训练，不声称本轮提高了识别率。模型性能与 Python 兼容性历史测试见下文。
-- Windows 原生五项按键、WebView2 RPC、窗口枚举与自建窗口截图验证结果见 `windows-native-results.json`；发布前更新本次运行链接。
+- Windows 原生五项按键、WebView2 RPC、窗口枚举与自建窗口截图验证结果见 `windows-native-results.json`；本次通过：https://github.com/lvren145739-cloud/gwyf-strategy-assistant/actions/runs/39581253842 。五项按键均以真实键盘事件触发，按住不重复、冲突回滚、保存、暂停/恢复与前台切换释放通过。
 
 以下为历史验证范围。
 

@@ -10,7 +10,8 @@
       "capture",
       "archive",
       "accept",
-      "reset"
+      "reset",
+      "discard"
     ],
     "keyboardEvents": true,
     "noRepeat": true,
@@ -24,5 +25,5 @@
     "height": 411
   },
   "scope": "Windows native GUI and synthetic own-window capture. No real game run.",
-  "sourceURL": "https://github.com/lvren145739-cloud/gwyf-strategy-assistant/actions/runs/39440288836"
+  "source": "https://github.com/lvren145739-cloud/gwyf-strategy-assistant/actions/runs/39581253842"
 }

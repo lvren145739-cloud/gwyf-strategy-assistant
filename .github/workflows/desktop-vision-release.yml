@@ -1,4 +1,4 @@
-name: Publish Desktop Vision 0.3.1
+name: Publish Desktop Vision 0.3.2
 on:
   push:
     branches: [desktop-vision-v0.3]

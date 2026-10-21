@@ -19,6 +19,12 @@ jobs:
         run: python desktop-vision/tools/ci_prepare_portable.py
       - name: Import native dependencies from embedded runtime
         run: .\desktop-vision\runtime\python.exe -c "import cv2,numpy,mss,webview,clr; clr.AddReference('System.Windows.Forms'); print('Windows embedded imports passed')"
+      - name: Shortcut validation and legacy configuration migration
+        run: |
+          python desktop-vision/tests/hotkeys_test.py
+          node desktop-vision/tests/hotkeys.test.js
+          node desktop-vision/tests/state.test.js
+          node desktop-vision/tests/recognition-policy.test.js
       - name: Real framework registration
         run: .\desktop-vision\runtime\python.exe desktop-vision/tests/bridge_runtime.py
       - name: Real Windows WebView2 and EnumWindows
